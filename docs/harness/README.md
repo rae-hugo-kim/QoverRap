@@ -28,6 +28,7 @@
 
 ## Related Docs
 
+- `docs/test-plan/README.md` — QR 오버래핑 2단계(Phase A/B) 테스트 계획
 - `docs/rules/seed_contract.md`
 - `docs/rules/kickoff_output_contract.md`
 - `docs/rules/startdev_seed_contract.md`
