@@ -6,3 +6,12 @@
 !.claude/settings.json
 docs/sum/
 docs/brainstorming/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# OMC internal state
+.omc/state/

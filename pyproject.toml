@@ -1,0 +1,32 @@
+[project]
+name = "qoverwrap-poc"
+version = "0.0.0"
+description = "QR overlay PoC (tests and docs)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "qrcode[pil]>=7.0",
+  "Pillow>=9.0",
+  "pyzbar>=0.1.9",
+  "opencv-python-headless>=4.0",
+  "cryptography>=41.0",
+]
+
+# To install all deps including dev tools:
+#   pip install -e ".[dev]"
+# System prerequisite for pyzbar:
+#   apt-get install libzbar0   (Debian/Ubuntu)
+#   brew install zbar          (macOS)
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-q"

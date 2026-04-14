@@ -1,0 +1,4 @@
+{"ts":"2026-04-14T15:17:51+09:00","event":"kickoff_completed","actor":"assistant","meta":{"topic":"QR 오버래핑 기술 개발 및 KR 특허 출원"}}
+{"ts":"2026-04-14T15:17:51+09:00","event":"seed_generated","actor":"assistant","meta":{"seed_path":"docs/harness/seed.yaml","status":"draft","version":1}}
+{"ts":"2026-04-14T15:17:51+09:00","event":"rubric_evaluated","actor":"assistant","meta":{"goal":"HIGH","constraints":"HIGH","success":"HIGH","context":"MEDIUM"}}
+{"ts":"2026-04-14T15:19:09+09:00","event":"startdev_started","actor":"assistant","meta":{"seed_version":1,"seed_status":"draft"}}

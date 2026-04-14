@@ -1,0 +1,54 @@
+version: 1
+task_id: "20260414-1430-qrap"
+status: draft
+
+goal: >
+  QR 다중 레이어 오버래핑 기술의 실현 가능성을 검증(PoC)하고,
+  KR 특허 출원을 완료한다. 3-layer 아키텍처(A: 공개 / B: 컨텍스트 / C: 검증)
+  기반 QR 인코딩/디코딩 프로토타입을 구현하여 실험 프로토콜을 통과시키고,
+  KIPRIS 선행기술 조사를 거쳐 특허 명세서 초안을 작성한다.
+
+constraints:
+  - 법률 자문 언어 사용 금지 — 모든 특허 주장에 검증 계획 필요
+  - 검증 없이 특허성 확정 주장 금지
+  - review gate 우회 금지 (4-stage: fact → prior-art → claim safety → publish safety)
+  - human_legal_checked 없이 특허 관련 문서 게시 불가
+  - 보안 주장은 검증 로그 없이 확정 불가
+  - 특허 문서 상태 전환 순서 준수: ai_generated → human_reviewed → attorney_ready
+
+acceptance_criteria:
+  - "QR 오버래핑 PoC: 스캔 성공률 95%+, 디코드 레이턴시 ≤300ms, 레이어 무결성 99%, 컨텍스트 라우팅 98%+ (200회 스캔, 다양한 디바이스/조명)"
+  - "선행기술 조사: KIPRIS에서 3건+ 후보 특허 발견 + 각각 유사점/차이점 테이블 작성"
+  - "특허 명세서 초안: 독립항 1-2개 + 종속항 5-10개, 실시예, 도면 계획 포함"
+  - "실험 프로토콜: 4개 메트릭(스캔/레이턴시/무결성/라우팅) 실행 + pass/fail 결과 기록 완료"
+
+out_of_scope:
+  - 상용 서비스 배포 (SaaS/앱)
+  - 해외 특허 출원 (PCT, US 등)
+  - 블로그 플랫폼 개발
+  - 법률 자문 제공
+
+assumptions:
+  - KIPRIS에서 QR 관련 선행기술 검색이 가능함
+  - QR 코드 표준 내에서 다중 레이어 인코딩이 기술적으로 가능함
+  - 3-layer 아키텍처(A/B/C)가 단일 QR 코드에 구현 가능함
+  - 실험에 필요한 디바이스 및 환경 접근이 가능함
+
+risks:
+  - QR 코드 크기/해상도 제한으로 3-layer 인코딩 불가능 가능성
+  - 선행기술에서 높은 유사도의 기존 특허 발견 시 novelty 위협
+  - 실험 환경(조명/카메라/왜곡) 차이로 인한 결과 변동
+  - 실제 특허성은 선행기술 범위에 크게 의존하여 예측 불가
+  - Layer C 보안 레이어의 실제 암호화 검증 범위 불명확
+
+references:
+  - path: docs/harness/kickoff-summary.md
+    reason: 킥오프 인터뷰 결과 요약
+  - path: brainstorming/05_qr-layering-feasibility-protocol.md
+    reason: QR 레이어링 실험 프로토콜 원본
+  - path: brainstorming/04_patent-workflow-kr.md
+    reason: KR 특허 워크플로우 정의
+  - path: brainstorming/00_problem-framing.md
+    reason: 전략적 문제 프레이밍 및 성공 기준
+  - path: brainstorming/06_post-pipeline-and-checklists.md
+    reason: 리뷰 게이트 및 상태 전환 정의
