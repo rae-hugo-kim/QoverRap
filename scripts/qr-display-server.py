@@ -40,7 +40,7 @@ def _find_qr_images(image_dir: pathlib.Path) -> list[pathlib.Path]:
     if not image_dir.exists():
         return []
     images = sorted(
-        p for p in image_dir.glob("qr_*.png")
+        p for p in image_dir.glob("*.png")
         if "grid" not in p.name
     )
     return images
@@ -294,6 +294,18 @@ def _build_html(images_json: str, interval_ms: int) -> str:
     }} else {{
       showImage(0);
       rafId = requestAnimationFrame(tick);
+
+      // Poll server for remote index changes (from density_scan_test.py API calls)
+      setInterval(() => {{
+        fetch('/api/current')
+          .then(r => r.json())
+          .then(data => {{
+            if (data.current_index !== currentIndex) {{
+              showImage(data.current_index);
+            }}
+          }})
+          .catch(() => {{}});
+      }}, 500);
     }}
   </script>
 </body>

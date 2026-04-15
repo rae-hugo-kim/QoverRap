@@ -25,6 +25,7 @@ import json
 import pathlib
 import signal
 import sys
+import urllib.request
 from datetime import datetime
 from typing import Any
 
@@ -258,6 +259,7 @@ def run_test(
     device: str,
     manifest_path: pathlib.Path,
     output_path: pathlib.Path,
+    server: str | None = "http://localhost:8765",
 ) -> None:
     images = _load_manifest(manifest_path)
 
@@ -294,7 +296,7 @@ def run_test(
     print(" 절차 / Procedure:")
     print("   1. 디스플레이 서버의 QR을 카메라로 스캔")
     print("   2. 인식되면 y, 실패하면 n, 건너뛰기 s")
-    print("   3. 브라우저에서 → 키로 다음 QR")
+    print("   3. 다음 QR은 자동 전환 (서버 연결 시) / → 키로 수동 전환")
     print()
 
     # Register Ctrl+C handler for graceful save
@@ -304,6 +306,21 @@ def run_test(
         sys.exit(0)
 
     signal.signal(signal.SIGINT, _handle_sigint)
+
+    # Build display-server filename→index mapping for auto-sync
+    server_url = server
+    server_index_map: dict[str, int] = {}
+    if server_url:
+        try:
+            resp = urllib.request.urlopen(f"{server_url}/api/list", timeout=2)
+            data = json.loads(resp.read())
+            for i, name in enumerate(data.get("images", [])):
+                server_index_map[name] = i
+            print(f" Display server 연결됨 / Connected: {server_url} ({len(server_index_map)} images)")
+        except Exception:
+            print(f" Display server 미연결 / Not connected: {server_url} (수동으로 → 키 사용)")
+            server_url = None
+    print()
 
     # Main loop
     pending = [e for e in images if e["filename"] not in previous]
@@ -317,6 +334,17 @@ def run_test(
         ecc = entry.get("ecc", "?").upper()
         modules = entry.get("modules", ver * 4 + 17)
         mpx = entry["module_px"]
+
+        # Auto-sync display server to show the current image
+        if server_url and fname in server_index_map:
+            try:
+                idx = server_index_map[fname]
+                req = urllib.request.Request(
+                    f"{server_url}/api/set?index={idx}", method="POST",
+                )
+                urllib.request.urlopen(req, timeout=2)
+            except Exception:
+                pass  # non-critical — user can still navigate manually
 
         print(
             f"[{tested_count}/{total}] v{ver:02d} | {dpx}px | ECC-{ecc} | "
@@ -440,6 +468,11 @@ def _parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         default="test-results/density-scan-results.json",
         help="Path for the JSON results file (created/overwritten on completion)",
     )
+    parser.add_argument(
+        "--server",
+        default="http://localhost:8765",
+        help="Display server URL for auto-sync (set empty to disable)",
+    )
     return parser.parse_args(argv)
 
 
@@ -449,6 +482,7 @@ def main(argv: list[str] | None = None) -> None:
         device=args.device,
         manifest_path=pathlib.Path(args.manifest),
         output_path=pathlib.Path(args.output),
+        server=args.server or None,
     )
 
 
