@@ -250,9 +250,9 @@ def _build_html(images_json: str, interval_ms: int) -> str:
         lastTick = timestamp;
 
         const secs = Math.max(0, Math.ceil(remainingMs / 1000));
-        timerEl.textContent = secs;
+        timerEl.textContent = INTERVAL_MS > 0 ? secs : '→';
 
-        if (remainingMs <= 0) {{
+        if (INTERVAL_MS > 0 && remainingMs <= 0) {{
           lastTick = null;
           showImage(currentIndex + 1);
         }}
@@ -370,8 +370,44 @@ class QRDisplayHandler(BaseHTTPRequestHandler):
         elif path == "/health":
             self._send_json({"status": "ok", "version": __version__})
 
+        elif path == "/api/current":
+            self._send_json({
+                "current_index": getattr(self.server, "_remote_index", 0),
+            })
+
         else:
             self._send_html("<h1>404 Not Found</h1>", 404)
+
+    def do_POST(self):
+        parsed = urlparse(self.path)
+        path = parsed.path
+        images = self.server.qr_images
+
+        if path == "/api/next":
+            cur = getattr(self.server, "_remote_index", 0)
+            nxt = min(cur + 1, len(images) - 1)
+            self.server._remote_index = nxt
+            self._send_json({"index": nxt, "total": len(images)})
+
+        elif path == "/api/prev":
+            cur = getattr(self.server, "_remote_index", 0)
+            prv = max(cur - 1, 0)
+            self.server._remote_index = prv
+            self._send_json({"index": prv, "total": len(images)})
+
+        elif path == "/api/set":
+            params = parse_qs(parsed.query)
+            try:
+                idx = int(params.get("index", ["0"])[0])
+                idx = max(0, min(idx, len(images) - 1))
+            except (ValueError, IndexError):
+                self._send_json({"error": "invalid index"}, 400)
+                return
+            self.server._remote_index = idx
+            self._send_json({"index": idx, "total": len(images)})
+
+        else:
+            self._send_json({"error": "not found"}, 404)
 
 
 # ---------------------------------------------------------------------------

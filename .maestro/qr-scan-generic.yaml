@@ -4,8 +4,9 @@
 #
 # 기기 정보 (Device info):
 #   - 모델: Lenovo Xiaoxin Pad
-#   - 카메라 앱 패키지: com.android.camera2 (기본 시도)
-#                       com.android.camera 도 시도 가능 (하단 주석 참고)
+#   - 모델: Lenovo TB336FU (Xiaoxin Pad)
+#   - 카메라 앱 패키지: com.zui.camera (ZUI 카메라)
+#   - QR 전용 앱: com.zui.camera.qr (필요 시 사용)
 #
 # !!! 중요: 카메라 패키지 확인 방법 (IMPORTANT: How to verify camera package) !!!
 #   adb shell pm list packages | grep -i camera
@@ -33,16 +34,15 @@
 #   SCREENSHOT_DIR — 스크린샷 저장 경로 (기본값: test-results/generic)
 
 ---
-appId: com.android.camera2
-# appId: com.android.camera       # 위 패키지가 없으면 이 줄의 주석 해제
-#                                   Uncomment if com.android.camera2 not found
-# appId: com.lenovo.camera         # Lenovo 커스텀 카메라 앱인 경우
-#                                   If device uses Lenovo custom camera
+appId: com.zui.camera
+# appId: com.zui.camera.qr        # QR 전용 앱 사용 시
+# appId: com.zui.camera       # AOSP 기본 카메라
 
 env:
   QR_COUNT: "5"
   SCREENSHOT_DIR: "test-results/generic"
 
+---
 # ===========================================================================
 # 반복 스캔 루프 / Repeat scan loop
 # ===========================================================================
@@ -55,7 +55,7 @@ env:
       #    Launch camera app
       # -----------------------------------------------------------------------
       - launchApp:
-          appId: com.android.camera2
+          appId: com.zui.camera
           clearState: false
 
       # -----------------------------------------------------------------------
@@ -84,8 +84,8 @@ env:
       # -----------------------------------------------------------------------
       - extendedWaitUntil:
           visible:
-            text: "example.com"
-          timeout: 8000
+            text: "QoverwRap"
+          timeout: 15000
         # 감지 실패 시 계속 진행
         # Continue on timeout
 
@@ -100,7 +100,7 @@ env:
       #      - 카메라 뷰파인더 내 링크 버튼
       # -----------------------------------------------------------------------
       - tapOn:
-          text: "example.com"
+          text: "복사"
           optional: true
 
       # -----------------------------------------------------------------------
@@ -144,5 +144,5 @@ env:
       #     Ensure camera app is in foreground
       # -----------------------------------------------------------------------
       - launchApp:
-          appId: com.android.camera2
+          appId: com.zui.camera
           clearState: false
