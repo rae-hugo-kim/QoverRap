@@ -1,0 +1,30 @@
+# .maestro/qr-scan-common.yaml
+# 공통 서브플로우: 두 기기 플로우(Samsung, Generic)에서 runFlow로 호출됩니다.
+# Common subflow: called via runFlow from both device-specific flows.
+#
+# 이 파일은 단독으로 실행하지 마세요. 상위 플로우에서 호출됩니다.
+# Do NOT run this file directly — it is a subflow invoked by parent flows.
+#
+# 파라미터 (Parameters):
+#   QR_COUNT      — 스캔할 QR 코드 수 (기본값: 5) / Number of QRs to scan (default: 5)
+#   SCREENSHOT_DIR — 스크린샷 저장 디렉터리 / Directory to save screenshots
+
+---
+appId: ${CAMERA_PACKAGE}
+
+# ---------------------------------------------------------------------------
+# takeScreenshotAndLabel: 현재 화면을 스크린샷으로 저장
+# takeScreenshotAndLabel: capture current screen as evidence screenshot
+# ---------------------------------------------------------------------------
+- takeScreenshot: ${SCREENSHOT_DIR}/${SCAN_INDEX}_scan_result
+
+# ---------------------------------------------------------------------------
+# 뒤로 가기 (카메라 앱 유지): 다음 스캔을 위해 뷰파인더로 복귀
+# Go back (stay in camera): return to viewfinder for next scan
+# ---------------------------------------------------------------------------
+- pressKey: Back
+
+# 다음 QR이 화면에 표시될 시간 확보 (디스플레이 서버 자동 전환 간격과 맞춤)
+# Give time for next QR to appear on display (matches display server interval)
+- waitForAnimationToEnd:
+    timeout: 2000

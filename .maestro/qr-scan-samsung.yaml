@@ -1,0 +1,128 @@
+# .maestro/qr-scan-samsung.yaml
+# Samsung Galaxy Tab S9 Ultra 전용 QR 스캔 자동화 플로우
+# QR scan automation flow for Samsung Galaxy Tab S9 Ultra
+#
+# 기기 정보 (Device info):
+#   - 모델: Samsung Galaxy Tab S9 Ultra
+#   - 카메라 앱 패키지: com.sec.android.app.camera
+#   - QR 인식 방식: Samsung 카메라는 별도 QR 모드 전환 없이 자동 감지
+#                   (뷰파인더 하단에 URL/텍스트 오버레이로 결과 표시)
+#
+# 사전 조건 (Prerequisites):
+#   1. 기기가 USB로 연결되어 adb가 인식할 수 있어야 함
+#   2. QR 이미지 생성 완료: python scripts/generate_test_qrs.py
+#   3. 디스플레이 서버 실행 중: python scripts/qr-display-server.py
+#   4. 기기를 디스플레이 앞에 위치 (Maestro가 물리적 카메라 입력은 제어 불가)
+#
+# 실행 방법 (Run):
+#   maestro test .maestro/qr-scan-samsung.yaml
+#   또는 오케스트레이터 사용: ./scripts/run-physical-test.sh samsung 20
+#
+# 환경 변수 (Env vars):
+#   QR_COUNT      — 스캔할 QR 수 (기본값: 5)
+#   SCREENSHOT_DIR — 스크린샷 저장 경로 (기본값: test-results/samsung)
+
+---
+appId: com.sec.android.app.camera
+
+env:
+  QR_COUNT: "5"
+  SCREENSHOT_DIR: "test-results/samsung"
+
+# ===========================================================================
+# 반복 스캔 루프 / Repeat scan loop
+# ===========================================================================
+- repeat:
+    times: ${QR_COUNT}
+    commands:
+
+      # -----------------------------------------------------------------------
+      # 1. 카메라 앱 실행 (매 반복마다 새로 시작)
+      #    Launch camera app fresh each iteration
+      # -----------------------------------------------------------------------
+      - launchApp:
+          appId: com.sec.android.app.camera
+          clearState: false  # 상태 유지: 마지막으로 사용한 카메라 모드 유지
+                             # Keep state: preserves last-used camera mode
+
+      # -----------------------------------------------------------------------
+      # 2. 카메라 초기화 대기 (뷰파인더 로드 확인)
+      #    Wait for camera to initialize (viewfinder loaded)
+      # -----------------------------------------------------------------------
+      - waitForAnimationToEnd:
+          timeout: 3000
+
+      # -----------------------------------------------------------------------
+      # 3. Samsung 카메라 뷰파인더가 준비되었는지 확인
+      #    Verify Samsung camera viewfinder is ready
+      #    Samsung 카메라는 PHOTO 모드가 기본값이며 QR을 자동 감지합니다.
+      #    Samsung camera defaults to PHOTO mode and auto-detects QR codes.
+      # -----------------------------------------------------------------------
+      - assertVisible:
+          enabled: false  # 뷰파인더 자체는 UI 요소가 아니므로 skip
+                          # Viewfinder itself is not a UI element — skip assert
+
+      # -----------------------------------------------------------------------
+      # 4. QR 코드 자동 감지 대기 (Samsung 오버레이 팝업 대기)
+      #    Wait for QR code auto-detection overlay (Samsung bottom banner)
+      #
+      #    Samsung 카메라는 QR을 감지하면 화면 하단에 URL 또는 텍스트 배너를 표시합니다.
+      #    Samsung camera shows a URL/text banner at the bottom when QR is detected.
+      #
+      #    오버레이 텍스트 패턴 예시: "https://example.com/v1?id=001"
+      #    또는 Bixby 버튼처럼 나타나는 "QR code detected" 문자열
+      # -----------------------------------------------------------------------
+      - extendedWaitUntil:
+          visible:
+            text: "example.com"  # Layer A URL 패턴의 일부 / Part of Layer A URL pattern
+          timeout: 8000
+        # 감지 실패 시 계속 진행 (타임아웃은 로그에 기록됨)
+        # On timeout, flow continues (timeout is logged by Maestro)
+
+      # -----------------------------------------------------------------------
+      # 5. 감지된 QR 결과 배너를 탭하여 확인/열기
+      #    Tap the detected QR result banner to confirm/open
+      #
+      #    Samsung 오버레이는 화면 하단 중앙에 나타납니다.
+      #    The Samsung overlay appears at the bottom-center of the screen.
+      # -----------------------------------------------------------------------
+      - tapOn:
+          text: "example.com"
+          optional: true  # 배너가 없으면 탭 건너뜀 (타임아웃 케이스 대응)
+                          # Skip tap if banner not present (handles timeout case)
+
+      # -----------------------------------------------------------------------
+      # 6. 결과 화면 대기 (URL 열리거나 오버레이 고정)
+      #    Wait for result to settle (URL opens or overlay stabilizes)
+      # -----------------------------------------------------------------------
+      - waitForAnimationToEnd:
+          timeout: 1500
+
+      # -----------------------------------------------------------------------
+      # 7. 증거용 스크린샷 캡처
+      #    Capture screenshot as evidence
+      # -----------------------------------------------------------------------
+      - takeScreenshot: ${SCREENSHOT_DIR}/scan_${SCAN_INDEX}
+
+      # -----------------------------------------------------------------------
+      # 8. 브라우저/결과 화면에서 카메라로 복귀
+      #    Return to camera from browser/result screen
+      # -----------------------------------------------------------------------
+      - pressKey: Back
+
+      # -----------------------------------------------------------------------
+      # 9. 디스플레이 서버가 다음 QR로 전환할 시간 확보 (기본 8초 간격)
+      #    Allow time for display server to advance to next QR (default 8s interval)
+      #    이 대기 시간은 qr-display-server.py의 --interval 값과 맞춰야 합니다.
+      #    This wait must match the --interval value of qr-display-server.py.
+      # -----------------------------------------------------------------------
+      - waitForAnimationToEnd:
+          timeout: 2000
+
+      # -----------------------------------------------------------------------
+      # 10. 다음 반복 전 카메라 앱으로 복귀 확인
+      #     Ensure we're back in camera before next iteration
+      # -----------------------------------------------------------------------
+      - launchApp:
+          appId: com.sec.android.app.camera
+          clearState: false

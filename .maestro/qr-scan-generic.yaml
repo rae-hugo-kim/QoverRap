@@ -1,0 +1,148 @@
+# .maestro/qr-scan-generic.yaml
+# Lenovo Xiaoxin Pad (Generic Android) 전용 QR 스캔 자동화 플로우
+# QR scan automation flow for Lenovo Xiaoxin Pad (Generic Android)
+#
+# 기기 정보 (Device info):
+#   - 모델: Lenovo Xiaoxin Pad
+#   - 카메라 앱 패키지: com.android.camera2 (기본 시도)
+#                       com.android.camera 도 시도 가능 (하단 주석 참고)
+#
+# !!! 중요: 카메라 패키지 확인 방법 (IMPORTANT: How to verify camera package) !!!
+#   adb shell pm list packages | grep -i camera
+#   위 명령어로 실제 설치된 카메라 패키지명을 확인하고 아래 appId를 업데이트하세요.
+#   Run the above command, find your actual camera package, then update appId below.
+#
+#   Lenovo 기기 일반 패키지 후보 (Common Lenovo camera packages):
+#     com.android.camera2       — AOSP 기본 (most common)
+#     com.android.camera        — 구형 AOSP
+#     com.lenovo.camera         — Lenovo 커스텀 (일부 모델)
+#     com.motorola.camera       — Moto/Lenovo 공유 기기 (rare)
+#
+# 사전 조건 (Prerequisites):
+#   1. 기기가 USB로 연결되어 adb가 인식할 수 있어야 함
+#   2. QR 이미지 생성 완료: python scripts/generate_test_qrs.py
+#   3. 디스플레이 서버 실행 중: python scripts/qr-display-server.py
+#   4. 기기를 디스플레이 앞에 위치 (Maestro가 물리적 카메라 입력은 제어 불가)
+#
+# 실행 방법 (Run):
+#   maestro test .maestro/qr-scan-generic.yaml
+#   또는 오케스트레이터 사용: ./scripts/run-physical-test.sh generic 20
+#
+# 환경 변수 (Env vars):
+#   QR_COUNT      — 스캔할 QR 수 (기본값: 5)
+#   SCREENSHOT_DIR — 스크린샷 저장 경로 (기본값: test-results/generic)
+
+---
+appId: com.android.camera2
+# appId: com.android.camera       # 위 패키지가 없으면 이 줄의 주석 해제
+#                                   Uncomment if com.android.camera2 not found
+# appId: com.lenovo.camera         # Lenovo 커스텀 카메라 앱인 경우
+#                                   If device uses Lenovo custom camera
+
+env:
+  QR_COUNT: "5"
+  SCREENSHOT_DIR: "test-results/generic"
+
+# ===========================================================================
+# 반복 스캔 루프 / Repeat scan loop
+# ===========================================================================
+- repeat:
+    times: ${QR_COUNT}
+    commands:
+
+      # -----------------------------------------------------------------------
+      # 1. 카메라 앱 실행
+      #    Launch camera app
+      # -----------------------------------------------------------------------
+      - launchApp:
+          appId: com.android.camera2
+          clearState: false
+
+      # -----------------------------------------------------------------------
+      # 2. 카메라 초기화 대기
+      #    Wait for camera to initialize
+      # -----------------------------------------------------------------------
+      - waitForAnimationToEnd:
+          timeout: 4000
+
+      # -----------------------------------------------------------------------
+      # 3. Generic Android 카메라 QR 감지 대기
+      #    Wait for Generic Android camera QR detection
+      #
+      #    Generic Android (AOSP) 카메라는 Android 8+에서 QR을 자동 감지하며
+      #    화면에 오버레이 또는 토스트 메시지를 표시합니다.
+      #    Generic Android (AOSP) camera auto-detects QR on Android 8+ and
+      #    shows an overlay or toast notification on screen.
+      #
+      #    오버레이 패턴은 기기/OS 버전마다 다를 수 있습니다.
+      #    Overlay pattern may differ per device/OS version.
+      #
+      #    시도할 텍스트 패턴 (Try these text patterns in order):
+      #      - "example.com"    — Layer A URL 포함 (URL fragment)
+      #      - "Open"           — Android 링크 오버레이 버튼
+      #      - "QR code"        — 일부 기기의 감지 문자열
+      # -----------------------------------------------------------------------
+      - extendedWaitUntil:
+          visible:
+            text: "example.com"
+          timeout: 8000
+        # 감지 실패 시 계속 진행
+        # Continue on timeout
+
+      # -----------------------------------------------------------------------
+      # 4. QR 결과 오버레이 탭 (없으면 건너뜀)
+      #    Tap QR result overlay (skip if not present)
+      #
+      #    Generic Android는 오버레이 UI가 Samsung과 다를 수 있습니다.
+      #    다음 중 하나가 표시될 수 있습니다:
+      #      - 화면 상단 배너 (top banner)
+      #      - 화면 하단 스낵바 (bottom snackbar)
+      #      - 카메라 뷰파인더 내 링크 버튼
+      # -----------------------------------------------------------------------
+      - tapOn:
+          text: "example.com"
+          optional: true
+
+      # -----------------------------------------------------------------------
+      # 5. "Open" 버튼 탭 시도 (일부 기기에서 링크 열기 확인 필요)
+      #    Try tapping "Open" button (some devices require link open confirmation)
+      # -----------------------------------------------------------------------
+      - tapOn:
+          text: "Open"
+          optional: true
+
+      # -----------------------------------------------------------------------
+      # 6. 결과 안정화 대기
+      #    Wait for result to settle
+      # -----------------------------------------------------------------------
+      - waitForAnimationToEnd:
+          timeout: 1500
+
+      # -----------------------------------------------------------------------
+      # 7. 증거용 스크린샷 캡처
+      #    Capture screenshot as evidence
+      # -----------------------------------------------------------------------
+      - takeScreenshot: ${SCREENSHOT_DIR}/scan_${SCAN_INDEX}
+
+      # -----------------------------------------------------------------------
+      # 8. 카메라로 복귀
+      #    Return to camera
+      # -----------------------------------------------------------------------
+      - pressKey: Back
+      - pressKey: Back  # 브라우저가 열린 경우 두 번 필요할 수 있음
+                        # May need twice if browser was opened
+
+      # -----------------------------------------------------------------------
+      # 9. 디스플레이 서버 전환 대기
+      #    Wait for display server to advance
+      # -----------------------------------------------------------------------
+      - waitForAnimationToEnd:
+          timeout: 2000
+
+      # -----------------------------------------------------------------------
+      # 10. 카메라 앱으로 복귀 확인
+      #     Ensure camera app is in foreground
+      # -----------------------------------------------------------------------
+      - launchApp:
+          appId: com.android.camera2
+          clearState: false
