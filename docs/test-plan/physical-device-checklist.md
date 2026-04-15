@@ -488,6 +488,45 @@ assert got_a == a and got_b == b and got_c == c
 
 ---
 
+## Quick Reference: 밀도 한계 테스트 명령어
+
+### 1. QR 이미지 생성 (최초 1회)
+```bash
+cd ~/projects/workspace/QoverwRap
+.venv/bin/python scripts/generate_density_qrs.py
+# → test-qr-density/ 에 48개 이미지 + manifest.json 생성
+# 옵션: --versions 5,10,15,20,25,30,35,40 --sizes 200,400,600 --ecc M,H
+```
+
+### 2. 디스플레이 서버 실행 (터미널 1)
+```bash
+.venv/bin/python scripts/qr-display-server.py --image-dir test-qr-density --interval 0 --port 8765
+# 브라우저에서 http://localhost:8765 열기
+```
+
+### 3. 스캔 테스트 실행 (터미널 2)
+```bash
+# 기기별로 --output 파일을 다르게 지정할 것!
+.venv/bin/python scripts/density_scan_test.py --device "Xiaoxin Pad" --output test-results/density-xiaoxin-pad.json
+.venv/bin/python scripts/density_scan_test.py --device "Galaxy Tab S9 Ultra" --output test-results/density-galaxy-tab.json
+.venv/bin/python scripts/density_scan_test.py --device "LG V20" --output test-results/density-lg-v20.json
+.venv/bin/python scripts/density_scan_test.py --device "Galaxy S7" --output test-results/density-galaxy-s7.json
+```
+
+### 4. 개별 QR 재확인 (의심 결과)
+```bash
+# 디스플레이 서버가 실행 중인 상태에서:
+curl -s -X POST "http://localhost:8765/api/set?index=$(curl -s http://localhost:8765/api/list | python3 -c "import sys,json; imgs=json.load(sys.stdin)['images']; print(imgs.index('v10_600px_M.png'))")"
+```
+
+### 참고
+- `--interval 0` = 수동 모드 (자동 전환 안 함)
+- 스캔 기록기가 디스플레이 서버를 자동 제어함 (→ 키 안 눌러도 됨)
+- Ctrl+C로 중단해도 결과 저장됨, 같은 명령 재실행 시 이어서 가능
+- 같은 --output 파일을 다른 기기로 실행하면 resume 기능이 오작동함 — 반드시 기기별 별도 파일 사용
+
+---
+
 ## 참고 문서
 
 - [phase-a-feasibility.md](phase-a-feasibility.md) — A-ENV1 정의
