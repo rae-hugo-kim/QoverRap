@@ -67,7 +67,38 @@ cd <project-name>
 3. docs/sum/ → 비움 (이전 세션 기록 제거)
 ```
 
-### Phase 3: 초기 커밋
+### Phase 3: 하네스 메타 주입
+
+`source_remote`, `commit_sha`, `bootstrapped_at`을 `.claude/hooks/harness/harness-meta.json`에 주입.
+이 필드들이 있으면 SessionStart 훅이 원격 버전을 확인할 수 있고, 없으면(=템플릿 자체일 때) 스킵됨.
+
+```bash
+# 소스 레포 URL (SSH 형식 권장 — 비공개 접근 호환)
+SOURCE_REMOTE="git@github.com:rae-hugo-kim/claude.git"
+
+# 템플릿 현재 HEAD SHA — 사용자가 클론한 시점의 SHA
+COMMIT_SHA=$(git -C . rev-parse HEAD)
+
+# ISO 8601 UTC
+BOOTSTRAPPED_AT=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+```
+
+기존 `harness-meta.json`에 다음 필드 추가 (기존 `version`, `updated`, `description`은 유지):
+
+```json
+{
+  "version": "<existing>",
+  "updated": "<existing>",
+  "description": "<existing>",
+  "source_remote": "git@github.com:rae-hugo-kim/claude.git",
+  "commit_sha": "<COMMIT_SHA>",
+  "bootstrapped_at": "<BOOTSTRAPPED_AT>"
+}
+```
+
+Edit 툴로 JSON 파일 직접 수정 (마지막 `}` 앞에 세 필드 삽입).
+
+### Phase 4: 초기 커밋
 
 ```bash
 git add -A

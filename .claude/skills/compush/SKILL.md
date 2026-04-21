@@ -82,8 +82,10 @@ Format: `<type>: <short description>`
 
 ```bash
 git commit -m "<message>"
-git push
+git push --follow-tags
 ```
+
+`--follow-tags` ensures any annotated tags created by hooks (e.g., harness version bump) are pushed with the branch in one operation.
 
 ### 7. Output
 

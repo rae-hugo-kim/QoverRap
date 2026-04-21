@@ -64,6 +64,17 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/harness/harness-version-check.mjs",
+            "timeout": 15
+          }
+        ]
+      }
     ]
   }
 }

@@ -1,0 +1,199 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776656133279,
+  "projectRoot": "/home/rae/projects/workspace/QoverwRap",
+  "techStack": {
+    "languages": [
+      {
+        "name": "Python",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "pyproject.toml"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "pytest",
+        "version": null,
+        "category": "testing"
+      }
+    ],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": "pytest",
+    "lintCommand": "ruff check",
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "scripts",
+      "src",
+      "tests"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "brainstorming": {
+      "path": "brainstorming",
+      "purpose": null,
+      "fileCount": 13,
+      "lastAccessed": 1776656133273,
+      "keyFiles": [
+        "00_problem-framing.md",
+        "01_channel-strategy.md",
+        "02_style-guide.md",
+        "03_seo-geo-aeo-playbook.md",
+        "04_patent-workflow-kr.md"
+      ]
+    },
+    "checklists": {
+      "path": "checklists",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1776656133274,
+      "keyFiles": [
+        "INDEX.md",
+        "bugfix.md",
+        "code_review.md",
+        "eval.md",
+        "plan.md"
+      ]
+    },
+    "claudedocs": {
+      "path": "claudedocs",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1776656133274,
+      "keyFiles": [
+        "CLAUDEKR.md",
+        "CLAUDE_original.md",
+        "INDEX.md",
+        "agreements.md",
+        "bootstrap_oh_my_claudecode.md"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 1,
+      "lastAccessed": 1776656133274,
+      "keyFiles": [
+        "glossary.yaml"
+      ]
+    },
+    "rules": {
+      "path": "rules",
+      "purpose": null,
+      "fileCount": 23,
+      "lastAccessed": 1776656133275,
+      "keyFiles": [
+        "INDEX.md",
+        "adversarial_review.md",
+        "agent_security.md",
+        "anti_hallucination.md",
+        "assetization.md"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 10,
+      "lastAccessed": 1776656133275,
+      "keyFiles": [
+        "collect-results.py",
+        "density_scan_test.py",
+        "generate_density_qrs.py",
+        "generate_test_qrs.py",
+        "harness-sync.sh"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 1,
+      "lastAccessed": 1776656133276,
+      "keyFiles": [
+        "__init__.py"
+      ]
+    },
+    "templates": {
+      "path": "templates",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1776656133276,
+      "keyFiles": [
+        "INDEX.md",
+        "assumptions.md",
+        "decision_log.md",
+        "eval_definition.md",
+        "eval_report.md"
+      ]
+    },
+    "test-qr-density": {
+      "path": "test-qr-density",
+      "purpose": null,
+      "fileCount": 49,
+      "lastAccessed": 1776656133276,
+      "keyFiles": [
+        "manifest.json",
+        "v05_200px_H.png",
+        "v05_200px_M.png",
+        "v05_400px_H.png",
+        "v05_400px_M.png"
+      ]
+    },
+    "test-qr-images": {
+      "path": "test-qr-images",
+      "purpose": null,
+      "fileCount": 7,
+      "lastAccessed": 1776656133276,
+      "keyFiles": [
+        "manifest.json",
+        "qr_001_small.png",
+        "qr_002_medium.png",
+        "qr_003_large.png",
+        "qr_004_small.png"
+      ]
+    },
+    "test-results": {
+      "path": "test-results",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1776656133277,
+      "keyFiles": [
+        "density-galaxy-tab.json",
+        "density-scan-results.json",
+        "density-xiaoxin-pad.json"
+      ]
+    },
+    "tests": {
+      "path": "tests",
+      "purpose": "Test files",
+      "fileCount": 3,
+      "lastAccessed": 1776656133277,
+      "keyFiles": [
+        "README.md",
+        "__init__.py",
+        "test_test_plan_docs.py"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

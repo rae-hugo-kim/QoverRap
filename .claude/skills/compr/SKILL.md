@@ -82,9 +82,11 @@ git commit -m "<message>"
 ### 5. Push and create PR
 
 ```bash
-git push -u origin <branch-name>
+git push -u --follow-tags origin <branch-name>
 gh pr create --base <target> --head <branch> --title "<title>" --body "<body>"
 ```
+
+`--follow-tags` ensures any annotated tags created by hooks (e.g., harness version bump) are pushed with the branch.
 
 **PR body format**:
 ```markdown

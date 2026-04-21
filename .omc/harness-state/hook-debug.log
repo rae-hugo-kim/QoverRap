@@ -1,0 +1,2603 @@
+[2026-04-16T02:35:39.139Z] backpressure-gate: Hook started
+[2026-04-16T02:35:39.139Z] acceptance-gate: Hook started
+[2026-04-16T02:35:39.140Z] backpressure-gate: Command: git log --oneline -20
+[2026-04-16T02:35:39.140Z] acceptance-gate: Command: git log --oneline -20
+[2026-04-16T02:35:39.140Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:35:39.140Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:35:39.437Z] backpressure-tracker: Hook started
+[2026-04-16T02:35:39.437Z] backpressure-tracker: Command: git log --oneline -20
+[2026-04-16T02:35:39.437Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T02:35:57.293Z] acceptance-gate: Hook started
+[2026-04-16T02:35:57.293Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -5
+[2026-04-16T02:35:57.293Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:35:57.295Z] backpressure-gate: Hook started
+[2026-04-16T02:35:57.295Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -5
+[2026-04-16T02:35:57.295Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:36:17.206Z] backpressure-tracker: Hook started
+[2026-04-16T02:36:17.206Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -5
+[2026-04-16T02:36:17.206Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T02:36:17.206Z] backpressure-tracker: Added to history: {"time":"11:36","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T02:36:21.339Z] acceptance-gate: Hook started
+[2026-04-16T02:36:21.339Z] backpressure-gate: Hook started
+[2026-04-16T02:36:21.339Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | head -30
+[2026-04-16T02:36:21.339Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:36:21.339Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | head -30
+[2026-04-16T02:36:21.339Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:36:41.152Z] backpressure-tracker: Hook started
+[2026-04-16T02:36:41.152Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | head -30
+[2026-04-16T02:36:41.152Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T02:36:41.153Z] backpressure-tracker: Added to history: {"time":"11:36","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T02:36:43.961Z] acceptance-gate: Hook started
+[2026-04-16T02:36:43.961Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T02:36:43.961Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:36:43.961Z] backpressure-gate: Hook started
+[2026-04-16T02:36:43.961Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T02:36:43.961Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:37:03.466Z] backpressure-tracker: Hook started
+[2026-04-16T02:37:03.466Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T02:37:03.467Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T02:37:03.467Z] backpressure-tracker: Added to history: {"time":"11:37","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T02:37:06.730Z] acceptance-gate: Hook started
+[2026-04-16T02:37:06.731Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | grep -E "^[0-9]+ (passed|failed)"
+[2026-04-16T02:37:06.731Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:37:06.733Z] backpressure-gate: Hook started
+[2026-04-16T02:37:06.734Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | grep -E "^[0-9]+ (passed|failed)"
+[2026-04-16T02:37:06.734Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:37:26.521Z] backpressure-tracker: Hook started
+[2026-04-16T02:37:26.521Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | grep -E "^[0-9]+ (passed|failed)"
+[2026-04-16T02:37:26.521Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T02:37:26.522Z] backpressure-tracker: Added to history: {"time":"11:37","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T02:37:30.782Z] backpressure-gate: Hook started
+[2026-04-16T02:37:30.782Z] acceptance-gate: Hook started
+[2026-04-16T02:37:30.782Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | grep -E "passed|failed"
+[2026-04-16T02:37:30.782Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:37:30.782Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | grep -E "passed|failed"
+[2026-04-16T02:37:30.782Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:37:50.269Z] backpressure-tracker: Hook started
+[2026-04-16T02:37:50.269Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | grep -E "passed|failed"
+[2026-04-16T02:37:50.270Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T02:37:50.270Z] backpressure-tracker: Added to history: {"time":"11:37","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T02:37:53.409Z] backpressure-gate: Hook started
+[2026-04-16T02:37:53.410Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T02:37:53.410Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T02:37:53.410Z] acceptance-gate: Hook started
+[2026-04-16T02:37:53.410Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T02:37:53.410Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T02:38:12.861Z] backpressure-tracker: Hook started
+[2026-04-16T02:38:12.861Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T02:38:12.861Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T02:38:12.862Z] backpressure-tracker: Added to history: {"time":"11:38","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:21:52.641Z] scope-gate: Hook started
+[2026-04-16T05:21:52.641Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/encoder.py
+[2026-04-16T05:21:52.641Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:21:52.642Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:21:52.642Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:21:52.642Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:21:52.642Z] context-gate: Hook started
+[2026-04-16T05:21:52.642Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/encoder.py
+[2026-04-16T05:21:52.642Z] context-gate: File was read, allowing
+[2026-04-16T05:21:55.174Z] acceptance-gate: Hook started
+[2026-04-16T05:21:55.175Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_enc.py -v --tb=short 2>&1
+[2026-04-16T05:21:55.175Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:21:55.175Z] backpressure-gate: Hook started
+[2026-04-16T05:21:55.175Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_enc.py -v --tb=short 2>&1
+[2026-04-16T05:21:55.175Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:21:55.557Z] backpressure-tracker: Hook started
+[2026-04-16T05:21:55.558Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/unit/test_b_enc.py -v --tb=short 2>&1
+[2026-04-16T05:21:55.558Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:21:55.558Z] backpressure-tracker: Added to history: {"time":"14:21","type":"test","cmd":".venv/bin/python -m pytest tests/unit/test_b_enc.p...","result":"PASS"}
+[2026-04-16T05:21:57.894Z] acceptance-gate: Hook started
+[2026-04-16T05:21:57.894Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/feasibility/ --tb=no -q 2>&1
+[2026-04-16T05:21:57.895Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:21:57.895Z] backpressure-gate: Hook started
+[2026-04-16T05:21:57.895Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/feasibility/ --tb=no -q 2>&1
+[2026-04-16T05:21:57.895Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:22:17.814Z] backpressure-tracker: Hook started
+[2026-04-16T05:22:17.814Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/feasibility/ --tb=no -q 2>&1
+[2026-04-16T05:22:17.815Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:22:17.815Z] backpressure-tracker: Added to history: {"time":"14:22","type":"test","cmd":".venv/bin/python -m pytest tests/feasibility/ --tb...","result":"PASS"}
+[2026-04-16T05:22:26.999Z] backpressure-gate: Hook started
+[2026-04-16T05:22:26.999Z] acceptance-gate: Hook started
+[2026-04-16T05:22:26.999Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:22:26.999Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:22:26.999Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:22:26.999Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:22:46.678Z] backpressure-tracker: Hook started
+[2026-04-16T05:22:46.678Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:22:46.678Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:22:46.678Z] backpressure-tracker: Added to history: {"time":"14:22","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:27:40.651Z] scope-gate: Hook started
+[2026-04-16T05:27:40.651Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/decoder.py
+[2026-04-16T05:27:40.651Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:27:40.651Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:27:40.651Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:27:40.651Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:27:40.652Z] context-gate: Hook started
+[2026-04-16T05:27:40.652Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/decoder.py
+[2026-04-16T05:27:40.652Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:28:38.629Z] scope-gate: Hook started
+[2026-04-16T05:28:38.629Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/unit/test_b_dec.py
+[2026-04-16T05:28:38.629Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:28:38.630Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:28:38.630Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:28:38.630Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:28:38.631Z] context-gate: Hook started
+[2026-04-16T05:28:38.631Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/unit/test_b_dec.py
+[2026-04-16T05:28:38.631Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:28:41.759Z] acceptance-gate: Hook started
+[2026-04-16T05:28:41.759Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_dec.py -v --tb=short 2>&1
+[2026-04-16T05:28:41.759Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:28:41.760Z] backpressure-gate: Hook started
+[2026-04-16T05:28:41.761Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_dec.py -v --tb=short 2>&1
+[2026-04-16T05:28:41.761Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:28:45.530Z] acceptance-gate: Hook started
+[2026-04-16T05:28:45.530Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py --tb=no -q 2>&1
+[2026-04-16T05:28:45.530Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:28:45.532Z] backpressure-gate: Hook started
+[2026-04-16T05:28:45.532Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py --tb=no -q 2>&1
+[2026-04-16T05:28:45.532Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:29:05.076Z] backpressure-tracker: Hook started
+[2026-04-16T05:29:05.076Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py --tb=no -q 2>&1
+[2026-04-16T05:29:05.076Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:29:05.076Z] backpressure-tracker: Added to history: {"time":"14:29","type":"test","cmd":".venv/bin/python -m pytest tests/feasibility/ test...","result":"PASS"}
+[2026-04-16T05:29:47.586Z] scope-gate: Hook started
+[2026-04-16T05:29:47.586Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/decoder.py
+[2026-04-16T05:29:47.586Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:29:47.586Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:29:47.586Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:29:47.586Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:29:47.588Z] context-gate: Hook started
+[2026-04-16T05:29:47.588Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/decoder.py
+[2026-04-16T05:29:47.588Z] context-gate: File was read, allowing
+[2026-04-16T05:29:52.790Z] backpressure-gate: Hook started
+[2026-04-16T05:29:52.790Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_dec.py -v --tb=short 2>&1
+[2026-04-16T05:29:52.790Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:29:52.790Z] acceptance-gate: Hook started
+[2026-04-16T05:29:52.790Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_dec.py -v --tb=short 2>&1
+[2026-04-16T05:29:52.790Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:29:53.061Z] backpressure-tracker: Hook started
+[2026-04-16T05:29:53.061Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/unit/test_b_dec.py -v --tb=short 2>&1
+[2026-04-16T05:29:53.061Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:29:53.062Z] backpressure-tracker: Added to history: {"time":"14:29","type":"test","cmd":".venv/bin/python -m pytest tests/unit/test_b_dec.p...","result":"PASS"}
+[2026-04-16T05:29:55.019Z] backpressure-gate: Hook started
+[2026-04-16T05:29:55.020Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:29:55.020Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:29:55.020Z] acceptance-gate: Hook started
+[2026-04-16T05:29:55.020Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:29:55.020Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:30:14.686Z] backpressure-tracker: Hook started
+[2026-04-16T05:30:14.686Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:30:14.687Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:30:14.687Z] backpressure-tracker: Added to history: {"time":"14:30","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1","result":"PASS"}
+[2026-04-16T05:30:24.628Z] acceptance-gate: Hook started
+[2026-04-16T05:30:24.628Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:30:24.628Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:30:24.628Z] backpressure-gate: Hook started
+[2026-04-16T05:30:24.628Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:30:24.628Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:30:44.068Z] backpressure-tracker: Hook started
+[2026-04-16T05:30:44.068Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:30:44.068Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:30:44.068Z] backpressure-tracker: Added to history: {"time":"14:30","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:32:59.444Z] acceptance-gate: Hook started
+[2026-04-16T05:32:59.444Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/unit/
+[2026-04-16T05:32:59.444Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:32:59.445Z] backpressure-gate: Hook started
+[2026-04-16T05:32:59.445Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/unit/
+[2026-04-16T05:32:59.445Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:32:59.606Z] backpressure-tracker: Hook started
+[2026-04-16T05:32:59.606Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/tests/unit/
+[2026-04-16T05:32:59.606Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T05:33:00.052Z] acceptance-gate: Hook started
+[2026-04-16T05:33:00.052Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/src/qoverwrap/
+[2026-04-16T05:33:00.052Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:33:00.052Z] backpressure-gate: Hook started
+[2026-04-16T05:33:00.052Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/src/qoverwrap/
+[2026-04-16T05:33:00.052Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:33:00.208Z] backpressure-tracker: Hook started
+[2026-04-16T05:33:00.208Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/src/qoverwrap/
+[2026-04-16T05:33:00.209Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T05:33:11.294Z] context-gate: Hook started
+[2026-04-16T05:33:11.294Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/crypto.py
+[2026-04-16T05:33:11.294Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:33:11.296Z] scope-gate: Hook started
+[2026-04-16T05:33:11.296Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/crypto.py
+[2026-04-16T05:33:11.296Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:33:11.296Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:33:11.296Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:33:11.297Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:33:58.529Z] scope-gate: Hook started
+[2026-04-16T05:33:58.529Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/unit/test_b_crypto.py
+[2026-04-16T05:33:58.529Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:33:58.530Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:33:58.530Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:33:58.530Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:33:58.530Z] context-gate: Hook started
+[2026-04-16T05:33:58.530Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/unit/test_b_crypto.py
+[2026-04-16T05:33:58.530Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:34:02.500Z] acceptance-gate: Hook started
+[2026-04-16T05:34:02.500Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_crypto.py -v --tb=short 2>&1
+[2026-04-16T05:34:02.500Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:34:02.501Z] backpressure-gate: Hook started
+[2026-04-16T05:34:02.501Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_crypto.py -v --tb=short 2>&1
+[2026-04-16T05:34:02.501Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:34:06.252Z] acceptance-gate: Hook started
+[2026-04-16T05:34:06.252Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py tests/unit/test_b_dec.py --tb=no -q 2>&1
+[2026-04-16T05:34:06.252Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:34:06.253Z] backpressure-gate: Hook started
+[2026-04-16T05:34:06.253Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py tests/unit/test_b_dec.py --tb=no -q 2>&1
+[2026-04-16T05:34:06.253Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:34:25.804Z] backpressure-tracker: Hook started
+[2026-04-16T05:34:25.804Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py tests/unit/test_b_dec.py --tb=no -q 2>&1
+[2026-04-16T05:34:25.804Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:34:25.805Z] backpressure-tracker: Added to history: {"time":"14:34","type":"test","cmd":".venv/bin/python -m pytest tests/feasibility/ test...","result":"PASS"}
+[2026-04-16T05:35:06.904Z] scope-gate: Hook started
+[2026-04-16T05:35:06.904Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/crypto.py
+[2026-04-16T05:35:06.904Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:35:06.904Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:35:06.904Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:35:06.904Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:35:06.905Z] context-gate: Hook started
+[2026-04-16T05:35:06.905Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/crypto.py
+[2026-04-16T05:35:06.905Z] context-gate: File was read, allowing
+[2026-04-16T05:35:09.629Z] acceptance-gate: Hook started
+[2026-04-16T05:35:09.630Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_crypto.py -v --tb=short 2>&1
+[2026-04-16T05:35:09.630Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:35:09.633Z] backpressure-gate: Hook started
+[2026-04-16T05:35:09.633Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_crypto.py -v --tb=short 2>&1
+[2026-04-16T05:35:09.633Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:35:09.952Z] backpressure-tracker: Hook started
+[2026-04-16T05:35:09.952Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/unit/test_b_crypto.py -v --tb=short 2>&1
+[2026-04-16T05:35:09.952Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:35:09.953Z] backpressure-tracker: Added to history: {"time":"14:35","type":"test","cmd":".venv/bin/python -m pytest tests/unit/test_b_crypt...","result":"PASS"}
+[2026-04-16T05:35:12.573Z] acceptance-gate: Hook started
+[2026-04-16T05:35:12.573Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:35:12.573Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:35:12.575Z] backpressure-gate: Hook started
+[2026-04-16T05:35:12.575Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:35:12.575Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:35:32.209Z] backpressure-tracker: Hook started
+[2026-04-16T05:35:32.209Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:35:32.209Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:35:32.209Z] backpressure-tracker: Added to history: {"time":"14:35","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1","result":"PASS"}
+[2026-04-16T05:35:40.884Z] acceptance-gate: Hook started
+[2026-04-16T05:35:40.884Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:35:40.884Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:35:40.885Z] backpressure-gate: Hook started
+[2026-04-16T05:35:40.886Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:35:40.886Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:36:00.910Z] backpressure-tracker: Hook started
+[2026-04-16T05:36:00.911Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:36:00.911Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:36:00.911Z] backpressure-tracker: Added to history: {"time":"14:36","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:38:34.009Z] scope-gate: Hook started
+[2026-04-16T05:38:34.009Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/resolver.py
+[2026-04-16T05:38:34.009Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:38:34.010Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:38:34.010Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:38:34.010Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:38:34.010Z] context-gate: Hook started
+[2026-04-16T05:38:34.010Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/resolver.py
+[2026-04-16T05:38:34.010Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:39:24.614Z] scope-gate: Hook started
+[2026-04-16T05:39:24.614Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/unit/test_b_res.py
+[2026-04-16T05:39:24.614Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:39:24.614Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:39:24.615Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:39:24.615Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:39:24.615Z] context-gate: Hook started
+[2026-04-16T05:39:24.615Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/unit/test_b_res.py
+[2026-04-16T05:39:24.615Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:39:27.934Z] acceptance-gate: Hook started
+[2026-04-16T05:39:27.934Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_res.py -v --tb=short 2>&1
+[2026-04-16T05:39:27.934Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:39:27.936Z] backpressure-gate: Hook started
+[2026-04-16T05:39:27.936Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_res.py -v --tb=short 2>&1
+[2026-04-16T05:39:27.936Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:39:33.775Z] acceptance-gate: Hook started
+[2026-04-16T05:39:33.775Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py tests/unit/test_b_dec.py tests/unit/test_b_crypto.py --tb=no -q 2>&1
+[2026-04-16T05:39:33.775Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:39:33.776Z] backpressure-gate: Hook started
+[2026-04-16T05:39:33.776Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py tests/unit/test_b_dec.py tests/unit/test_b_crypto.py --tb=no -q 2>&1
+[2026-04-16T05:39:33.776Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:39:53.241Z] backpressure-tracker: Hook started
+[2026-04-16T05:39:53.241Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/feasibility/ tests/unit/test_b_enc.py tests/unit/test_b_dec.py tests/unit/test_b_crypto.py --tb=no -q 2>&1
+[2026-04-16T05:39:53.241Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:39:53.242Z] backpressure-tracker: Added to history: {"time":"14:39","type":"test","cmd":".venv/bin/python -m pytest tests/feasibility/ test...","result":"PASS"}
+[2026-04-16T05:40:47.998Z] scope-gate: Hook started
+[2026-04-16T05:40:47.998Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/resolver.py
+[2026-04-16T05:40:47.998Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:40:47.998Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:40:47.998Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:40:47.998Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:40:47.998Z] context-gate: Hook started
+[2026-04-16T05:40:47.998Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/src/qoverwrap/resolver.py
+[2026-04-16T05:40:47.999Z] context-gate: File was read, allowing
+[2026-04-16T05:40:51.223Z] acceptance-gate: Hook started
+[2026-04-16T05:40:51.224Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_res.py -v --tb=short 2>&1
+[2026-04-16T05:40:51.224Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:40:51.225Z] backpressure-gate: Hook started
+[2026-04-16T05:40:51.225Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/unit/test_b_res.py -v --tb=short 2>&1
+[2026-04-16T05:40:51.225Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:40:51.516Z] backpressure-tracker: Hook started
+[2026-04-16T05:40:51.516Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/unit/test_b_res.py -v --tb=short 2>&1
+[2026-04-16T05:40:51.516Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:40:51.517Z] backpressure-tracker: Added to history: {"time":"14:40","type":"test","cmd":".venv/bin/python -m pytest tests/unit/test_b_res.p...","result":"PASS"}
+[2026-04-16T05:40:53.403Z] acceptance-gate: Hook started
+[2026-04-16T05:40:53.403Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:40:53.403Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:40:53.403Z] backpressure-gate: Hook started
+[2026-04-16T05:40:53.403Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:40:53.403Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:41:13.109Z] backpressure-tracker: Hook started
+[2026-04-16T05:41:13.109Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:41:13.109Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:41:13.109Z] backpressure-tracker: Added to history: {"time":"14:41","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1","result":"PASS"}
+[2026-04-16T05:41:24.115Z] acceptance-gate: Hook started
+[2026-04-16T05:41:24.115Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:41:24.115Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:41:24.116Z] backpressure-gate: Hook started
+[2026-04-16T05:41:24.116Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:41:24.116Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:41:43.825Z] backpressure-tracker: Hook started
+[2026-04-16T05:41:43.825Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:41:43.825Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:41:43.826Z] backpressure-tracker: Added to history: {"time":"14:41","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:42:04.538Z] acceptance-gate: Hook started
+[2026-04-16T05:42:04.538Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/integration/
+[2026-04-16T05:42:04.538Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:42:04.539Z] backpressure-gate: Hook started
+[2026-04-16T05:42:04.539Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/integration/
+[2026-04-16T05:42:04.539Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:42:04.702Z] backpressure-tracker: Hook started
+[2026-04-16T05:42:04.702Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/tests/integration/
+[2026-04-16T05:42:04.702Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T05:42:07.041Z] scope-gate: Hook started
+[2026-04-16T05:42:07.042Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/integration/__init__.py
+[2026-04-16T05:42:07.042Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:42:07.042Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:42:07.042Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:42:07.042Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:42:07.042Z] context-gate: Hook started
+[2026-04-16T05:42:07.042Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/integration/__init__.py
+[2026-04-16T05:42:07.042Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:42:08.288Z] context-gate: Hook started
+[2026-04-16T05:42:08.288Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/integration/conftest.py
+[2026-04-16T05:42:08.288Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:42:08.289Z] scope-gate: Hook started
+[2026-04-16T05:42:08.289Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/integration/conftest.py
+[2026-04-16T05:42:08.289Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:42:08.289Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:42:08.289Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:42:08.289Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:43:12.547Z] scope-gate: Hook started
+[2026-04-16T05:43:12.547Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/integration/test_b_int.py
+[2026-04-16T05:43:12.547Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:43:12.547Z] context-gate: Hook started
+[2026-04-16T05:43:12.547Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/integration/test_b_int.py
+[2026-04-16T05:43:12.547Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:43:12.547Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:43:12.547Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:43:12.547Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:43:15.791Z] acceptance-gate: Hook started
+[2026-04-16T05:43:15.792Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/integration/ -v --tb=short 2>&1
+[2026-04-16T05:43:15.792Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:43:15.792Z] backpressure-gate: Hook started
+[2026-04-16T05:43:15.792Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/integration/ -v --tb=short 2>&1
+[2026-04-16T05:43:15.792Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:43:16.312Z] backpressure-tracker: Hook started
+[2026-04-16T05:43:16.312Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/integration/ -v --tb=short 2>&1
+[2026-04-16T05:43:16.312Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:43:16.312Z] backpressure-tracker: Added to history: {"time":"14:43","type":"test","cmd":".venv/bin/python -m pytest tests/integration/ -v -...","result":"PASS"}
+[2026-04-16T05:43:18.932Z] acceptance-gate: Hook started
+[2026-04-16T05:43:18.932Z] backpressure-gate: Hook started
+[2026-04-16T05:43:18.932Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:43:18.932Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:43:18.932Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:43:18.932Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:43:38.603Z] backpressure-tracker: Hook started
+[2026-04-16T05:43:38.603Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:43:38.603Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:43:38.604Z] backpressure-tracker: Added to history: {"time":"14:43","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1","result":"PASS"}
+[2026-04-16T05:43:40.521Z] acceptance-gate: Hook started
+[2026-04-16T05:43:40.522Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T05:43:40.522Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:43:40.522Z] backpressure-gate: Hook started
+[2026-04-16T05:43:40.522Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T05:43:40.522Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:44:00.236Z] backpressure-tracker: Hook started
+[2026-04-16T05:44:00.236Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T05:44:00.236Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:44:00.236Z] backpressure-tracker: Added to history: {"time":"14:44","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T05:44:02.925Z] backpressure-gate: Hook started
+[2026-04-16T05:44:02.925Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:44:02.925Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:44:02.925Z] acceptance-gate: Hook started
+[2026-04-16T05:44:02.925Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:44:02.925Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:44:22.705Z] backpressure-tracker: Hook started
+[2026-04-16T05:44:22.705Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:44:22.705Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:44:22.706Z] backpressure-tracker: Added to history: {"time":"14:44","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1","result":"PASS"}
+[2026-04-16T05:44:25.270Z] backpressure-gate: Hook started
+[2026-04-16T05:44:25.270Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | grep -E "passed|failed|error"
+[2026-04-16T05:44:25.270Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:44:25.271Z] acceptance-gate: Hook started
+[2026-04-16T05:44:25.271Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | grep -E "passed|failed|error"
+[2026-04-16T05:44:25.271Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:44:44.982Z] backpressure-tracker: Hook started
+[2026-04-16T05:44:44.982Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | grep -E "passed|failed|error"
+[2026-04-16T05:44:44.983Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:44:44.983Z] backpressure-tracker: Added to history: {"time":"14:44","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | g...","result":"PASS"}
+[2026-04-16T05:45:01.478Z] acceptance-gate: Hook started
+[2026-04-16T05:45:01.478Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:45:01.478Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:45:01.478Z] backpressure-gate: Hook started
+[2026-04-16T05:45:01.478Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:45:01.479Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:45:21.128Z] backpressure-tracker: Hook started
+[2026-04-16T05:45:21.128Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:45:21.128Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:45:21.129Z] backpressure-tracker: Added to history: {"time":"14:45","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:46:24.545Z] acceptance-gate: Hook started
+[2026-04-16T05:46:24.545Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/
+[2026-04-16T05:46:24.545Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:46:24.548Z] backpressure-gate: Hook started
+[2026-04-16T05:46:24.548Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/
+[2026-04-16T05:46:24.548Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:46:24.713Z] backpressure-tracker: Hook started
+[2026-04-16T05:46:24.714Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/tests/
+[2026-04-16T05:46:24.714Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T05:46:30.434Z] acceptance-gate: Hook started
+[2026-04-16T05:46:30.434Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/experiment/ 2>/dev/null && echo "EXISTS" || echo "EMPTY/MISSING"
+[2026-04-16T05:46:30.434Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:46:30.435Z] backpressure-gate: Hook started
+[2026-04-16T05:46:30.435Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/experiment/ 2>/dev/null && echo "EXISTS" || echo "EMPTY/MISSING"
+[2026-04-16T05:46:30.435Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:46:30.596Z] backpressure-tracker: Hook started
+[2026-04-16T05:46:30.596Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/tests/experiment/ 2>/dev/null && echo "EXISTS" || echo "EMPTY/MISSING"
+[2026-04-16T05:46:30.596Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T05:46:33.000Z] scope-gate: Hook started
+[2026-04-16T05:46:33.000Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/__init__.py
+[2026-04-16T05:46:33.000Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:46:33.000Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:46:33.000Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:46:33.000Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:46:33.003Z] context-gate: Hook started
+[2026-04-16T05:46:33.003Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/__init__.py
+[2026-04-16T05:46:33.003Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:48:05.085Z] context-gate: Hook started
+[2026-04-16T05:48:05.086Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/test_b_exp.py
+[2026-04-16T05:48:05.086Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T05:48:05.088Z] scope-gate: Hook started
+[2026-04-16T05:48:05.088Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/test_b_exp.py
+[2026-04-16T05:48:05.088Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:48:05.088Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:48:05.088Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:48:05.088Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:48:08.653Z] acceptance-gate: Hook started
+[2026-04-16T05:48:08.653Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/experiment/ -v --tb=short 2>&1
+[2026-04-16T05:48:08.653Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:48:08.655Z] backpressure-gate: Hook started
+[2026-04-16T05:48:08.655Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/experiment/ -v --tb=short 2>&1
+[2026-04-16T05:48:08.655Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:48:24.674Z] acceptance-gate: Hook started
+[2026-04-16T05:48:24.674Z] acceptance-gate: Command: .venv/bin/python -c "
+import random
+from qoverwrap.crypto import generate_keypair, sign_layers
+from qoverwrap.encoder import encode_layers
+import qrcode
+from pyzbar.pyzbar import decode as pyzbar_decode
+
+priv, pub = generate_keypair()
+layer_a = 'https://qoverwrap.example.com/v1/card?id=abc123'
+layer_b = b'{\"issuer\":\"QoverwRap\"}'
+layer_c = sign_layers(priv, layer_a, layer_b)
+payload_str = encode_layers(layer_a, layer_b, layer_c)
+print('payload_str[:80]:', repr(payload_str[:80]))
+print('layer_a:', repr(layer_a))
+
+qr = qrcode.QRCode(version=None, error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=4)
+qr.add_data(payload_str)
+qr.make(fit=True)
+img = qr.make_image(fill_color='black', back_color='white')
+print('img type:', type(img))
+print('img mode:', img.mode if hasattr(img, 'mode') else 'N/A')
+
+decoded = pyzbar_decode(img)
+print('pyzbar decoded count:', len(decoded))
+if decoded:
+    print('decoded data[:80]:', repr(decoded[0].data[:80]))
+    text = decoded[0].data.decode('utf-8', errors='replace')
+    print('starts with layer_a:', text.startswith(layer_a))
+else:
+    print('ERROR: pyzbar returned empty list')
+    # Try converting to PIL Image
+    from PIL import Image
+    pil_img = img.convert('RGB') if hasattr(img, 'convert') else img
+    print('pil img type:', type(pil_img))
+    decoded2 = pyzbar_decode(pil_img)
+    print('decoded2 count:', len(decoded2))
+"
+
+[2026-04-16T05:48:24.674Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:48:24.675Z] backpressure-gate: Hook started
+[2026-04-16T05:48:24.675Z] backpressure-gate: Command: .venv/bin/python -c "
+import random
+from qoverwrap.crypto import generate_keypair, sign_layers
+from qoverwrap.encoder import encode_layers
+import qrcode
+from pyzbar.pyzbar import decode as pyzbar_decode
+
+priv, pub = generate_keypair()
+layer_a = 'https://qoverwrap.example.com/v1/card?id=abc123'
+layer_b = b'{\"issuer\":\"QoverwRap\"}'
+layer_c = sign_layers(priv, layer_a, layer_b)
+payload_str = encode_layers(layer_a, layer_b, layer_c)
+print('payload_str[:80]:', repr(payload_str[:80]))
+print('layer_a:', repr(layer_a))
+
+qr = qrcode.QRCode(version=None, error_correction=qrcode.constants.ERROR_CORRECT_M, box_size=10, border=4)
+qr.add_data(payload_str)
+qr.make(fit=True)
+img = qr.make_image(fill_color='black', back_color='white')
+print('img type:', type(img))
+print('img mode:', img.mode if hasattr(img, 'mode') else 'N/A')
+
+decoded = pyzbar_decode(img)
+print('pyzbar decoded count:', len(decoded))
+if decoded:
+    print('decoded data[:80]:', repr(decoded[0].data[:80]))
+    text = decoded[0].data.decode('utf-8', errors='replace')
+    print('starts with layer_a:', text.startswith(layer_a))
+else:
+    print('ERROR: pyzbar returned empty list')
+    # Try converting to PIL Image
+    from PIL import Image
+    pil_img = img.convert('RGB') if hasattr(img, 'convert') else img
+    print('pil img type:', type(pil_img))
+    decoded2 = pyzbar_decode(pil_img)
+    print('decoded2 count:', len(decoded2))
+"
+
+[2026-04-16T05:48:24.675Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:48:32.623Z] scope-gate: Hook started
+[2026-04-16T05:48:32.624Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/test_b_exp.py
+[2026-04-16T05:48:32.624Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:48:32.624Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:48:32.624Z] context-gate: Hook started
+[2026-04-16T05:48:32.624Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/test_b_exp.py
+[2026-04-16T05:48:32.624Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:48:32.624Z] context-gate: File not in read log, blocking
+[2026-04-16T05:48:32.624Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:48:40.338Z] scope-gate: Hook started
+[2026-04-16T05:48:40.338Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/test_b_exp.py
+[2026-04-16T05:48:40.338Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T05:48:40.338Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T05:48:40.338Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T05:48:40.338Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T05:48:40.338Z] context-gate: Hook started
+[2026-04-16T05:48:40.338Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/tests/experiment/test_b_exp.py
+[2026-04-16T05:48:40.338Z] context-gate: File was read, allowing
+[2026-04-16T05:48:42.771Z] acceptance-gate: Hook started
+[2026-04-16T05:48:42.771Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/experiment/ -v --tb=short 2>&1
+[2026-04-16T05:48:42.771Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:48:42.771Z] backpressure-gate: Hook started
+[2026-04-16T05:48:42.771Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/experiment/ -v --tb=short 2>&1
+[2026-04-16T05:48:42.772Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:48:50.386Z] backpressure-tracker: Hook started
+[2026-04-16T05:48:50.386Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/experiment/ -v --tb=short 2>&1
+[2026-04-16T05:48:50.386Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:48:50.386Z] backpressure-tracker: Added to history: {"time":"14:48","type":"test","cmd":".venv/bin/python -m pytest tests/experiment/ -v --...","result":"PASS"}
+[2026-04-16T05:48:53.735Z] acceptance-gate: Hook started
+[2026-04-16T05:48:53.735Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:48:53.735Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:48:53.736Z] backpressure-gate: Hook started
+[2026-04-16T05:48:53.736Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:48:53.736Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:49:20.861Z] backpressure-tracker: Hook started
+[2026-04-16T05:49:20.861Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1
+[2026-04-16T05:49:20.861Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:49:20.862Z] backpressure-tracker: Added to history: {"time":"14:49","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1","result":"PASS"}
+[2026-04-16T05:49:23.341Z] acceptance-gate: Hook started
+[2026-04-16T05:49:23.342Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T05:49:23.342Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:49:23.342Z] backpressure-gate: Hook started
+[2026-04-16T05:49:23.342Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T05:49:23.342Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:49:50.331Z] backpressure-tracker: Hook started
+[2026-04-16T05:49:50.331Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no -q 2>&1 | tail -3
+[2026-04-16T05:49:50.331Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:49:50.332Z] backpressure-tracker: Added to history: {"time":"14:49","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no -q 2>&1 ...","result":"PASS"}
+[2026-04-16T05:49:52.795Z] acceptance-gate: Hook started
+[2026-04-16T05:49:52.795Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -5
+[2026-04-16T05:49:52.795Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:49:52.797Z] backpressure-gate: Hook started
+[2026-04-16T05:49:52.797Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -5
+[2026-04-16T05:49:52.797Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:50:19.877Z] backpressure-tracker: Hook started
+[2026-04-16T05:50:19.877Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -5
+[2026-04-16T05:50:19.878Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:50:19.878Z] backpressure-tracker: Added to history: {"time":"14:50","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T05:50:35.131Z] acceptance-gate: Hook started
+[2026-04-16T05:50:35.131Z] acceptance-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:50:35.131Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T05:50:35.132Z] backpressure-gate: Hook started
+[2026-04-16T05:50:35.132Z] backpressure-gate: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:50:35.132Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T05:51:02.452Z] backpressure-tracker: Hook started
+[2026-04-16T05:51:02.452Z] backpressure-tracker: Command: .venv/bin/python -m pytest tests/ --tb=no 2>&1 | tail -1
+[2026-04-16T05:51:02.452Z] backpressure-tracker: Is verification: true, type: test
+[2026-04-16T05:51:02.452Z] backpressure-tracker: Added to history: {"time":"14:51","type":"test","cmd":".venv/bin/python -m pytest tests/ --tb=no 2>&1 | t...","result":"PASS"}
+[2026-04-16T08:59:23.961Z] acceptance-gate: Hook started
+[2026-04-16T08:59:23.961Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/sum/
+[2026-04-16T08:59:23.961Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T08:59:23.962Z] backpressure-gate: Hook started
+[2026-04-16T08:59:23.962Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/sum/
+[2026-04-16T08:59:23.962Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T08:59:24.127Z] backpressure-tracker: Hook started
+[2026-04-16T08:59:24.127Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/docs/sum/
+[2026-04-16T08:59:24.128Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T09:00:22.622Z] scope-gate: Hook started
+[2026-04-16T09:00:22.622Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-16_phase-b-and-prior-art.md
+[2026-04-16T09:00:22.622Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T09:00:22.622Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T09:00:22.622Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T09:00:22.622Z] context-gate: Hook started
+[2026-04-16T09:00:22.622Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-16_phase-b-and-prior-art.md
+[2026-04-16T09:00:22.622Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T09:00:22.622Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T09:01:44.977Z] scope-gate: Hook started
+[2026-04-16T09:01:44.978Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-16T09:01:44.978Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T09:01:44.978Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T09:01:44.978Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T09:01:44.978Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T09:01:44.980Z] context-gate: Hook started
+[2026-04-16T09:01:44.980Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-16T09:01:44.980Z] context-gate: File does not exist (new file), allowing
+[2026-04-16T09:10:31.516Z] context-gate: Hook started
+[2026-04-16T09:10:31.517Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-16_phase-b-and-prior-art.md
+[2026-04-16T09:10:31.517Z] context-gate: File was read, allowing
+[2026-04-16T09:10:31.517Z] scope-gate: Hook started
+[2026-04-16T09:10:31.517Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-16_phase-b-and-prior-art.md
+[2026-04-16T09:10:31.517Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T09:10:31.517Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T09:10:31.517Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T09:10:31.517Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T09:10:41.567Z] scope-gate: Hook started
+[2026-04-16T09:10:41.567Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-16_phase-b-and-prior-art.md
+[2026-04-16T09:10:41.567Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-16T09:10:41.567Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-16T09:10:41.567Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-16T09:10:41.567Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-16T09:10:41.569Z] context-gate: Hook started
+[2026-04-16T09:10:41.569Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-16_phase-b-and-prior-art.md
+[2026-04-16T09:10:41.569Z] context-gate: File was read, allowing
+[2026-04-16T09:35:20.667Z] acceptance-gate: Hook started
+[2026-04-16T09:35:20.667Z] acceptance-gate: Command: git log --oneline -20
+[2026-04-16T09:35:20.667Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T09:35:20.668Z] backpressure-gate: Hook started
+[2026-04-16T09:35:20.668Z] backpressure-gate: Command: git log --oneline -20
+[2026-04-16T09:35:20.668Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T09:35:20.843Z] backpressure-tracker: Hook started
+[2026-04-16T09:35:20.843Z] backpressure-tracker: Command: git log --oneline -20
+[2026-04-16T09:35:20.844Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T09:35:21.591Z] acceptance-gate: Hook started
+[2026-04-16T09:35:21.591Z] acceptance-gate: Command: git remote -v 2>/dev/null && git branch -vv 2>/dev/null | head -5
+[2026-04-16T09:35:21.591Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T09:35:21.592Z] backpressure-gate: Hook started
+[2026-04-16T09:35:21.592Z] backpressure-gate: Command: git remote -v 2>/dev/null && git branch -vv 2>/dev/null | head -5
+[2026-04-16T09:35:21.592Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T09:35:21.756Z] backpressure-tracker: Hook started
+[2026-04-16T09:35:21.756Z] backpressure-tracker: Command: git remote -v 2>/dev/null && git branch -vv 2>/dev/null | head -5
+[2026-04-16T09:35:21.757Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-16T09:35:22.594Z] acceptance-gate: Hook started
+[2026-04-16T09:35:22.594Z] acceptance-gate: Command: git status --short
+[2026-04-16T09:35:22.594Z] acceptance-gate: Not a git commit, allowing
+[2026-04-16T09:35:22.595Z] backpressure-gate: Hook started
+[2026-04-16T09:35:22.595Z] backpressure-gate: Command: git status --short
+[2026-04-16T09:35:22.595Z] backpressure-gate: Not a git commit, allowing
+[2026-04-16T09:35:22.752Z] backpressure-tracker: Hook started
+[2026-04-16T09:35:22.752Z] backpressure-tracker: Command: git status --short
+[2026-04-16T09:35:22.752Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T03:18:42.541Z] acceptance-gate: Hook started
+[2026-04-17T03:18:42.541Z] backpressure-gate: Hook started
+[2026-04-17T03:18:42.541Z] acceptance-gate: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-17T03:18:42.541Z] backpressure-gate: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-17T03:18:42.541Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T03:18:42.541Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T03:18:42.713Z] backpressure-tracker: Hook started
+[2026-04-17T03:18:42.713Z] backpressure-tracker: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-17T03:18:42.713Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T03:19:05.274Z] scope-gate: Hook started
+[2026-04-17T03:19:05.274Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-17_status-review.md
+[2026-04-17T03:19:05.274Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T03:19:05.275Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T03:19:05.275Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T03:19:05.275Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T03:19:05.276Z] context-gate: Hook started
+[2026-04-17T03:19:05.276Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-17_status-review.md
+[2026-04-17T03:19:05.276Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T04:27:18.334Z] acceptance-gate: Hook started
+[2026-04-17T04:27:18.335Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/research/ 2>/dev/null && echo "---" && ls /home/rae/projects/workspace/QoverwRap/
+[2026-04-17T04:27:18.335Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:27:18.335Z] backpressure-gate: Hook started
+[2026-04-17T04:27:18.335Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/research/ 2>/dev/null && echo "---" && ls /home/rae/projects/workspace/QoverwRap/
+[2026-04-17T04:27:18.335Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:27:18.626Z] backpressure-tracker: Hook started
+[2026-04-17T04:27:18.626Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/docs/research/ 2>/dev/null && echo "---" && ls /home/rae/projects/workspace/QoverwRap/
+[2026-04-17T04:27:18.626Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:27:21.735Z] acceptance-gate: Hook started
+[2026-04-17T04:27:21.735Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/research/ && echo "---BRAINSTORM---" && ls /home/rae/projects/workspace/QoverwRap/brainstorming/ 2>/dev/null
+[2026-04-17T04:27:21.735Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:27:21.735Z] backpressure-gate: Hook started
+[2026-04-17T04:27:21.736Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/research/ && echo "---BRAINSTORM---" && ls /home/rae/projects/workspace/QoverwRap/brainstorming/ 2>/dev/null
+[2026-04-17T04:27:21.736Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:27:21.904Z] backpressure-tracker: Hook started
+[2026-04-17T04:27:21.905Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/docs/research/ && echo "---BRAINSTORM---" && ls /home/rae/projects/workspace/QoverwRap/brainstorming/ 2>/dev/null
+[2026-04-17T04:27:21.905Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:28:02.874Z] backpressure-gate: Hook started
+[2026-04-17T04:28:02.874Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/test-results/ 2>/dev/null && echo "---" && ls /home/rae/projects/workspace/QoverwRap/tests/ 2>/dev/null && echo "---CHECKLIST---" && ls /home/rae/projects/workspace/QoverwRap/checklists/ 2>/dev/null
+[2026-04-17T04:28:02.874Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:28:02.874Z] acceptance-gate: Hook started
+[2026-04-17T04:28:02.874Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/test-results/ 2>/dev/null && echo "---" && ls /home/rae/projects/workspace/QoverwRap/tests/ 2>/dev/null && echo "---CHECKLIST---" && ls /home/rae/projects/workspace/QoverwRap/checklists/ 2>/dev/null
+[2026-04-17T04:28:02.874Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:28:03.057Z] backpressure-tracker: Hook started
+[2026-04-17T04:28:03.057Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/test-results/ 2>/dev/null && echo "---" && ls /home/rae/projects/workspace/QoverwRap/tests/ 2>/dev/null && echo "---CHECKLIST---" && ls /home/rae/projects/workspace/QoverwRap/checklists/ 2>/dev/null
+[2026-04-17T04:28:03.057Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:28:07.156Z] acceptance-gate: Hook started
+[2026-04-17T04:28:07.156Z] acceptance-gate: Command: git -C /home/rae/projects/workspace/QoverwRap log --oneline -20 && echo "---PHASE---" && ls /home/rae/projects/workspace/QoverwRap/claudedocs/ 2>/dev/null | head -30
+[2026-04-17T04:28:07.156Z] backpressure-gate: Hook started
+[2026-04-17T04:28:07.156Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:28:07.156Z] backpressure-gate: Command: git -C /home/rae/projects/workspace/QoverwRap log --oneline -20 && echo "---PHASE---" && ls /home/rae/projects/workspace/QoverwRap/claudedocs/ 2>/dev/null | head -30
+[2026-04-17T04:28:07.156Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:28:07.329Z] backpressure-tracker: Hook started
+[2026-04-17T04:28:07.329Z] backpressure-tracker: Command: git -C /home/rae/projects/workspace/QoverwRap log --oneline -20 && echo "---PHASE---" && ls /home/rae/projects/workspace/QoverwRap/claudedocs/ 2>/dev/null | head -30
+[2026-04-17T04:28:07.329Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:28:11.807Z] backpressure-gate: Hook started
+[2026-04-17T04:28:11.807Z] acceptance-gate: Hook started
+[2026-04-17T04:28:11.807Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/unit/ /home/rae/projects/workspace/QoverwRap/tests/integration/ /home/rae/projects/workspace/QoverwRap/tests/experiment/ 2>/dev/null && echo "---SRC---" && ls /home/rae/projects/workspace/QoverwRap/src/qoverwrap/ 2>/dev/null
+[2026-04-17T04:28:11.807Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/tests/unit/ /home/rae/projects/workspace/QoverwRap/tests/integration/ /home/rae/projects/workspace/QoverwRap/tests/experiment/ 2>/dev/null && echo "---SRC---" && ls /home/rae/projects/workspace/QoverwRap/src/qoverwrap/ 2>/dev/null
+[2026-04-17T04:28:11.807Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:28:11.807Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:28:11.979Z] backpressure-tracker: Hook started
+[2026-04-17T04:28:11.980Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/tests/unit/ /home/rae/projects/workspace/QoverwRap/tests/integration/ /home/rae/projects/workspace/QoverwRap/tests/experiment/ 2>/dev/null && echo "---SRC---" && ls /home/rae/projects/workspace/QoverwRap/src/qoverwrap/ 2>/dev/null
+[2026-04-17T04:28:11.980Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:42:12.390Z] acceptance-gate: Hook started
+[2026-04-17T04:42:12.391Z] acceptance-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/.env* 2>/dev/null; ls -la /home/rae/projects/workspace/QoverwRap/.envrc 2>/dev/null; cat /home/rae/projects/workspace/QoverwRap/.gitignore 2>/dev/null | head -30
+[2026-04-17T04:42:12.391Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:42:12.391Z] backpressure-gate: Hook started
+[2026-04-17T04:42:12.391Z] backpressure-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/.env* 2>/dev/null; ls -la /home/rae/projects/workspace/QoverwRap/.envrc 2>/dev/null; cat /home/rae/projects/workspace/QoverwRap/.gitignore 2>/dev/null | head -30
+[2026-04-17T04:42:12.391Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:42:12.584Z] backpressure-tracker: Hook started
+[2026-04-17T04:42:12.584Z] backpressure-tracker: Command: ls -la /home/rae/projects/workspace/QoverwRap/.env* 2>/dev/null; ls -la /home/rae/projects/workspace/QoverwRap/.envrc 2>/dev/null; cat /home/rae/projects/workspace/QoverwRap/.gitignore 2>/dev/null | head -30
+[2026-04-17T04:42:12.584Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:42:16.454Z] backpressure-gate: Hook started
+[2026-04-17T04:42:16.454Z] backpressure-gate: Command: grep -n -i "kipris\|api" /home/rae/projects/workspace/QoverwRap/brainstorming/04_patent-workflow-kr.md 2>/dev/null | head -20
+[2026-04-17T04:42:16.455Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:42:16.455Z] acceptance-gate: Hook started
+[2026-04-17T04:42:16.455Z] acceptance-gate: Command: grep -n -i "kipris\|api" /home/rae/projects/workspace/QoverwRap/brainstorming/04_patent-workflow-kr.md 2>/dev/null | head -20
+[2026-04-17T04:42:16.456Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:42:16.628Z] backpressure-tracker: Hook started
+[2026-04-17T04:42:16.628Z] backpressure-tracker: Command: grep -n -i "kipris\|api" /home/rae/projects/workspace/QoverwRap/brainstorming/04_patent-workflow-kr.md 2>/dev/null | head -20
+[2026-04-17T04:42:16.628Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:42:41.774Z] scope-gate: Hook started
+[2026-04-17T04:42:41.774Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/.gitignore
+[2026-04-17T04:42:41.774Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T04:42:41.775Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T04:42:41.775Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T04:42:41.775Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T04:42:41.775Z] context-gate: Hook started
+[2026-04-17T04:42:41.775Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/.gitignore
+[2026-04-17T04:42:41.776Z] context-gate: File was read, allowing
+[2026-04-17T04:42:43.387Z] scope-gate: Hook started
+[2026-04-17T04:42:43.387Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/.env.example
+[2026-04-17T04:42:43.387Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T04:42:43.387Z] context-gate: Hook started
+[2026-04-17T04:42:43.387Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/.env.example
+[2026-04-17T04:42:43.388Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T04:42:43.388Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T04:42:43.388Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T04:42:43.388Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T04:42:44.380Z] scope-gate: Hook started
+[2026-04-17T04:42:44.380Z] context-gate: Hook started
+[2026-04-17T04:42:44.380Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/.env
+[2026-04-17T04:42:44.380Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T04:42:44.380Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/.env
+[2026-04-17T04:42:44.380Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T04:42:44.380Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T04:42:44.380Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T04:42:44.380Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T04:42:47.689Z] acceptance-gate: Hook started
+[2026-04-17T04:42:47.689Z] acceptance-gate: Command: git check-ignore -v .env .env.local && git status --short .env .env.example .gitignore
+[2026-04-17T04:42:47.689Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:42:47.690Z] backpressure-gate: Hook started
+[2026-04-17T04:42:47.690Z] backpressure-gate: Command: git check-ignore -v .env .env.local && git status --short .env .env.example .gitignore
+[2026-04-17T04:42:47.690Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:42:47.862Z] backpressure-tracker: Hook started
+[2026-04-17T04:42:47.862Z] backpressure-tracker: Command: git check-ignore -v .env .env.local && git status --short .env .env.example .gitignore
+[2026-04-17T04:42:47.863Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T04:43:21.908Z] acceptance-gate: Hook started
+[2026-04-17T04:43:21.908Z] acceptance-gate: Command: python3 -c "
+from dotenv import dotenv_values
+v = dotenv_values('.env')
+key = v.get('KIPRIS_API_KEY', '')
+print(f'length={len(key)}')
+print(f'endswith==: {key.endswith(chr(61))}')
+print(f'first8={key[:8]!r}  last4={key[-4:]!r}')
+"
+[2026-04-17T04:43:21.908Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T04:43:21.910Z] backpressure-gate: Hook started
+[2026-04-17T04:43:21.910Z] backpressure-gate: Command: python3 -c "
+from dotenv import dotenv_values
+v = dotenv_values('.env')
+key = v.get('KIPRIS_API_KEY', '')
+print(f'length={len(key)}')
+print(f'endswith==: {key.endswith(chr(61))}')
+print(f'first8={key[:8]!r}  last4={key[-4:]!r}')
+"
+[2026-04-17T04:43:21.910Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T04:43:22.132Z] backpressure-tracker: Hook started
+[2026-04-17T04:43:22.132Z] backpressure-tracker: Command: python3 -c "
+from dotenv import dotenv_values
+v = dotenv_values('.env')
+key = v.get('KIPRIS_API_KEY', '')
+print(f'length={len(key)}')
+print(f'endswith==: {key.endswith(chr(61))}')
+print(f'first8={key[:8]!r}  last4={key[-4:]!r}')
+"
+[2026-04-17T04:43:22.132Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:30:29.250Z] backpressure-gate: Hook started
+[2026-04-17T06:30:29.251Z] acceptance-gate: Hook started
+[2026-04-17T06:30:29.251Z] acceptance-gate: Command: ls -la "/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json" 2>/dev/null && echo "---FOUND---" || echo "NOT FOUND — 파일 경로 재확인 필요"
+[2026-04-17T06:30:29.251Z] backpressure-gate: Command: ls -la "/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json" 2>/dev/null && echo "---FOUND---" || echo "NOT FOUND — 파일 경로 재확인 필요"
+[2026-04-17T06:30:29.251Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:30:29.251Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:30:29.426Z] backpressure-tracker: Hook started
+[2026-04-17T06:30:29.426Z] backpressure-tracker: Command: ls -la "/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json" 2>/dev/null && echo "---FOUND---" || echo "NOT FOUND — 파일 경로 재확인 필요"
+[2026-04-17T06:30:29.427Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:30:35.281Z] acceptance-gate: Hook started
+[2026-04-17T06:30:35.282Z] acceptance-gate: Command: python3 -c "
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json') as f:
+    data = json.load(f)
+print('TYPE:', type(data).__name__)
+if isinstance(data, dict):
+    print('TOP KEYS:', list(data.keys())[:20])
+elif isinstance(data, list):
+    print('LIST LEN:', len(data))
+    print('SAMPLE[0]:', json.dumps(data[0], ensure_ascii=False, indent=2)[:800] if data else 'empty')
+"
+[2026-04-17T06:30:35.282Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:30:35.285Z] backpressure-gate: Hook started
+[2026-04-17T06:30:35.286Z] backpressure-gate: Command: python3 -c "
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json') as f:
+    data = json.load(f)
+print('TYPE:', type(data).__name__)
+if isinstance(data, dict):
+    print('TOP KEYS:', list(data.keys())[:20])
+elif isinstance(data, list):
+    print('LIST LEN:', len(data))
+    print('SAMPLE[0]:', json.dumps(data[0], ensure_ascii=False, indent=2)[:800] if data else 'empty')
+"
+[2026-04-17T06:30:35.286Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:30:38.414Z] backpressure-gate: Hook started
+[2026-04-17T06:30:38.415Z] backpressure-gate: Command: python3 -c "
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+print('TYPE:', type(data).__name__)
+if isinstance(data, dict):
+    print('TOP KEYS:', list(data.keys())[:30])
+    for k in list(data.keys())[:3]:
+        v = data[k]
+        print(f'  {k}: {type(v).__name__}')
+elif isinstance(data, list):
+    print('LIST LEN:', len(data))
+    print('SAMPLE[0]:')
+    print(json.dumps(data[0], ensure_ascii=False, indent=2)[:1500] if data else 'empty')
+"
+[2026-04-17T06:30:38.415Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:30:38.414Z] acceptance-gate: Hook started
+[2026-04-17T06:30:38.415Z] acceptance-gate: Command: python3 -c "
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+print('TYPE:', type(data).__name__)
+if isinstance(data, dict):
+    print('TOP KEYS:', list(data.keys())[:30])
+    for k in list(data.keys())[:3]:
+        v = data[k]
+        print(f'  {k}: {type(v).__name__}')
+elif isinstance(data, list):
+    print('LIST LEN:', len(data))
+    print('SAMPLE[0]:')
+    print(json.dumps(data[0], ensure_ascii=False, indent=2)[:1500] if data else 'empty')
+"
+[2026-04-17T06:30:38.415Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:30:38.608Z] backpressure-tracker: Hook started
+[2026-04-17T06:30:38.609Z] backpressure-tracker: Command: python3 -c "
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+print('TYPE:', type(data).__name__)
+if isinstance(data, dict):
+    print('TOP KEYS:', list(data.keys())[:30])
+    for k in list(data.keys())[:3]:
+        v = data[k]
+        print(f'  {k}: {type(v).__name__}')
+elif isinstance(data, list):
+    print('LIST LEN:', len(data))
+    print('SAMPLE[0]:')
+    print(json.dumps(data[0], ensure_ascii=False, indent=2)[:1500] if data else 'empty')
+"
+[2026-04-17T06:30:38.609Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:30:54.326Z] backpressure-gate: Hook started
+[2026-04-17T06:30:54.326Z] backpressure-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+
+header = data[0]
+rows = data[1:]
+print("HEADERS:", header)
+print()
+
+# Distinct service names
+services = sorted({r[1] for r in rows if len(r) > 1})
+print(f"TOTAL SERVICES: {len(services)}")
+for s in services:
+    print(f"  - {s}")
+EOF
+[2026-04-17T06:30:54.326Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:30:54.326Z] acceptance-gate: Hook started
+[2026-04-17T06:30:54.326Z] acceptance-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+
+header = data[0]
+rows = data[1:]
+print("HEADERS:", header)
+print()
+
+# Distinct service names
+services = sorted({r[1] for r in rows if len(r) > 1})
+print(f"TOTAL SERVICES: {len(services)}")
+for s in services:
+    print(f"  - {s}")
+EOF
+[2026-04-17T06:30:54.326Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:30:54.520Z] backpressure-tracker: Hook started
+[2026-04-17T06:30:54.521Z] backpressure-tracker: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+
+header = data[0]
+rows = data[1:]
+print("HEADERS:", header)
+print()
+
+# Distinct service names
+services = sorted({r[1] for r in rows if len(r) > 1})
+print(f"TOTAL SERVICES: {len(services)}")
+for s in services:
+    print(f"  - {s}")
+EOF
+[2026-04-17T06:30:54.521Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:31:03.208Z] acceptance-gate: Hook started
+[2026-04-17T06:31:03.208Z] acceptance-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+rows = data[1:]
+
+# Distinct operations
+ops = sorted({(r[1], r[4]) for r in rows if len(r) > 4})
+print(f"OPERATIONS: {len(ops)}")
+for svc, op in ops:
+    print(f"  [{svc}] {op}")
+EOF
+[2026-04-17T06:31:03.209Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:31:03.209Z] backpressure-gate: Hook started
+[2026-04-17T06:31:03.210Z] backpressure-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+rows = data[1:]
+
+# Distinct operations
+ops = sorted({(r[1], r[4]) for r in rows if len(r) > 4})
+print(f"OPERATIONS: {len(ops)}")
+for svc, op in ops:
+    print(f"  [{svc}] {op}")
+EOF
+[2026-04-17T06:31:03.210Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:31:03.400Z] backpressure-tracker: Hook started
+[2026-04-17T06:31:03.401Z] backpressure-tracker: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+rows = data[1:]
+
+# Distinct operations
+ops = sorted({(r[1], r[4]) for r in rows if len(r) > 4})
+print(f"OPERATIONS: {len(ops)}")
+for svc, op in ops:
+    print(f"  [{svc}] {op}")
+EOF
+[2026-04-17T06:31:03.401Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:31:14.830Z] acceptance-gate: Hook started
+[2026-04-17T06:31:14.830Z] acceptance-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+rows = data[1:]
+
+# Focus on getAdvancedSearch and freeSearchInfo
+for target in ['getAdvancedSearch', 'freeSearchInfo']:
+    print(f"\n=========== {target} ===========")
+    matching = [r for r in rows if len(r) > 4 and target in r[4]]
+    for r in matching:
+        # columns: 순번, 서비스명, API유형, API분류, API오퍼레이션명, 입출력, 레벨, 구분, 데이터항목, 설명, 부가정보
+        io = r[5] if len(r) > 5 else ''
+        lvl = r[6] if len(r) > 6 else ''
+        kind = r[7] if len(r) > 7 else ''
+        item = r[8] if len(r) > 8 else ''
+        desc = (r[9] if len(r) > 9 else '')[:80]
+        extra = (r[10] if len(r) > 10 else '')[:80]
+        print(f"  [{io}][{lvl}][{kind}] {item} | {desc} | {extra}")
+EOF
+[2026-04-17T06:31:14.830Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:31:14.830Z] backpressure-gate: Hook started
+[2026-04-17T06:31:14.830Z] backpressure-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+rows = data[1:]
+
+# Focus on getAdvancedSearch and freeSearchInfo
+for target in ['getAdvancedSearch', 'freeSearchInfo']:
+    print(f"\n=========== {target} ===========")
+    matching = [r for r in rows if len(r) > 4 and target in r[4]]
+    for r in matching:
+        # columns: 순번, 서비스명, API유형, API분류, API오퍼레이션명, 입출력, 레벨, 구분, 데이터항목, 설명, 부가정보
+        io = r[5] if len(r) > 5 else ''
+        lvl = r[6] if len(r) > 6 else ''
+        kind = r[7] if len(r) > 7 else ''
+        item = r[8] if len(r) > 8 else ''
+        desc = (r[9] if len(r) > 9 else '')[:80]
+        extra = (r[10] if len(r) > 10 else '')[:80]
+        print(f"  [{io}][{lvl}][{kind}] {item} | {desc} | {extra}")
+EOF
+[2026-04-17T06:31:14.831Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:31:15.031Z] backpressure-tracker: Hook started
+[2026-04-17T06:31:15.031Z] backpressure-tracker: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+rows = data[1:]
+
+# Focus on getAdvancedSearch and freeSearchInfo
+for target in ['getAdvancedSearch', 'freeSearchInfo']:
+    print(f"\n=========== {target} ===========")
+    matching = [r for r in rows if len(r) > 4 and target in r[4]]
+    for r in matching:
+        # columns: 순번, 서비스명, API유형, API분류, API오퍼레이션명, 입출력, 레벨, 구분, 데이터항목, 설명, 부가정보
+        io = r[5] if len(r) > 5 else ''
+        lvl = r[6] if len(r) > 6 else ''
+        kind = r[7] if len(r) > 7 else ''
+        item = r[8] if len(r) > 8 else ''
+        desc = (r[9] if len(r) > 9 else '')[:80]
+        extra = (r[10] if len(r) > 10 else '')[:80]
+        print(f"  [{io}][{lvl}][{kind}] {item} | {desc} | {extra}")
+EOF
+[2026-04-17T06:31:15.031Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:31:29.986Z] acceptance-gate: Hook started
+[2026-04-17T06:31:29.986Z] acceptance-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+# Search for any URL-like strings
+for r in data[1:]:
+    for cell in r:
+        if isinstance(cell, str) and ('http' in cell.lower() or 'kipris' in cell.lower() or 'endpoint' in cell.lower() or 'plus.kipris' in cell.lower()):
+            print(cell[:200])
+            break
+EOF
+[2026-04-17T06:31:29.986Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:31:29.988Z] backpressure-gate: Hook started
+[2026-04-17T06:31:29.988Z] backpressure-gate: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+# Search for any URL-like strings
+for r in data[1:]:
+    for cell in r:
+        if isinstance(cell, str) and ('http' in cell.lower() or 'kipris' in cell.lower() or 'endpoint' in cell.lower() or 'plus.kipris' in cell.lower()):
+            print(cell[:200])
+            break
+EOF
+[2026-04-17T06:31:29.989Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:31:30.169Z] backpressure-tracker: Hook started
+[2026-04-17T06:31:30.169Z] backpressure-tracker: Command: python3 << 'EOF'
+import json
+with open('/mnt/c/Users/user/Downloads/KIPRISPlus Open API 입출력값 정보.json', encoding='utf-8-sig') as f:
+    data = json.load(f)
+# Search for any URL-like strings
+for r in data[1:]:
+    for cell in r:
+        if isinstance(cell, str) and ('http' in cell.lower() or 'kipris' in cell.lower() or 'endpoint' in cell.lower() or 'plus.kipris' in cell.lower()):
+            print(cell[:200])
+            break
+EOF
+[2026-04-17T06:31:30.169Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:34:14.784Z] acceptance-gate: Hook started
+[2026-04-17T06:34:14.784Z] backpressure-gate: Hook started
+[2026-04-17T06:34:14.784Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/scripts/ 2>/dev/null && echo "---PYPROJECT---" && grep -A5 "dependencies\|requires" /home/rae/projects/workspace/QoverwRap/pyproject.toml | head -30
+[2026-04-17T06:34:14.784Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/scripts/ 2>/dev/null && echo "---PYPROJECT---" && grep -A5 "dependencies\|requires" /home/rae/projects/workspace/QoverwRap/pyproject.toml | head -30
+[2026-04-17T06:34:14.784Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:34:14.784Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:34:14.954Z] backpressure-tracker: Hook started
+[2026-04-17T06:34:14.954Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/scripts/ 2>/dev/null && echo "---PYPROJECT---" && grep -A5 "dependencies\|requires" /home/rae/projects/workspace/QoverwRap/pyproject.toml | head -30
+[2026-04-17T06:34:14.954Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:34:18.985Z] acceptance-gate: Hook started
+[2026-04-17T06:34:18.986Z] acceptance-gate: Command: python3 -c "import requests, dotenv; print('requests:', requests.__version__); print('dotenv:', dotenv.__version__)" 2>&1 | head -5
+[2026-04-17T06:34:18.986Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:34:18.987Z] backpressure-gate: Hook started
+[2026-04-17T06:34:18.987Z] backpressure-gate: Command: python3 -c "import requests, dotenv; print('requests:', requests.__version__); print('dotenv:', dotenv.__version__)" 2>&1 | head -5
+[2026-04-17T06:34:18.987Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:34:19.281Z] backpressure-tracker: Hook started
+[2026-04-17T06:34:19.281Z] backpressure-tracker: Command: python3 -c "import requests, dotenv; print('requests:', requests.__version__); print('dotenv:', dotenv.__version__)" 2>&1 | head -5
+[2026-04-17T06:34:19.281Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:34:41.377Z] scope-gate: Hook started
+[2026-04-17T06:34:41.377Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:34:41.377Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:34:41.377Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:34:41.378Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:34:41.378Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:34:41.378Z] context-gate: Hook started
+[2026-04-17T06:34:41.379Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:34:41.379Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T06:34:45.582Z] acceptance-gate: Hook started
+[2026-04-17T06:34:45.582Z] acceptance-gate: Command: test -f /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py && echo "FILE EXISTS" && wc -l /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:34:45.582Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:34:45.584Z] backpressure-gate: Hook started
+[2026-04-17T06:34:45.585Z] backpressure-gate: Command: test -f /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py && echo "FILE EXISTS" && wc -l /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:34:45.585Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:34:45.764Z] backpressure-tracker: Hook started
+[2026-04-17T06:34:45.764Z] backpressure-tracker: Command: test -f /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py && echo "FILE EXISTS" && wc -l /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:34:45.764Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:34:46.380Z] acceptance-gate: Hook started
+[2026-04-17T06:34:46.380Z] acceptance-gate: Command: python3 scripts/kipris_search.py "QR코드" 2>&1 | head -40
+[2026-04-17T06:34:46.380Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:34:46.383Z] backpressure-gate: Hook started
+[2026-04-17T06:34:46.383Z] backpressure-gate: Command: python3 scripts/kipris_search.py "QR코드" 2>&1 | head -40
+[2026-04-17T06:34:46.383Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:34:47.034Z] backpressure-tracker: Hook started
+[2026-04-17T06:34:47.034Z] backpressure-tracker: Command: python3 scripts/kipris_search.py "QR코드" 2>&1 | head -40
+[2026-04-17T06:34:47.034Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:34:54.149Z] acceptance-gate: Hook started
+[2026-04-17T06:34:54.149Z] acceptance-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+params = {"word": "QR코드", "patent": "true", "utility": "true", "numOfRows": 5, "pageNo": 1, "accessKey": key}
+url = f"http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch?{urllib.parse.urlencode(params)}"
+r = requests.get(url, timeout=30)
+print("STATUS:", r.status_code)
+print("CONTENT-TYPE:", r.headers.get('content-type'))
+print("RAW:")
+print(r.text[:3000])
+EOF
+[2026-04-17T06:34:54.149Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:34:54.151Z] backpressure-gate: Hook started
+[2026-04-17T06:34:54.151Z] backpressure-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+params = {"word": "QR코드", "patent": "true", "utility": "true", "numOfRows": 5, "pageNo": 1, "accessKey": key}
+url = f"http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch?{urllib.parse.urlencode(params)}"
+r = requests.get(url, timeout=30)
+print("STATUS:", r.status_code)
+print("CONTENT-TYPE:", r.headers.get('content-type'))
+print("RAW:")
+print(r.text[:3000])
+EOF
+[2026-04-17T06:34:54.151Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:34:54.438Z] backpressure-tracker: Hook started
+[2026-04-17T06:34:54.438Z] backpressure-tracker: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+params = {"word": "QR코드", "patent": "true", "utility": "true", "numOfRows": 5, "pageNo": 1, "accessKey": key}
+url = f"http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch?{urllib.parse.urlencode(params)}"
+r = requests.get(url, timeout=30)
+print("STATUS:", r.status_code)
+print("CONTENT-TYPE:", r.headers.get('content-type'))
+print("RAW:")
+print(r.text[:3000])
+EOF
+[2026-04-17T06:34:54.438Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:35:05.551Z] acceptance-gate: Hook started
+[2026-04-17T06:35:05.551Z] acceptance-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# EXACT replica of Java sample (patentIpcInfo with known applno)
+url1 = "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/patentIpcInfo"
+url = f"{url1}?applicationNumber=1020060118886&accessKey={key}"
+r = requests.get(url, timeout=30)
+print("=== Java sample replica (patentIpcInfo) ===")
+print("STATUS:", r.status_code, "CT:", r.headers.get('content-type'))
+print(r.text[:1500])
+EOF
+[2026-04-17T06:35:05.551Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:35:05.552Z] backpressure-gate: Hook started
+[2026-04-17T06:35:05.553Z] backpressure-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# EXACT replica of Java sample (patentIpcInfo with known applno)
+url1 = "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/patentIpcInfo"
+url = f"{url1}?applicationNumber=1020060118886&accessKey={key}"
+r = requests.get(url, timeout=30)
+print("=== Java sample replica (patentIpcInfo) ===")
+print("STATUS:", r.status_code, "CT:", r.headers.get('content-type'))
+print(r.text[:1500])
+EOF
+[2026-04-17T06:35:05.553Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:35:05.818Z] backpressure-tracker: Hook started
+[2026-04-17T06:35:05.818Z] backpressure-tracker: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# EXACT replica of Java sample (patentIpcInfo with known applno)
+url1 = "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/patentIpcInfo"
+url = f"{url1}?applicationNumber=1020060118886&accessKey={key}"
+r = requests.get(url, timeout=30)
+print("=== Java sample replica (patentIpcInfo) ===")
+print("STATUS:", r.status_code, "CT:", r.headers.get('content-type'))
+print(r.text[:1500])
+EOF
+[2026-04-17T06:35:05.818Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:35:13.004Z] acceptance-gate: Hook started
+[2026-04-17T06:35:13.004Z] acceptance-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# Try multiple candidate paths for getAdvancedSearch
+candidates = [
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch",
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getWordSearch",
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/freeSearchInfo",
+    "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+]
+for base in candidates:
+    url = f"{base}?word=QR&patent=true&utility=true&numOfRows=3&pageNo=1&accessKey={key}"
+    try:
+        r = requests.get(url, timeout=15)
+        print(f"\n=== {base} ===")
+        print(f"STATUS: {r.status_code}  CT: {r.headers.get('content-type')}")
+        print(r.text[:600])
+    except Exception as e:
+        print(f"\n=== {base} ===\nEXC: {e}")
+EOF
+[2026-04-17T06:35:13.004Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:35:13.005Z] backpressure-gate: Hook started
+[2026-04-17T06:35:13.005Z] backpressure-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# Try multiple candidate paths for getAdvancedSearch
+candidates = [
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch",
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getWordSearch",
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/freeSearchInfo",
+    "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+]
+for base in candidates:
+    url = f"{base}?word=QR&patent=true&utility=true&numOfRows=3&pageNo=1&accessKey={key}"
+    try:
+        r = requests.get(url, timeout=15)
+        print(f"\n=== {base} ===")
+        print(f"STATUS: {r.status_code}  CT: {r.headers.get('content-type')}")
+        print(r.text[:600])
+    except Exception as e:
+        print(f"\n=== {base} ===\nEXC: {e}")
+EOF
+[2026-04-17T06:35:13.005Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:35:13.500Z] backpressure-tracker: Hook started
+[2026-04-17T06:35:13.501Z] backpressure-tracker: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# Try multiple candidate paths for getAdvancedSearch
+candidates = [
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch",
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getWordSearch",
+    "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/freeSearchInfo",
+    "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+]
+for base in candidates:
+    url = f"{base}?word=QR&patent=true&utility=true&numOfRows=3&pageNo=1&accessKey={key}"
+    try:
+        r = requests.get(url, timeout=15)
+        print(f"\n=== {base} ===")
+        print(f"STATUS: {r.status_code}  CT: {r.headers.get('content-type')}")
+        print(r.text[:600])
+    except Exception as e:
+        print(f"\n=== {base} ===\nEXC: {e}")
+EOF
+[2026-04-17T06:35:13.501Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:35:26.349Z] backpressure-gate: Hook started
+[2026-04-17T06:35:26.349Z] backpressure-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# getAdvancedSearch on kipo-api path — test with all known param names
+base = "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch"
+params = {
+    "word": "QR",
+    "patent": "true",
+    "utility": "true",
+    "numOfRows": "3",
+    "pageNo": "1",
+    "accessKey": key,
+}
+url = f"{base}?{urllib.parse.urlencode(params)}"
+r = requests.get(url, timeout=30)
+print("STATUS:", r.status_code, "CT:", r.headers.get('content-type'))
+print(r.text[:1500])
+EOF
+[2026-04-17T06:35:26.349Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:35:26.349Z] acceptance-gate: Hook started
+[2026-04-17T06:35:26.349Z] acceptance-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# getAdvancedSearch on kipo-api path — test with all known param names
+base = "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch"
+params = {
+    "word": "QR",
+    "patent": "true",
+    "utility": "true",
+    "numOfRows": "3",
+    "pageNo": "1",
+    "accessKey": key,
+}
+url = f"{base}?{urllib.parse.urlencode(params)}"
+r = requests.get(url, timeout=30)
+print("STATUS:", r.status_code, "CT:", r.headers.get('content-type'))
+print(r.text[:1500])
+EOF
+[2026-04-17T06:35:26.349Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:35:26.611Z] backpressure-tracker: Hook started
+[2026-04-17T06:35:26.611Z] backpressure-tracker: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+# getAdvancedSearch on kipo-api path — test with all known param names
+base = "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch"
+params = {
+    "word": "QR",
+    "patent": "true",
+    "utility": "true",
+    "numOfRows": "3",
+    "pageNo": "1",
+    "accessKey": key,
+}
+url = f"{base}?{urllib.parse.urlencode(params)}"
+r = requests.get(url, timeout=30)
+print("STATUS:", r.status_code, "CT:", r.headers.get('content-type'))
+print(r.text[:1500])
+EOF
+[2026-04-17T06:35:26.611Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:35:38.874Z] acceptance-gate: Hook started
+[2026-04-17T06:35:38.874Z] acceptance-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+tests = [
+    # (label, base, params)
+    ("kipo-api + ServiceKey",
+     "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","patent":"true","utility":"true","numOfRows":"3","pageNo":"1","ServiceKey":key}),
+    ("kipo-api + accessKey + required all",
+     "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","inventionTitle":"","astrtCont":"","claimScope":"","ipcNumber":"",
+      "applicationNumber":"","openNumber":"","publicationNumber":"","registerNumber":"",
+      "priorityApplicationNumber":"","internationalApplicationNumber":"","internationOpenNumber":"",
+      "applicationDate":"","openDate":"","publicationDate":"","registerDate":"",
+      "priorityApplicationDate":"","internationalApplicationDate":"","internationOpenDate":"",
+      "applicant":"","inventors":"","agent":"","rightHoler":"",
+      "patent":"true","utility":"true","lastvalue":"",
+      "pageNo":"1","numOfRows":"3","sortSpec":"AD","descSort":"true",
+      "accessKey":key}),
+    ("openapi/rest + accessKey on getAdvancedSearch with full params",
+     "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","patent":"true","utility":"true","numOfRows":"3","pageNo":"1","accessKey":key}),
+]
+
+for label, base, params in tests:
+    url = f"{base}?{urllib.parse.urlencode(params)}"
+    r = requests.get(url, timeout=30)
+    print(f"\n=== {label} ===")
+    print(f"STATUS: {r.status_code}  CT: {r.headers.get('content-type')}")
+    print(r.text[:600])
+EOF
+[2026-04-17T06:35:38.874Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:35:38.875Z] backpressure-gate: Hook started
+[2026-04-17T06:35:38.875Z] backpressure-gate: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+tests = [
+    # (label, base, params)
+    ("kipo-api + ServiceKey",
+     "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","patent":"true","utility":"true","numOfRows":"3","pageNo":"1","ServiceKey":key}),
+    ("kipo-api + accessKey + required all",
+     "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","inventionTitle":"","astrtCont":"","claimScope":"","ipcNumber":"",
+      "applicationNumber":"","openNumber":"","publicationNumber":"","registerNumber":"",
+      "priorityApplicationNumber":"","internationalApplicationNumber":"","internationOpenNumber":"",
+      "applicationDate":"","openDate":"","publicationDate":"","registerDate":"",
+      "priorityApplicationDate":"","internationalApplicationDate":"","internationOpenDate":"",
+      "applicant":"","inventors":"","agent":"","rightHoler":"",
+      "patent":"true","utility":"true","lastvalue":"",
+      "pageNo":"1","numOfRows":"3","sortSpec":"AD","descSort":"true",
+      "accessKey":key}),
+    ("openapi/rest + accessKey on getAdvancedSearch with full params",
+     "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","patent":"true","utility":"true","numOfRows":"3","pageNo":"1","accessKey":key}),
+]
+
+for label, base, params in tests:
+    url = f"{base}?{urllib.parse.urlencode(params)}"
+    r = requests.get(url, timeout=30)
+    print(f"\n=== {label} ===")
+    print(f"STATUS: {r.status_code}  CT: {r.headers.get('content-type')}")
+    print(r.text[:600])
+EOF
+[2026-04-17T06:35:38.876Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:35:39.286Z] backpressure-tracker: Hook started
+[2026-04-17T06:35:39.286Z] backpressure-tracker: Command: python3 << 'EOF'
+import os, urllib.parse, requests
+from dotenv import load_dotenv
+load_dotenv('.env')
+key = os.environ['KIPRIS_API_KEY']
+
+tests = [
+    # (label, base, params)
+    ("kipo-api + ServiceKey",
+     "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","patent":"true","utility":"true","numOfRows":"3","pageNo":"1","ServiceKey":key}),
+    ("kipo-api + accessKey + required all",
+     "http://plus.kipris.or.kr/kipo-api/kipi/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","inventionTitle":"","astrtCont":"","claimScope":"","ipcNumber":"",
+      "applicationNumber":"","openNumber":"","publicationNumber":"","registerNumber":"",
+      "priorityApplicationNumber":"","internationalApplicationNumber":"","internationOpenNumber":"",
+      "applicationDate":"","openDate":"","publicationDate":"","registerDate":"",
+      "priorityApplicationDate":"","internationalApplicationDate":"","internationOpenDate":"",
+      "applicant":"","inventors":"","agent":"","rightHoler":"",
+      "patent":"true","utility":"true","lastvalue":"",
+      "pageNo":"1","numOfRows":"3","sortSpec":"AD","descSort":"true",
+      "accessKey":key}),
+    ("openapi/rest + accessKey on getAdvancedSearch with full params",
+     "http://plus.kipris.or.kr/openapi/rest/patUtiModInfoSearchSevice/getAdvancedSearch",
+     {"word":"QR","patent":"true","utility":"true","numOfRows":"3","pageNo":"1","accessKey":key}),
+]
+
+for label, base, params in tests:
+    url = f"{base}?{urllib.parse.urlencode(params)}"
+    r = requests.get(url, timeout=30)
+    print(f"\n=== {label} ===")
+    print(f"STATUS: {r.status_code}  CT: {r.headers.get('content-type')}")
+    print(r.text[:600])
+EOF
+[2026-04-17T06:35:39.286Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:36:38.429Z] scope-gate: Hook started
+[2026-04-17T06:36:38.429Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:38.429Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:36:38.430Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:36:38.430Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:36:38.430Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:36:38.430Z] context-gate: Hook started
+[2026-04-17T06:36:38.430Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:38.430Z] context-gate: File not in read log, blocking
+[2026-04-17T06:36:39.819Z] scope-gate: Hook started
+[2026-04-17T06:36:39.819Z] context-gate: Hook started
+[2026-04-17T06:36:39.819Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:39.819Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:39.819Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:36:39.819Z] context-gate: File not in read log, blocking
+[2026-04-17T06:36:39.820Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:36:39.820Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:36:39.820Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:36:50.226Z] scope-gate: Hook started
+[2026-04-17T06:36:50.226Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:50.226Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:36:50.226Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:36:50.226Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:36:50.226Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:36:50.227Z] context-gate: Hook started
+[2026-04-17T06:36:50.227Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:50.227Z] context-gate: File was read, allowing
+[2026-04-17T06:36:51.868Z] scope-gate: Hook started
+[2026-04-17T06:36:51.868Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:51.868Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:36:51.868Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:36:51.868Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:36:51.868Z] context-gate: Hook started
+[2026-04-17T06:36:51.868Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:36:51.868Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:51.868Z] context-gate: File was read, allowing
+[2026-04-17T06:36:52.790Z] scope-gate: Hook started
+[2026-04-17T06:36:52.790Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:52.790Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:36:52.790Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:36:52.790Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:36:52.791Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:36:52.792Z] context-gate: Hook started
+[2026-04-17T06:36:52.792Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:36:52.792Z] context-gate: File was read, allowing
+[2026-04-17T06:36:56.647Z] acceptance-gate: Hook started
+[2026-04-17T06:36:56.647Z] acceptance-gate: Command: python3 scripts/kipris_search.py 2>&1 | head -30
+[2026-04-17T06:36:56.647Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:36:56.649Z] backpressure-gate: Hook started
+[2026-04-17T06:36:56.649Z] backpressure-gate: Command: python3 scripts/kipris_search.py 2>&1 | head -30
+[2026-04-17T06:36:56.649Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:36:58.840Z] backpressure-tracker: Hook started
+[2026-04-17T06:36:58.840Z] backpressure-tracker: Command: python3 scripts/kipris_search.py 2>&1 | head -30
+[2026-04-17T06:36:58.840Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:49:30.437Z] backpressure-gate: Hook started
+[2026-04-17T06:49:30.437Z] backpressure-gate: Command: python3 scripts/kipris_search.py 2>&1
+[2026-04-17T06:49:30.437Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:49:30.438Z] acceptance-gate: Hook started
+[2026-04-17T06:49:30.438Z] acceptance-gate: Command: python3 scripts/kipris_search.py 2>&1
+[2026-04-17T06:49:30.438Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:49:43.217Z] backpressure-tracker: Hook started
+[2026-04-17T06:49:43.218Z] backpressure-tracker: Command: python3 scripts/kipris_search.py 2>&1
+[2026-04-17T06:49:43.218Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:49:56.006Z] acceptance-gate: Hook started
+[2026-04-17T06:49:56.006Z] acceptance-gate: Command: python3 << 'EOF'
+import json
+data = json.load(open('docs/research/kipris-results.json', encoding='utf-8'))
+
+print("=== SUMMARY ===")
+for r in data:
+    print(f"  [{r['keyword']}] total={r.get('totalCount')}  sample_items={len(r.get('items',[]))}")
+
+print("\n=== QR코드 오버래핑 (가장 좁은 키워드, 32건) ===")
+overlap = next(r for r in data if r['keyword'] == 'QR코드 오버래핑')
+for i, it in enumerate(overlap['items'][:15], 1):
+    print(f"\n{i}. {it.get('inventionTitle')}")
+    print(f"   출원: {it.get('applicationNumber')} / {it.get('applicationDate')}")
+    print(f"   등록: {it.get('registerNumber')} ({it.get('registerStatus')})")
+    print(f"   IPC: {it.get('ipcNumber')}")
+    print(f"   출원인: {it.get('applicantName')}")
+    ab = it.get('abstract') or ''
+    print(f"   초록: {ab[:200]}")
+EOF
+[2026-04-17T06:49:56.006Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:49:56.009Z] backpressure-gate: Hook started
+[2026-04-17T06:49:56.009Z] backpressure-gate: Command: python3 << 'EOF'
+import json
+data = json.load(open('docs/research/kipris-results.json', encoding='utf-8'))
+
+print("=== SUMMARY ===")
+for r in data:
+    print(f"  [{r['keyword']}] total={r.get('totalCount')}  sample_items={len(r.get('items',[]))}")
+
+print("\n=== QR코드 오버래핑 (가장 좁은 키워드, 32건) ===")
+overlap = next(r for r in data if r['keyword'] == 'QR코드 오버래핑')
+for i, it in enumerate(overlap['items'][:15], 1):
+    print(f"\n{i}. {it.get('inventionTitle')}")
+    print(f"   출원: {it.get('applicationNumber')} / {it.get('applicationDate')}")
+    print(f"   등록: {it.get('registerNumber')} ({it.get('registerStatus')})")
+    print(f"   IPC: {it.get('ipcNumber')}")
+    print(f"   출원인: {it.get('applicantName')}")
+    ab = it.get('abstract') or ''
+    print(f"   초록: {ab[:200]}")
+EOF
+[2026-04-17T06:49:56.009Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:49:56.252Z] backpressure-tracker: Hook started
+[2026-04-17T06:49:56.252Z] backpressure-tracker: Command: python3 << 'EOF'
+import json
+data = json.load(open('docs/research/kipris-results.json', encoding='utf-8'))
+
+print("=== SUMMARY ===")
+for r in data:
+    print(f"  [{r['keyword']}] total={r.get('totalCount')}  sample_items={len(r.get('items',[]))}")
+
+print("\n=== QR코드 오버래핑 (가장 좁은 키워드, 32건) ===")
+overlap = next(r for r in data if r['keyword'] == 'QR코드 오버래핑')
+for i, it in enumerate(overlap['items'][:15], 1):
+    print(f"\n{i}. {it.get('inventionTitle')}")
+    print(f"   출원: {it.get('applicationNumber')} / {it.get('applicationDate')}")
+    print(f"   등록: {it.get('registerNumber')} ({it.get('registerStatus')})")
+    print(f"   IPC: {it.get('ipcNumber')}")
+    print(f"   출원인: {it.get('applicantName')}")
+    ab = it.get('abstract') or ''
+    print(f"   초록: {ab[:200]}")
+EOF
+[2026-04-17T06:49:56.252Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:50:17.071Z] scope-gate: Hook started
+[2026-04-17T06:50:17.071Z] context-gate: Hook started
+[2026-04-17T06:50:17.071Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:50:17.071Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:50:17.071Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:50:17.071Z] context-gate: File was read, allowing
+[2026-04-17T06:50:17.071Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:50:17.072Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:50:17.072Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:50:23.796Z] scope-gate: Hook started
+[2026-04-17T06:50:23.796Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:50:23.796Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:50:23.796Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:50:23.796Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:50:23.796Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:50:23.800Z] context-gate: Hook started
+[2026-04-17T06:50:23.800Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:50:23.800Z] context-gate: File was read, allowing
+[2026-04-17T06:50:26.874Z] scope-gate: Hook started
+[2026-04-17T06:50:26.874Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:50:26.874Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:50:26.874Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:50:26.874Z] context-gate: Hook started
+[2026-04-17T06:50:26.874Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+[2026-04-17T06:50:26.874Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:50:26.874Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:50:26.874Z] context-gate: File was read, allowing
+[2026-04-17T06:50:35.366Z] acceptance-gate: Hook started
+[2026-04-17T06:50:35.366Z] acceptance-gate: Command: python3 scripts/kipris_search.py --title 2>&1
+[2026-04-17T06:50:35.367Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:50:35.367Z] backpressure-gate: Hook started
+[2026-04-17T06:50:35.368Z] backpressure-gate: Command: python3 scripts/kipris_search.py --title 2>&1
+[2026-04-17T06:50:35.368Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:50:44.485Z] backpressure-tracker: Hook started
+[2026-04-17T06:50:44.486Z] backpressure-tracker: Command: python3 scripts/kipris_search.py --title 2>&1
+[2026-04-17T06:50:44.486Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:50:56.250Z] acceptance-gate: Hook started
+[2026-04-17T06:50:56.250Z] acceptance-gate: Command: python3 << 'EOF'
+import json
+data = json.load(open('docs/research/kipris-results-title.json', encoding='utf-8'))
+
+# Dedupe by applicationNumber across all keywords
+seen = {}
+for r in data:
+    kw = r['keyword']
+    for it in r.get('items', []):
+        an = it.get('applicationNumber')
+        if not an: continue
+        if an not in seen:
+            seen[an] = {**it, "_matched": []}
+        seen[an]["_matched"].append(kw)
+
+print(f"TOTAL UNIQUE: {len(seen)}\n")
+
+# Print high-priority (excluding QR 인증 only matches)
+priority = [v for v in seen.values() if set(v['_matched']) - {'QR 인증'}]
+priority.sort(key=lambda x: x.get('applicationDate') or '', reverse=True)
+
+print(f"=== HIGH-PRIORITY ({len(priority)}) — excluding broad 'QR 인증' only ===\n")
+for i, it in enumerate(priority, 1):
+    print(f"{i}. {it.get('inventionTitle')}")
+    print(f"   출원: {it.get('applicationNumber')} ({it.get('applicationDate')}) / 등록: {it.get('registerNumber')} [{it.get('registerStatus')}]")
+    print(f"   출원인: {it.get('applicantName')}")
+    print(f"   매칭: {it['_matched']}")
+    print(f"   IPC: {it.get('ipcNumber')}")
+    ab = (it.get('abstract') or '').replace('\n',' ')[:300]
+    print(f"   초록: {ab}")
+    print()
+EOF
+[2026-04-17T06:50:56.250Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:50:56.256Z] backpressure-gate: Hook started
+[2026-04-17T06:50:56.257Z] backpressure-gate: Command: python3 << 'EOF'
+import json
+data = json.load(open('docs/research/kipris-results-title.json', encoding='utf-8'))
+
+# Dedupe by applicationNumber across all keywords
+seen = {}
+for r in data:
+    kw = r['keyword']
+    for it in r.get('items', []):
+        an = it.get('applicationNumber')
+        if not an: continue
+        if an not in seen:
+            seen[an] = {**it, "_matched": []}
+        seen[an]["_matched"].append(kw)
+
+print(f"TOTAL UNIQUE: {len(seen)}\n")
+
+# Print high-priority (excluding QR 인증 only matches)
+priority = [v for v in seen.values() if set(v['_matched']) - {'QR 인증'}]
+priority.sort(key=lambda x: x.get('applicationDate') or '', reverse=True)
+
+print(f"=== HIGH-PRIORITY ({len(priority)}) — excluding broad 'QR 인증' only ===\n")
+for i, it in enumerate(priority, 1):
+    print(f"{i}. {it.get('inventionTitle')}")
+    print(f"   출원: {it.get('applicationNumber')} ({it.get('applicationDate')}) / 등록: {it.get('registerNumber')} [{it.get('registerStatus')}]")
+    print(f"   출원인: {it.get('applicantName')}")
+    print(f"   매칭: {it['_matched']}")
+    print(f"   IPC: {it.get('ipcNumber')}")
+    ab = (it.get('abstract') or '').replace('\n',' ')[:300]
+    print(f"   초록: {ab}")
+    print()
+EOF
+[2026-04-17T06:50:56.257Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:50:56.509Z] backpressure-tracker: Hook started
+[2026-04-17T06:50:56.510Z] backpressure-tracker: Command: python3 << 'EOF'
+import json
+data = json.load(open('docs/research/kipris-results-title.json', encoding='utf-8'))
+
+# Dedupe by applicationNumber across all keywords
+seen = {}
+for r in data:
+    kw = r['keyword']
+    for it in r.get('items', []):
+        an = it.get('applicationNumber')
+        if not an: continue
+        if an not in seen:
+            seen[an] = {**it, "_matched": []}
+        seen[an]["_matched"].append(kw)
+
+print(f"TOTAL UNIQUE: {len(seen)}\n")
+
+# Print high-priority (excluding QR 인증 only matches)
+priority = [v for v in seen.values() if set(v['_matched']) - {'QR 인증'}]
+priority.sort(key=lambda x: x.get('applicationDate') or '', reverse=True)
+
+print(f"=== HIGH-PRIORITY ({len(priority)}) — excluding broad 'QR 인증' only ===\n")
+for i, it in enumerate(priority, 1):
+    print(f"{i}. {it.get('inventionTitle')}")
+    print(f"   출원: {it.get('applicationNumber')} ({it.get('applicationDate')}) / 등록: {it.get('registerNumber')} [{it.get('registerStatus')}]")
+    print(f"   출원인: {it.get('applicantName')}")
+    print(f"   매칭: {it['_matched']}")
+    print(f"   IPC: {it.get('ipcNumber')}")
+    ab = (it.get('abstract') or '').replace('\n',' ')[:300]
+    print(f"   초록: {ab}")
+    print()
+EOF
+[2026-04-17T06:50:56.510Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:51:28.591Z] scope-gate: Hook started
+[2026-04-17T06:51:28.591Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-17T06:51:28.591Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:51:28.591Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:51:28.591Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:51:28.591Z] context-gate: Hook started
+[2026-04-17T06:51:28.591Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:51:28.591Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-17T06:51:28.592Z] context-gate: File was read, allowing
+[2026-04-17T06:51:32.716Z] scope-gate: Hook started
+[2026-04-17T06:51:32.716Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-17T06:51:32.716Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:51:32.716Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:51:32.716Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:51:32.716Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:51:32.717Z] context-gate: Hook started
+[2026-04-17T06:51:32.717Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-17T06:51:32.717Z] context-gate: File was read, allowing
+[2026-04-17T06:52:08.612Z] scope-gate: Hook started
+[2026-04-17T06:52:08.612Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-17T06:52:08.612Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:52:08.612Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:52:08.612Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:52:08.613Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:52:08.614Z] context-gate: Hook started
+[2026-04-17T06:52:08.614Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+[2026-04-17T06:52:08.614Z] context-gate: File was read, allowing
+[2026-04-17T06:52:13.032Z] acceptance-gate: Hook started
+[2026-04-17T06:52:13.032Z] acceptance-gate: Command: wc -l docs/research/prior-art-survey.md && grep -c "^### 3-" docs/research/prior-art-survey.md && echo "--- Sections ---" && grep -n "^## " docs/research/prior-art-survey.md
+[2026-04-17T06:52:13.032Z] backpressure-gate: Hook started
+[2026-04-17T06:52:13.032Z] backpressure-gate: Command: wc -l docs/research/prior-art-survey.md && grep -c "^### 3-" docs/research/prior-art-survey.md && echo "--- Sections ---" && grep -n "^## " docs/research/prior-art-survey.md
+[2026-04-17T06:52:13.032Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T06:52:13.032Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T06:52:13.224Z] backpressure-tracker: Hook started
+[2026-04-17T06:52:13.224Z] backpressure-tracker: Command: wc -l docs/research/prior-art-survey.md && grep -c "^### 3-" docs/research/prior-art-survey.md && echo "--- Sections ---" && grep -n "^## " docs/research/prior-art-survey.md
+[2026-04-17T06:52:13.224Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T06:52:30.853Z] scope-gate: Hook started
+[2026-04-17T06:52:30.854Z] scope-gate: File path: /home/rae/.claude/projects/-home-rae-projects-workspace-QoverwRap/memory/reference_kipris_api.md
+[2026-04-17T06:52:30.854Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:52:30.854Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:52:30.854Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:52:30.854Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:52:30.855Z] context-gate: Hook started
+[2026-04-17T06:52:30.856Z] context-gate: File path: /home/rae/.claude/projects/-home-rae-projects-workspace-QoverwRap/memory/reference_kipris_api.md
+[2026-04-17T06:52:30.856Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T06:52:36.537Z] scope-gate: Hook started
+[2026-04-17T06:52:36.537Z] scope-gate: File path: /home/rae/.claude/projects/-home-rae-projects-workspace-QoverwRap/memory/MEMORY.md
+[2026-04-17T06:52:36.537Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T06:52:36.538Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T06:52:36.538Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T06:52:36.538Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T06:52:36.538Z] context-gate: Hook started
+[2026-04-17T06:52:36.538Z] context-gate: File path: /home/rae/.claude/projects/-home-rae-projects-workspace-QoverwRap/memory/MEMORY.md
+[2026-04-17T06:52:36.538Z] context-gate: File was read, allowing
+[2026-04-17T08:24:21.665Z] backpressure-gate: Hook started
+[2026-04-17T08:24:21.665Z] acceptance-gate: Hook started
+[2026-04-17T08:24:21.666Z] acceptance-gate: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-17T08:24:21.666Z] backpressure-gate: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-17T08:24:21.666Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T08:24:21.666Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T08:24:21.843Z] backpressure-tracker: Hook started
+[2026-04-17T08:24:21.843Z] backpressure-tracker: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-17T08:24:21.844Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T08:25:35.477Z] scope-gate: Hook started
+[2026-04-17T08:25:35.478Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-17_kipris-prior-art.md
+[2026-04-17T08:25:35.478Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T08:25:35.478Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T08:25:35.478Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T08:25:35.478Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T08:25:35.479Z] context-gate: Hook started
+[2026-04-17T08:25:35.480Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-17_kipris-prior-art.md
+[2026-04-17T08:25:35.480Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T08:25:43.147Z] acceptance-gate: Hook started
+[2026-04-17T08:25:43.147Z] acceptance-gate: Command: git status && echo "---" && git diff --stat && echo "---" && git branch --show-current && git remote -v
+[2026-04-17T08:25:43.147Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T08:25:43.148Z] backpressure-gate: Hook started
+[2026-04-17T08:25:43.148Z] backpressure-gate: Command: git status && echo "---" && git diff --stat && echo "---" && git branch --show-current && git remote -v
+[2026-04-17T08:25:43.148Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T08:25:43.326Z] backpressure-tracker: Hook started
+[2026-04-17T08:25:43.327Z] backpressure-tracker: Command: git status && echo "---" && git diff --stat && echo "---" && git branch --show-current && git remote -v
+[2026-04-17T08:25:43.327Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T08:26:06.506Z] acceptance-gate: Hook started
+[2026-04-17T08:26:06.506Z] acceptance-gate: Command: ls -la docs/research/ docs/sum/ 2>/dev/null
+[2026-04-17T08:26:06.506Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T08:26:06.507Z] backpressure-gate: Hook started
+[2026-04-17T08:26:06.507Z] backpressure-gate: Command: ls -la docs/research/ docs/sum/ 2>/dev/null
+[2026-04-17T08:26:06.507Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T08:26:06.682Z] backpressure-tracker: Hook started
+[2026-04-17T08:26:06.683Z] backpressure-tracker: Command: ls -la docs/research/ docs/sum/ 2>/dev/null
+[2026-04-17T08:26:06.683Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T08:26:18.956Z] acceptance-gate: Hook started
+[2026-04-17T08:26:18.956Z] acceptance-gate: Command: git add .gitignore .env.example scripts/kipris_search.py docs/research/prior-art-survey.md docs/research/kipris-results.json docs/research/kipris-results-title.json && git diff --cached --name-only && echo "---SIZE---" && git diff --cached --stat | tail -5
+[2026-04-17T08:26:18.956Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T08:26:18.956Z] backpressure-gate: Hook started
+[2026-04-17T08:26:18.957Z] backpressure-gate: Command: git add .gitignore .env.example scripts/kipris_search.py docs/research/prior-art-survey.md docs/research/kipris-results.json docs/research/kipris-results-title.json && git diff --cached --name-only && echo "---SIZE---" && git diff --cached --stat | tail -5
+[2026-04-17T08:26:18.957Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T08:26:19.148Z] backpressure-tracker: Hook started
+[2026-04-17T08:26:19.149Z] backpressure-tracker: Command: git add .gitignore .env.example scripts/kipris_search.py docs/research/prior-art-survey.md docs/research/kipris-results.json docs/research/kipris-results-title.json && git diff --cached --name-only && echo "---SIZE---" && git diff --cached --stat | tail -5
+[2026-04-17T08:26:19.149Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T08:26:37.572Z] acceptance-gate: Hook started
+[2026-04-17T08:26:37.572Z] acceptance-gate: Command: git commit -m "$(cat <<'EOF'
+feat: complete KIPRIS prior-art search with KR patent survey
+
+Add KIPRIS Plus OpenAPI keyword search automation and identify 4 KR
+patents (KR10-2875492, KR10-2765780, KR2022-0046292, KR10-2576380)
+relevant to QR multi-layer encoding. None match QoverwRap's logical
+payload-layer + embedded Ed25519 signature + role-based Resolver
+combination — novelty hypothesis reinforced.
+
+Constraint: KIPRIS Plus requires live subscription; endpoint and
+  ServiceKey param name differ from 2020 Java sample
+Rejected: Guessing endpoint from Java sample only | 404s — live probe
+  revealed /kipo-api/kipi/ base + ServiceKey (not accessKey) param
+Confidence: high
+Scope-risk: narrow
+Directive: Use inventionTitle field over word for signal; word-field
+  hits are noisy (thousands) dominated by unrelated "QR decomposition"
+  MIMO patents
+Not-tested: CNIPA, J-PlatPat, INPI searches (§6-2~6-4 remain open)
+EOF
+)" 2>&1 | tail -20
+[2026-04-17T08:26:37.572Z] acceptance-gate: Git commit detected, checking acceptance criteria
+[2026-04-17T08:26:37.572Z] acceptance-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T08:26:37.572Z] acceptance-gate: AC found in seed.yaml, checking completion via flag or scope file checkboxes
+[2026-04-17T08:26:37.573Z] acceptance-gate: Checkboxes: total=4, checked=0, unchecked=4
+[2026-04-17T08:26:37.573Z] acceptance-gate: BLOCKED: 4 unchecked criteria, no override flag
+[2026-04-17T08:26:37.573Z] backpressure-gate: Hook started
+[2026-04-17T08:26:37.573Z] backpressure-gate: Command: git commit -m "$(cat <<'EOF'
+feat: complete KIPRIS prior-art search with KR patent survey
+
+Add KIPRIS Plus OpenAPI keyword search automation and identify 4 KR
+patents (KR10-2875492, KR10-2765780, KR2022-0046292, KR10-2576380)
+relevant to QR multi-layer encoding. None match QoverwRap's logical
+payload-layer + embedded Ed25519 signature + role-based Resolver
+combination — novelty hypothesis reinforced.
+
+Constraint: KIPRIS Plus requires live subscription; endpoint and
+  ServiceKey param name differ from 2020 Java sample
+Rejected: Guessing endpoint from Java sample only | 404s — live probe
+  revealed /kipo-api/kipi/ base + ServiceKey (not accessKey) param
+Confidence: high
+Scope-risk: narrow
+Directive: Use inventionTitle field over word for signal; word-field
+  hits are noisy (thousands) dominated by unrelated "QR decomposition"
+  MIMO patents
+Not-tested: CNIPA, J-PlatPat, INPI searches (§6-2~6-4 remain open)
+EOF
+)" 2>&1 | tail -20
+[2026-04-17T08:26:37.573Z] backpressure-gate: Git commit detected, checking backpressure status
+[2026-04-17T08:26:37.573Z] backpressure-gate: Status: PASS
+[2026-04-17T08:26:37.574Z] backpressure-gate: Status is PASS, allowing
+[2026-04-17T08:26:45.023Z] scope-gate: Hook started
+[2026-04-17T08:26:45.023Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/harness/current-scope.md
+[2026-04-17T08:26:45.023Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T08:26:45.024Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T08:26:45.024Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T08:26:45.024Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T08:26:45.024Z] context-gate: Hook started
+[2026-04-17T08:26:45.024Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/harness/current-scope.md
+[2026-04-17T08:26:45.024Z] context-gate: File was read, allowing
+[2026-04-17T08:26:58.935Z] acceptance-gate: Hook started
+[2026-04-17T08:26:58.935Z] acceptance-gate: Command: git add docs/harness/current-scope.md && git commit -m "$(cat <<'EOF'
+feat: complete KIPRIS prior-art search with KR patent survey
+
+Add KIPRIS Plus OpenAPI keyword search automation and identify 4 KR
+patents (KR10-2875492, KR10-2765780, KR2022-0046292, KR10-2576380)
+relevant to QR multi-layer encoding. None match QoverwRap's logical
+payload-layer + embedded Ed25519 signature + role-based Resolver
+combination — novelty hypothesis reinforced.
+
+Constraint: KIPRIS Plus requires live subscription; endpoint and
+  ServiceKey param name differ from 2020 Java sample
+Rejected: Guessing endpoint from Java sample only | 404s — live probe
+  revealed /kipo-api/kipi/ base + ServiceKey (not accessKey) param
+Confidence: high
+Scope-risk: narrow
+Directive: Use inventionTitle field over word for signal; word-field
+  hits are noisy (thousands) dominated by unrelated "QR decomposition"
+  MIMO patents
+Not-tested: CNIPA, J-PlatPat, INPI searches (§6-2~6-4 remain open)
+EOF
+)" 2>&1 | tail -20
+[2026-04-17T08:26:58.935Z] acceptance-gate: Git commit detected, checking acceptance criteria
+[2026-04-17T08:26:58.935Z] acceptance-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T08:26:58.936Z] acceptance-gate: AC found in seed.yaml, checking completion via flag or scope file checkboxes
+[2026-04-17T08:26:58.936Z] acceptance-gate: Checkboxes: total=4, checked=1, unchecked=3
+[2026-04-17T08:26:58.936Z] acceptance-gate: BLOCKED: 3 unchecked criteria, no override flag
+[2026-04-17T08:26:58.936Z] backpressure-gate: Hook started
+[2026-04-17T08:26:58.936Z] backpressure-gate: Command: git add docs/harness/current-scope.md && git commit -m "$(cat <<'EOF'
+feat: complete KIPRIS prior-art search with KR patent survey
+
+Add KIPRIS Plus OpenAPI keyword search automation and identify 4 KR
+patents (KR10-2875492, KR10-2765780, KR2022-0046292, KR10-2576380)
+relevant to QR multi-layer encoding. None match QoverwRap's logical
+payload-layer + embedded Ed25519 signature + role-based Resolver
+combination — novelty hypothesis reinforced.
+
+Constraint: KIPRIS Plus requires live subscription; endpoint and
+  ServiceKey param name differ from 2020 Java sample
+Rejected: Guessing endpoint from Java sample only | 404s — live probe
+  revealed /kipo-api/kipi/ base + ServiceKey (not accessKey) param
+Confidence: high
+Scope-risk: narrow
+Directive: Use inventionTitle field over word for signal; word-field
+  hits are noisy (thousands) dominated by unrelated "QR decomposition"
+  MIMO patents
+Not-tested: CNIPA, J-PlatPat, INPI searches (§6-2~6-4 remain open)
+EOF
+)" 2>&1 | tail -20
+[2026-04-17T08:26:58.936Z] backpressure-gate: Git commit detected, checking backpressure status
+[2026-04-17T08:26:58.936Z] backpressure-gate: Status: PASS
+[2026-04-17T08:26:58.936Z] backpressure-gate: Status is PASS, allowing
+[2026-04-17T08:27:07.494Z] acceptance-gate: Hook started
+[2026-04-17T08:27:07.495Z] acceptance-gate: Command: test -f .claude/hooks/harness/acceptance-gate.mjs && head -60 .claude/hooks/harness/acceptance-gate.mjs
+[2026-04-17T08:27:07.495Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T08:27:07.495Z] backpressure-gate: Hook started
+[2026-04-17T08:27:07.496Z] backpressure-gate: Command: test -f .claude/hooks/harness/acceptance-gate.mjs && head -60 .claude/hooks/harness/acceptance-gate.mjs
+[2026-04-17T08:27:07.496Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T08:27:07.667Z] backpressure-tracker: Hook started
+[2026-04-17T08:27:07.667Z] backpressure-tracker: Command: test -f .claude/hooks/harness/acceptance-gate.mjs && head -60 .claude/hooks/harness/acceptance-gate.mjs
+[2026-04-17T08:27:07.667Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T09:54:51.058Z] scope-gate: Hook started
+[2026-04-17T09:54:51.058Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:51.058Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T09:54:51.058Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T09:54:51.058Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T09:54:51.058Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T09:54:51.060Z] context-gate: Hook started
+[2026-04-17T09:54:51.060Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:51.060Z] context-gate: File does not exist (new file), allowing
+[2026-04-17T09:54:54.458Z] acceptance-gate: Hook started
+[2026-04-17T09:54:54.458Z] acceptance-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md && wc -l /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:54.458Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T09:54:54.460Z] backpressure-gate: Hook started
+[2026-04-17T09:54:54.460Z] backpressure-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md && wc -l /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:54.460Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T09:54:54.641Z] backpressure-tracker: Hook started
+[2026-04-17T09:54:54.641Z] backpressure-tracker: Command: ls -la /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md && wc -l /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:54.641Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T09:54:55.751Z] acceptance-gate: Hook started
+[2026-04-17T09:54:55.751Z] acceptance-gate: Command: grep -n "^##\|^###" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:55.751Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T09:54:55.753Z] backpressure-gate: Hook started
+[2026-04-17T09:54:55.753Z] backpressure-gate: Command: grep -n "^##\|^###" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:55.753Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T09:54:55.924Z] backpressure-tracker: Hook started
+[2026-04-17T09:54:55.924Z] backpressure-tracker: Command: grep -n "^##\|^###" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:55.924Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T09:54:56.817Z] backpressure-gate: Hook started
+[2026-04-17T09:54:56.818Z] backpressure-gate: Command: grep -c "^| Q[0-9]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:56.818Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T09:54:56.819Z] acceptance-gate: Hook started
+[2026-04-17T09:54:56.819Z] acceptance-gate: Command: grep -c "^| Q[0-9]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:56.819Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T09:54:56.986Z] backpressure-tracker: Hook started
+[2026-04-17T09:54:56.986Z] backpressure-tracker: Command: grep -c "^| Q[0-9]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T09:54:56.986Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T10:03:23.094Z] acceptance-gate: Hook started
+[2026-04-17T10:03:23.095Z] acceptance-gate: Command: gh auth status 2>&1 | head -5
+[2026-04-17T10:03:23.095Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T10:03:23.096Z] backpressure-gate: Hook started
+[2026-04-17T10:03:23.097Z] backpressure-gate: Command: gh auth status 2>&1 | head -5
+[2026-04-17T10:03:23.097Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T10:03:23.816Z] backpressure-tracker: Hook started
+[2026-04-17T10:03:23.816Z] backpressure-tracker: Command: gh auth status 2>&1 | head -5
+[2026-04-17T10:03:23.816Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T10:03:23.941Z] acceptance-gate: Hook started
+[2026-04-17T10:03:23.941Z] acceptance-gate: Command: git remote get-url origin 2>&1
+[2026-04-17T10:03:23.941Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T10:03:23.942Z] backpressure-gate: Hook started
+[2026-04-17T10:03:23.942Z] backpressure-gate: Command: git remote get-url origin 2>&1
+[2026-04-17T10:03:23.942Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T10:03:24.120Z] backpressure-tracker: Hook started
+[2026-04-17T10:03:24.120Z] backpressure-tracker: Command: git remote get-url origin 2>&1
+[2026-04-17T10:03:24.121Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T10:03:24.782Z] acceptance-gate: Hook started
+[2026-04-17T10:03:24.782Z] acceptance-gate: Command: gh issue list --limit 5 --state all 2>&1
+[2026-04-17T10:03:24.782Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T10:03:24.783Z] backpressure-gate: Hook started
+[2026-04-17T10:03:24.783Z] backpressure-gate: Command: gh issue list --limit 5 --state all 2>&1
+[2026-04-17T10:03:24.784Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T10:03:25.399Z] backpressure-tracker: Hook started
+[2026-04-17T10:03:25.399Z] backpressure-tracker: Command: gh issue list --limit 5 --state all 2>&1
+[2026-04-17T10:03:25.399Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T10:03:25.464Z] acceptance-gate: Hook started
+[2026-04-17T10:03:25.465Z] acceptance-gate: Command: gh label list 2>&1 | head -20
+[2026-04-17T10:03:25.465Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T10:03:25.465Z] backpressure-gate: Hook started
+[2026-04-17T10:03:25.465Z] backpressure-gate: Command: gh label list 2>&1 | head -20
+[2026-04-17T10:03:25.465Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T10:03:26.120Z] backpressure-tracker: Hook started
+[2026-04-17T10:03:26.120Z] backpressure-tracker: Command: gh label list 2>&1 | head -20
+[2026-04-17T10:03:26.121Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T10:05:50.691Z] acceptance-gate: Hook started
+[2026-04-17T10:05:50.691Z] acceptance-gate: Command: gh issue create --title "선행기술 조사 §6 보완: EPO OPS 계정 활성화 대기 및 쿼리 설계 완료" --label "documentation,enhancement" --body "$(cat <<'EOF'
+## 배경
+
+선행기술 조사(`docs/research/prior-art-survey.md`)의 §6 미완료 항목 해소를 위해
+EPO OPS (European Patent Office — Open Patent Services) API 사용을 결정.
+
+- §6-2 CNIPA (중국 특허) — Liu et al. (2019) 관련 CN 특허 확인
+- §6-3 INPI/EP (프랑스·유럽 특허) — 2LQR (Tkachenko/Puech) 특허 번호 확인
+- §6-4 J-PlatPat (일본 특허) — DENSO WAVE 등 JP 다층 QR 특허
+
+KIPRIS는 해외 특허 영문초록만 제공 → 청구항·법적 상태 분석 불가.
+**EPO OPS 하나로 CN/JP/EP/FR 모두 커버 가능**하여 선택.
+
+## 현재 상태
+
+### ✅ 완료
+- EPO OPS 가입 신청 (Non-paying 티어, Organisation type: Industry)
+- 쿼리 설계 완료: `docs/research/epo-queries.md`
+  - Q1~Q4 (CN, §6-2)
+  - Q5~Q8 (EP/FR, §6-3)
+  - Q9~Q12 (JP, §6-4)
+  - Q13~Q15 (관할 무관 보강)
+- API 쿼터 분석 완료 (주 3.5~4 GB, 예상 사용량 ~26 MB, 쿼터의 0.7%)
+
+### ⏳ 대기
+- **EPO 측 계정 수동 활성화** (통상 1~2 영업일)
+- 활성화 메일 수신 시 다음 단계 착수
+
+## 활성화 이후 작업
+
+- [ ] OAuth2 App 생성 → Consumer Key/Secret 확보
+- [ ] `.env.example`에 `EPO_OPS_KEY`, `EPO_OPS_SECRET` 필드 추가
+- [ ] `scripts/epo_ops_search.py` 작성 (KIPRIS 스크립트 패턴 + OAuth2 + throttle)
+- [ ] Q1~Q15 순차 실행 → `docs/research/epo-results-*.json` 저장
+- [ ] 결과 triage → `prior-art-survey.md` §3 후보 확장 및 §6 해소 표시
+
+## 참고
+
+- 쿼리 설계: `docs/research/epo-queries.md`
+- 기반 문서: `docs/research/prior-art-survey.md` §6
+- API: https://ops.epo.org
+- 문서: OPS v3.2 Reference Guide
+EOF
+)"
+[2026-04-17T10:05:50.691Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T10:05:50.692Z] backpressure-gate: Hook started
+[2026-04-17T10:05:50.692Z] backpressure-gate: Command: gh issue create --title "선행기술 조사 §6 보완: EPO OPS 계정 활성화 대기 및 쿼리 설계 완료" --label "documentation,enhancement" --body "$(cat <<'EOF'
+## 배경
+
+선행기술 조사(`docs/research/prior-art-survey.md`)의 §6 미완료 항목 해소를 위해
+EPO OPS (European Patent Office — Open Patent Services) API 사용을 결정.
+
+- §6-2 CNIPA (중국 특허) — Liu et al. (2019) 관련 CN 특허 확인
+- §6-3 INPI/EP (프랑스·유럽 특허) — 2LQR (Tkachenko/Puech) 특허 번호 확인
+- §6-4 J-PlatPat (일본 특허) — DENSO WAVE 등 JP 다층 QR 특허
+
+KIPRIS는 해외 특허 영문초록만 제공 → 청구항·법적 상태 분석 불가.
+**EPO OPS 하나로 CN/JP/EP/FR 모두 커버 가능**하여 선택.
+
+## 현재 상태
+
+### ✅ 완료
+- EPO OPS 가입 신청 (Non-paying 티어, Organisation type: Industry)
+- 쿼리 설계 완료: `docs/research/epo-queries.md`
+  - Q1~Q4 (CN, §6-2)
+  - Q5~Q8 (EP/FR, §6-3)
+  - Q9~Q12 (JP, §6-4)
+  - Q13~Q15 (관할 무관 보강)
+- API 쿼터 분석 완료 (주 3.5~4 GB, 예상 사용량 ~26 MB, 쿼터의 0.7%)
+
+### ⏳ 대기
+- **EPO 측 계정 수동 활성화** (통상 1~2 영업일)
+- 활성화 메일 수신 시 다음 단계 착수
+
+## 활성화 이후 작업
+
+- [ ] OAuth2 App 생성 → Consumer Key/Secret 확보
+- [ ] `.env.example`에 `EPO_OPS_KEY`, `EPO_OPS_SECRET` 필드 추가
+- [ ] `scripts/epo_ops_search.py` 작성 (KIPRIS 스크립트 패턴 + OAuth2 + throttle)
+- [ ] Q1~Q15 순차 실행 → `docs/research/epo-results-*.json` 저장
+- [ ] 결과 triage → `prior-art-survey.md` §3 후보 확장 및 §6 해소 표시
+
+## 참고
+
+- 쿼리 설계: `docs/research/epo-queries.md`
+- 기반 문서: `docs/research/prior-art-survey.md` §6
+- API: https://ops.epo.org
+- 문서: OPS v3.2 Reference Guide
+EOF
+)"
+[2026-04-17T10:05:50.692Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T10:05:52.491Z] backpressure-tracker: Hook started
+[2026-04-17T10:05:52.491Z] backpressure-tracker: Command: gh issue create --title "선행기술 조사 §6 보완: EPO OPS 계정 활성화 대기 및 쿼리 설계 완료" --label "documentation,enhancement" --body "$(cat <<'EOF'
+## 배경
+
+선행기술 조사(`docs/research/prior-art-survey.md`)의 §6 미완료 항목 해소를 위해
+EPO OPS (European Patent Office — Open Patent Services) API 사용을 결정.
+
+- §6-2 CNIPA (중국 특허) — Liu et al. (2019) 관련 CN 특허 확인
+- §6-3 INPI/EP (프랑스·유럽 특허) — 2LQR (Tkachenko/Puech) 특허 번호 확인
+- §6-4 J-PlatPat (일본 특허) — DENSO WAVE 등 JP 다층 QR 특허
+
+KIPRIS는 해외 특허 영문초록만 제공 → 청구항·법적 상태 분석 불가.
+**EPO OPS 하나로 CN/JP/EP/FR 모두 커버 가능**하여 선택.
+
+## 현재 상태
+
+### ✅ 완료
+- EPO OPS 가입 신청 (Non-paying 티어, Organisation type: Industry)
+- 쿼리 설계 완료: `docs/research/epo-queries.md`
+  - Q1~Q4 (CN, §6-2)
+  - Q5~Q8 (EP/FR, §6-3)
+  - Q9~Q12 (JP, §6-4)
+  - Q13~Q15 (관할 무관 보강)
+- API 쿼터 분석 완료 (주 3.5~4 GB, 예상 사용량 ~26 MB, 쿼터의 0.7%)
+
+### ⏳ 대기
+- **EPO 측 계정 수동 활성화** (통상 1~2 영업일)
+- 활성화 메일 수신 시 다음 단계 착수
+
+## 활성화 이후 작업
+
+- [ ] OAuth2 App 생성 → Consumer Key/Secret 확보
+- [ ] `.env.example`에 `EPO_OPS_KEY`, `EPO_OPS_SECRET` 필드 추가
+- [ ] `scripts/epo_ops_search.py` 작성 (KIPRIS 스크립트 패턴 + OAuth2 + throttle)
+- [ ] Q1~Q15 순차 실행 → `docs/research/epo-results-*.json` 저장
+- [ ] 결과 triage → `prior-art-survey.md` §3 후보 확장 및 §6 해소 표시
+
+## 참고
+
+- 쿼리 설계: `docs/research/epo-queries.md`
+- 기반 문서: `docs/research/prior-art-survey.md` §6
+- API: https://ops.epo.org
+- 문서: OPS v3.2 Reference Guide
+EOF
+)"
+[2026-04-17T10:05:52.491Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T11:18:43.065Z] acceptance-gate: Hook started
+[2026-04-17T11:18:43.065Z] acceptance-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/.omc/harness-state/ 2>&1
+[2026-04-17T11:18:43.065Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T11:18:43.065Z] backpressure-gate: Hook started
+[2026-04-17T11:18:43.065Z] backpressure-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/.omc/harness-state/ 2>&1
+[2026-04-17T11:18:43.065Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T11:18:43.239Z] backpressure-tracker: Hook started
+[2026-04-17T11:18:43.239Z] backpressure-tracker: Command: ls -la /home/rae/projects/workspace/QoverwRap/.omc/harness-state/ 2>&1
+[2026-04-17T11:18:43.239Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T11:18:43.586Z] acceptance-gate: Hook started
+[2026-04-17T11:18:43.586Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/ 2>&1
+[2026-04-17T11:18:43.586Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T11:18:43.587Z] backpressure-gate: Hook started
+[2026-04-17T11:18:43.587Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/ 2>&1
+[2026-04-17T11:18:43.588Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T11:18:43.760Z] backpressure-tracker: Hook started
+[2026-04-17T11:18:43.760Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/ 2>&1
+[2026-04-17T11:18:43.760Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T11:18:58.038Z] acceptance-gate: Hook started
+[2026-04-17T11:18:58.039Z] acceptance-gate: Command: tail -50 /home/rae/projects/workspace/QoverwRap/.omc/harness-state/hook-debug.log 2>&1
+[2026-04-17T11:18:58.039Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T11:18:58.040Z] backpressure-gate: Hook started
+[2026-04-17T11:18:58.040Z] backpressure-gate: Command: tail -50 /home/rae/projects/workspace/QoverwRap/.omc/harness-state/hook-debug.log 2>&1
+[2026-04-17T11:18:58.040Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T11:18:58.212Z] backpressure-tracker: Hook started
+[2026-04-17T11:18:58.213Z] backpressure-tracker: Command: tail -50 /home/rae/projects/workspace/QoverwRap/.omc/harness-state/hook-debug.log 2>&1
+[2026-04-17T11:18:58.213Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T12:10:05.546Z] scope-gate: Hook started
+[2026-04-17T12:10:05.546Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:05.546Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T12:10:05.547Z] context-gate: Hook started
+[2026-04-17T12:10:05.547Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:05.547Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T12:10:05.547Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T12:10:05.547Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T12:10:05.547Z] context-gate: File was read, allowing
+[2026-04-17T12:10:12.371Z] acceptance-gate: Hook started
+[2026-04-17T12:10:12.371Z] acceptance-gate: Command: grep -c "P1 ★★★\|P2 ★★ |\|P3 ★ " /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:12.371Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T12:10:12.371Z] backpressure-gate: Hook started
+[2026-04-17T12:10:12.371Z] backpressure-gate: Command: grep -c "P1 ★★★\|P2 ★★ |\|P3 ★ " /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:12.371Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T12:10:12.543Z] backpressure-tracker: Hook started
+[2026-04-17T12:10:12.544Z] backpressure-tracker: Command: grep -c "P1 ★★★\|P2 ★★ |\|P3 ★ " /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:12.544Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T12:10:13.117Z] acceptance-gate: Hook started
+[2026-04-17T12:10:13.117Z] acceptance-gate: Command: grep -n "P1 ★★★\|P2 ★★\|P3 ★" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:13.118Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T12:10:13.120Z] backpressure-gate: Hook started
+[2026-04-17T12:10:13.120Z] backpressure-gate: Command: grep -n "P1 ★★★\|P2 ★★\|P3 ★" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:13.120Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T12:10:13.292Z] backpressure-tracker: Hook started
+[2026-04-17T12:10:13.292Z] backpressure-tracker: Command: grep -n "P1 ★★★\|P2 ★★\|P3 ★" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:13.292Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-17T12:10:20.154Z] scope-gate: Hook started
+[2026-04-17T12:10:20.154Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:20.154Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-17T12:10:20.154Z] context-gate: Hook started
+[2026-04-17T12:10:20.154Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:20.154Z] context-gate: File was read, allowing
+[2026-04-17T12:10:20.155Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-17T12:10:20.155Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-17T12:10:20.155Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-17T12:10:24.106Z] acceptance-gate: Hook started
+[2026-04-17T12:10:24.106Z] acceptance-gate: Command: grep -c "^| Q[0-9]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md && echo "---" && grep -E "^\| P[123]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:24.106Z] acceptance-gate: Not a git commit, allowing
+[2026-04-17T12:10:24.107Z] backpressure-gate: Hook started
+[2026-04-17T12:10:24.107Z] backpressure-gate: Command: grep -c "^| Q[0-9]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md && echo "---" && grep -E "^\| P[123]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:24.107Z] backpressure-gate: Not a git commit, allowing
+[2026-04-17T12:10:24.281Z] backpressure-tracker: Hook started
+[2026-04-17T12:10:24.282Z] backpressure-tracker: Command: grep -c "^| Q[0-9]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md && echo "---" && grep -E "^\| P[123]" /home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+[2026-04-17T12:10:24.282Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:01.947Z] acceptance-gate: Hook started
+[2026-04-20T03:17:01.947Z] acceptance-gate: Command: ls /home/rae/projects/workspace/claude/ 2>&1 | head -30
+[2026-04-20T03:17:01.947Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:01.948Z] backpressure-gate: Hook started
+[2026-04-20T03:17:01.948Z] backpressure-gate: Command: ls /home/rae/projects/workspace/claude/ 2>&1 | head -30
+[2026-04-20T03:17:01.948Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:02.123Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:02.123Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/claude/ 2>&1 | head -30
+[2026-04-20T03:17:02.123Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:02.876Z] acceptance-gate: Hook started
+[2026-04-20T03:17:02.876Z] acceptance-gate: Command: find /home/rae/projects/workspace/claude -iname "*whitelist*" -o -iname "*whitelist*.json" 2>/dev/null | head -20
+[2026-04-20T03:17:02.877Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:02.878Z] backpressure-gate: Hook started
+[2026-04-20T03:17:02.878Z] backpressure-gate: Command: find /home/rae/projects/workspace/claude -iname "*whitelist*" -o -iname "*whitelist*.json" 2>/dev/null | head -20
+[2026-04-20T03:17:02.878Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:03.159Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:03.160Z] backpressure-tracker: Command: find /home/rae/projects/workspace/claude -iname "*whitelist*" -o -iname "*whitelist*.json" 2>/dev/null | head -20
+[2026-04-20T03:17:03.160Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:03.730Z] backpressure-gate: Hook started
+[2026-04-20T03:17:03.730Z] acceptance-gate: Hook started
+[2026-04-20T03:17:03.731Z] acceptance-gate: Command: ls /home/rae/projects/workspace/claude/.claude/hooks/harness/ 2>&1 || ls /home/rae/projects/workspace/claude/.claude/ 2>&1
+[2026-04-20T03:17:03.731Z] backpressure-gate: Command: ls /home/rae/projects/workspace/claude/.claude/hooks/harness/ 2>&1 || ls /home/rae/projects/workspace/claude/.claude/ 2>&1
+[2026-04-20T03:17:03.731Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:03.731Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:03.897Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:03.897Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/claude/.claude/hooks/harness/ 2>&1 || ls /home/rae/projects/workspace/claude/.claude/ 2>&1
+[2026-04-20T03:17:03.897Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:12.668Z] acceptance-gate: Hook started
+[2026-04-20T03:17:12.668Z] acceptance-gate: Command: grep -rl "whitelist" /home/rae/projects/workspace/claude/ 2>/dev/null | head -20
+[2026-04-20T03:17:12.668Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:12.669Z] backpressure-gate: Hook started
+[2026-04-20T03:17:12.669Z] backpressure-gate: Command: grep -rl "whitelist" /home/rae/projects/workspace/claude/ 2>/dev/null | head -20
+[2026-04-20T03:17:12.669Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:13.438Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:13.439Z] backpressure-tracker: Command: grep -rl "whitelist" /home/rae/projects/workspace/claude/ 2>/dev/null | head -20
+[2026-04-20T03:17:13.439Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:14.227Z] acceptance-gate: Hook started
+[2026-04-20T03:17:14.227Z] acceptance-gate: Command: ls -la /home/rae/projects/workspace/claude/.claude 2>&1; echo "---"; find /home/rae/projects/workspace/claude -maxdepth 3 -name "settings*.json" 2>/dev/null
+[2026-04-20T03:17:14.227Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:14.227Z] backpressure-gate: Hook started
+[2026-04-20T03:17:14.227Z] backpressure-gate: Command: ls -la /home/rae/projects/workspace/claude/.claude 2>&1; echo "---"; find /home/rae/projects/workspace/claude -maxdepth 3 -name "settings*.json" 2>/dev/null
+[2026-04-20T03:17:14.227Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:14.399Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:14.400Z] backpressure-tracker: Command: ls -la /home/rae/projects/workspace/claude/.claude 2>&1; echo "---"; find /home/rae/projects/workspace/claude -maxdepth 3 -name "settings*.json" 2>/dev/null
+[2026-04-20T03:17:14.400Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:15.196Z] acceptance-gate: Hook started
+[2026-04-20T03:17:15.196Z] acceptance-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/.claude/ /home/rae/projects/workspace/QoverwRap/.claude/hooks/ /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/ 2>&1
+[2026-04-20T03:17:15.196Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:15.198Z] backpressure-gate: Hook started
+[2026-04-20T03:17:15.198Z] backpressure-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/.claude/ /home/rae/projects/workspace/QoverwRap/.claude/hooks/ /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/ 2>&1
+[2026-04-20T03:17:15.198Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:15.376Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:15.377Z] backpressure-tracker: Command: ls -la /home/rae/projects/workspace/QoverwRap/.claude/ /home/rae/projects/workspace/QoverwRap/.claude/hooks/ /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/ 2>&1
+[2026-04-20T03:17:15.377Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:37.951Z] acceptance-gate: Hook started
+[2026-04-20T03:17:37.951Z] acceptance-gate: Command: ls /home/rae/projects/workspace/claude/scripts/harness-*.sh 2>&1; echo "---"; ls /home/rae/projects/workspace/QoverwRap/scripts/harness-*.sh 2>&1
+[2026-04-20T03:17:37.952Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:37.953Z] backpressure-gate: Hook started
+[2026-04-20T03:17:37.954Z] backpressure-gate: Command: ls /home/rae/projects/workspace/claude/scripts/harness-*.sh 2>&1; echo "---"; ls /home/rae/projects/workspace/QoverwRap/scripts/harness-*.sh 2>&1
+[2026-04-20T03:17:37.954Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:44.856Z] acceptance-gate: Hook started
+[2026-04-20T03:17:44.856Z] acceptance-gate: Command: cat /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/harness-meta.json 2>&1 || echo "NO_META_FILE"
+[2026-04-20T03:17:44.856Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:44.856Z] backpressure-gate: Hook started
+[2026-04-20T03:17:44.856Z] backpressure-gate: Command: cat /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/harness-meta.json 2>&1 || echo "NO_META_FILE"
+[2026-04-20T03:17:44.856Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:45.025Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:45.025Z] backpressure-tracker: Command: cat /home/rae/projects/workspace/QoverwRap/.claude/hooks/harness/harness-meta.json 2>&1 || echo "NO_META_FILE"
+[2026-04-20T03:17:45.025Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:45.664Z] backpressure-gate: Hook started
+[2026-04-20T03:17:45.664Z] acceptance-gate: Hook started
+[2026-04-20T03:17:45.665Z] acceptance-gate: Command: cd /home/rae/projects/workspace/claude && git log --oneline -5 && echo "---TAGS---" && git tag -l "harness/*" | tail -10
+[2026-04-20T03:17:45.665Z] backpressure-gate: Command: cd /home/rae/projects/workspace/claude && git log --oneline -5 && echo "---TAGS---" && git tag -l "harness/*" | tail -10
+[2026-04-20T03:17:45.665Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:45.665Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:45.857Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:45.857Z] backpressure-tracker: Command: cd /home/rae/projects/workspace/claude && git log --oneline -5 && echo "---TAGS---" && git tag -l "harness/*" | tail -10
+[2026-04-20T03:17:45.857Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:17:46.584Z] acceptance-gate: Hook started
+[2026-04-20T03:17:46.584Z] acceptance-gate: Command: cat /home/rae/projects/workspace/claude/.claude/hooks/harness/harness-meta.json 2>&1
+[2026-04-20T03:17:46.584Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:17:46.585Z] backpressure-gate: Hook started
+[2026-04-20T03:17:46.585Z] backpressure-gate: Command: cat /home/rae/projects/workspace/claude/.claude/hooks/harness/harness-meta.json 2>&1
+[2026-04-20T03:17:46.585Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:17:46.753Z] backpressure-tracker: Hook started
+[2026-04-20T03:17:46.753Z] backpressure-tracker: Command: cat /home/rae/projects/workspace/claude/.claude/hooks/harness/harness-meta.json 2>&1
+[2026-04-20T03:17:46.753Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:15.678Z] acceptance-gate: Hook started
+[2026-04-20T03:18:15.678Z] acceptance-gate: Command: bash /home/rae/projects/workspace/claude/scripts/harness-sync.sh --dry-run 2>&1
+[2026-04-20T03:18:15.678Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:15.680Z] backpressure-gate: Hook started
+[2026-04-20T03:18:15.680Z] backpressure-gate: Command: bash /home/rae/projects/workspace/claude/scripts/harness-sync.sh --dry-run 2>&1
+[2026-04-20T03:18:15.680Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:21.041Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:21.041Z] backpressure-tracker: Command: bash /home/rae/projects/workspace/claude/scripts/harness-sync.sh --dry-run 2>&1
+[2026-04-20T03:18:21.041Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:30.407Z] acceptance-gate: Hook started
+[2026-04-20T03:18:30.407Z] acceptance-gate: Command: git status --porcelain CLAUDE.md rules/ checklists/ templates/ .claude/ 2>&1 | head -30
+[2026-04-20T03:18:30.407Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:30.411Z] backpressure-gate: Hook started
+[2026-04-20T03:18:30.411Z] backpressure-gate: Command: git status --porcelain CLAUDE.md rules/ checklists/ templates/ .claude/ 2>&1 | head -30
+[2026-04-20T03:18:30.411Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:30.586Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:30.586Z] backpressure-tracker: Command: git status --porcelain CLAUDE.md rules/ checklists/ templates/ .claude/ 2>&1 | head -30
+[2026-04-20T03:18:30.586Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:31.192Z] acceptance-gate: Hook started
+[2026-04-20T03:18:31.193Z] acceptance-gate: Command: wc -l CLAUDE.md rules/*.md 2>&1 | tail -20
+[2026-04-20T03:18:31.193Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:31.194Z] backpressure-gate: Hook started
+[2026-04-20T03:18:31.195Z] backpressure-gate: Command: wc -l CLAUDE.md rules/*.md 2>&1 | tail -20
+[2026-04-20T03:18:31.195Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:31.364Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:31.364Z] backpressure-tracker: Command: wc -l CLAUDE.md rules/*.md 2>&1 | tail -20
+[2026-04-20T03:18:31.364Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:31.212Z] acceptance-gate: Hook started
+[2026-04-20T03:18:31.212Z] acceptance-gate: Command: git log --oneline --all -- CLAUDE.md rules/ 2>&1 | head -5
+[2026-04-20T03:18:31.212Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:31.213Z] backpressure-gate: Hook started
+[2026-04-20T03:18:31.213Z] backpressure-gate: Command: git log --oneline --all -- CLAUDE.md rules/ 2>&1 | head -5
+[2026-04-20T03:18:31.213Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:31.388Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:31.388Z] backpressure-tracker: Command: git log --oneline --all -- CLAUDE.md rules/ 2>&1 | head -5
+[2026-04-20T03:18:31.388Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:44.000Z] acceptance-gate: Hook started
+[2026-04-20T03:18:44.001Z] acceptance-gate: Command: bash /home/rae/projects/workspace/claude/scripts/harness-sync.sh 2>&1
+[2026-04-20T03:18:44.001Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:44.002Z] backpressure-gate: Hook started
+[2026-04-20T03:18:44.002Z] backpressure-gate: Command: bash /home/rae/projects/workspace/claude/scripts/harness-sync.sh 2>&1
+[2026-04-20T03:18:44.002Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:49.454Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:49.454Z] backpressure-tracker: Command: bash /home/rae/projects/workspace/claude/scripts/harness-sync.sh 2>&1
+[2026-04-20T03:18:49.455Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:53.811Z] acceptance-gate: Hook started
+[2026-04-20T03:18:53.811Z] acceptance-gate: Command: cat .claude/hooks/harness/harness-meta.json 2>&1
+[2026-04-20T03:18:53.811Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:53.812Z] backpressure-gate: Hook started
+[2026-04-20T03:18:53.812Z] backpressure-gate: Command: cat .claude/hooks/harness/harness-meta.json 2>&1
+[2026-04-20T03:18:53.812Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:53.984Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:53.984Z] backpressure-tracker: Command: cat .claude/hooks/harness/harness-meta.json 2>&1
+[2026-04-20T03:18:53.984Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:54.594Z] acceptance-gate: Hook started
+[2026-04-20T03:18:54.595Z] acceptance-gate: Command: git status --short 2>&1 | head -40
+[2026-04-20T03:18:54.595Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:54.596Z] backpressure-gate: Hook started
+[2026-04-20T03:18:54.596Z] backpressure-gate: Command: git status --short 2>&1 | head -40
+[2026-04-20T03:18:54.596Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:54.768Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:54.768Z] backpressure-tracker: Command: git status --short 2>&1 | head -40
+[2026-04-20T03:18:54.768Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:18:55.412Z] acceptance-gate: Hook started
+[2026-04-20T03:18:55.413Z] acceptance-gate: Command: ls .claude/hooks/harness/ && echo "---SKILLS---" && ls .claude/skills/ && echo "---SCRIPTS---" && ls scripts/harness*.sh 2>&1
+[2026-04-20T03:18:55.413Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:18:55.413Z] backpressure-gate: Hook started
+[2026-04-20T03:18:55.413Z] backpressure-gate: Command: ls .claude/hooks/harness/ && echo "---SKILLS---" && ls .claude/skills/ && echo "---SCRIPTS---" && ls scripts/harness*.sh 2>&1
+[2026-04-20T03:18:55.413Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:18:55.586Z] backpressure-tracker: Hook started
+[2026-04-20T03:18:55.586Z] backpressure-tracker: Command: ls .claude/hooks/harness/ && echo "---SKILLS---" && ls .claude/skills/ && echo "---SCRIPTS---" && ls scripts/harness*.sh 2>&1
+[2026-04-20T03:18:55.586Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:29:58.624Z] acceptance-gate: Hook started
+[2026-04-20T03:29:58.624Z] acceptance-gate: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-20T03:29:58.624Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:29:58.627Z] backpressure-gate: Hook started
+[2026-04-20T03:29:58.627Z] backpressure-gate: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-20T03:29:58.627Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:29:58.790Z] backpressure-tracker: Hook started
+[2026-04-20T03:29:58.790Z] backpressure-tracker: Command: mkdir -p /home/rae/projects/workspace/QoverwRap/docs/sum
+[2026-04-20T03:29:58.791Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:09.152Z] scope-gate: Hook started
+[2026-04-20T03:31:09.153Z] scope-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md
+[2026-04-20T03:31:09.153Z] scope-gate: CWD: /home/rae/projects/workspace/QoverwRap
+[2026-04-20T03:31:09.153Z] scope-gate: Loaded 4 items from seed.yaml
+[2026-04-20T03:31:09.153Z] scope-gate: OUT OF SCOPE items: ["상용 서비스 배포 (SaaS/앱)","해외 특허 출원 (PCT, US 등)","블로그 플랫폼 개발","법률 자문 제공"]
+[2026-04-20T03:31:09.153Z] scope-gate: Path not in OUT OF SCOPE, allowing
+[2026-04-20T03:31:09.154Z] context-gate: Hook started
+[2026-04-20T03:31:09.154Z] context-gate: File path: /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md
+[2026-04-20T03:31:09.154Z] context-gate: File does not exist (new file), allowing
+[2026-04-20T03:31:14.975Z] acceptance-gate: Hook started
+[2026-04-20T03:31:14.975Z] acceptance-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md && wc -l /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md
+[2026-04-20T03:31:14.975Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:14.976Z] backpressure-gate: Hook started
+[2026-04-20T03:31:14.976Z] backpressure-gate: Command: ls -la /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md && wc -l /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md
+[2026-04-20T03:31:14.976Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:15.142Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:15.142Z] backpressure-tracker: Command: ls -la /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md && wc -l /home/rae/projects/workspace/QoverwRap/docs/sum/session_2026-04-20_epo-ops-and-harness-sync.md
+[2026-04-20T03:31:15.142Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:23.338Z] acceptance-gate: Hook started
+[2026-04-20T03:31:23.338Z] acceptance-gate: Command: git status 2>&1 | head -80
+[2026-04-20T03:31:23.338Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:23.341Z] backpressure-gate: Hook started
+[2026-04-20T03:31:23.341Z] backpressure-gate: Command: git status 2>&1 | head -80
+[2026-04-20T03:31:23.341Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:23.528Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:23.528Z] backpressure-tracker: Command: git status 2>&1 | head -80
+[2026-04-20T03:31:23.528Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:24.141Z] acceptance-gate: Hook started
+[2026-04-20T03:31:24.141Z] backpressure-gate: Hook started
+[2026-04-20T03:31:24.141Z] backpressure-gate: Command: git diff --stat HEAD 2>&1 | tail -30
+[2026-04-20T03:31:24.141Z] acceptance-gate: Command: git diff --stat HEAD 2>&1 | tail -30
+[2026-04-20T03:31:24.141Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:24.141Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:24.313Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:24.313Z] backpressure-tracker: Command: git diff --stat HEAD 2>&1 | tail -30
+[2026-04-20T03:31:24.313Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:24.741Z] acceptance-gate: Hook started
+[2026-04-20T03:31:24.742Z] acceptance-gate: Command: git branch --show-current 2>&1 && echo "---REMOTE---" && git remote -v 2>&1
+[2026-04-20T03:31:24.742Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:24.742Z] backpressure-gate: Hook started
+[2026-04-20T03:31:24.743Z] backpressure-gate: Command: git branch --show-current 2>&1 && echo "---REMOTE---" && git remote -v 2>&1
+[2026-04-20T03:31:24.743Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:24.908Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:24.908Z] backpressure-tracker: Command: git branch --show-current 2>&1 && echo "---REMOTE---" && git remote -v 2>&1
+[2026-04-20T03:31:24.908Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:45.359Z] acceptance-gate: Hook started
+[2026-04-20T03:31:45.360Z] acceptance-gate: Command: cat /home/rae/projects/workspace/QoverwRap/.gitignore 2>&1
+[2026-04-20T03:31:45.360Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:45.361Z] backpressure-gate: Hook started
+[2026-04-20T03:31:45.361Z] backpressure-gate: Command: cat /home/rae/projects/workspace/QoverwRap/.gitignore 2>&1
+[2026-04-20T03:31:45.361Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:45.533Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:45.533Z] backpressure-tracker: Command: cat /home/rae/projects/workspace/QoverwRap/.gitignore 2>&1
+[2026-04-20T03:31:45.534Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:45.748Z] acceptance-gate: Hook started
+[2026-04-20T03:31:45.748Z] acceptance-gate: Command: git diff docs/harness/current-scope.md 2>&1
+[2026-04-20T03:31:45.748Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:45.751Z] backpressure-gate: Hook started
+[2026-04-20T03:31:45.751Z] backpressure-gate: Command: git diff docs/harness/current-scope.md 2>&1
+[2026-04-20T03:31:45.751Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:45.918Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:45.919Z] backpressure-tracker: Command: git diff docs/harness/current-scope.md 2>&1
+[2026-04-20T03:31:45.919Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:31:46.487Z] acceptance-gate: Hook started
+[2026-04-20T03:31:46.487Z] acceptance-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/sum/ 2>&1
+[2026-04-20T03:31:46.487Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:31:46.488Z] backpressure-gate: Hook started
+[2026-04-20T03:31:46.488Z] backpressure-gate: Command: ls /home/rae/projects/workspace/QoverwRap/docs/sum/ 2>&1
+[2026-04-20T03:31:46.488Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T03:31:46.653Z] backpressure-tracker: Hook started
+[2026-04-20T03:31:46.653Z] backpressure-tracker: Command: ls /home/rae/projects/workspace/QoverwRap/docs/sum/ 2>&1
+[2026-04-20T03:31:46.653Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T03:35:39.198Z] acceptance-gate: Hook started
+[2026-04-20T03:35:39.198Z] acceptance-gate: Command: git status --short
+[2026-04-20T03:35:39.198Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T03:35:39.200Z] backpressure-gate: Hook started
+[2026-04-20T03:35:39.200Z] backpressure-gate: Command: git status --short
+[2026-04-20T03:35:39.200Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:04.651Z] acceptance-gate: Hook started
+[2026-04-20T08:20:04.652Z] acceptance-gate: Command: git status && echo "---" && git log -5 --oneline && echo "---" && git branch --show-current
+[2026-04-20T08:20:04.652Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:04.653Z] backpressure-gate: Hook started
+[2026-04-20T08:20:04.653Z] backpressure-gate: Command: git status && echo "---" && git log -5 --oneline && echo "---" && git branch --show-current
+[2026-04-20T08:20:04.653Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:04.831Z] backpressure-tracker: Hook started
+[2026-04-20T08:20:04.831Z] backpressure-tracker: Command: git status && echo "---" && git log -5 --oneline && echo "---" && git branch --show-current
+[2026-04-20T08:20:04.832Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T08:20:13.613Z] acceptance-gate: Hook started
+[2026-04-20T08:20:13.613Z] acceptance-gate: Command: git diff --cached .gitignore && echo "---ENV---" && cat .env.example
+[2026-04-20T08:20:13.613Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:13.615Z] backpressure-gate: Hook started
+[2026-04-20T08:20:13.615Z] backpressure-gate: Command: git diff --cached .gitignore && echo "---ENV---" && cat .env.example
+[2026-04-20T08:20:13.616Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:13.789Z] backpressure-tracker: Hook started
+[2026-04-20T08:20:13.789Z] backpressure-tracker: Command: git diff --cached .gitignore && echo "---ENV---" && cat .env.example
+[2026-04-20T08:20:13.789Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T08:20:17.764Z] acceptance-gate: Hook started
+[2026-04-20T08:20:17.765Z] acceptance-gate: Command: git log --oneline -- .omc/ | head -5 && echo "---" && git ls-files .omc/ | head -10
+[2026-04-20T08:20:17.765Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:17.766Z] backpressure-gate: Hook started
+[2026-04-20T08:20:17.766Z] backpressure-gate: Command: git log --oneline -- .omc/ | head -5 && echo "---" && git ls-files .omc/ | head -10
+[2026-04-20T08:20:17.766Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:17.946Z] backpressure-tracker: Hook started
+[2026-04-20T08:20:17.946Z] backpressure-tracker: Command: git log --oneline -- .omc/ | head -5 && echo "---" && git ls-files .omc/ | head -10
+[2026-04-20T08:20:17.946Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T08:20:24.404Z] acceptance-gate: Hook started
+[2026-04-20T08:20:24.404Z] acceptance-gate: Command: git reset HEAD && git status --short | head -5
+[2026-04-20T08:20:24.404Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:24.406Z] backpressure-gate: Hook started
+[2026-04-20T08:20:24.406Z] backpressure-gate: Command: git reset HEAD && git status --short | head -5
+[2026-04-20T08:20:24.406Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:24.579Z] backpressure-tracker: Hook started
+[2026-04-20T08:20:24.579Z] backpressure-tracker: Command: git reset HEAD && git status --short | head -5
+[2026-04-20T08:20:24.579Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T08:20:29.138Z] acceptance-gate: Hook started
+[2026-04-20T08:20:29.138Z] acceptance-gate: Command: git add .claude/settings.json .claude/skills/compr/SKILL.md .claude/skills/compush/SKILL.md .claude/skills/init/SKILL.md .claude/hooks/harness/harness-meta.json .claude/hooks/harness/harness-version-check.mjs .claude/skills/harness-check/ .githooks/ scripts/harness-sync.sh scripts/harness-version-bump.sh docs/harness/current-scope.md rules/mcp_policy.md .omc/state/hud-state.json .omc/state/hud-stdin-cache.json .omc/state/subagent-tracking.json .omc/harness-state/ .omc/project-memory.json .omc/sessions/ && git status --short | grep -E "^[AMD]" | head -30
+[2026-04-20T08:20:29.138Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:29.140Z] backpressure-gate: Hook started
+[2026-04-20T08:20:29.140Z] backpressure-gate: Command: git add .claude/settings.json .claude/skills/compr/SKILL.md .claude/skills/compush/SKILL.md .claude/skills/init/SKILL.md .claude/hooks/harness/harness-meta.json .claude/hooks/harness/harness-version-check.mjs .claude/skills/harness-check/ .githooks/ scripts/harness-sync.sh scripts/harness-version-bump.sh docs/harness/current-scope.md rules/mcp_policy.md .omc/state/hud-state.json .omc/state/hud-stdin-cache.json .omc/state/subagent-tracking.json .omc/harness-state/ .omc/project-memory.json .omc/sessions/ && git status --short | grep -E "^[AMD]" | head -30
+[2026-04-20T08:20:29.140Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:33.158Z] acceptance-gate: Hook started
+[2026-04-20T08:20:33.158Z] acceptance-gate: Command: grep -n "omc\|\.omc" .gitignore
+[2026-04-20T08:20:33.158Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:33.160Z] backpressure-gate: Hook started
+[2026-04-20T08:20:33.160Z] backpressure-gate: Command: grep -n "omc\|\.omc" .gitignore
+[2026-04-20T08:20:33.160Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:33.336Z] backpressure-tracker: Hook started
+[2026-04-20T08:20:33.337Z] backpressure-tracker: Command: grep -n "omc\|\.omc" .gitignore
+[2026-04-20T08:20:33.337Z] backpressure-tracker: Is verification: false, type: 
+[2026-04-20T08:20:43.379Z] acceptance-gate: Hook started
+[2026-04-20T08:20:43.379Z] acceptance-gate: Command: git check-ignore -v .omc/harness-state/ .omc/project-memory.json .omc/sessions/00bc87c6-edc3-401f-97c6-7df19f5320fa.json 2>&1; echo "---"; git check-ignore -v .omc/state/hud-stdin-cache.json 2>&1
+[2026-04-20T08:20:43.379Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:43.380Z] backpressure-gate: Hook started
+[2026-04-20T08:20:43.381Z] backpressure-gate: Command: git check-ignore -v .omc/harness-state/ .omc/project-memory.json .omc/sessions/00bc87c6-edc3-401f-97c6-7df19f5320fa.json 2>&1; echo "---"; git check-ignore -v .omc/state/hud-stdin-cache.json 2>&1
+[2026-04-20T08:20:43.381Z] backpressure-gate: Not a git commit, allowing
+[2026-04-20T08:20:51.540Z] acceptance-gate: Hook started
+[2026-04-20T08:20:51.540Z] acceptance-gate: Command: git add .claude/settings.json .claude/skills/compr/SKILL.md .claude/skills/compush/SKILL.md .claude/skills/init/SKILL.md .claude/hooks/harness/harness-meta.json .claude/hooks/harness/harness-version-check.mjs .claude/skills/harness-check/ .githooks/ scripts/harness-sync.sh scripts/harness-version-bump.sh docs/harness/current-scope.md rules/mcp_policy.md .omc/harness-state/ .omc/project-memory.json .omc/sessions/ && git diff --cached --stat
+[2026-04-20T08:20:51.540Z] acceptance-gate: Not a git commit, allowing
+[2026-04-20T08:20:51.542Z] backpressure-gate: Hook started
+[2026-04-20T08:20:51.542Z] backpressure-gate: Command: git add .claude/settings.json .claude/skills/compr/SKILL.md .claude/skills/compush/SKILL.md .claude/skills/init/SKILL.md .claude/hooks/harness/harness-meta.json .claude/hooks/harness/harness-version-check.mjs .claude/skills/harness-check/ .githooks/ scripts/harness-sync.sh scripts/harness-version-bump.sh docs/harness/current-scope.md rules/mcp_policy.md .omc/harness-state/ .omc/project-memory.json .omc/sessions/ && git diff --cached --stat
+[2026-04-20T08:20:51.542Z] backpressure-gate: Not a git commit, allowing
