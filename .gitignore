@@ -20,3 +20,7 @@ __pycache__/
 test-qr-images/
 test-qr-density/
 test-results/
+
+# Secrets
+.env
+.env.local
