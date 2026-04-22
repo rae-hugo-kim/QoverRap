@@ -1,0 +1,167 @@
+[
+  {
+    "query_id": "Q1",
+    "priority": "P1",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "88330",
+    "hour_quota_used": "88330",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q2",
+    "priority": "P2",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "88509",
+    "hour_quota_used": "88509",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q3",
+    "priority": "P1",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "idle (images=green:200, inpadoc=green:60, other=green:1000, retrieval=green:200, search=green:30)",
+    "week_quota_used": "88688",
+    "hour_quota_used": "88688",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q4",
+    "priority": "P2",
+    "status": "ok",
+    "total_results": "1",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "89253",
+    "hour_quota_used": "89253",
+    "retrieved": 1,
+    "error": null
+  },
+  {
+    "query_id": "Q5",
+    "priority": "P3",
+    "status": "ok",
+    "total_results": "6586",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "105982",
+    "hour_quota_used": "105982",
+    "retrieved": 100,
+    "error": null
+  },
+  {
+    "query_id": "Q6",
+    "priority": "P3",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "106161",
+    "hour_quota_used": "106161",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q7",
+    "priority": "P3",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "106340",
+    "hour_quota_used": "106340",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q8",
+    "priority": "P3",
+    "status": "ok",
+    "total_results": "1",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "106931",
+    "hour_quota_used": "106931",
+    "retrieved": 1,
+    "error": null
+  },
+  {
+    "query_id": "Q9",
+    "priority": "P3",
+    "status": "ok",
+    "total_results": "36770",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "123952",
+    "hour_quota_used": "123952",
+    "retrieved": 100,
+    "error": null
+  },
+  {
+    "query_id": "Q10",
+    "priority": "P3",
+    "status": "ok",
+    "total_results": "26",
+    "throttling": "idle (images=green:200, inpadoc=green:60, other=green:1000, retrieval=green:200, search=green:30)",
+    "week_quota_used": "128575",
+    "hour_quota_used": "128575",
+    "retrieved": 26,
+    "error": null
+  },
+  {
+    "query_id": "Q11",
+    "priority": "P2",
+    "status": "ok",
+    "total_results": "1",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "129177",
+    "hour_quota_used": "129177",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q12",
+    "priority": "P2",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "129356",
+    "hour_quota_used": "129356",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q13",
+    "priority": "P2",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "129535",
+    "hour_quota_used": "129535",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q14",
+    "priority": "P2",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "129714",
+    "hour_quota_used": "129714",
+    "retrieved": 0,
+    "error": null
+  },
+  {
+    "query_id": "Q15",
+    "priority": "P3",
+    "status": "404-noresults",
+    "total_results": "0",
+    "throttling": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota_used": "129893",
+    "hour_quota_used": "129893",
+    "retrieved": 0,
+    "error": null
+  }
+]

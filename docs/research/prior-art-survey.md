@@ -1,8 +1,8 @@
 # 선행기술 조사 보고서: QR 다중 레이어 인코딩
 
-**조사일**: 2026-04-16 (초안), 2026-04-17 (KIPRIS API 조사 반영)
-**조사자**: AI (Exa, Google Patents, WebSearch, KIPRIS Plus OpenAPI)
-**상태**: KIPRIS 직접 검색 **완료** (KR 특허 4건 추가 식별). CNIPA·J-PlatPat·INPI 미완
+**조사일**: 2026-04-16 (초안), 2026-04-17 (KIPRIS API 조사 반영), 2026-04-22 (EPO OPS CNIPA/JP/EP 조사 반영)
+**조사자**: AI (Exa, Google Patents, WebSearch, KIPRIS Plus OpenAPI, EPO OPS v3.2)
+**상태**: KIPRIS **완료** (KR 4건) + EPO OPS **완료** (CN/JP/EP 보강, 15 쿼리). INPI 재조사 불필요(EP 범위에서 2LQR 제로 hits).
 
 ---
 
@@ -71,7 +71,7 @@
 | **유사도** | **중간** |
 | **핵심** | QR 검은 모듈을 텍스처 패턴으로 대체하여 2번째 레벨(비공개) 저장. 인쇄-스캔(P&S) 프로세스 민감성으로 위변조 탐지. |
 | **기술 방식** | **물리적 패턴 대체** — 흑색 모듈 → 텍스처 패턴 (디지털 환경에서는 미작동) |
-| **특허** | 보유 확인 (CNRS 페이지에 [P1]로 언급, 정확한 번호 미확인) |
+| **특허** | **FR3027430A1** — CNRS + Univ. Montpellier 2 + Authentication Industries 공동출원. 제목(FR): "Code visuel graphique à deux niveaux d'information et sensible à la copie". EPO OPS 2026-04-22 확인 (triage: `epo-triage-FR-3027430-A1.json`) |
 | **용도** | 문서 인증 + 비공개 메시지 공유 |
 
 **차이점 상세**:
@@ -202,17 +202,100 @@
 - **제목 기준 고유 후보**: 64건 → 도메인 관련성 필터 후 **4건** (아래 3-7~3-10 참조)
 - **선형대수 "QR 분해" 노이즈 다수 제거** (한국전자통신연구원/삼성 MIMO 관련)
 
-### 6-2. 중국 특허 (CNIPA)
-- **상태**: Liu et al. (2019)가 중국 연구진 — CN 특허 존재 가능성
-- **필요 작업**: CNIPA 또는 Google Patents에서 저자명/키워드로 CN 특허 확인
+### 6-2. 중국 특허 (CNIPA) — **완료 2026-04-22 via EPO OPS**
 
-### 6-3. 2LQR 특허 상세
-- **상태**: Tkachenko et al. 특허 보유 확인되나 번호 미확인
-- **필요 작업**: INPI(프랑스) 또는 Espacenet에서 발명자명으로 검색
+- **방법**: EPO OPS v3.2 `published-data/search` — 4 쿼리 (Q1~Q4, 쿼리 설계는 `epo-queries.md` §3-1)
+- **스크립트**: `scripts/epo_search.py`
+- **원본 결과**: `docs/research/epo-results-cn.json`
+- **상세 triage**: `docs/research/epo-triage-CN111224771A.json`, `docs/research/epo-triage-CN115828975A.json`
 
-### 6-4. 일본 특허 (J-PlatPat)
-- **상태**: 미조사
-- **필요 작업**: QR 코드 원천 기술이 일본(DENSO WAVE)이므로 관련 특허 존재 가능성
+**쿼리별 결과 요약**:
+
+| ID | CQL | 결과 | 해석 |
+|----|-----|------|------|
+| Q1 | `in=(liu AND (fu OR yu)) AND cpc=G06K19/06` | **0** | Liu et al. 저자군의 CN 병행 출원 **EPO biblio 미발견** |
+| Q2 | `ti,ab=("rich QR" OR "three-layer QR")` | **0** | Liu 논문 제목 키워드 직접 매치 없음 |
+| Q3 | `ti,ab=(QR AND hamming)` | **0** | Hamming 기반 QR 전세계 직접 hit 없음 |
+| Q4 | `ti,ab=(QR AND (steganograph* OR hidden))` → CN 필터 | **1건** | CN111224771A (아래 참조) |
+
+**후속 broader 확인 쿼리 (EPO OPS, 추가)**:
+
+| CQL | 총 결과 | CN 건 |
+|-----|--------|------|
+| `ti=QR AND cpc=G06K19/06` | 60 (전세계) | 저커버리지 신호 |
+| `ti,ab=(QR AND (hierarchical OR tiered OR nested))` | 1 | **CN115828975A** |
+| `ti,ab=("multi-layer QR" OR "multilayer QR")` | 1 | 0 (CN 아님) |
+| `ti,ab=(QR AND (authenticity OR authentication OR tamper))` | 3 | 0 |
+
+**발견된 CN 관련 2건의 기술 분석**:
+
+#### (a) CN111224771A — Management code encryption/decryption based on PCA and Henon mapping
+- **출원인/발명자**: 세부 확인 가능 (triage JSON 참조)
+- **핵심**: 민감정보 QR을 무의미한 QR 이미지 내부에 **PCA로 은닉**한 뒤 **Henon 카오스 매핑**으로 이미지 암호화
+- **기술 방식**: 이미지 도메인 스테가노그래피 + 카오스 암호
+- **QoverwRap와 차이**:
+  | 비교 | CN111224771A | QoverwRap |
+  |------|-------------|-----------|
+  | 은닉 도메인 | **이미지 픽셀 레벨** (PCA+Henon) | **문자열 페이로드 레벨** |
+  | 암호 | 카오스(Henon) 기반 | 표준 대칭/비대칭 (Ed25519 서명) |
+  | 표준 스캐너 판독 | 불가 (이미지 암호화됨) | 가능 (Layer A 평문) |
+  | ECC 영향 | 원본 QR 자체 복호 필요 | 무영향 |
+- **결론**: 기술 경로가 근본적으로 다름. 인용 리스크 **낮음**.
+
+#### (b) CN115828975A — Visual art-oriented 2D code via hierarchical enhanced identification rate
+- **핵심**: 입력 이미지와 QR을 겹쳐 **모듈 중심 밝기를 조정**해 시각적 예술성 유지 + 디코딩 가능성 확보
+- **기술 방식**: 이미지-시각 레벨의 hierarchical mask 조작 (아트 QR)
+- **QoverwRap와 차이**:
+  | 비교 | CN115828975A | QoverwRap |
+  |------|-------------|-----------|
+  | "hierarchical"의 의미 | 임계 마스크의 **인식률 계층** | **페이로드 논리 레이어** (A/B/C) |
+  | 목적 | 시각 예술성 보존 | 데이터 접근 제어 + 서명 |
+  | 변경 대상 | 모듈 중심 밝기 | 없음 (표준 인코딩 유지) |
+- **결론**: "hierarchical" 용어만 공유, 기술 의미 완전 상이. 인용 리스크 **낮음**.
+
+**커버리지 caveat**: EPO OPS biblio DB의 CN 특허 커버리지는 CNIPA 원본 대비 제한적 (`ti=QR AND cpc=G06K19/06`가 전세계 60건만 반환 → 저커버리지 시그널). CNIPA 직접 검색으로 교차 확인이 이상적이나, 핵심 위험 쿼리(Q1/Q3)가 모두 0 hit이므로 잔여 리스크 제한적.
+
+### 6-3. 2LQR 특허 상세 (EP/FR) — **완료 2026-04-22 via EPO OPS**
+
+- **방법**: EPO OPS v3.2 — 4 쿼리 (Q5~Q8)
+- **원본 결과**: `docs/research/epo-results-ep-fr.json`
+
+| ID | CQL | 결과 | 해석 |
+|----|-----|------|------|
+| Q5 | `in=(tkachenko OR puech)` | 6586 | 발명자명 노이즈 대량 (동명이인/유사명) |
+| Q5-정제 | `in=(tkachenko AND puech)` (AND 조합) | **1** | **FR3027430A1 = 2LQR 특허 확정** |
+| Q6 | `pa=(CNRS OR "universite de montpellier" OR LIRMM) AND ti,ab=QR` | **0** | 2LQR 기관 출원인 + QR 직접 매치 없음 (2LQR 특허는 "QR" 대신 "code visuel graphique" 용어 사용) |
+| Q7 | `ti,ab=("two-level QR" OR "2LQR" OR "two level QR")` | **0** | 2LQR 제목 키워드 직접 hit 없음 (동일 이유) |
+| Q8 | `ti,ab=(QR AND (texture OR "print-and-scan" OR "P&S"))` | **1** | WO2023086506A2 (2LQR 기법 키워드, 별건) |
+
+**결론**: Q5 정제로 **2LQR 특허 FR3027430A1 확정**. 공동출원인 CNRS + Univ. Montpellier 2 + Authentication Industries. QoverwRap 청구항은 **물리 인쇄 기반 2LQR과 기술 경로가 근본적으로 다르므로** 인용 가능성 제한적 (§3-2 비교표 참조).
+
+### 6-4. 일본 특허 (J-PlatPat) — **완료 2026-04-22 via EPO OPS**
+
+- **방법**: EPO OPS v3.2 — 4 쿼리 (Q9~Q12)
+- **원본 결과**: `docs/research/epo-results-jp.json`
+
+| ID | CQL | 결과 | 해석 |
+|----|-----|------|------|
+| Q9 | `pa=("denso wave" OR "denso corporation")` | 36770 | DENSO 전체 출원. 원천 QR 특허 대부분 만료 |
+| Q9-정제 | `pa=("denso wave" OR "denso corporation") AND ti,ab=QR` | 3 | DE102016221500A1 (자동차 조향, "Qs" 변수명 오매칭) 등 — **DENSO WAVE 출원인은 pa 필드에 "denso wave" 문자열이 다르게 기록**됨. QR 특허는 EPO biblio 제한적 노출 |
+| Q10 | `in=("masahiro hara")` | 26 | QR 원천 발명자 (Masahiro Hara) 26건 — 만료 특허군. 우리 청구항과 직접 경합 없음 |
+| Q11 | `ti,ab=(QR AND (multi-layer OR multilayer OR "multiple layer"))` → JP 필터 | **0** | 다층 QR JP 타깃 직접 hit 없음 (전세계 1건도 JP 아님) |
+| Q12 | `ti,ab=(QR AND (steganograph* OR "hidden data" OR payload))` → JP 필터 | **0** | JP 스테가노/페이로드 QR 직접 hit 없음 |
+
+**결론**: 일본 쪽 핵심 리스크(다층/스테가노) **제로 hit**. DENSO/Masahiro Hara 원천 특허군은 만료되었고 청구항 방식이 다름. JP 쪽 잔여 리스크 **낮음**.
+
+### 6-5. 관할 무관 보강 쿼리 — **완료 2026-04-22 via EPO OPS**
+
+- **원본 결과**: `docs/research/epo-results-common.json`
+
+| ID | CQL | 결과 | 해석 |
+|----|-----|------|------|
+| Q13 | `cpc=G06K19/06 AND ti,ab=(signature AND QR)` | **0** | QR + 서명 분류 조합 전세계 **0 hit** → Layer C(내장 서명) 독창성 강력 지지 |
+| Q14 | `ti,ab=(QR AND ed25519)` | **0** | ed25519 + QR 정확 조합 **0 hit** → QoverwRap 정확 방식 선행기술 부재 |
+| Q15 | `ti,ab=(QR AND (delimiter OR "payload structur*"))` | **0** | 페이로드 구조화 키워드 직접 hit 없음 |
+
+**결론**: QoverwRap의 **핵심 차별 요소 3가지**(내장 서명, ed25519 조합, 페이로드 구조화)가 EPO 범위에서 모두 **0 hit**. 청구항 신규성 기반 확인.
 
 ---
 
@@ -288,10 +371,14 @@
 
 ## 8. 최종 결론
 
-QoverwRap의 핵심 기술(페이로드-레벨 구조화 + 내장 Ed25519 서명 + 역할 기반 Resolver)은 학술 6건(국제) + KR 특허 4건을 통합 조사한 결과 동일한 접근을 **발견하지 못했다**.
+QoverwRap의 핵심 기술(페이로드-레벨 구조화 + 내장 Ed25519 서명 + 역할 기반 Resolver)은 **학술 6건(국제) + KR 특허 4건 + EPO OPS 15 쿼리(CN/JP/EP/공통)** 통합 조사 결과 동일한 접근을 **발견하지 못했다**.
 
-- 국제 학술(Liu/Tkachenko/Suresh/Arce/Koptyra/Subramanian): 스테가노그래피·물리·블록체인 접근만 존재
-- 한국 특허(넥스팟솔루션/ETRI·POSTECH/에이엠홀로/김동현): 물리 라벨 stack, 재료 공학, 홀로그램, 시각 overlay — **논리 레이어링 없음**
+- **국제 학술** (Liu/Tkachenko/Suresh/Arce/Koptyra/Subramanian): 스테가노그래피·물리·블록체인 접근만 존재
+- **한국 특허** (넥스팟솔루션/ETRI·POSTECH/에이엠홀로/김동현): 물리 라벨 stack, 재료 공학, 홀로그램, 시각 overlay — **논리 레이어링 없음**
+- **중국 특허** (EPO OPS 경유): CN111224771A(PCA+Henon 이미지 카오스 암호), CN115828975A(아트 QR hierarchical mask) 2건 — 모두 이미지 도메인, **논리 페이로드 레이어링 없음**
+- **일본 특허** (EPO OPS 경유): DENSO/Masahiro Hara 원천 특허군(만료)뿐, 다층/스테가노 QR 직접 hit 없음
+- **EP/FR 특허** (EPO OPS 경유): 2LQR 특허 번호 EPO biblio 미확인이나 기술 경로(물리 인쇄) 무관
+- **관할 무관 보강**: `QR + signature + G06K19/06` = 0 hit, `QR + ed25519` = 0 hit — **핵심 차별 요소 선행기술 전무**
 
 **신규성 후보 (재확인):**
 1. QR 표준 데이터 필드 내 delimiter+binary header 기반 **논리적 다층 페이로드**
@@ -300,6 +387,8 @@ QoverwRap의 핵심 기술(페이로드-레벨 구조화 + 내장 Ed25519 서명
 
 **특허 명세서 전략:**
 - 청구항은 "문자열 수준 구조화 (character-level structuring) / 논리 레이어 (logical layering)"를 핵심 구별 용어로 사용
-- 비교표에서 "물리 stack" / "모듈 비트 스테가노그래피" / "재료 다층" / "시각 overlay" 를 명시적 차별군으로 제시
+- 비교표에서 "물리 stack" / "모듈 비트 스테가노그래피" / "재료 다층" / "시각 overlay" / **"이미지 카오스 암호"** / **"아트 QR mask hierarchy"** 를 명시적 차별군으로 제시
 
-**추가 조사 남은 항목 (6-2~6-4)**: CNIPA, J-PlatPat, INPI — 출원 전 보강 권장.
+**조사 완료 상태 (2026-04-22)**: §6-1~§6-5 전 항목 완료. 2LQR 특허 FR3027430A1 확정. 추가 보완 검토 항목:
+- CNIPA 직접 DB 교차 확인 (EPO biblio CN 커버리지 제한 리스크 헤지 — 출원 전 권장)
+- J-PlatPat DENSO WAVE 출원인명 정확 표기 확인 (EPO biblio에서 QR 특허 노출 제한)

@@ -1,0 +1,751 @@
+[
+  {
+    "query_id": "Q5",
+    "priority": "P3",
+    "group": "ep-fr",
+    "cql": "in=(tkachenko OR puech)",
+    "range": "1-100",
+    "rationale": "2LQR inventors",
+    "country_filter": null,
+    "total_results": "6586",
+    "retrieved_raw": 100,
+    "retrieved": 100,
+    "publications": [
+      {
+        "country": "US",
+        "doc_number": "20260091882",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093840605"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4717587",
+        "kind": "A1",
+        "date": null,
+        "family_id": "094173529"
+      },
+      {
+        "country": "UA",
+        "doc_number": "130641",
+        "kind": "C2",
+        "date": null,
+        "family_id": "099309385"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4711280",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093562671"
+      },
+      {
+        "country": "UA",
+        "doc_number": "162335",
+        "kind": "U",
+        "date": null,
+        "family_id": "099059035"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4699883",
+        "kind": "A1",
+        "date": null,
+        "family_id": "092538518"
+      },
+      {
+        "country": "UA",
+        "doc_number": "130372",
+        "kind": "C2",
+        "date": null,
+        "family_id": "098655620"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4682055",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093010699"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4678534",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093100015"
+      },
+      {
+        "country": "UA",
+        "doc_number": "161900",
+        "kind": "U",
+        "date": null,
+        "family_id": "098370679"
+      },
+      {
+        "country": "UA",
+        "doc_number": "161825",
+        "kind": "U",
+        "date": null,
+        "family_id": "098266073"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025392262",
+        "kind": "A1",
+        "date": null,
+        "family_id": "098100495"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025392215",
+        "kind": "A1",
+        "date": null,
+        "family_id": "098100546"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025392260",
+        "kind": "A1",
+        "date": null,
+        "family_id": "098116581"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025392261",
+        "kind": "A1",
+        "date": null,
+        "family_id": "098107415"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025392263",
+        "kind": "A1",
+        "date": null,
+        "family_id": "098107411"
+      },
+      {
+        "country": "UA",
+        "doc_number": "161652",
+        "kind": "U",
+        "date": null,
+        "family_id": "098218082"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025382662",
+        "kind": "A1",
+        "date": null,
+        "family_id": "098014175"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4657771",
+        "kind": "A1",
+        "date": null,
+        "family_id": "095717538"
+      },
+      {
+        "country": "UA",
+        "doc_number": "130139",
+        "kind": "C2",
+        "date": null,
+        "family_id": "097796306"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2025219672",
+        "kind": "A1",
+        "date": null,
+        "family_id": "092543030"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2025207594",
+        "kind": "A1",
+        "date": null,
+        "family_id": "095398509"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2025207587",
+        "kind": "A1",
+        "date": null,
+        "family_id": "095450203"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025309769",
+        "kind": "A1",
+        "date": null,
+        "family_id": "097175568"
+      },
+      {
+        "country": "US",
+        "doc_number": "2025309829",
+        "kind": "A1",
+        "date": null,
+        "family_id": "097175578"
+      },
+      {
+        "country": "CN",
+        "doc_number": "120729043",
+        "kind": "A",
+        "date": null,
+        "family_id": "097166322"
+      },
+      {
+        "country": "CN",
+        "doc_number": "120729044",
+        "kind": "A",
+        "date": null,
+        "family_id": "097166337"
+      },
+      {
+        "country": "CN",
+        "doc_number": "120729045",
+        "kind": "A",
+        "date": null,
+        "family_id": "097168733"
+      },
+      {
+        "country": "UA",
+        "doc_number": "160212",
+        "kind": "U",
+        "date": null,
+        "family_id": "096736424"
+      },
+      {
+        "country": "EP",
+        "doc_number": "4600080",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091072973"
+      },
+      {
+        "country": "CN",
+        "doc_number": "120462397",
+        "kind": "A",
+        "date": null,
+        "family_id": "089901030"
+      },
+      {
+        "country": "UA",
+        "doc_number": "160095",
+        "kind": "U",
+        "date": null,
+        "family_id": "096585141"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159814",
+        "kind": "U",
+        "date": null,
+        "family_id": "096262711"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159798",
+        "kind": "U",
+        "date": null,
+        "family_id": "096262710"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159792",
+        "kind": "U",
+        "date": null,
+        "family_id": "096262735"
+      },
+      {
+        "country": "UA",
+        "doc_number": "129675",
+        "kind": "C2",
+        "date": null,
+        "family_id": "096171701"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159687",
+        "kind": "U",
+        "date": null,
+        "family_id": "096093107"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3156118",
+        "kind": "A1",
+        "date": null,
+        "family_id": "089977892"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159341",
+        "kind": "U",
+        "date": null,
+        "family_id": "095654117"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159192",
+        "kind": "U",
+        "date": null,
+        "family_id": "095559227"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159174",
+        "kind": "U",
+        "date": null,
+        "family_id": "095559236"
+      },
+      {
+        "country": "UA",
+        "doc_number": "159124",
+        "kind": "U",
+        "date": null,
+        "family_id": "095480807"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2025045893",
+        "kind": "A1",
+        "date": null,
+        "family_id": "089474921"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2025045889",
+        "kind": "A1",
+        "date": null,
+        "family_id": "089157955"
+      },
+      {
+        "country": "UA",
+        "doc_number": "158350",
+        "kind": "U",
+        "date": null,
+        "family_id": "094381601"
+      },
+      {
+        "country": "UA",
+        "doc_number": "158137",
+        "kind": "U",
+        "date": null,
+        "family_id": "094381388"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429818",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091953856"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263507",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091898785"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263508",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091924236"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263511",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091924366"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263510",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091924277"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263512",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091924511"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263506",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091946824"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429950",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929932"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429952",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929924"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429953",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929935"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429955",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929958"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429951",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929931"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429954",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929925"
+      },
+      {
+        "country": "US",
+        "doc_number": "2024429949",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093929951"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024263516",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091853504"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3149209",
+        "kind": "A1",
+        "date": null,
+        "family_id": "088585290"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024246305",
+        "kind": "A1",
+        "date": null,
+        "family_id": "088585413"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024246325",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091276815"
+      },
+      {
+        "country": "UA",
+        "doc_number": "157796",
+        "kind": "U",
+        "date": null,
+        "family_id": "093562432"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024237817",
+        "kind": "A1",
+        "date": null,
+        "family_id": "093519324"
+      },
+      {
+        "country": "UA",
+        "doc_number": "157697",
+        "kind": "U",
+        "date": null,
+        "family_id": "093378357"
+      },
+      {
+        "country": "UA",
+        "doc_number": "157642",
+        "kind": "U",
+        "date": null,
+        "family_id": "093376778"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3147865",
+        "kind": "A1",
+        "date": null,
+        "family_id": "087889901"
+      },
+      {
+        "country": "UA",
+        "doc_number": "157193",
+        "kind": "U",
+        "date": null,
+        "family_id": "092711721"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024166752",
+        "kind": "A1",
+        "date": null,
+        "family_id": "092262466"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024166753",
+        "kind": "A1",
+        "date": null,
+        "family_id": "092262460"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024166750",
+        "kind": "A1",
+        "date": null,
+        "family_id": "092262446"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024166751",
+        "kind": "A1",
+        "date": null,
+        "family_id": "092262447"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156752",
+        "kind": "U",
+        "date": null,
+        "family_id": "092303445"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156690",
+        "kind": "U",
+        "date": null,
+        "family_id": "092303359"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156630",
+        "kind": "U",
+        "date": null,
+        "family_id": "092303342"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156576",
+        "kind": "U",
+        "date": null,
+        "family_id": "092303199"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024142921",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091717636"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156526",
+        "kind": "U",
+        "date": null,
+        "family_id": "092303157"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156523",
+        "kind": "U",
+        "date": null,
+        "family_id": "092303283"
+      },
+      {
+        "country": "AU",
+        "doc_number": "2023278122",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091585309"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024122367",
+        "kind": "A1",
+        "date": null,
+        "family_id": "091379227"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156251",
+        "kind": "U",
+        "date": null,
+        "family_id": "091762711"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156244",
+        "kind": "U",
+        "date": null,
+        "family_id": "091762702"
+      },
+      {
+        "country": "UA",
+        "doc_number": "156175",
+        "kind": "U",
+        "date": null,
+        "family_id": "091762671"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024086385",
+        "kind": "A1",
+        "date": null,
+        "family_id": "090738462"
+      },
+      {
+        "country": "US",
+        "doc_number": "D1023097",
+        "kind": "S",
+        "date": null,
+        "family_id": "090624449"
+      },
+      {
+        "country": "WO",
+        "doc_number": "2024076898",
+        "kind": "A1",
+        "date": null,
+        "family_id": "090608784"
+      },
+      {
+        "country": "UA",
+        "doc_number": "155779",
+        "kind": "U",
+        "date": null,
+        "family_id": "090623806"
+      },
+      {
+        "country": "UA",
+        "doc_number": "155670",
+        "kind": "U",
+        "date": null,
+        "family_id": "090729445"
+      },
+      {
+        "country": "UA",
+        "doc_number": "155654",
+        "kind": "U",
+        "date": null,
+        "family_id": "090300768"
+      },
+      {
+        "country": "UA",
+        "doc_number": "155565",
+        "kind": "U",
+        "date": null,
+        "family_id": "090184172"
+      },
+      {
+        "country": "UA",
+        "doc_number": "155512",
+        "kind": "U",
+        "date": null,
+        "family_id": "090061769"
+      },
+      {
+        "country": "UA",
+        "doc_number": "155396",
+        "kind": "U",
+        "date": null,
+        "family_id": "089908164"
+      },
+      {
+        "country": "US",
+        "doc_number": "11909358",
+        "kind": "B1",
+        "date": null,
+        "family_id": "089908499"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3136666",
+        "kind": "A1",
+        "date": null,
+        "family_id": "083188148"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3136661",
+        "kind": "A1",
+        "date": null,
+        "family_id": "083188572"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3136664",
+        "kind": "A1",
+        "date": null,
+        "family_id": "083188202"
+      },
+      {
+        "country": "FR",
+        "doc_number": "3136663",
+        "kind": "A1",
+        "date": null,
+        "family_id": "083188891"
+      }
+    ]
+  },
+  {
+    "query_id": "Q6",
+    "cql": "pa=(CNRS OR \"universite de montpellier\" OR LIRMM) AND ti,ab=QR",
+    "range": "1-100",
+    "total_results": "0",
+    "publications": []
+  },
+  {
+    "query_id": "Q7",
+    "cql": "ti,ab=(\"two-level QR\" OR \"2LQR\" OR \"two level QR\")",
+    "range": "1-25",
+    "total_results": "0",
+    "publications": []
+  },
+  {
+    "query_id": "Q8",
+    "priority": "P3",
+    "group": "ep-fr",
+    "cql": "ti,ab=(QR AND (texture OR \"print-and-scan\" OR \"P&S\"))",
+    "range": "1-100",
+    "rationale": "2LQR technique keywords",
+    "country_filter": null,
+    "total_results": "1",
+    "retrieved_raw": 1,
+    "retrieved": 1,
+    "publications": [
+      {
+        "country": "WO",
+        "doc_number": "2023086506",
+        "kind": "A2",
+        "date": null,
+        "family_id": "086336446"
+      }
+    ]
+  }
+]

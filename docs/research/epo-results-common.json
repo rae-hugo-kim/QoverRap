@@ -1,0 +1,23 @@
+[
+  {
+    "query_id": "Q13",
+    "cql": "cpc=G06K19/06 AND ti,ab=(signature AND QR)",
+    "range": "1-100",
+    "total_results": "0",
+    "publications": []
+  },
+  {
+    "query_id": "Q14",
+    "cql": "ti,ab=(QR AND ed25519)",
+    "range": "1-100",
+    "total_results": "0",
+    "publications": []
+  },
+  {
+    "query_id": "Q15",
+    "cql": "ti,ab=(QR AND (delimiter OR \"payload structur*\"))",
+    "range": "1-100",
+    "total_results": "0",
+    "publications": []
+  }
+]

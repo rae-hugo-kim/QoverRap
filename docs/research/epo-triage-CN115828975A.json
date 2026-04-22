@@ -1,0 +1,296 @@
+{
+  "ops:world-patent-data": {
+    "@xmlns": {
+      "ops": "http://ops.epo.org",
+      "$": "http://www.epo.org/exchange",
+      "xlink": "http://www.w3.org/1999/xlink"
+    },
+    "exchange-documents": {
+      "exchange-document": {
+        "@system": "ops.epo.org",
+        "@family-id": "085544328",
+        "@country": "CN",
+        "@doc-number": "115828975",
+        "@kind": "A",
+        "bibliographic-data": {
+          "publication-reference": {
+            "document-id": [
+              {
+                "@document-id-type": "docdb",
+                "country": {
+                  "$": "CN"
+                },
+                "doc-number": {
+                  "$": "115828975"
+                },
+                "kind": {
+                  "$": "A"
+                },
+                "date": {
+                  "$": "20230321"
+                }
+              },
+              {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "CN115828975"
+                },
+                "date": {
+                  "$": "20230321"
+                }
+              }
+            ]
+          },
+          "classifications-ipcr": {
+            "classification-ipcr": [
+              {
+                "@sequence": "1",
+                "text": {
+                  "$": "G06K  19/    06            A I"
+                }
+              },
+              {
+                "@sequence": "2",
+                "text": {
+                  "$": "G06T   3/    40            A I"
+                }
+              },
+              {
+                "@sequence": "3",
+                "text": {
+                  "$": "G06T   7/    90            A I"
+                }
+              }
+            ]
+          },
+          "patent-classifications": {},
+          "application-reference": {
+            "@doc-id": "589112468",
+            "document-id": [
+              {
+                "@document-id-type": "docdb",
+                "country": {
+                  "$": "CN"
+                },
+                "doc-number": {
+                  "$": "202211559535"
+                },
+                "kind": {
+                  "$": "A"
+                }
+              },
+              {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "CN202211559535"
+                },
+                "date": {
+                  "$": "20221206"
+                }
+              },
+              {
+                "@document-id-type": "original",
+                "doc-number": {
+                  "$": "202211559535.3"
+                }
+              }
+            ]
+          },
+          "priority-claims": {
+            "priority-claim": {
+              "@sequence": "1",
+              "@kind": "national",
+              "document-id": {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "CN202211559535"
+                },
+                "date": {
+                  "$": "20221206"
+                }
+              }
+            }
+          },
+          "parties": {
+            "applicants": {
+              "applicant": [
+                {
+                  "@sequence": "1",
+                  "@data-format": "epodoc",
+                  "applicant-name": {
+                    "name": {
+                      "$": "SHUOZHOU CLOUD TIMES TECH CO LTD"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "1",
+                  "@data-format": "original",
+                  "applicant-name": {
+                    "name": {
+                      "$": "朔州云时代技术有限公司"
+                    }
+                  }
+                }
+              ]
+            },
+            "inventors": {
+              "inventor": [
+                {
+                  "@sequence": "1",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "MA JIE"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "LIAO WEIZHI"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "3",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "GUO XINGHUA"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "4",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "HAN WENZHE"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "5",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "ZHANG ZHENGDONG"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "6",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "LIU LISHA"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "7",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "WANG XIAOLIANG"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "1",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "马杰"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "廖威智"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "3",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "郭兴华"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "4",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "韩文哲"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "5",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "张正东"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "6",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "刘丽莎"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "7",
+                  "@data-format": "original",
+                  "inventor-name": {
+                    "name": {
+                      "$": "王晓亮"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "invention-title": [
+            {
+              "$": "Visual art-oriented two-dimensional code generation method based on hierarchical enhanced identification rate",
+              "@lang": "en"
+            },
+            {
+              "$": "基于分层增强辨识率实现面向视觉艺术的二维码生成方法",
+              "@lang": "ol"
+            }
+          ]
+        },
+        "abstract": [
+          {
+            "@lang": "en",
+            "p": {
+              "$": "The invention provides a two-dimensional code generation method for realizing visual art based on hierarchical enhanced identification rate, and belongs to the technical field of QR code visual coding. The problems of module damage, low visibility and low decoding reliability in existing QR code artistry are solved. Comprising the following steps: zooming an input image O and a QR Code to the same size; generating a threshold mask T by using the input image O; mutually overlapping the input image O and the QR Code, and finding out an area of the input image O corresponding to the central position of the QR Code module; judging whether the area is modified or not according to the brightness value of the module central area corresponding to the input image O, the threshold mask T and the color of the QR Code; if the input image O does not need to be modified, the module center area corresponding to the input image O is not modified; if the input image O needs to be modified, adjusting the brightness of a module central area corresponding to the input image O; repeating the steps until all modules are processed; the method is applied to two-dimensional code generation."
+            }
+          },
+          {
+            "@lang": "ol",
+            "p": {
+              "$": "本发明提供了基于分层增强辨识率实现面向视觉艺术的二维码生成方法，属于QR码视觉编码技术领域；解决了现有QR码艺术化存在的模块损坏、可视性低、译码可靠性低的问题；包括如下步骤：将输入图像O与QR Code缩放至相同大小；利用输入图像O产生一张阈值掩模T；将输入图像O与QR Code互相叠合，找出QR Code模块中心位置所对应到输入图像O的区域；将输入图像O所对应到的模块中心区域的亮度值与阈值掩模T以及QR Code的颜色进行判断是否修改该区域；若不需修改，则输入图像O所对应的模块中心区域不做任何修改；若需要修改，则调整输入图像O所对应的模块中心区域的亮度；重复步骤直至所有模块处理完毕；本发明应用于二维码生成。"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

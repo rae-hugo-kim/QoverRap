@@ -1,0 +1,427 @@
+{
+  "ops:world-patent-data": {
+    "@xmlns": {
+      "ops": "http://ops.epo.org",
+      "$": "http://www.epo.org/exchange",
+      "xlink": "http://www.w3.org/1999/xlink"
+    },
+    "exchange-documents": {
+      "exchange-document": {
+        "@system": "ops.epo.org",
+        "@family-id": "052779729",
+        "@country": "FR",
+        "@doc-number": "3027430",
+        "@kind": "A1",
+        "bibliographic-data": {
+          "publication-reference": {
+            "document-id": [
+              {
+                "@document-id-type": "docdb",
+                "country": {
+                  "$": "FR"
+                },
+                "doc-number": {
+                  "$": "3027430"
+                },
+                "kind": {
+                  "$": "A1"
+                },
+                "date": {
+                  "$": "20160422"
+                }
+              },
+              {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "FR3027430"
+                },
+                "date": {
+                  "$": "20160422"
+                }
+              }
+            ]
+          },
+          "classifications-ipcr": {
+            "classification-ipcr": {
+              "@sequence": "1",
+              "text": {
+                "$": "G06K   9/    00            A I"
+              }
+            }
+          },
+          "patent-classifications": {
+            "patent-classification": {
+              "@sequence": "1",
+              "classification-scheme": {
+                "@office": "EP",
+                "@scheme": "CPCI"
+              },
+              "section": {
+                "$": "G"
+              },
+              "class": {
+                "$": "06"
+              },
+              "subclass": {
+                "$": "K"
+              },
+              "main-group": {
+                "$": "19"
+              },
+              "subgroup": {
+                "$": "06056"
+              },
+              "classification-value": {
+                "$": "I"
+              },
+              "generating-office": {
+                "$": "EP"
+              }
+            }
+          },
+          "application-reference": {
+            "@doc-id": "438583088",
+            "document-id": [
+              {
+                "@document-id-type": "docdb",
+                "country": {
+                  "$": "FR"
+                },
+                "doc-number": {
+                  "$": "1460055"
+                },
+                "kind": {
+                  "$": "A"
+                }
+              },
+              {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "FR20140060055"
+                },
+                "date": {
+                  "$": "20141020"
+                }
+              },
+              {
+                "@document-id-type": "original",
+                "doc-number": {
+                  "$": "1460055"
+                }
+              }
+            ]
+          },
+          "priority-claims": {
+            "priority-claim": {
+              "@sequence": "1",
+              "@kind": "national",
+              "document-id": [
+                {
+                  "@document-id-type": "epodoc",
+                  "doc-number": {
+                    "$": "FR20140060055"
+                  },
+                  "date": {
+                    "$": "20141020"
+                  }
+                },
+                {
+                  "@document-id-type": "original",
+                  "doc-number": {
+                    "$": "1460055"
+                  }
+                }
+              ]
+            }
+          },
+          "parties": {
+            "applicants": {
+              "applicant": [
+                {
+                  "@sequence": "1",
+                  "@data-format": "epodoc",
+                  "applicant-name": {
+                    "name": {
+                      "$": "AUTHENTICATION IND [FR]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "@data-format": "epodoc",
+                  "applicant-name": {
+                    "name": {
+                      "$": "CENTRE NAT RECH SCIENT [FR]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "3",
+                  "@data-format": "epodoc",
+                  "applicant-name": {
+                    "name": {
+                      "$": "UNIV MONTPELLIER 2 SCIENCES ET TECHNIQUES [FR]"
+                    }
+                  }
+                }
+              ]
+            },
+            "inventors": {
+              "inventor": [
+                {
+                  "@sequence": "1",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "TKACHENKO LULIIA [FR]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "DESTRUEL CHRISTOPHE [FR]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "3",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "GAUDIN JEAN-MARC [FR]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "4",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "PUECH WILLIAM [FR]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "5",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "STRAUSS OLIVIER [FR]"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "invention-title": {
+            "$": "CODE VISUEL GRAPHIQUE A DEUX NIVEAUX D'INFORMATION ET SENSIBLE A LA COPIE, PROCEDES DE GENERATION ET DE LECTURE D'UN CODE VISUEL.",
+            "@lang": "fr"
+          },
+          "references-cited": {
+            "citation": [
+              {
+                "@cited-phase": "national-search-report",
+                "@cited-by": "examiner",
+                "@sequence": "1",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "1",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "US6032861"
+                      },
+                      "name": {
+                        "$": "LEMELSON JEROME H [US] ET AL"
+                      },
+                      "date": {
+                        "$": "20000307"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "US"
+                      },
+                      "doc-number": {
+                        "$": "6032861"
+                      },
+                      "kind": {
+                        "$": "A"
+                      },
+                      "name": {
+                        "$": "LEMELSON JEROME H [US] ET AL"
+                      },
+                      "date": {
+                        "$": "20000307"
+                      }
+                    }
+                  ]
+                },
+                "category": [
+                  {
+                    "$": "X"
+                  },
+                  {
+                    "$": "I"
+                  }
+                ],
+                "rel-claims": [
+                  {
+                    "$": "1,3,7-11,14,15"
+                  },
+                  {
+                    "$": "13"
+                  }
+                ],
+                "rel-passage": {
+                  "passage": [
+                    {
+                      "$": "* column  6, line  42  - line  59 *"
+                    },
+                    {
+                      "$": "* column  13, line  30  - line  65 *"
+                    },
+                    {
+                      "$": "* figures 1C,5,7A *"
+                    }
+                  ]
+                }
+              },
+              {
+                "@cited-phase": "national-search-report",
+                "@cited-by": "examiner",
+                "@sequence": "2",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "2",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "FR2936335"
+                      },
+                      "name": {
+                        "$": "ADVANCED TRACK &amp; TRACE [FR]"
+                      },
+                      "date": {
+                        "$": "20100326"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "FR"
+                      },
+                      "doc-number": {
+                        "$": "2936335"
+                      },
+                      "kind": {
+                        "$": "A1"
+                      },
+                      "name": {
+                        "$": "ADVANCED TRACK &amp; TRACE [FR]"
+                      },
+                      "date": {
+                        "$": "20100326"
+                      }
+                    }
+                  ]
+                },
+                "category": {
+                  "$": "X"
+                },
+                "rel-claims": {
+                  "$": "1-6,11,12,14,15"
+                },
+                "rel-passage": {
+                  "passage": [
+                    {
+                      "$": "* page  17, line  27  - line  36 *"
+                    },
+                    {
+                      "$": "* page  18, line  34  - page  19, line  31 *"
+                    },
+                    {
+                      "$": "* figures 2A,2B,3A,3B,5,9A,9B *"
+                    }
+                  ]
+                }
+              },
+              {
+                "@cited-phase": "national-search-report",
+                "@cited-by": "examiner",
+                "@sequence": "3",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "3",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "US2012024956"
+                      },
+                      "name": {
+                        "$": "CHEN YU-HSIANG [TW]"
+                      },
+                      "date": {
+                        "$": "20120202"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "US"
+                      },
+                      "doc-number": {
+                        "$": "2012024956"
+                      },
+                      "kind": {
+                        "$": "A1"
+                      },
+                      "name": {
+                        "$": "CHEN YU-HSIANG [TW]"
+                      },
+                      "date": {
+                        "$": "20120202"
+                      }
+                    }
+                  ]
+                },
+                "category": {
+                  "$": "X"
+                },
+                "rel-claims": {
+                  "$": "1,11,14"
+                },
+                "rel-passage": {
+                  "passage": [
+                    {
+                      "$": "* paragraph  [0021] *"
+                    },
+                    {
+                      "$": "* paragraph  [0025] *"
+                    },
+                    {
+                      "$": "* figure 2 *"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "abstract": {
+          "@lang": "fr",
+          "p": {
+            "$": "« Code visuel graphique à deux niveaux d'information et sensible à la copie, procédés et dispositifs de génération et de lecture d'un tel code visuel graphique » L'invention concerne un code visuel graphique (200) composé d'une pluralité de motifs graphiques, dits motifs primaires, dont l'agencement spatial les uns avec les autres, représente une information prédéterminée, dite information primaire, lisible par un moyen de lecture optique exécutant une application de lecture prédéterminée, dite primaire, caractérisé en ce qu'au moins un desdits motifs primaires (202), dit motif enrichi, comporte au moins un motif graphique, dit motif secondaire, représentant une information, dite secondaire, et lisible par un moyen de lecture optique exécutant une application de lecture, dite secondaire. L'invention concerne également des procédés et dispositifs de génération et de lecture d'un tel code visuel graphique."
+          }
+        }
+      }
+    }
+  }
+}

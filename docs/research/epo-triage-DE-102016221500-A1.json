@@ -1,0 +1,536 @@
+{
+  "ops:world-patent-data": {
+    "@xmlns": {
+      "ops": "http://ops.epo.org",
+      "$": "http://www.epo.org/exchange",
+      "xlink": "http://www.w3.org/1999/xlink"
+    },
+    "exchange-documents": {
+      "exchange-document": {
+        "@system": "ops.epo.org",
+        "@family-id": "058639696",
+        "@country": "DE",
+        "@doc-number": "102016221500",
+        "@kind": "A1",
+        "bibliographic-data": {
+          "publication-reference": {
+            "document-id": [
+              {
+                "@document-id-type": "docdb",
+                "country": {
+                  "$": "DE"
+                },
+                "doc-number": {
+                  "$": "102016221500"
+                },
+                "kind": {
+                  "$": "A1"
+                },
+                "date": {
+                  "$": "20170518"
+                }
+              },
+              {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "DE102016221500"
+                },
+                "date": {
+                  "$": "20170518"
+                }
+              }
+            ]
+          },
+          "classifications-ipcr": {
+            "classification-ipcr": {
+              "@sequence": "1",
+              "text": {
+                "$": "B62D   6/    00            A I"
+              }
+            }
+          },
+          "patent-classifications": {
+            "patent-classification": [
+              {
+                "@sequence": "1",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "15"
+                },
+                "subgroup": {
+                  "$": "0225"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "US"
+                }
+              },
+              {
+                "@sequence": "2",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "5"
+                },
+                "subgroup": {
+                  "$": "0463"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "US"
+                }
+              },
+              {
+                "@sequence": "3",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "5"
+                },
+                "subgroup": {
+                  "$": "0463"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "EP"
+                }
+              },
+              {
+                "@sequence": "4",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "5"
+                },
+                "subgroup": {
+                  "$": "0466"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "US"
+                }
+              },
+              {
+                "@sequence": "5",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "5"
+                },
+                "subgroup": {
+                  "$": "0466"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "EP"
+                }
+              },
+              {
+                "@sequence": "6",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "6"
+                },
+                "subgroup": {
+                  "$": "008"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "US"
+                }
+              },
+              {
+                "@sequence": "7",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "6"
+                },
+                "subgroup": {
+                  "$": "008"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "EP"
+                }
+              },
+              {
+                "@sequence": "8",
+                "classification-scheme": {
+                  "@office": "EP",
+                  "@scheme": "CPCI"
+                },
+                "section": {
+                  "$": "B"
+                },
+                "class": {
+                  "$": "62"
+                },
+                "subclass": {
+                  "$": "D"
+                },
+                "main-group": {
+                  "$": "6"
+                },
+                "subgroup": {
+                  "$": "10"
+                },
+                "classification-value": {
+                  "$": "I"
+                },
+                "generating-office": {
+                  "$": "US"
+                }
+              }
+            ]
+          },
+          "application-reference": {
+            "@doc-id": "478237084",
+            "document-id": [
+              {
+                "@document-id-type": "docdb",
+                "country": {
+                  "$": "DE"
+                },
+                "doc-number": {
+                  "$": "102016221500"
+                },
+                "kind": {
+                  "$": "A"
+                }
+              },
+              {
+                "@document-id-type": "epodoc",
+                "doc-number": {
+                  "$": "DE201610221500"
+                },
+                "date": {
+                  "$": "20161102"
+                }
+              },
+              {
+                "@document-id-type": "original",
+                "doc-number": {
+                  "$": "102016221500"
+                }
+              }
+            ]
+          },
+          "priority-claims": {
+            "priority-claim": [
+              {
+                "@sequence": "1",
+                "@kind": "national",
+                "document-id": [
+                  {
+                    "@document-id-type": "epodoc",
+                    "doc-number": {
+                      "$": "JP20150222984"
+                    },
+                    "date": {
+                      "$": "20151113"
+                    }
+                  },
+                  {
+                    "@document-id-type": "original",
+                    "doc-number": {
+                      "$": "2015-222984"
+                    }
+                  }
+                ]
+              },
+              {
+                "@sequence": "2",
+                "@kind": "national",
+                "document-id": [
+                  {
+                    "@document-id-type": "epodoc",
+                    "doc-number": {
+                      "$": "JP20160099410"
+                    },
+                    "date": {
+                      "$": "20160518"
+                    }
+                  },
+                  {
+                    "@document-id-type": "original",
+                    "doc-number": {
+                      "$": "2016-99410"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "parties": {
+            "applicants": {
+              "applicant": {
+                "@sequence": "1",
+                "@data-format": "epodoc",
+                "applicant-name": {
+                  "name": {
+                    "$": "DENSO CORP [JP]"
+                  }
+                }
+              }
+            },
+            "inventors": {
+              "inventor": [
+                {
+                  "@sequence": "1",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "AOKI TAKASHI [JP]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "2",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "KATAOKA MOTOAKI [JP]"
+                    }
+                  }
+                },
+                {
+                  "@sequence": "3",
+                  "@data-format": "epodoc",
+                  "inventor-name": {
+                    "name": {
+                      "$": "HIRATE YOSUKE [JP]"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "invention-title": {
+            "$": "LENKSTEUERUNG",
+            "@lang": "de"
+          },
+          "references-cited": {
+            "citation": [
+              {
+                "@cited-phase": "undefined",
+                "@cited-by": "applicant",
+                "@sequence": "1",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "1",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "JP2014213781"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "JP"
+                      },
+                      "doc-number": {
+                        "$": "2014213781"
+                      },
+                      "kind": {
+                        "$": "A"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "@cited-phase": "national-search-report",
+                "@cited-by": "examiner",
+                "@sequence": "1",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "1",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "DE602004012360"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "DE"
+                      },
+                      "doc-number": {
+                        "$": "602004012360"
+                      },
+                      "kind": {
+                        "$": "T2"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "@cited-phase": "national-search-report",
+                "@cited-by": "examiner",
+                "@sequence": "2",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "2",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "EP2186709"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "EP"
+                      },
+                      "doc-number": {
+                        "$": "2186709"
+                      },
+                      "kind": {
+                        "$": "A1"
+                      }
+                    }
+                  ]
+                }
+              },
+              {
+                "@cited-phase": "national-search-report",
+                "@cited-by": "examiner",
+                "@sequence": "3",
+                "patcit": {
+                  "@dnum-type": "publication number",
+                  "@num": "3",
+                  "document-id": [
+                    {
+                      "@document-id-type": "epodoc",
+                      "doc-number": {
+                        "$": "JP2014213781"
+                      }
+                    },
+                    {
+                      "@document-id-type": "docdb",
+                      "country": {
+                        "$": "JP"
+                      },
+                      "doc-number": {
+                        "$": "2014213781"
+                      },
+                      "kind": {
+                        "$": "A"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "abstract": {
+          "@lang": "de",
+          "p": {
+            "$": "Eine Lenksteuerung, die einen Motor (80) steuert, um ein Hilfsdrehmoment auszugeben, um ein Lenkelement (91) zu steuern, umfassend einen Lenkeigenschaftsrechner (23), der eine Lenkzustandsgröße (Qs) berechnet, die ein Index eines Lenkzustandes ist, der eines angibt von (i) einem Lenkung-weg-Zustand, (ii) einem Lenkung-zurück-Zustand oder (iii) einem Bleib-unbewegt-Zustand, einen Eingestelltes-Drehmoment-Rechner (24), der ein eingestelltes Drehmoment (Th) basierend auf der Lenkzustandsgröße berechnet, und einen Sollwertrechner (41), der ein Sollhilfsdrehmoment (Ta*), das ein Sollwert betreffend eines Antriebs des Motors ist, unter Verwendung des eingestellten Drehmoments (Th) berechnet. Auf solch eine Weise werden die Lenkzustandsgröße (Qs), der Lenkung-zurück-Betrieb, der Bleib-unbewegt-Betrieb eines Lenkrades und das eingestellte Drehmoment (Th) geeignet berechnet, wodurch eine geeignete Einstellung eines Lenkgefühls ermöglicht wird."
+          }
+        }
+      }
+    }
+  }
+}
