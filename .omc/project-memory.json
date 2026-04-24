@@ -194,6 +194,43 @@
       ]
     }
   },
-  "hotPaths": [],
+  "hotPaths": [
+    {
+      "path": "docs/research/prior-art-survey.md",
+      "accessCount": 11,
+      "lastAccessed": 1776998661914,
+      "type": "file"
+    },
+    {
+      "path": "scripts/epo_search.py",
+      "accessCount": 7,
+      "lastAccessed": 1776748202854,
+      "type": "file"
+    },
+    {
+      "path": "docs/harness/acceptance-done",
+      "accessCount": 1,
+      "lastAccessed": 1776744949886,
+      "type": "file"
+    },
+    {
+      "path": "scripts/kipris_search.py",
+      "accessCount": 1,
+      "lastAccessed": 1776745257709,
+      "type": "file"
+    },
+    {
+      "path": "docs/research/epo-queries.md",
+      "accessCount": 1,
+      "lastAccessed": 1776745261390,
+      "type": "file"
+    },
+    {
+      "path": "docs/sum/session_2026-04-22_epo-prior-art-complete.md",
+      "accessCount": 1,
+      "lastAccessed": 1776857298492,
+      "type": "file"
+    }
+  ],
   "userDirectives": []
 }

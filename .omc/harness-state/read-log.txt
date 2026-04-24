@@ -164,3 +164,17 @@
 /home/rae/projects/workspace/QoverwRap/.claude/settings.json
 /home/rae/projects/workspace/claude/scripts/harness-sync.sh
 /home/rae/projects/workspace/claude/scripts/harness-sync.sh
+/home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+/home/rae/projects/workspace/QoverwRap/scripts/kipris_search.py
+/home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+/home/rae/projects/workspace/QoverwRap/docs/research/epo-queries.md
+/home/rae/projects/workspace/QoverwRap/scripts/epo_search.py
+/home/rae/projects/workspace/QoverwRap/scripts/epo_search.py
+/home/rae/projects/workspace/QoverwRap/scripts/epo_search.py
+/home/rae/projects/workspace/QoverwRap/scripts/epo_search.py
+/home/rae/projects/workspace/QoverwRap/scripts/epo_search.py
+/home/rae/projects/workspace/QoverwRap/scripts/epo_search.py
+/home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+/home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+/home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md
+/home/rae/projects/workspace/QoverwRap/docs/research/prior-art-survey.md

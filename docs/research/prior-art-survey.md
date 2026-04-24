@@ -155,6 +155,30 @@
 | Koptyra, Ogiela | 2024 | Steganography in QR Codes — Suboptimal Segmentation | 세그먼트 모드 선택 기반, 낮음 |
 | Alajmi et al. | 2020 | Steganography of Encrypted Messages Inside Valid QR Codes | AES + ECC 스테가노그래피, 낮음 |
 | Chow et al. | 2016 | Exploiting Error Correction in QR Codes for Secret Sharing | 비밀 분산 공유, 낮음 |
+| van der Merwe, Noble (Apple) | 2015 | Invisible Optical Label for Transmitting Information Between Computing Devices (US 9,022,291 B1 / US 9,022,292 B1) | 시간축 chrominance 인코딩 — 아래 §4-1 참조 |
+
+### 4-1. Apple "Invisible Optical Label" (IOL) — US 9,022,291 / US 9,022,292
+
+| 항목 | 내용 |
+|------|------|
+| **출처** | US 9,022,291 B1 / US 9,022,292 B1, Apple Inc., 발급 2015-05-05 |
+| **유사도** | **낮음** (QR 도메인 외) |
+| **핵심** | 디스플레이에서 프레임 A(파랑+자홍) / 프레임 B(주황+초록)를 60~120fps로 교대 표시하여 인간 눈에는 회색 애니메이션으로만 보이지만, 카메라 센서는 프레임 간 색차(chrominance)에서 2D 매트릭스 코드를 추출. Apple Watch 초기 페어링 파티클 클라우드 애니메이션이 이 기술의 상용 구현. |
+| **기술 방식** | **시간축 chrominance 은닉** — 디스플레이→카메라 채널의 시간 도메인 레이어링 |
+| **용도** | 디바이스 페어링 (Apple Watch ↔ iPhone) |
+
+**QoverwRap와 차이**:
+
+| 비교 항목 | Apple IOL | QoverwRap |
+|-----------|-----------|-----------|
+| 인코딩 도메인 | **시간축** (프레임 간 색상 교대, 디스플레이→카메라) | **페이로드** (QR 데이터 필드 문자열 내부) |
+| 가시성 | 인간 눈에 비가시 (카메라만 감지) | 표준 QR 스캐너로 판독 가능 (Layer A 평문) |
+| 복제 방지 | 시간축 정보 소실로 스크린샷 복제 불가 | Ed25519 서명으로 위변조 감지 |
+| 레이어 구조 | 단일 은닉 채널 (페어링 데이터) | 3-layer 논리 구조 (A=공개 + B=메타 + C=서명) |
+| 표준 호환 | Apple 독자 프로토콜 | QR 표준 (ISO/IEC 18004) 완전 호환 |
+| 인증 대상 | 디바이스 (이 Watch가 나의 것인가) | 데이터 무결성 (이 QR 내용이 진짜인가) |
+
+**시사점**: IOL은 "시각 코드에 정보를 은닉하여 전송"이라는 상위 개념을 공유하지만, 인코딩 도메인(시간 vs 페이로드), 채널(디스플레이→카메라 vs QR 데이터 필드), 목적(디바이스 페어링 vs 데이터 인증)이 모두 다름. 특허 청구항 충돌 리스크 **없음**. 다만, 특허 명세서의 "관련 기술" 섹션에서 시간축 은닉(IOL) 대비 페이로드-레벨 구조화의 차별성을 언급하면 심사관에게 기술 스펙트럼의 위치를 명확히 전달할 수 있음.
 
 ---
 
