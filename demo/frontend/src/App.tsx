@@ -292,6 +292,7 @@ export default function App() {
           <div className="flex items-center gap-2 flex-wrap">
             <span className="bg-slate-100 rounded p-0.5 flex">
               <button
+                data-testid="mode-bare"
                 onClick={() => setThemed(false)}
                 className={`px-2.5 py-1 rounded text-xs ${
                   !themed
@@ -302,6 +303,7 @@ export default function App() {
                 Bare
               </button>
               <button
+                data-testid="mode-themed"
                 onClick={() => setThemed(true)}
                 className={`px-2.5 py-1 rounded text-xs ${
                   themed
@@ -313,6 +315,7 @@ export default function App() {
               </button>
             </span>
             <button
+              data-testid="mode-screenshot"
               onClick={() => setScreenshot((v) => !v)}
               className={`px-2 py-1.5 rounded text-xs border ${
                 screenshot
@@ -324,6 +327,7 @@ export default function App() {
               📸 {screenshot ? "샷 ON" : "샷"}
             </button>
             <button
+              data-testid="reset"
               onClick={reset}
               className="px-3 py-1.5 rounded text-xs bg-slate-900 text-white hover:bg-slate-700"
             >
@@ -415,6 +419,7 @@ export default function App() {
               </p>
             </details>
             <button
+              data-testid="build-qr"
               onClick={buildQR}
               disabled={!issuerId || busy}
               className="px-3 py-1.5 bg-slate-900 text-white rounded text-sm disabled:opacity-50"
@@ -463,6 +468,7 @@ export default function App() {
             <div className="flex flex-wrap gap-2 mb-2">
               {encoded && (
                 <button
+                  data-testid="skip-scan"
                   onClick={() => onScanned(encoded)}
                   className="px-3 py-1.5 bg-slate-900 text-white rounded text-sm"
                 >
@@ -506,6 +512,7 @@ export default function App() {
             <div className="flex flex-wrap gap-2 items-center">
               {!tampered ? (
                 <button
+                  data-testid="tamper"
                   onClick={attemptTamper}
                   disabled={busy}
                   className="px-3 py-1.5 bg-red-600 text-white rounded text-sm hover:bg-red-700 disabled:opacity-50"
@@ -514,6 +521,7 @@ export default function App() {
                 </button>
               ) : (
                 <button
+                  data-testid="restore"
                   onClick={restoreOriginal}
                   disabled={busy}
                   className="px-3 py-1.5 bg-emerald-600 text-white rounded text-sm hover:bg-emerald-700 disabled:opacity-50"
@@ -542,7 +550,7 @@ export default function App() {
             </p>
           )}
           {scanned && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div data-testid="resolve-grid" className="grid grid-cols-1 md:grid-cols-3 gap-3">
               {LEVELS.map((lvl) => (
                 <ResolveColumn
                   key={lvl}

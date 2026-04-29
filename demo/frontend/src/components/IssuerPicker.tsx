@@ -14,6 +14,7 @@ export default function IssuerPicker({ entries, selectedId, onSelect }: Props) {
         return (
           <button
             key={e.issuer_id}
+            data-testid={`issuer-${e.issuer_id}`}
             onClick={() => onSelect(e.issuer_id)}
             className={`text-left rounded-lg p-4 border-2 transition ${
               active ? "border-slate-900" : "border-transparent hover:border-slate-300"
