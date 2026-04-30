@@ -1,0 +1,44 @@
+' KIPO patent figure style (black-and-white, 300dpi).
+' Include in every .puml: !include _kipo_style.iuml
+
+' Use built-in smetana layout (no Graphviz dependency).
+!pragma layout smetana
+
+skinparam dpi 300
+' CJK 한글 렌더링을 위해 Noto Sans CJK KR 우선 사용 (없으면 sans-serif fallback).
+skinparam DefaultFontName "Noto Sans CJK KR, sans-serif"
+skinparam DefaultFontSize 12
+skinparam shadowing false
+skinparam roundcorner 0
+skinparam padding 4
+
+skinparam BackgroundColor white
+
+skinparam ComponentBackgroundColor white
+skinparam ComponentBorderColor black
+skinparam ComponentFontColor black
+
+skinparam RectangleBackgroundColor white
+skinparam RectangleBorderColor black
+skinparam RectangleFontColor black
+
+skinparam PackageBackgroundColor white
+skinparam PackageBorderColor black
+skinparam PackageFontColor black
+
+skinparam ActivityBackgroundColor white
+skinparam ActivityBorderColor black
+skinparam ActivityFontColor black
+skinparam ActivityDiamondBackgroundColor white
+skinparam ActivityDiamondBorderColor black
+skinparam ActivityDiamondFontColor black
+skinparam ActivityStartColor black
+skinparam ActivityEndColor black
+skinparam ActivityArrowColor black
+
+skinparam NoteBackgroundColor white
+skinparam NoteBorderColor black
+skinparam NoteFontColor black
+
+skinparam ArrowColor black
+skinparam ArrowFontColor black

@@ -1,0 +1,24 @@
+@startuml fig1_payload
+!include _kipo_style.iuml
+
+title Fig. 1 — 단일 페이로드 문자열 (10) 의 비트 레이아웃
+
+rectangle "**Layer A (11)** — UTF-8 평문 문자열\n예) qwr:tigers-2026|VIP seat A1" as A
+rectangle "**구획자 (12) — DELIMITER**\n\\n---QWR---\\n   (UTF-8/ASCII 11 바이트)" as D
+rectangle "**트레일러 (13)**\n= base64( 이진 헤더(14) || Layer B(15) || Layer C(16) )\n\n  이진 헤더 (14, 5 바이트 big-endian):\n    버전 필드 (14a) : uint8\n    b_len 필드 (14b) : uint16\n    c_len 필드 (14c) : uint16\n\n  Layer B (15) — 컨텍스트 메타데이터 (≤ 65535 바이트)\n  Layer C (16) — 디지털 서명 (예: Ed25519 64 바이트)" as T
+
+A -[hidden]down- D
+D -[hidden]down- T
+
+note right of A
+  표준 QR 리더 판독 결과의
+  **선두 평문**으로 표시됨.
+end note
+
+note right of T
+  표준 리더는 본 트레일러를 판독하나
+  본 발명을 모르는 응용은 그
+  **구조적 의미를 해석하지 않음**.
+end note
+
+@enduml

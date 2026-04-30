@@ -1,0 +1,25 @@
+@startuml fig4_issuer_routing
+!include _kipo_style.iuml
+
+title Fig. 4 — 발급자 식별자 기반 공개키 선택 라우팅 흐름 (선택적 실시예)
+
+start
+:**S300** — QR 스캔\n(QR 스캐너 인터페이스, 210);
+:**S301** — Layer A (11) 추출;
+:**S302** — Layer A 선두의\n"qwr:" 프리픽스 파싱\n→ issuer-id 분리;
+:**S303** — 신뢰 레지스트리 (230) 조회\nTRUST_REGISTRY[issuer-id]\n→ public_key;
+:**S304** — 검증부 (240) 호출\nverify_signature(public_key,\n  signing_message, Layer C);
+:**S305** — 검증 결과를 응용 UI 의\n시각 테마 / 카드 렌더링에 반영;
+stop
+
+note right
+  Layer A 선두 영역의 발급자 식별자 컨벤션:
+    qwr:<issuer-id>|<message>
+
+  신뢰 레지스트리 (230) 예시:
+    "tigers-2026"    → ed25519_pub_A
+    "violet-fandom"  → ed25519_pub_B
+    "comic-con-2026" → ed25519_pub_C
+end note
+
+@enduml

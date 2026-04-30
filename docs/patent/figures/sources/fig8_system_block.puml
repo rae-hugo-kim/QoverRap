@@ -1,0 +1,37 @@
+@startuml fig8_system_block
+!include _kipo_style.iuml
+
+title Fig. 8 — 단일 QR 페이로드 계층형 데이터 처리 시스템 (1) 의 구성 블록도
+
+package "단일 QR 페이로드 계층형 데이터 처리 시스템 (1)\n— 청구항 11" as SYS {
+
+  package "발급 측 서브시스템 (100)" as ISSUER {
+    component "발급 입력 인터페이스\n(110)\n  Layer A (11) 입력\n  Layer B (15) 입력\n  서명 키 선택" as IF1
+    component "서명 키 저장부\n(120)\n  issuer signing keys" as KS
+    component "인코더\n(130)\n  서명 대상 정규화\n  sign() → Layer C (16)\n  이진 헤더 (14) 생성\n  trailer (13) = encode(...)\n  payload (10) =\n    Layer A (11) || DEL (12) || trailer (13)" as ENC
+    component "표준 QR 인코더\n(140)\n  ISO/IEC 18004 심벌 생성" as QRENC
+
+    IF1 -down-> ENC
+    KS -down-> ENC
+    ENC -down-> QRENC
+  }
+
+  package "검증 측 서브시스템 (200)" as VERIFIER {
+    component "QR 스캐너 인터페이스\n(210)\n  payload (10) 수신" as SCAN
+    component "디코더\n(220)\n  구획자 (12) 분리\n  텍스트 안전 디코딩\n  이진 헤더 (14) 파싱\n  Layer A (11) / B (15) / C (16) 추출" as DEC
+    component "공개키 저장부 /\n신뢰 레지스트리\n(230)\n  issuer_id → pk 매핑\n  외부 입력 인터페이스" as REG
+    component "검증부\n(240)\n  signing_message 재구성\n  verify_signature(pk, msg, Lc)" as VER
+    component "리졸버\n(250)\n  출력 수준 정규화\n  검증 결과 반영\n  safe-fallback 강등" as RES
+    component "반환 출력 인터페이스\n(260)\n  Layer A (11)\n  Layer B (15) — 제2/3 수준\n  검증 결과 — 제3 수준" as IF2
+
+    SCAN -down-> DEC
+    DEC -down-> VER
+    REG -right-> VER
+    VER -down-> RES
+    RES -down-> IF2
+  }
+
+  QRENC -right-> SCAN : "페이로드 문자열 (10)\n(QR 코드 매체로 전달)"
+}
+
+@enduml
