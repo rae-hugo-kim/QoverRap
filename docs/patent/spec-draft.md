@@ -36,8 +36,8 @@
 | (가) 모듈 비트 스테가노그래피 | Liu et al. 2019; Suresh et al. 2023; Koptyra & Ogiela 2024 | QR 코드워드 비트 조작 (Hamming/ECC 활용) | QR 모듈 또는 ECC 코드워드를 은닉 채널로 변조 |
 | (나) 물리/시각 다층 | Tkachenko (2LQR, FR3027430A1); 넥스팟솔루션 KR10-2875492; 에이엠홀로 KR10-2022-0046292 | 텍스처 패턴, 라벨 스택, 홀로그램 | **물리 인쇄 의존** → 디지털 환경 미작동; 고해상도 입력 필요 |
 | (다) 컬러/재료 채널 | Arce US10152663B2; ETRI/POSTECH KR10-2765780; CN111224771A | RGB 채널, 재료층, 이미지 도메인 카오스 암호 | 표준 흑백 QR 비호환; 전용 디코더 필요 |
-| (라) 외부 검증 시스템 | Subramanian US12200151B2 (블록체인); Apple IOL US 9,022,291 (시간축 chrominance); DENSO SQRC | 블록체인·시간축 신호 또는 cryptographic key를 가진 dedicated reader | **외부 인프라/온라인 서버 호출** 또는 **전용 리더의 키 보유**에 의존 |
-| (마) 서명-내장 자격증명/인증 QR | SMART Health Cards; ICAO VDS / VDS-NC; SAP signed QR; US20120308003A1 (signed barcode); KR20180122843A (QR 진본성 + 서명문 + 기관코드) | signed credential, visible digital seal, signed barcode, QR authenticity verification | 전체 credential 또는 barcode message를 단일 서명 객체로 취급. **Layer A 평문 prefix + delimiter-framed trailer + versioned binary header에 의한 부분 호환 wire format** 및 **파싱·검증 실패 시 Layer A만 반환하는 safe-fallback resolver** 를 명시하지 않음 |
+| (라) 외부 검증 시스템 | Subramanian US12200151B2 (블록체인); Apple IOL US 9,022,291 (시간축 chrominance); DENSO SQRC (→ `prior-art-survey.md` §3-11) | 블록체인·시간축 신호 또는 cryptographic key를 가진 dedicated reader | **외부 인프라/온라인 서버 호출** 또는 **전용 리더의 키 보유**에 의존. SQRC는 추가로 ISO/IEC 18004 미등재 독점 확장으로 표준 데이터 영역 외부에 private 데이터 삽입 |
+| (마) 서명-내장 자격증명/인증 QR | SMART Health Cards (→ `prior-art-survey.md` §3-12); ICAO VDS / VDS-NC (→ §3-13); SAP signed QR (→ §3-16); US20120308003A1 — signed barcode (→ §3-14); KR20180122843A — QR 진본성 + 서명문 + 기관코드 (→ §3-15) | signed credential, visible digital seal, signed barcode, QR authenticity verification | 전체 credential 또는 barcode message를 단일 서명 객체로 취급. **Layer A 평문 prefix + delimiter-framed trailer + versioned binary header에 의한 부분 호환 wire format** 및 **파싱·검증 실패 시 Layer A만 반환하는 safe-fallback resolver** 를 명시하지 않음. 원문 인용 및 차별점 표는 `prior-art-survey.md` §9 (3-11 ~ 3-16) 참조 |
 
 ### 3.3 EPO OPS 보강 검색 결과의 해석
 
