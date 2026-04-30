@@ -1,0 +1,90 @@
+[
+  {
+    "id": "QR-A",
+    "desc": "QR + signature + G06K19/06 (날짜 필터)",
+    "cql": "cpc=G06K19/06 AND ti,ab=(signature AND QR) AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "idle (images=green:200, inpadoc=green:60, other=green:1000, retrieval=green:200, search=green:30)",
+    "week_quota": "179",
+    "hour_quota": "179"
+  },
+  {
+    "id": "QR-B",
+    "desc": "QR + ed25519 (날짜 필터)",
+    "cql": "ti,ab=(QR AND ed25519) AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota": "358",
+    "hour_quota": "358"
+  },
+  {
+    "id": "QR-C",
+    "desc": "Layered/multi-layer/stacked QR (날짜 필터)",
+    "cql": "ti,ab=(\"layered QR\" OR \"multi-layer QR\" OR \"stacked QR\" OR \"multilayer QR\") AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota": "537",
+    "hour_quota": "537"
+  },
+  {
+    "id": "QR-D",
+    "desc": "QR + trailer + signed (날짜 필터)",
+    "cql": "ti,ab=(QR AND trailer AND signed) AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "idle (images=green:200, inpadoc=green:60, other=green:1000, retrieval=green:200, search=green:30)",
+    "week_quota": "716",
+    "hour_quota": "716"
+  },
+  {
+    "id": "QR-E",
+    "desc": "QR + delimiter OR payload structur* (날짜 필터)",
+    "cql": "ti,ab=(QR AND (delimiter OR \"payload structur\")) AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota": "895",
+    "hour_quota": "895"
+  },
+  {
+    "id": "QR-F",
+    "desc": "signed QR OR QR signature — broader (날짜 필터)",
+    "cql": "ti,ab=(\"signed QR\" OR \"QR signature\" OR \"QR code signature\") AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota": "1074",
+    "hour_quota": "1074"
+  },
+  {
+    "id": "QR-G",
+    "desc": "QR + offline + verification (날짜 필터)",
+    "cql": "ti,ab=(QR AND offline AND verification) AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota": "1253",
+    "hour_quota": "1253"
+  },
+  {
+    "id": "QR-H",
+    "desc": "authenticity + barcode + G06K19/06 (날짜 필터)",
+    "cql": "cpc=G06K19/06 AND ti,ab=(authenticity AND barcode) AND pd within \"2025-04-30 2026-04-30\"",
+    "status": "noresults",
+    "total": "0",
+    "publications": [],
+    "throttle": "busy (images=green:100, inpadoc=green:45, other=green:1000, retrieval=green:100, search=green:15)",
+    "week_quota": "1432",
+    "hour_quota": "1432"
+  }
+]

@@ -1,7 +1,7 @@
 # QoverwRap 특허 명세서 초안
 
 > **상태**: `ai_generated` — 변리사 검토 전. 청구항 표현·법률 용어는 변리사 단계에서 정제.
-> **검증 정책**: 청구항 후보의 신규성/진보성은 `docs/research/prior-art-survey.md` (KIPRIS + EPO OPS) 결과에 근거하며, "QR + 서명 일반"은 신규성의 핵심 근거로 쓰지 않는다. 핵심 차별점은 **Layer A 평문 prefix + delimiter-framed trailer + versioned binary header + safe-fallback resolver의 구체적 결합**이다.
+> **검증 정책**: 청구항 후보의 신규성/진보성은 `docs/research/prior-art-survey.md` (KIPRIS + EPO OPS + Google Patents + 비특허 문헌, **출원 직전 12개월 재조사 §10 포함**) 결과에 근거하며, "QR + 서명 일반"은 신규성의 핵심 근거로 쓰지 않는다. 핵심 차별점은 **Layer A 평문 prefix + delimiter-framed trailer + versioned binary header + safe-fallback resolver의 구체적 결합**이다.
 > **관련 문서**: 코어 구현 `src/qoverwrap/`, 통합 테스트 `tests/test_*.py`, 데모 앱 `demo/`, 선행기술 조사 `docs/research/prior-art-survey.md`.
 > **작성일 기준**: 2026-04-29 / 도면은 `docs/patent/figures/` 의 PNG 캡처 + 본 문서의 텍스트 다이어그램 결합.
 
@@ -34,9 +34,9 @@
 | 군 | 대표 문헌 | 방식 | 본 발명과의 차이 |
 |----|-----------|------|------|
 | (가) 모듈 비트 스테가노그래피 | Liu et al. 2019; Suresh et al. 2023; Koptyra & Ogiela 2024 | QR 코드워드 비트 조작 (Hamming/ECC 활용) | QR 모듈 또는 ECC 코드워드를 은닉 채널로 변조 |
-| (나) 물리/시각 다층 | Tkachenko (2LQR, FR3027430A1); 넥스팟솔루션 KR10-2875492; 에이엠홀로 KR10-2022-0046292 | 텍스처 패턴, 라벨 스택, 홀로그램 | **물리 인쇄 의존** → 디지털 환경 미작동; 고해상도 입력 필요 |
+| (나) 물리/시각 다층 | Tkachenko (2LQR, FR3027430A1); 넥스팟솔루션 KR10-2875492 (및 후속 KR10-2024-0081386, → `prior-art-survey.md` §10-1-A); 에이엠홀로 KR10-2022-0046292; arXiv 2503.13458 "Dueling QR Codes" (→ §10-3); MDPI Sensors PMC12252379 (LSB+CNN, → §10-3) | 텍스처 패턴, 라벨 스택, 홀로그램, 모듈/픽셀 조작 | **물리 인쇄 의존** 또는 **모듈 비트/픽셀 조작** → 디지털 환경 미작동; 고해상도 입력 필요 |
 | (다) 컬러/재료 채널 | Arce US10152663B2; ETRI/POSTECH KR10-2765780; CN111224771A | RGB 채널, 재료층, 이미지 도메인 카오스 암호 | 표준 흑백 QR 비호환; 전용 디코더 필요 |
-| (라) 외부 검증 시스템 | Subramanian US12200151B2 (블록체인); Apple IOL US 9,022,291 (시간축 chrominance); DENSO SQRC (→ `prior-art-survey.md` §3-11) | 블록체인·시간축 신호 또는 cryptographic key를 가진 dedicated reader | **외부 인프라/온라인 서버 호출** 또는 **전용 리더의 키 보유**에 의존. SQRC는 추가로 ISO/IEC 18004 미등재 독점 확장으로서, dedicated reader 와 cryptographic key 보유를 private data 판독의 전제 조건으로 함 |
+| (라) 외부 검증 시스템 | Subramanian US12200151B2 (블록체인); Apple IOL US 9,022,291 (시간축 chrominance); DENSO SQRC (→ `prior-art-survey.md` §3-11); KR10-2025-0093608 (블록체인 + JSON QR, → §10-1-B); KR10-2025-7030169 (3M 공유 가능 QR 웹앱, → §10-1-C); US12328587B2 (Glyph payload + 외부 key-value DB, → §10-3); IJSRA-2025-0933 (블록체인 two-level QR, → §10-3); ACM Certifichain (Hyperledger 연동, → §10-3) | 블록체인·시간축 신호·외부 DB·서버 인증 또는 cryptographic key를 가진 dedicated reader | **외부 인프라/온라인 서버 호출** 또는 **전용 리더의 키 보유**에 의존. SQRC는 추가로 ISO/IEC 18004 미등재 독점 확장으로서 dedicated reader 와 cryptographic key 보유를 private data 판독의 전제 조건으로 함 |
 | (마) 서명-내장 자격증명/인증 QR | SMART Health Cards (→ `prior-art-survey.md` §3-12); ICAO VDS / VDS-NC (→ §3-13); SAP signed QR (→ §3-16); US20120308003A1 — signed barcode (→ §3-14); KR20180122843A — QR 진본성 + 서명문 + 기관코드 (→ §3-15) | signed credential, visible digital seal, signed barcode, QR authenticity verification | 전체 credential 또는 barcode message를 단일 서명 객체로 취급. **Layer A 평문 prefix + delimiter-framed trailer + versioned binary header에 의한 부분 호환 wire format** 및 **파싱·검증 실패 시 Layer A만 반환하는 safe-fallback resolver** 를 명시하지 않음. 원문 인용 및 차별점 표는 `prior-art-survey.md` §9 (3-11 ~ 3-16) 참조 |
 
 ### 3.3 EPO OPS 보강 검색 결과의 해석
@@ -538,6 +538,7 @@ QR 코드의 표준 심벌 체계에 의해 인코딩 가능한 단일 페이로
 - **참조부호 일괄 부착 (2026-04-30, 직접 출원 단계 1/3)**: KIPO 형식 직접 출원 준비. §7.1 참조부호 일람표 신설 (구조 요소 10~16 / 시스템 모듈 1·100s·200s / 절차 단계 S100s·S200s·S300s). §8.1 (Fig. 1), §8.2 (Fig. 2), §8.3 (Fig. 3), §8.4 (Fig. 4), §8.6 (Fig. 8) 의 ASCII 다이어그램 및 흐름도에 참조부호 부착. §8.6 모듈-청구항 매핑 표 및 데이터 흐름 요약에 참조부호 + 절차 단계 번호 추가.
 - **KIPO 흑백 도면 + 렌더 파이프라인 (2026-04-30, 직접 출원 단계 2/3)**: `docs/patent/figures/sources/*.puml` 5개 (Fig. 1, 2, 3, 4, 8) PlantUML 소스 작성. `_kipo_style.iuml` 공통 스타일 (BW + 300dpi + smetana + Noto Sans CJK KR). `scripts/render_patent_figures.sh` 자동 렌더 스크립트. `docs/patent/figures/rendered/` 에 PNG/SVG/PDF 출력. `scripts/cleanup_demo_figures.sh` 로 Fig. 5~7 데모 PNG 1차 정리 (헤더 chrome 제거, 흑백, 300dpi).
 - **KEAPS 가이드 + bibliographic form (2026-04-30, 직접 출원 단계 3/3)**: `docs/patent/keaps-submission-guide.md` (KEAPS 입력 매핑, 청구항 인용 형식 변환, 도면 첨부, 출원 직전 체크리스트), `docs/patent/bibliographic-form.md` (출원인·발명자·우선권·결제·첨부문서). 본인 출원 시나리오로 직접 출원 패키지 완비.
+- **출원 직전 12개월 prior-art 재조사 (2026-04-30)**: KIPRIS / EPO OPS / Google Patents + 비특허 문헌, 공개일 2025-04-30 ~ 2026-04-30 범위. 11 건 신규 문헌 식별 (`prior-art-survey.md` §10-1 ~ §10-3); 본 발명의 5요소 결합과 직접 충돌하는 문헌 0 건. 신규 문헌 중 (나) / (라) 군 분류 가능한 8 건은 §3.2 표에 cross-link 추가. 잔여 한계: EPO OPS 색인 지연 4~8 주, 비특허 문헌 광범위 검색의 본질적 한계.
 
 [다음 작업]
 1. 변리사 검토 (`status: ai_generated → human_reviewed → attorney_ready`)
