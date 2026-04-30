@@ -112,6 +112,16 @@ If you cannot comply with any MUST:
 - **Supabase**: MUST use migrations for DDL; MAY use direct SQL for queries.
 - **Web Search**: SHOULD use for current events, errors, latest docs.
 
+## Agent Routing Policy (Trigger-based)
+
+- See [`rules/agent_routing.md`](rules/agent_routing.md) for full routing rules.
+- **researcher** (Exa): SHOULD delegate for external docs, web search, error lookups.
+- **db-worker** (Supabase): MUST delegate for DDL changes and schema operations.
+- **refactorer** (Serena): SHOULD delegate for 3+ file symbol renames or impact analysis.
+- **full-context** (all MCP): SHOULD delegate when 2+ MCP domains intersect in one task.
+- **reviewer**: SHOULD delegate for code changes ≥10 lines or logic changes. 3-pass adversarial (self + Codex + OMC).
+- **verifier**: MUST delegate before claiming task completion when AC exists.
+
 ## Linked Modules
 
 - Safety & security: [`rules/safety_security.md`](rules/safety_security.md)
@@ -136,6 +146,7 @@ If you cannot comply with any MUST:
 - Hook recipes: [`rules/hook_recipes.md`](rules/hook_recipes.md)
 - Session persistence: [`rules/session_persistence.md`](rules/session_persistence.md)
 - Adversarial review: [`rules/adversarial_review.md`](rules/adversarial_review.md)
+- Agent routing: [`rules/agent_routing.md`](rules/agent_routing.md)
 
 ## Checklists (Use as needed)
 

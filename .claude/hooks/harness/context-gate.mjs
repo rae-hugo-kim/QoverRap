@@ -12,6 +12,7 @@ let data;
 try {
   data = JSON.parse(input);
 } catch (e) {
+  console.error('HARNESS WARNING: Hook received invalid input, skipping check.');
   process.exit(0);
 }
 
@@ -53,7 +54,8 @@ if (!existsSync(readLogPath)) {
 
 const readLog = readFileSync(readLogPath, 'utf-8');
 
-if (readLog.includes(filePath) || readLog.includes(normalizedPath)) {
+const readPaths = new Set(readLog.split('\n').map(l => l.trim()).filter(Boolean));
+if (readPaths.has(filePath) || readPaths.has(normalizedPath)) {
   log('File was read, allowing');
   process.exit(0);
 } else {

@@ -83,6 +83,32 @@ Write to notepads before compacting when the information needs to survive beyond
 
 ---
 
+## Startup Context Budget
+
+Every MCP server and skill registered in `~/.claude/` is listed in the system prompt at session start, consuming context before any work begins. Lazy-load pattern: keep rarely-used servers and skills dormant, activate on demand.
+
+### Scripts: `~/.claude/scripts/`
+
+**`mcp`** — MCP server on/off (registry: `~/.claude/scripts/mcp-registry.json`)
+
+```
+mcp ls                # show active/inactive servers
+mcp on/off <name>     # enable/disable in ~/.claude.json
+mcp reset             # keep only defaults (exa, supabase, context7)
+```
+
+**`skill`** — Skill on/off (archive: `~/.claude/skills-archive/`)
+
+```
+skill ls              # show active/archived skills
+skill on/off <name>   # move between ~/.claude/skills/ and archive
+skill reset           # keep only defaults
+```
+
+Changes take effect next session. When user requests a dormant server or skill (e.g. "serena 연결해", "copywriting 스킬 켜줘", "새 스킬 아카이브에 추가해줘"), run the appropriate script.
+
+---
+
 ## Self-Check
 
 Before compacting, ask: **"Am I about to lose context that I'll need in the next 5 minutes?"**

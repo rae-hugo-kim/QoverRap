@@ -65,18 +65,23 @@ When multiple tools can accomplish the same task:
 | 새 파일 또는 >500줄 파일의 구조 파악 | **SHOULD** 레이어 D `get_symbols_overview` |
 | 문자열·주석·에러 메시지·환경변수·설정값 | **MUST** `Grep` |
 | 파일·디렉토리 이름 패턴 | **MUST** `Glob` |
-| 심볼명 모름 (의도 기반 탐색) | **SHOULD** `Grep`에 관련 키워드 복수(OR)로 후보 추림 → 레이어 C로 정밀화 |
+| 심볼명 모름 (의도 기반 탐색, 코드베이스 <100파일 또는 키워드 확정적) | **SHOULD** `Grep`에 관련 키워드 복수(OR)로 후보 추림 → 레이어 C로 정밀화 |
+| **콜드스타트 + 의도 기반 (코드베이스 >500파일, CLAUDE.md/AGENTS.md로 미해결)** | **SHOULD** `grepai search` Top-5 → 레이어 C로 정밀화 (trial) |
+| **유저가 "grepai"·"의미 기반 검색"을 명시** | **MUST** `grepai search` 경유 |
+| 동적 디스패치·설정 주도·폴리글롯 코드의 call 추적 | **MAY** `grepai trace callers/callees` — 단일언어 정적코드는 `lsp_find_references` 우선 |
 
 **MUST NOT**:
 - LSP 가용 상태에서 심볼 참조를 `Grep` 단독으로 결론 (주석·유사 식별자 오탐 위험)
 - 파일 전체 `Read` 후 눈으로 심볼 탐색 — `lsp_document_symbols` 또는 `get_symbols_overview` 선행
+- 심볼명·파일경로·리터럴이 유저 프롬프트에 이미 주어졌는데 `grepai` 호출 (LSP/Grep 직행)
+- `grepai` 랭킹만으로 작업 결론 — 상위 1–2개를 LSP/Read로 검증해야 함
 
 **MAY skip LSP** when:
 - 수정 위치가 이미 정확히 특정된 단일 라인 편집
 - 비코드 파일(md / yaml / json) — Grep·Read로 충분
 
-**비고 — 시맨틱 검색 레이어 미도입**:
-벡터 인덱스 기반 시맨틱 검색(grepai 등)은 현재 정책에 포함되지 않음. "Grep으로 해결 못 한 의도 기반 쿼리가 전체의 10%를 초과"한다는 계측 증거 확보 후 재검토.
+**비고 — 시맨틱 검색 레이어 (grepai, 2주 시범)**:
+CLI + Skill 래퍼 경로로 도입(MCP 서버 아님 → context tax 0). 상세 라우팅은 `.claude/skills/grepai-search/SKILL.md`. 종료 조건: (a) 일 평균 <1회 호출 또는 (b) 오도 사례 > 유도 사례 → skill 디렉토리 삭제로 롤백. 배경: `docs/sum/session_2026-04-21_grepai-adoption-decision.md`.
 
 ---
 

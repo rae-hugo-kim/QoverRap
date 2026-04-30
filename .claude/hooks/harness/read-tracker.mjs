@@ -11,6 +11,7 @@ let data;
 try {
   data = JSON.parse(input);
 } catch {
+  console.error('HARNESS WARNING: Hook received invalid input, skipping check.');
   process.exit(0);
 }
 
@@ -26,7 +27,13 @@ if (!existsSync(stateDir)) {
 }
 
 const normalizedPath = filePath.replace(/^[A-Za-z]:/, '').replace(/\\/g, '/');
-appendFileSync(readLogPath, filePath + '\n');
-appendFileSync(readLogPath, normalizedPath + '\n');
+
+const existing = existsSync(readLogPath) ? readFileSync(readLogPath, 'utf-8') : '';
+const existingSet = new Set(existing.split('\n').filter(Boolean));
+
+if (!existingSet.has(filePath) && !existingSet.has(normalizedPath)) {
+  appendFileSync(readLogPath, filePath + '\n');
+  appendFileSync(readLogPath, normalizedPath + '\n');
+}
 
 process.exit(0);

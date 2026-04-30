@@ -20,6 +20,7 @@ let data;
 try {
   data = JSON.parse(input);
 } catch (e) {
+  console.error('HARNESS WARNING: Hook received invalid input, skipping check.');
   process.exit(0);
 }
 
@@ -38,7 +39,7 @@ const command = data?.tool_input?.command || '';
 log(`Command: ${command}`);
 
 // Only check for git commit commands
-if (!command.match(/\bgit commit\b/)) {
+if (!command.match(/(?:^|&&|\|\||;)\s*git\b[^|;]*\bcommit\b/)) {
   log('Not a git commit, allowing');
   process.exit(0);
 }

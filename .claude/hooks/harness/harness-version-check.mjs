@@ -9,7 +9,7 @@
 // Version compare: primary = tag name (harness/YYYY.N), fallback = commit SHA.
 // Cache: 24h in .omc/state/harness-version-check.json.
 
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdirSync, statSync, renameSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import process from 'node:process';
@@ -23,6 +23,15 @@ try { data = JSON.parse(stdin); } catch { /* ignore */ }
 
 const force = process.argv.includes('--force');
 const cwd = data?.session_state?.cwd || process.cwd();
+
+// Log rotation: rotate hook-debug.log if it exceeds 1MB
+const debugLogPath = join(cwd, '.omc', 'harness-state', 'hook-debug.log');
+try {
+  if (existsSync(debugLogPath) && statSync(debugLogPath).size > 1048576) {
+    renameSync(debugLogPath, debugLogPath + '.old');
+  }
+} catch { /* ignore rotation errors */ }
+
 const metaPath = join(cwd, '.claude/hooks/harness/harness-meta.json');
 if (!existsSync(metaPath)) process.exit(0);
 

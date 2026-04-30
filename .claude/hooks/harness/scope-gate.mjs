@@ -19,6 +19,7 @@ let data;
 try {
   data = JSON.parse(input);
 } catch (e) {
+  console.error('HARNESS WARNING: Hook received invalid input, skipping check.');
   process.exit(0);
 }
 

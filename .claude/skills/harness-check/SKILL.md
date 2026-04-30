@@ -1,7 +1,7 @@
 ---
 name: harness-check
 allowed-tools: Bash(node:*), Bash(bash:*), Bash(cat:*), Bash(git:*), Read
-argument-hint: [--dry-run]
+argument-hint: [--dry-run] [--audit]
 description: Check harness version drift and auto-sync from the source remote. Use when the user says "harness-check", "harness version", "하네스 버전", or wants to retrofit/update harness files from the source repo.
 ---
 
@@ -16,6 +16,7 @@ One command that both **reports drift** and **resolves it** by overwriting local
 - `$ARGUMENTS`:
   - (empty) — check + sync (default)
   - `--dry-run` — show what would be overwritten, no changes
+  - `--audit` — also run a deterministic 7-category quality audit after sync
 
 ## Constraints
 
@@ -75,6 +76,21 @@ git status --short
 ```
 
 Confirm `version`, `commit_sha`, `updated` reflect the remote's latest; review changes before committing.
+
+### 4. Quality audit (when `--audit` flag passed)
+
+After sync (or instead of it, if invoked separately), run the deterministic quality scorer:
+
+```bash
+bash scripts/harness-audit.sh           # full breakdown
+bash scripts/harness-audit.sh --terse   # one-line per category + TOTAL
+```
+
+Outputs 7 categories × 0..10 (total 0..70):
+- `tool_coverage`, `context_efficiency`, `quality_gates`, `memory_persistence`,
+  `eval_coverage`, `security_guardrails`, `cost_efficiency`
+
+Use the score to track harness quality across versions and to surface concrete gaps (each missing item is listed with its category).
 
 ## Error Handling
 

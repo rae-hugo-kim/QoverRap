@@ -21,12 +21,32 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node .claude/hooks/harness/destructive-guard.mjs",
+            "timeout": 3
+          },
+          {
+            "type": "command",
             "command": "node .claude/hooks/harness/acceptance-gate.mjs",
             "timeout": 3
           },
           {
             "type": "command",
             "command": "node .claude/hooks/harness/backpressure-gate.mjs",
+            "timeout": 3
+          },
+          {
+            "type": "command",
+            "command": "node .claude/hooks/harness/review-gate.mjs",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/harness/mcp-gate.mjs",
             "timeout": 3
           }
         ]
@@ -49,6 +69,16 @@
           {
             "type": "command",
             "command": "node .claude/hooks/harness/backpressure-tracker.mjs",
+            "timeout": 3
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/harness/backpressure-invalidator.mjs",
             "timeout": 3
           }
         ]
