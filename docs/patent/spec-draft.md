@@ -536,6 +536,8 @@ QR 코드의 표준 심벌 체계에 의해 인코딩 가능한 단일 페이로
 - **P0+ 정합성 패치 (2026-04-30)**: GPT 2차 검토 반영. §3.1 표준 QR 표현 보수화, §8.5 Fig. 5 / Fig. 6 / Fig. 7 설명 수정 (Layer C 사용자 출력 표현 제거, "같은 페이로드" 사실 정합성 보강), 청구항 1 simple-mode 본항 통합, 청구항 8 주장형 표현 객관화, §8.1.1 alg_id/encoding_id/flags 확장 명시, §8.6 청구항 11 변형 (프로세서+메모리) 노트, prior-art §3-11 SQRC 단정 footnote 분리, §5 리스크 평가 표 보수화. (`docs/research/gptfeedbacks2.md` 참조)
 - **P0++ 정합성 패치 (2026-04-30, 3차)**: GPT 3차 검토 반영. §8.3 pseudocode verified 반환값에서 Layer C 제거 (verification_result + optional signature_ref), 청구항 5 재정의 (생성-측 단순 모드 → 디코더 측 자동 판별 — 청구항 1(f)와 중복 해소), 청구항 2 전제부에 "복합 모드 페이로드" 한정 추가, §4 과제 3에 "공개키 부재" 누락 보강, §8.1.1 첫 문장 "헤더의 버전·길이 필드 변조" → "서명 대상에 포함되는 버전 및 길이 관련 필드의 변조" (c_len 미포함 정확화).
 - **참조부호 일괄 부착 (2026-04-30, 직접 출원 단계 1/3)**: KIPO 형식 직접 출원 준비. §7.1 참조부호 일람표 신설 (구조 요소 10~16 / 시스템 모듈 1·100s·200s / 절차 단계 S100s·S200s·S300s). §8.1 (Fig. 1), §8.2 (Fig. 2), §8.3 (Fig. 3), §8.4 (Fig. 4), §8.6 (Fig. 8) 의 ASCII 다이어그램 및 흐름도에 참조부호 부착. §8.6 모듈-청구항 매핑 표 및 데이터 흐름 요약에 참조부호 + 절차 단계 번호 추가.
+- **KIPO 흑백 도면 + 렌더 파이프라인 (2026-04-30, 직접 출원 단계 2/3)**: `docs/patent/figures/sources/*.puml` 5개 (Fig. 1, 2, 3, 4, 8) PlantUML 소스 작성. `_kipo_style.iuml` 공통 스타일 (BW + 300dpi + smetana + Noto Sans CJK KR). `scripts/render_patent_figures.sh` 자동 렌더 스크립트. `docs/patent/figures/rendered/` 에 PNG/SVG/PDF 출력. `scripts/cleanup_demo_figures.sh` 로 Fig. 5~7 데모 PNG 1차 정리 (헤더 chrome 제거, 흑백, 300dpi).
+- **KEAPS 가이드 + bibliographic form (2026-04-30, 직접 출원 단계 3/3)**: `docs/patent/keaps-submission-guide.md` (KEAPS 입력 매핑, 청구항 인용 형식 변환, 도면 첨부, 출원 직전 체크리스트), `docs/patent/bibliographic-form.md` (출원인·발명자·우선권·결제·첨부문서). 본인 출원 시나리오로 직접 출원 패키지 완비.
 
 [다음 작업]
 1. 변리사 검토 (`status: ai_generated → human_reviewed → attorney_ready`)
