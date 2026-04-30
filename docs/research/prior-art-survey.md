@@ -27,13 +27,14 @@
 
 | 특성 | QoverwRap |
 |------|-----------|
-| 임베딩 방식 | **페이로드 구조화** — QR 표준 데이터 필드 내에서 delimiter + base64(binary header + layers) |
-| 레이어 구조 | 3-layer: A(공개 텍스트) + B(컨텍스트 메타데이터) + C(Ed25519 서명) |
-| 표준 스캐너 호환 | Layer A가 평문으로 먼저 표시, 뒤의 trailer는 무의미한 문자열로 보임 |
-| 오류 정정 영향 | **없음** — ECC 능력을 소모하지 않음 |
-| 서명/검증 | **자기 완결적** — Ed25519 서명이 Layer C로 QR 안에 내장, 외부 시스템 불필요 |
-| 접근 제어 | **역할 기반 Resolver** — public / authenticated / verified 3단계 |
-| Wire format | `[Layer A 평문]\n---QWR---\n[base64([1B ver][2B b_len][2B c_len][B][C])]` |
+| 임베딩 방식 | **페이로드 문자열-레벨 구조화** — QR 표준 데이터 필드 안에서 delimiter + base64(binary header + 후속 계층 데이터) 결합 |
+| 레이어 구조 | Layer A(공개 텍스트 prefix) + Layer B(컨텍스트 메타데이터) + Layer C(디지털 서명, 예: Ed25519) |
+| 표준 스캐너 호환 | Layer A가 표준 QR 리더의 판독 결과 선두에 평문으로 표시, 뒤의 trailer는 표준 리더 동작을 방해하지 않음 |
+| 오류 정정 영향 | QR 모듈 또는 ECC 코드워드를 은닉 채널로 변조하지 않음 (선택된 QR 버전·오류 정정 레벨의 표준 ECC 메커니즘 그대로 사용) |
+| 서명/검증 | 검증 대상 데이터 및 서명값이 동일 페이로드에 포함되고, 공개키는 사전 보유 또는 외부 입력으로 제공되며, **온라인 검증 서버 또는 블록체인 조회 호출 없이** 검증 |
+| 출력 정책 | 검증 결과 기반 출력 정책 — 제1/제2/제3 출력 수준 (구 명칭: public / authenticated / verified). 페이로드 자체의 암호학적 판독 제한이 아닌 응용 프로그램 반환 데이터의 범위를 결정하는 매개변수 |
+| 안전 강등 | 페이로드 파싱·헤더 검증·트레일러 디코딩·공개키 부재·서명 검증 실패 중 어느 하나라도 발생 시 Layer A 만 반환 |
+| Wire format | `[Layer A 평문]\n---QWR---\n[base64([1B ver][2B b_len][2B c_len][B][C])]` (DELIMITER = UTF-8 11바이트) |
 
 ---
 
@@ -100,7 +101,7 @@
 | 비교 항목 | Suresh et al. | QoverwRap |
 |-----------|--------------|-----------|
 | 레이어 역할 | 동종 (모두 임의 데이터) | 이종 (A=공개, B=컨텍스트, C=서명) |
-| 레이어 접근 | 키 기반 복호화 | 역할 기반 Resolver |
+| 레이어 접근 | 키 기반 복호화 | 검증 결과 기반 출력 정책 (Resolver) |
 | 무결성 | 없음 | 내장 서명 |
 | ECC 영향 | 소모 | 무영향 |
 | 복잡도 | 높음 (압축+암호화+스테가노그래피) | 낮음 (직렬화+서명) |
@@ -142,7 +143,7 @@
 | **핵심** | 블록체인(Ethereum 등)에 QR 코드 URL 해시를 기록하여 변조 감지. 스캔 시 블록체인 조회로 검증. |
 | **기술 방식** | **외부 검증 시스템** (블록체인) |
 
-**차이점**: QoverwRap는 자기 완결적 (서명이 QR 안에 내장, 외부 시스템 불필요).
+**차이점**: QoverwRap는 검증 대상 데이터 및 서명값이 동일 페이로드 내부에 포함되며, 사전 보유 또는 외부 입력 공개키만으로 온라인 검증 서버 호출 없이 검증 가능.
 
 ---
 
@@ -186,24 +187,26 @@
 
 ### QoverwRap 차별점 (novelty 후보)
 
-1. **페이로드-레벨 구조화 (Payload-Level Structuring)**
-   - 모든 선행기술 6건은 스테가노그래피(QR 모듈 비트 조작), 물리적 방식(컬러/텍스처), 또는 외부 시스템(블록체인)을 사용
-   - QoverwRap는 QR 표준 데이터 필드의 **문자열 내용 안에서** delimiter + binary header로 레이어를 구분
-   - 이 접근의 선례를 **발견하지 못함**
+본 발명의 신규성·진보성은 "QR + 서명" 또는 "다층 QR" 일반 개념이 아니라, 아래 요소의 **구체적 결합** 에 둔다. QR 또는 barcode 페이로드에 디지털 서명을 포함하여 인증을 수행하는 선행기술군((마) 서명-내장 자격증명/인증 QR — SMART Health Cards, ICAO VDS/VDS-NC, US20120308003A1, KR20180122843A, SAP signed QR 등)은 별도로 존재하므로, "QR + 서명 자체의 선례 부재"는 신규성 근거로 사용하지 않는다.
 
-2. **ECC 무손실**
-   - 스테가노그래피 방식(Liu, Suresh, Koptyra 등)은 ECC 용량을 소비하여 오류 정정 능력 감소
-   - QoverwRap는 표준 인코딩 그대로 사용하므로 ECC 능력 100% 유지
+1. **페이로드 문자열-레벨 구조화 (Payload-Level Structuring)**
+   - 선행기술 (가)~(다) 군은 스테가노그래피(QR 모듈 비트 조작), 물리적 방식(컬러/텍스처), 또는 이미지 도메인 변형을 사용
+   - QoverwRap는 QR 표준 데이터 필드의 **문자열 내용 안에서** delimiter + versioned binary header로 계층을 구분하고 텍스트 안전 인코딩 트레일러로 결합
+   - (마) 군은 전체 credential 또는 barcode message를 단일 서명 객체로 취급하며, Layer A 평문 prefix 와 delimiter-framed trailer 의 결합 wire format 을 명시하지 않음
 
-3. **자기 완결적 암호학적 서명**
-   - 서명이 Layer C로 QR 페이로드 안에 내장
-   - 외부 서버, 블록체인, PKI 인프라 없이 오프라인 검증 가능
-   - 이 조합(QR 내 내장 서명 + 다층 구조)의 선례를 **발견하지 못함**
+2. **QR 모듈 / ECC 코드워드 무변조**
+   - 스테가노그래피 방식((가) 군)은 모듈 비트·코드워드를 은닉 채널로 변조
+   - QoverwRap는 모듈 또는 ECC 코드워드를 은닉 채널로 변조하지 않으므로, 선택된 QR 버전 및 오류정정 레벨의 표준 오류정정 메커니즘을 그대로 사용
 
-4. **역할 기반 Resolver 정책**
-   - public / authenticated / verified 3단계 접근 수준
-   - 검증 실패 시 안전 기본값(public) 강등
-   - 정책 레이어가 구조적으로 분리된 선례를 **발견하지 못함**
+3. **온라인 서버 호출 없는 내장 서명 검증**
+   - 검증 대상 데이터 및 서명값이 동일 페이로드에 포함됨
+   - 공개키는 사전 보유 또는 외부 입력으로 제공되며, 온라인 검증 서버 또는 블록체인 조회 호출 없이 검증
+   - (라) 군은 외부 인프라/온라인 호출 의존, (마) 군은 issuer 키 분배가 일반적으로 가정되나 본 발명은 키 분배 채널을 청구하지 않음
+
+4. **검증 결과 기반 출력 정책 + 안전 강등의 결합**
+   - 출력 수준은 페이로드 자체의 암호학적 판독 제한이 아닌, 응용 프로그램 반환 데이터의 범위를 결정하는 매개변수
+   - 페이로드 파싱·헤더 검증·트레일러 디코딩·공개키 부재·서명 검증 실패 중 어느 하나라도 발생 시 Layer A 만 반환
+   - 본 강등 정책은 통상적인 오류 처리가 아니라 본 발명의 계층형 페이로드 구조 및 트레일러 검증 절차와 결합된 반환 데이터 제한 정책으로서, (마) 군 선행기술에서는 이 결합을 명시하지 않음
 
 ### 리스크 평가
 
@@ -273,7 +276,7 @@
   | 비교 | CN115828975A | QoverwRap |
   |------|-------------|-----------|
   | "hierarchical"의 의미 | 임계 마스크의 **인식률 계층** | **페이로드 논리 레이어** (A/B/C) |
-  | 목적 | 시각 예술성 보존 | 데이터 접근 제어 + 서명 |
+  | 목적 | 시각 예술성 보존 | 계층형 페이로드 직렬화 + 내장 서명 검증 |
   | 변경 대상 | 모듈 중심 밝기 | 없음 (표준 인코딩 유지) |
 - **결론**: "hierarchical" 용어만 공유, 기술 의미 완전 상이. 인용 리스크 **낮음**.
 
@@ -315,11 +318,11 @@
 
 | ID | CQL | 결과 | 해석 |
 |----|-----|------|------|
-| Q13 | `cpc=G06K19/06 AND ti,ab=(signature AND QR)` | **0** | QR + 서명 분류 조합 전세계 **0 hit** → Layer C(내장 서명) 독창성 강력 지지 |
-| Q14 | `ti,ab=(QR AND ed25519)` | **0** | ed25519 + QR 정확 조합 **0 hit** → QoverwRap 정확 방식 선행기술 부재 |
+| Q13 | `cpc=G06K19/06 AND ti,ab=(signature AND QR)` | **0** | 본 CQL의 정확 조합 직접 hit 없음. 다만 (마) 군 — SMART Health Cards, ICAO VDS, US20120308003A1, KR20180122843A 등 — 은 별도 검색에서 확인되므로 "QR + 서명 일반"의 선행기술은 존재 |
+| Q14 | `ti,ab=(QR AND ed25519)` | **0** | ed25519 + QR 정확 조합 직접 hit 없음 (다만 알고리즘명 단일 hit는 신규성 근거로 약함) |
 | Q15 | `ti,ab=(QR AND (delimiter OR "payload structur*"))` | **0** | 페이로드 구조화 키워드 직접 hit 없음 |
 
-**결론**: QoverwRap의 **핵심 차별 요소 3가지**(내장 서명, ed25519 조합, 페이로드 구조화)가 EPO 범위에서 모두 **0 hit**. 청구항 신규성 기반 확인.
+**결론 (재정의)**: 위 EPO OPS CQL의 직접 hit 부재 자체는 신규성의 핵심 근거가 아니다. (마) 군에 해당하는 선행기술 — barcode 또는 QR payload 에 digital signature 를 포함하여 인증하는 시스템 (예: US20120308003A1, KR20180122843A, SMART Health Cards, ICAO VDS) — 은 존재한다. 따라서 QoverwRap의 신규성·진보성 주장은 "QR + 서명 일반 개념"이 아니라, **Layer A 평문 prefix + delimiter-framed trailer + versioned binary header + Layer B/C 분리 + 검증 실패 시 Layer A 만 반환하는 safe-fallback resolver의 구체적 결합**에 둔다.
 
 ---
 
@@ -340,7 +343,7 @@
 |-----------|-------------|-----------|
 | 임베딩 위치 | 물리 라벨의 층별 인쇄 | QR 단일 데이터 필드 문자열 내부 |
 | 작동 환경 | 인쇄된 라벨 전용 (물리 스캐너) | 디지털+인쇄 모두 (표준 QR 스캐너) |
-| 서명 방식 | URL+보안코드 대조 (서버 필요) | Ed25519 자기완결 서명 (오프라인 검증) |
+| 서명 방식 | URL+보안코드 대조 (서버 필요) | 페이로드 내부에 Ed25519 서명 내장 (온라인 서버 호출 없는 검증) |
 | 다층의 의미 | 물리적 stack | 논리적 payload 구조 |
 
 ---
@@ -395,23 +398,30 @@
 
 ## 8. 최종 결론
 
-QoverwRap의 핵심 기술(페이로드-레벨 구조화 + 내장 Ed25519 서명 + 역할 기반 Resolver)은 **학술 6건(국제) + KR 특허 4건 + EPO OPS 15 쿼리(CN/JP/EP/공통)** 통합 조사 결과 동일한 접근을 **발견하지 못했다**.
+QoverwRap의 핵심 기술 결합 — (i) 표준 QR 리더가 평문으로 표시하는 Layer A prefix + (ii) delimiter-framed trailer + (iii) versioned binary header + (iv) Layer B/C 분리 + (v) 검증 실패 시 Layer A 만 반환하는 safe-fallback resolver — 은 **학술 6건(국제) + KR 특허 4건 + EPO OPS 15 쿼리(CN/JP/EP/공통)** 통합 조사 결과 동일한 결합 형태를 **발견하지 못했다**. 다만 결합을 구성하는 개별 개념(QR + 서명, signed credential, multi-layer QR 등)은 별도 선행기술군에 존재한다.
 
 - **국제 학술** (Liu/Tkachenko/Suresh/Arce/Koptyra/Subramanian): 스테가노그래피·물리·블록체인 접근만 존재
 - **한국 특허** (넥스팟솔루션/ETRI·POSTECH/에이엠홀로/김동현): 물리 라벨 stack, 재료 공학, 홀로그램, 시각 overlay — **논리 레이어링 없음**
-- **중국 특허** (EPO OPS 경유): CN111224771A(PCA+Henon 이미지 카오스 암호), CN115828975A(아트 QR hierarchical mask) 2건 — 모두 이미지 도메인, **논리 페이로드 레이어링 없음**
-- **일본 특허** (EPO OPS 경유): DENSO/Masahiro Hara 원천 특허군(만료)뿐, 다층/스테가노 QR 직접 hit 없음
-- **EP/FR 특허** (EPO OPS 경유): 2LQR 특허 번호 EPO biblio 미확인이나 기술 경로(물리 인쇄) 무관
-- **관할 무관 보강**: `QR + signature + G06K19/06` = 0 hit, `QR + ed25519` = 0 hit — **핵심 차별 요소 선행기술 전무**
+- **중국 특허** (EPO OPS 경유): CN111224771A(PCA+Henon 이미지 카오스 암호), CN115828975A(아트 QR hierarchical mask) 2건 — 모두 이미지 도메인
+- **일본 특허** (EPO OPS 경유): DENSO/Masahiro Hara 원천 특허군(만료) 외 다층/스테가노 QR 직접 hit 없음
+- **EP/FR 특허** (EPO OPS 경유): 2LQR 특허 FR3027430A1 확정 (물리 인쇄 기반)
+- **(마) 서명-내장 자격증명/인증 QR** (별도 식별): SMART Health Cards (signed JWS + JWK set), ICAO VDS / VDS-NC (cryptographically signed digital seal), US20120308003A1 (signed barcode), KR20180122843A (QR 진본성 + 서명문 + 기관코드), SAP Mobile Services signed QR — 본 군은 전체 credential 또는 barcode message 를 단일 서명 객체로 취급하며, 본 발명의 wire-format 결합 및 safe-fallback resolver 정책을 명시하지 않음
+- **관할 무관 보강 쿼리**: `QR + signature + G06K19/06` 등 일부 CQL은 0 hit이나, 위 (마) 군은 별도 경로로 식별됨. 따라서 0 hit 자체를 신규성의 핵심 근거로 사용하지 않음
 
-**신규성 후보 (재확인):**
-1. QR 표준 데이터 필드 내 delimiter+binary header 기반 **논리적 다층 페이로드**
-2. Ed25519 서명의 QR 내장 + 오프라인 자기완결 검증
-3. public/authenticated/verified **역할 기반 Resolver** (안전 기본값 강등)
+**신규성 후보 (재정의):**
+
+본 발명의 신규성·진보성은 다음 요소의 **구체적 결합** 에 둔다.
+
+1. 표준 QR 리더의 판독 결과에서 선두 평문으로 표시되는 Layer A prefix
+2. 미리 정해진 구획자 이후의 트레일러에 배치되는 versioned binary header (버전·길이 정보 포함)
+3. 후속 계층 데이터 (예: 컨텍스트 메타데이터 Layer B + 디지털 서명 Layer C) 의 텍스트 안전 인코딩 결합
+4. 동일 페이로드 내부의 정규화된 서명 대상에 대해 온라인 검증 서버 호출 없이 수행되는 디지털 서명 검증
+5. 페이로드 파싱·헤더 검증·트레일러 디코딩·공개키 부재·서명 검증 실패 중 어느 하나라도 발생 시 Layer A 만 반환하는, 계층 구조와 결합된 반환 데이터 제한 정책 (단순 오류 처리와 구별)
 
 **특허 명세서 전략:**
-- 청구항은 "문자열 수준 구조화 (character-level structuring) / 논리 레이어 (logical layering)"를 핵심 구별 용어로 사용
-- 비교표에서 "물리 stack" / "모듈 비트 스테가노그래피" / "재료 다층" / "시각 overlay" / **"이미지 카오스 암호"** / **"아트 QR mask hierarchy"** 를 명시적 차별군으로 제시
+- 청구항은 "Layer A prefix + delimiter-framed trailer + versioned binary header + safe-fallback resolver" 의 결합을 핵심 구별 요소로 사용
+- 독립항은 base64/Ed25519/구체 출력 수준 명칭에 고정하지 않고, 종속항에서 구체화 (claim differentiation)
+- 비교군은 (가) 모듈 비트 스테가노그래피 / (나) 물리·시각 다층 / (다) 컬러·재료 채널 / (라) 외부 검증 시스템(블록체인·dedicated reader 포함) / (마) 서명-내장 자격증명/인증 QR 의 5군 체계로 제시
 
 **조사 완료 상태 (2026-04-22)**: §6-1~§6-5 전 항목 완료. 2LQR 특허 FR3027430A1 확정. 추가 보완 검토 항목:
 - CNIPA 직접 DB 교차 확인 (EPO biblio CN 커버리지 제한 리스크 헤지 — 출원 전 권장)
