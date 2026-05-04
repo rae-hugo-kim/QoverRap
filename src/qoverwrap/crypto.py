@@ -39,10 +39,15 @@ def canonical_signing_message(
     if lb_len > MAX_U16:
         raise ValueError(f"layer_b length {lb_len} exceeds uint16 max ({MAX_U16})")
 
+    # Spec §8.1.1 / claim 12 layout — interleaved length||value, NOT
+    # lengths-grouped. External implementers that follow the spec will
+    # produce incompatible signatures if this order is changed.
     return (
         SIGNING_MAGIC
-        + struct.pack(">BHH", version, la_len, lb_len)
+        + struct.pack(">B", version)
+        + struct.pack(">H", la_len)
         + layer_a_bytes
+        + struct.pack(">H", lb_len)
         + layer_b
     )
 

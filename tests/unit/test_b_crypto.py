@@ -341,3 +341,35 @@ class TestBC6CanonicalBoundaries:
         sig_alt = key.sign(alt_msg)
         assert verify_signature(public_key, layer_a, layer_b, sig_alt) is False
         print("[B-C6] test_wrong_version_signature_does_not_verify — PASS")
+
+    def test_canonical_byte_layout_golden(self) -> None:
+        """B-C6 — exact byte layout per spec §8.1.1 / claim 12: MAGIC || version
+        || uint16_be(len(A)) || A || uint16_be(len(B)) || B   (interleaved).
+
+        Locks against accidental "lengths-grouped" layout
+        (MAGIC || version || len(A) || len(B) || A || B) which a previous
+        implementation produced. External implementers that follow the spec
+        wording must produce byte-identical signing messages.
+        """
+        layer_a = "ab"            # UTF-8: 61 62
+        layer_b = b"\x01\x02\x03"  # 01 02 03
+        msg = canonical_signing_message(layer_a, layer_b, version=0x01)
+
+        # Expected bytes:
+        #   QWR1  (4)        51 57 52 31
+        #   ver   (1)        01
+        #   |A|   (2 BE)     00 02
+        #   A     (2)        61 62
+        #   |B|   (2 BE)     00 03
+        #   B     (3)        01 02 03
+        expected = bytes.fromhex("51575231" "01" "0002" "6162" "0003" "010203")
+        assert msg == expected, (
+            f"[B-C6] byte layout mismatch:\n"
+            f"  expected (interleaved per spec): {expected.hex()}\n"
+            f"  got                            : {msg.hex()}"
+        )
+        # Anti-test — the buggy "lengths-grouped" layout MUST NOT equal the
+        # produced bytes:
+        bad = bytes.fromhex("51575231" "01" "0002" "0003" "6162" "010203")
+        assert msg != bad, "[B-C6] produced lengths-grouped layout (regressed)"
+        print("[B-C6] test_canonical_byte_layout_golden — PASS")
