@@ -4,6 +4,8 @@ version = "0.0.0"
 description = "Plaintext-prefix QR payload with delimiter-framed signed trailer and resolver (QoverwRap)"
 readme = "README.md"
 requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [{ name = "Sangrae Kim (김상래)" }]
 dependencies = [
   "qrcode[pil]>=7.0",
   "Pillow>=9.0",
