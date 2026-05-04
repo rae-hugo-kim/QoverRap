@@ -365,3 +365,59 @@ class TestBR6SimpleModeVerified:
         assert resolved.signature is None
         assert resolved.verified is False
         print("[B-R6] test_verified_simple_mode_falls_back_without_signature — PASS")
+
+
+class TestBR7VerifiedEmptyLayerB:
+    """B-R7: verified + empty Layer B — must preserve b"" (NOT collapse to None).
+
+    Regression test for the boundary case where claim 7(iii) requires Layer B
+    as verified data. An empty bytes Layer B is a legal verified outcome and
+    must be distinguishable from "Layer B absent" (None).
+    """
+
+    def test_verified_empty_layer_b_preserves_empty_bytes(self) -> None:
+        """B-R7 — sign+encode (a, b'', c) → resolve('verified', pub) → layer_b is b'' (not None)."""
+        priv, pub = generate_keypair()
+        layer_a = _sample_layer_a()
+        layer_b = b""
+        sig = sign_layers(priv, layer_a, layer_b)
+        payload = encode_layers(layer_a, layer_b, sig)
+
+        resolved = resolve(payload, "verified", public_key=pub)
+
+        assert resolved.verified is True, "[B-R7] verified should be True"
+        assert resolved.layer_a == layer_a, "[B-R7] layer_a mismatch"
+        assert resolved.layer_b is not None, (
+            "[B-R7] layer_b must NOT be None when verified+empty (claim 7(iii))"
+        )
+        assert resolved.layer_b == b"", (
+            f"[B-R7] layer_b must be b'' (empty bytes), got {resolved.layer_b!r}"
+        )
+        assert resolved.signature is not None and len(resolved.signature) == 64
+        print("[B-R7] test_verified_empty_layer_b_preserves_empty_bytes — PASS")
+
+    def test_api_serialization_preserves_empty_layer_b(self) -> None:
+        """B-R7 — `is not None` serialization (vs truthiness) keeps empty hex for empty Layer B.
+
+        Truthiness check (`if x else None`) would collapse b'' to None, breaking
+        the invariant at the API boundary. This test locks the serialization rule
+        used in `demo/backend/routers/resolve.py`.
+        """
+        priv, pub = generate_keypair()
+        layer_a = _sample_layer_a()
+        sig = sign_layers(priv, layer_a, b"")
+        payload = encode_layers(layer_a, b"", sig)
+        resolved = resolve(payload, "verified", public_key=pub)
+
+        # Mimic demo/backend/routers/resolve.py serialization (post-fix)
+        api_layer_b = resolved.layer_b.hex() if resolved.layer_b is not None else None
+        api_signature = (
+            resolved.signature.hex() if resolved.signature is not None else None
+        )
+
+        assert api_layer_b == "", (
+            f"[B-R7] API layer_b must be empty hex string '', got {api_layer_b!r} "
+            "(truthiness collapse would break claim 7(iii) invariant)"
+        )
+        assert api_signature is not None and len(api_signature) == 128
+        print("[B-R7] test_api_serialization_preserves_empty_layer_b — PASS")

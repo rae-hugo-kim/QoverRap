@@ -67,8 +67,11 @@ export default function ResolveColumn({
 }: Props) {
   const themeBg = themed && issuer ? issuer.theme_color : "#0f172a";
   const themeAccent = themed && issuer ? issuer.accent_color : "#64748b";
+  // Use `!= null` (not truthiness): an empty Layer B hex (`""`) is a legal
+  // "verified-but-empty" outcome and must be distinguishable from "Layer B
+  // absent" (null) per claim 7(iii). Truthy check would collapse both.
   const layerBData =
-    result && result.layer_b
+    result && result.layer_b != null
       ? parseLayerBJson(hexToStr(result.layer_b))
       : null;
 
@@ -192,9 +195,13 @@ export default function ResolveColumn({
               <div className="text-[10px] uppercase text-slate-500 mb-0.5">
                 Layer B
               </div>
-              {result.layer_b ? (
+              {result.layer_b != null ? (
                 <div className="rounded p-2 text-xs break-all bg-orange-50 text-orange-900 border border-orange-200">
-                  {hexToStr(result.layer_b)}
+                  {result.layer_b === "" ? (
+                    <em className="opacity-60">(empty — verified)</em>
+                  ) : (
+                    hexToStr(result.layer_b)
+                  )}
                 </div>
               ) : (
                 maskedRow("hidden", "#ea580c")
@@ -204,7 +211,7 @@ export default function ResolveColumn({
               <div className="text-[10px] uppercase text-slate-500 mb-0.5">
                 Signature (diagnostic)
               </div>
-              {result.signature ? (
+              {result.signature != null ? (
                 <div className="rounded p-2 text-[10px] break-all bg-green-50 text-green-900 font-mono border border-green-200">
                   {result.signature.slice(0, 32)}…
                 </div>

@@ -40,11 +40,15 @@ def resolve(req: ResolveRequest) -> ResolveResponse:
 
     resolved = core_resolve(req.payload, req.access_level, pub_bytes)
 
+    # Use `is not None` (not truthiness): an empty bytes Layer B with verified=True
+    # is a legal outcome and must be distinguishable from "Layer B absent". See
+    # claim 7(iii) and resolver.py — verified path preserves b"" instead of
+    # collapsing to None.
     return ResolveResponse(
         layer_a=resolved.layer_a,
-        layer_b=resolved.layer_b.hex() if resolved.layer_b else None,
-        signature=resolved.signature.hex() if resolved.signature else None,
+        layer_b=resolved.layer_b.hex() if resolved.layer_b is not None else None,
+        signature=resolved.signature.hex() if resolved.signature is not None else None,
         verified=resolved.verified,
         issuer_id=issuer_id,
-        routed_public_key=routed_pub.hex() if routed_pub else None,
+        routed_public_key=routed_pub.hex() if routed_pub is not None else None,
     )
