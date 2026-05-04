@@ -4,15 +4,15 @@ Tests the resolve() function defined in qoverwrap.resolver against the
 Phase B access level policy:
 
   - "public"        → Layer A only
-  - "authenticated" → Layer A + B
-  - "verified"      → Layer A + B + C (requires valid signature)
+  - "authenticated" → Layer A + B (parsed metadata; not cryptographically authenticated)
+  - "verified"      → Layer A + B + signature bytes when Ed25519 verifies
   - unknown level   → safe default (same as "public")
 
 Test IDs
 --------
 B-R1  public → A only
 B-R2  authenticated → A+B
-B-R3  verified → A+B+C
+B-R3  verified → A+B+signature (diagnostic)
 B-R4  unknown → safe default
 B-R5  forgery/partial/expired → B/C hidden
 """
@@ -52,7 +52,7 @@ class TestBR1Public:
     """B-R1: resolve(..., "public") returns Layer A only."""
 
     def test_public_returns_layer_a(self) -> None:
-        """B-R1 — resolve public: layer_a matches, layer_b is None, layer_c is None."""
+        """B-R1 — resolve public: layer_a matches, layer_b is None, signature is None."""
         layer_a = _sample_layer_a()
         layer_b = _sample_layer_b()
         layer_c = _sample_layer_c()
@@ -66,8 +66,8 @@ class TestBR1Public:
         assert resolved.layer_b is None, (
             f"[B-R1] layer_b should be None for public access, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, (
-            f"[B-R1] layer_c should be None for public access, got {resolved.layer_c!r}"
+        assert resolved.signature is None, (
+            f"[B-R1] signature should be None for public access, got {resolved.signature!r}"
         )
         print("[B-R1] test_public_returns_layer_a — PASS")
 
@@ -93,7 +93,7 @@ class TestBR1Public:
             f"[B-R1] layer_a mismatch for A-only payload: {resolved.layer_a!r}"
         )
         assert resolved.layer_b is None, "[B-R1] layer_b should be None"
-        assert resolved.layer_c is None, "[B-R1] layer_c should be None"
+        assert resolved.signature is None, "[B-R1] signature should be None"
         assert resolved.verified is False, "[B-R1] verified should be False"
         print("[B-R1] test_public_a_only_payload — PASS")
 
@@ -106,7 +106,7 @@ class TestBR2Authenticated:
     """B-R2: resolve(..., "authenticated") returns Layer A + B."""
 
     def test_authenticated_returns_a_and_b(self) -> None:
-        """B-R2 — layer_a matches, layer_b matches original, layer_c is None."""
+        """B-R2 — layer_a matches, layer_b matches original, signature is None."""
         layer_a = _sample_layer_a()
         layer_b = _sample_layer_b()
         layer_c = _sample_layer_c()
@@ -120,8 +120,8 @@ class TestBR2Authenticated:
         assert resolved.layer_b == layer_b, (
             f"[B-R2] layer_b mismatch: expected {layer_b!r}, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, (
-            f"[B-R2] layer_c should be None for authenticated access, got {resolved.layer_c!r}"
+        assert resolved.signature is None, (
+            f"[B-R2] signature should be None for authenticated access, got {resolved.signature!r}"
         )
         print("[B-R2] test_authenticated_returns_a_and_b — PASS")
 
@@ -149,7 +149,7 @@ class TestBR2Authenticated:
         assert resolved.layer_b is None, (
             f"[B-R2] layer_b should be None when payload has no B layer, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, "[B-R2] layer_c should be None"
+        assert resolved.signature is None, "[B-R2] signature should be None"
         print("[B-R2] test_authenticated_a_only_payload — PASS")
 
 
@@ -158,10 +158,10 @@ class TestBR2Authenticated:
 # ---------------------------------------------------------------------------
 
 class TestBR3Verified:
-    """B-R3: resolve(..., "verified") returns all layers when signature is valid."""
+    """B-R3: resolve(..., "verified") returns A+B+signature when signature is valid."""
 
     def test_verified_valid_signature(self) -> None:
-        """B-R3 — encode with signed layer_c, resolve "verified" with correct public_key → verified=True."""
+        """B-R3 — encode with signed Layer C, resolve "verified" with correct public_key → verified=True."""
         layer_a = _sample_layer_a()
         layer_b = _sample_layer_b()
         private_key, public_key = generate_keypair()
@@ -176,7 +176,7 @@ class TestBR3Verified:
         print("[B-R3] test_verified_valid_signature — PASS")
 
     def test_verified_returns_all_layers(self) -> None:
-        """B-R3 — layer_a, layer_b, layer_c all match originals."""
+        """B-R3 — layer_a, layer_b, signature bytes match originals."""
         layer_a = _sample_layer_a()
         layer_b = _sample_layer_b()
         private_key, public_key = generate_keypair()
@@ -191,8 +191,8 @@ class TestBR3Verified:
         assert resolved.layer_b == layer_b, (
             f"[B-R3] layer_b mismatch: expected {layer_b!r}, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c == layer_c, (
-            f"[B-R3] layer_c mismatch: expected {layer_c!r}, got {resolved.layer_c!r}"
+        assert resolved.signature == layer_c, (
+            f"[B-R3] signature mismatch: expected {layer_c!r}, got {resolved.signature!r}"
         )
         print("[B-R3] test_verified_returns_all_layers — PASS")
 
@@ -209,8 +209,8 @@ class TestBR3Verified:
         assert resolved.layer_b is None, (
             f"[B-R3] layer_b should be None when no public_key given, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, (
-            f"[B-R3] layer_c should be None when no public_key given, got {resolved.layer_c!r}"
+        assert resolved.signature is None, (
+            f"[B-R3] signature should be None when no public_key given, got {resolved.signature!r}"
         )
         assert resolved.verified is False, (
             f"[B-R3] verified should be False when no public_key given, got {resolved.verified!r}"
@@ -239,7 +239,7 @@ class TestBR4UnknownAccessLevel:
         assert resolved.layer_b is None, (
             f"[B-R4] layer_b should be None for unknown access level, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, "[B-R4] layer_c should be None"
+        assert resolved.signature is None, "[B-R4] signature should be None"
         assert resolved.verified is False, "[B-R4] verified should be False"
         print("[B-R4] test_unknown_level_returns_public — PASS")
 
@@ -296,8 +296,8 @@ class TestBR5ForgeryProtection:
         assert resolved.layer_b is None, (
             f"[B-R5] layer_b should be None on signature failure, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, (
-            f"[B-R5] layer_c should be None on signature failure, got {resolved.layer_c!r}"
+        assert resolved.signature is None, (
+            f"[B-R5] signature should be None on signature failure, got {resolved.signature!r}"
         )
         print("[B-R5] test_wrong_key_falls_back_to_public — PASS")
 
@@ -320,8 +320,8 @@ class TestBR5ForgeryProtection:
         assert resolved.layer_b is None, (
             f"[B-R5] layer_b should be None on tamper detection, got {resolved.layer_b!r}"
         )
-        assert resolved.layer_c is None, (
-            f"[B-R5] layer_c should be None on tamper detection, got {resolved.layer_c!r}"
+        assert resolved.signature is None, (
+            f"[B-R5] signature should be None on tamper detection, got {resolved.signature!r}"
         )
         print("[B-R5] test_tampered_payload_falls_back — PASS")
 
@@ -338,8 +338,8 @@ class TestBR5ForgeryProtection:
             assert resolved.layer_b is None, (
                 f"[B-R5] layer_b should be None for corrupted trailer, got {resolved.layer_b!r}"
             )
-            assert resolved.layer_c is None, (
-                f"[B-R5] layer_c should be None for corrupted trailer, got {resolved.layer_c!r}"
+            assert resolved.signature is None, (
+                f"[B-R5] signature should be None for corrupted trailer, got {resolved.signature!r}"
             )
             assert resolved.verified is False, (
                 f"[B-R5] verified should be False for corrupted trailer, got {resolved.verified!r}"
@@ -347,3 +347,21 @@ class TestBR5ForgeryProtection:
         except ValueError:
             pass  # Raising ValueError is also acceptable
         print("[B-R5] test_corrupted_trailer_returns_error_or_public — PASS")
+
+
+class TestBR6SimpleModeVerified:
+    """B-R6: delimiter-free (simple mode) payload under verified access."""
+
+    def test_verified_simple_mode_falls_back_without_signature(self) -> None:
+        """B-R6 — A-only wire payload: verified cannot succeed; behave like public for B/signature."""
+        layer_a = _sample_layer_a()
+        _priv, pub = generate_keypair()
+        encoded = encode_layers(layer_a)
+
+        resolved = resolve(encoded, "verified", public_key=pub)
+
+        assert resolved.layer_a == layer_a
+        assert resolved.layer_b is None
+        assert resolved.signature is None
+        assert resolved.verified is False
+        print("[B-R6] test_verified_simple_mode_falls_back_without_signature — PASS")

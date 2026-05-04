@@ -305,20 +305,35 @@ class TestBD5UnsupportedVersionFormat:
             decode_layers(bad_payload)
         print("[B-D5] test_unsupported_version_byte — PASS")
 
-    def test_extra_bytes_after_bc_ignored(self) -> None:
-        """B-D5 — Frame with trailing bytes beyond header+b+c decodes silently (forward compat)."""
+    def test_extra_bytes_after_bc_rejected_for_v1(self) -> None:
+        """B-D5 — v1 frame must be exactly header+b+c; trailing bytes are rejected."""
         layer_a = _sample_layer_a()
         layer_b = _sample_layer_b(32)
         layer_c = _sample_layer_c(16)
 
-        # Build a valid frame then append extra trailing bytes
         header = struct.pack(">BHH", HEADER_VERSION, len(layer_b), len(layer_c))
-        frame = header + layer_b + layer_c + b"\xff\xfe\xfd"  # trailing junk
+        frame = header + layer_b + layer_c + b"\xff\xfe\xfd"
         payload = layer_a + DELIMITER + base64.b64encode(frame).decode("ascii")
 
-        # Should not raise — extra bytes are silently ignored
-        a, b, c = decode_layers(payload)
-        assert a == layer_a, f"[B-D5] layer_a mismatch with trailing bytes: {a!r}"
-        assert b == layer_b, f"[B-D5] layer_b mismatch with trailing bytes"
-        assert c == layer_c, f"[B-D5] layer_c mismatch with trailing bytes"
-        print("[B-D5] test_extra_bytes_after_bc_ignored — PASS")
+        with pytest.raises(ValueError, match="Frame length mismatch"):
+            decode_layers(payload)
+        print("[B-D5] test_extra_bytes_after_bc_rejected_for_v1 — PASS")
+
+    def test_invalid_base64_strict_decode(self) -> None:
+        """B-D5 — Non-base64 alphabet in trailer fails strict decode."""
+        bad = _sample_layer_a() + DELIMITER + "!!!not_valid_base64!!!"
+        with pytest.raises(ValueError, match="Invalid base64"):
+            decode_layers(bad)
+        print("[B-D5] test_invalid_base64_strict_decode — PASS")
+
+    def test_base64_with_whitespace_rejected(self) -> None:
+        """B-D5 — validate=True rejects whitespace-padded base64."""
+        layer_a = _sample_layer_a()
+        layer_b = _sample_layer_b(8)
+        header = struct.pack(">BHH", HEADER_VERSION, len(layer_b), 0)
+        frame = header + layer_b
+        trailer = base64.b64encode(frame).decode("ascii")
+        payload = layer_a + DELIMITER + " " + trailer + " "
+        with pytest.raises(ValueError):
+            decode_layers(payload)
+        print("[B-D5] test_base64_with_whitespace_rejected — PASS")

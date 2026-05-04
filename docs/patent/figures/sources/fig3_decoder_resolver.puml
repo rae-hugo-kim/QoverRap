@@ -40,9 +40,9 @@ partition "리졸버 (250)" {
       #white:**S207** — safe-fallback;
       detach
     else (yes)
-      :**검증부 (240)** —\nverify_signature(\n  pk, signing_message, Layer C);
+      :**검증부 (240)** —\nsigning_message 재구성\n(A, B 로부터, §8.1.1)\nverify_signature(pk,\n  signing_message, Layer C);
       if (서명 valid?) then (yes)
-        :return (Layer A, Layer B,\n  vr=valid,\n  signature_ref=optional);
+        :return (Layer A, Layer B,\n  vr=valid,\n  signature=optional\n   (diagnostic));
       else (no)
         #white:**S207** — safe-fallback;
         detach

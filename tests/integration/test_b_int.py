@@ -173,7 +173,7 @@ class TestBINT2ResolvePublic:
         return encode_layers(a, b, layer_c), a
 
     def test_public_hides_bc(self) -> None:
-        """B-INT2 — resolve('public') returns layer_b=None, layer_c=None."""
+        """B-INT2 — resolve('public') returns layer_b=None, signature=None."""
         payload_str, _ = self._make_signed_payload()
 
         result = resolve(payload_str, "public")
@@ -181,8 +181,8 @@ class TestBINT2ResolvePublic:
         assert result.layer_b is None, (
             f"[B-INT2] layer_b should be None for public, got {result.layer_b!r}"
         )
-        assert result.layer_c is None, (
-            f"[B-INT2] layer_c should be None for public, got {result.layer_c!r}"
+        assert result.signature is None, (
+            f"[B-INT2] signature should be None for public, got {result.signature!r}"
         )
         assert result.verified is False
         print("[B-INT2] test_public_hides_bc — PASS")
@@ -204,14 +204,14 @@ class TestBINT2ResolvePublic:
 
 
 # ===========================================================================
-# B-INT3: encode → resolve(verified) → A+B+C + C verification
+# B-INT3: encode → resolve(verified) → A+B + signature (diagnostic) + verification
 # ===========================================================================
 
 class TestBINT3ResolveVerified:
-    """B-INT3: resolve('verified', pub) validates signature and exposes all layers."""
+    """B-INT3: resolve('verified', pub) validates Ed25519 and returns A+B plus optional signature bytes."""
 
     def test_verified_end_to_end(self) -> None:
-        """B-INT3 — generate_keypair, sign, encode, resolve('verified') → verified=True, all layers match."""
+        """B-INT3 — generate_keypair, sign, encode, resolve('verified') → verified=True, A/B/signature match."""
         priv, pub = generate_keypair()
         a = _sample_a()
         b = _sample_b()
@@ -223,11 +223,11 @@ class TestBINT3ResolveVerified:
         assert result.verified is True, "[B-INT3] verified should be True"
         assert result.layer_a == a, "[B-INT3] layer_a mismatch"
         assert result.layer_b == b, "[B-INT3] layer_b mismatch"
-        assert result.layer_c == layer_c, "[B-INT3] layer_c mismatch"
+        assert result.signature == layer_c, "[B-INT3] signature mismatch"
         print("[B-INT3] test_verified_end_to_end — PASS")
 
     def test_verified_wrong_key_fallback(self) -> None:
-        """B-INT3 — sign with key1, resolve with key2 → verified=False, b/c=None."""
+        """B-INT3 — sign with key1, resolve with key2 → verified=False, b/signature=None."""
         priv1, _pub1 = generate_keypair()
         _priv2, pub2 = generate_keypair()
 
@@ -240,7 +240,7 @@ class TestBINT3ResolveVerified:
 
         assert result.verified is False, "[B-INT3] verified should be False with wrong key"
         assert result.layer_b is None, "[B-INT3] layer_b should be None on failed verification"
-        assert result.layer_c is None, "[B-INT3] layer_c should be None on failed verification"
+        assert result.signature is None, "[B-INT3] signature should be None on failed verification"
         print("[B-INT3] test_verified_wrong_key_fallback — PASS")
 
     def test_verified_roundtrip_preserves_signature(self) -> None:

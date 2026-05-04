@@ -116,7 +116,7 @@ def test_resolve_public_only_hides_layers(client: TestClient) -> None:
     ).json()
     assert r["layer_a"] == layer_a
     assert r["layer_b"] is None
-    assert r["layer_c"] is None
+    assert r["signature"] is None
     assert r["verified"] is False
     assert r["issuer_id"] == "tigers-2026"
     assert r["routed_public_key"] is not None  # routed via trust registry
@@ -136,7 +136,7 @@ def test_resolve_authenticated_exposes_b_only(client: TestClient) -> None:
         json={"payload": enc["encoded"], "access_level": "authenticated"},
     ).json()
     assert r["layer_b"] == layer_b_hex
-    assert r["layer_c"] is None
+    assert r["signature"] is None
     assert r["verified"] is False
 
 
@@ -167,7 +167,7 @@ def test_resolve_verified_with_routing(client: TestClient) -> None:
     ).json()
     assert r["verified"] is True
     assert r["layer_b"] == layer_b_hex
-    assert r["layer_c"] == layer_c_hex
+    assert r["signature"] == layer_c_hex
     assert r["issuer_id"] == issuer_id
     assert r["routed_public_key"] == sig_resp["public_key"]
 
@@ -196,7 +196,7 @@ def test_resolve_verified_tampered_falls_back_to_public(client: TestClient) -> N
     ).json()
     assert r["verified"] is False
     assert r["layer_b"] is None
-    assert r["layer_c"] is None
+    assert r["signature"] is None
     assert r["layer_a"] == layer_a  # public still visible
 
 
@@ -231,3 +231,12 @@ def test_invalid_hex_returns_422(client: TestClient) -> None:
         json={"private_key": "ZZ" * 32, "layer_a": "x", "layer_b": ""},
     )
     assert r.status_code == 422
+
+
+def test_trust_sign_disabled_without_env(monkeypatch: pytest.MonkeyPatch, client: TestClient) -> None:
+    monkeypatch.setenv("QWR_ENABLE_DEMO_SIGNING", "")
+    r = client.post(
+        "/api/trust/tigers-2026/sign",
+        json={"layer_a": "qwr:tigers-2026|x", "layer_b": ""},
+    )
+    assert r.status_code == 403

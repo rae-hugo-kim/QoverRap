@@ -376,7 +376,7 @@ class TestBEXP4ContextRouting:
             match = (
                 resolved.layer_a == exp_a
                 and resolved.layer_b == exp_b
-                and resolved.layer_c == exp_c
+                and resolved.signature == exp_c
                 and resolved.verified == exp_verified
             )
             if match:
@@ -525,20 +525,20 @@ class TestBEXP5ACGate:
             if tier == 0:
                 resolved = resolve(payload_str, "public", None)
                 ok = (resolved.layer_a == layer_a and resolved.layer_b is None
-                      and resolved.layer_c is None and not resolved.verified)
+                      and resolved.signature is None and not resolved.verified)
             elif tier == 1:
                 resolved = resolve(payload_str, "authenticated", None)
                 ok = (resolved.layer_a == layer_a and resolved.layer_b == layer_b
-                      and resolved.layer_c is None and not resolved.verified)
+                      and resolved.signature is None and not resolved.verified)
             elif tier == 2:
                 resolved = resolve(payload_str, "verified", pub)
                 ok = (resolved.layer_a == layer_a and resolved.layer_b == layer_b
-                      and resolved.layer_c == layer_c and resolved.verified)
+                      and resolved.signature == layer_c and resolved.verified)
             else:  # verified with wrong key
                 _, wrong_pub = generate_keypair()
                 resolved = resolve(payload_str, "verified", wrong_pub)
                 ok = (resolved.layer_a == layer_a and resolved.layer_b is None
-                      and resolved.layer_c is None and not resolved.verified)
+                      and resolved.signature is None and not resolved.verified)
 
             if ok:
                 met4_correct += 1

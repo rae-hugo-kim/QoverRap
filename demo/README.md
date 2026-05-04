@@ -4,6 +4,8 @@
 
 > **특허 청구 대상은 코어** (`src/qoverwrap/`) 입니다. 이 데모 앱의 트러스트 레지스트리·발급자 라우팅·UI 테마는 *응용 레이어*이며 청구항 외부입니다.
 
+**용어**: API의 `authenticated` 접근 수준은 **암호학적 인증**이 아니라, 앱이 Layer B를 파싱해 보여 주는 **출력 정책(unverified parsed metadata)** 입니다. 암호학적 검증은 `verified` 수준에서만 수행됩니다.
+
 ## 구조
 
 ```
@@ -34,9 +36,12 @@ demo/
 루트에서 (가상환경 활성 상태):
 
 ```bash
+export QWR_ENABLE_DEMO_SIGNING=1   # /api/trust/{id}/sign 사용 시 필수
 .venv/bin/pip install -r demo/backend/requirements.txt
 .venv/bin/uvicorn demo.backend.main:app --reload --port 8000
 ```
+
+`QWR_ENABLE_DEMO_SIGNING=1`이 없으면 발급자 대리 서명 엔드포인트는 **403** 으로 비활성화됩니다. (테스트는 `tests/conftest.py`에서 자동으로 켭니다.)
 
 확인:
 
@@ -72,7 +77,7 @@ npm run dev        # http://localhost:5173
 .venv/bin/python -m pytest tests/demo/test_api.py -v
 ```
 
-12개 엔드포인트 시나리오:
+13개 엔드포인트 시나리오:
 
 - 헬스, 키 생성 모양 (Ed25519 32B/32B)
 - sign/verify roundtrip + 변조 검출
@@ -83,16 +88,18 @@ npm run dev        # http://localhost:5173
 - **변조 후 안전 강등** (서명 실패 → public)
 - 미등록 발급자 처리
 - hex 입력 검증 (422)
+- 데모 서명 비활성 시 trust `/sign` 403
 
 ## 청구항 vs 응용 분리 (UI에서도 명시)
 
-| 영역 | 청구항 안 | 응용 레이어 |
+| 영역 | 청구항 안 (또는 선택적 종속항) | 응용 레이어 |
 |------|-----------|-------------|
 | 페이로드 구조 (delimiter + base64 header) | ✅ | |
 | Ed25519 내장 서명 | ✅ | |
-| 역할 기반 Resolver (안전 강등) | ✅ | |
-| 발급자 ID 컨벤션 (`qwr:<id>\|<msg>`) | | ✅ |
-| 트러스트 레지스트리 | | ✅ |
+| Resolver 출력 정책 + 안전 강등 | ✅ | |
+| Layer A 선두 발급자 식별자 + 공개키 선택 (청구 후보 9류) | 선택적 종속항 | |
+| 발급자 ID 문자열 컨벤션 (`qwr:<id>\|<msg>`) | | ✅ (표현·운영 관례) |
+| in-memory 트러스트 레지스트리·프로세스 내 비밀키 | | ✅ |
 | Themed QR 카드, 색·로고 | | ✅ |
 
 App 푸터에 동일 라벨링이 노출됩니다.
@@ -100,5 +107,5 @@ App 푸터에 동일 라벨링이 노출됩니다.
 ## 보안 / 데모 한정 주의
 
 - `trust_registry.py`는 프로세스 시작 시 발급자 비밀키를 메모리에 생성해 보관합니다. 데모 편의용이며, 실제 서비스는 *발급자만* 비밀키를 보유해야 합니다.
-- `/api/trust/{id}/sign`은 데모 편의 엔드포인트입니다. 운영 환경에서는 노출하지 마십시오.
+- `/api/trust/{id}/sign`은 데모 편의 엔드포인트입니다. **`QWR_ENABLE_DEMO_SIGNING=1`일 때만** 동작하며, 운영 배포에서는 비활성화된 채 두는 것을 권장합니다.
 - CORS는 `*`로 열려 있습니다. 운영 환경에서는 origin을 좁히십시오.

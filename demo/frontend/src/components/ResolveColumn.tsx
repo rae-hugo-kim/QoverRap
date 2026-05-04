@@ -14,14 +14,15 @@ interface Props {
 
 const LEVEL_LABEL: Record<AccessLevel, string> = {
   public: "Public · 일반 QR 리더",
-  authenticated: "Authenticated · 우리 앱",
+  authenticated: "Authenticated · 파싱된 메타데이터 (미검증)",
   verified: "Verified · 서명까지 확인",
 };
 
 const LEVEL_DESC: Record<AccessLevel, string> = {
   public: "표준 QR 리더가 보는 Layer A 평문",
-  authenticated: "QoverwRap 디코더가 Layer B까지 추출",
-  verified: "+ 발급자 공개키로 Layer C 서명 검증",
+  authenticated:
+    "앱 출력 수준: Layer B를 파싱해 표시 (암호학적 인증 아님, verified=False)",
+  verified: "+ 발급자 공개키로 Ed25519 서명 검증 (검증 재료는 선택 표시)",
 };
 
 function maskedRow(label: string, color: string) {
@@ -201,11 +202,11 @@ export default function ResolveColumn({
             </div>
             <div>
               <div className="text-[10px] uppercase text-slate-500 mb-0.5">
-                Layer C (signature)
+                Signature (diagnostic)
               </div>
-              {result.layer_c ? (
+              {result.signature ? (
                 <div className="rounded p-2 text-[10px] break-all bg-green-50 text-green-900 font-mono border border-green-200">
-                  {result.layer_c.slice(0, 32)}…
+                  {result.signature.slice(0, 32)}…
                 </div>
               ) : (
                 maskedRow("hidden", "#16a34a")

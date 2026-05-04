@@ -1,7 +1,7 @@
 [project]
 name = "qoverwrap-poc"
 version = "0.0.0"
-description = "QR overlay PoC (tests and docs)"
+description = "Plaintext-prefix QR payload with delimiter-framed signed trailer and resolver (QoverwRap)"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

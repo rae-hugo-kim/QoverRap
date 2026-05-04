@@ -6,6 +6,8 @@ would have private keys held only by the issuing service.
 """
 from __future__ import annotations
 
+import os
+
 from fastapi import APIRouter, HTTPException
 
 from qoverwrap.crypto import sign_layers
@@ -37,7 +39,16 @@ def sign_as_issuer(issuer_id: str, body: dict) -> dict:
     """Demo-only: sign (layer_a, layer_b) using the issuer's bundled private key.
 
     Body: {"layer_a": str, "layer_b": str (hex)}
+
+    Disabled unless ``QWR_ENABLE_DEMO_SIGNING=1`` is set (prevents accidental
+    exposure in production-like deployments).
     """
+    if os.environ.get("QWR_ENABLE_DEMO_SIGNING", "").strip() != "1":
+        raise HTTPException(
+            status_code=403,
+            detail="Demo issuer signing is disabled. Set QWR_ENABLE_DEMO_SIGNING=1 to enable.",
+        )
+
     entry = trust_registry.get_entry(issuer_id)
     if entry is None:
         raise HTTPException(status_code=404, detail=f"unknown issuer: {issuer_id}")

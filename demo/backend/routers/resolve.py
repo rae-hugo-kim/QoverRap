@@ -43,7 +43,7 @@ def resolve(req: ResolveRequest) -> ResolveResponse:
     return ResolveResponse(
         layer_a=resolved.layer_a,
         layer_b=resolved.layer_b.hex() if resolved.layer_b else None,
-        layer_c=resolved.layer_c.hex() if resolved.layer_c else None,
+        signature=resolved.signature.hex() if resolved.signature else None,
         verified=resolved.verified,
         issuer_id=issuer_id,
         routed_public_key=routed_pub.hex() if routed_pub else None,

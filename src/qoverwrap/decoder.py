@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import base64
+import binascii
 import struct
 
 from .models import QwrPayload
@@ -22,8 +23,8 @@ def decode_layers(payload: str) -> tuple[str, bytes, bytes]:
     layer_a, trailer = payload.split(DELIMITER, maxsplit=1)
 
     try:
-        frame = base64.b64decode(trailer)
-    except Exception as exc:
+        frame = base64.b64decode(trailer, validate=True)
+    except binascii.Error as exc:
         raise ValueError(f"Invalid base64 trailer: {exc}") from exc
 
     if len(frame) < HEADER_SIZE:
@@ -38,10 +39,10 @@ def decode_layers(payload: str) -> tuple[str, bytes, bytes]:
             f"Unsupported version: 0x{version:02X} (expected 0x{HEADER_VERSION:02X})"
         )
 
-    if HEADER_SIZE + b_len + c_len > len(frame):
+    expected = HEADER_SIZE + b_len + c_len
+    if expected != len(frame):
         raise ValueError(
-            f"Frame too short for declared lengths: "
-            f"need {HEADER_SIZE + b_len + c_len}, have {len(frame)}"
+            f"Frame length mismatch: expected exactly {expected} bytes, got {len(frame)}"
         )
 
     layer_b = frame[HEADER_SIZE : HEADER_SIZE + b_len]

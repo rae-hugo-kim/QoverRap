@@ -17,7 +17,12 @@ import os
 
 import pytest
 
-from qoverwrap.crypto import generate_keypair, sign_layers, verify_signature
+from qoverwrap.crypto import (
+    canonical_signing_message,
+    generate_keypair,
+    sign_layers,
+    verify_signature,
+)
 
 # ---------------------------------------------------------------------------
 # Module-level helpers
@@ -303,3 +308,36 @@ class TestBC5EdgeCases:
         with pytest.raises(TypeError):
             verify_signature("not bytes", _sample_layer_a(), _sample_layer_b(), b"\x00" * 64)  # type: ignore[arg-type]
         print("[B-C5] test_invalid_public_key_type — PASS")
+
+
+class TestBC6CanonicalBoundaries:
+    """B-C6: canonical signing message disambiguates A/B boundaries and binds version."""
+
+    def test_signature_is_boundary_aware(self) -> None:
+        """B-C6 — sign('ab', b'c') must not verify as ('a', b'bc')."""
+        private_key, public_key = generate_keypair()
+        sig = sign_layers(private_key, "ab", b"c")
+        assert verify_signature(public_key, "ab", b"c", sig) is True
+        assert verify_signature(public_key, "a", b"bc", sig) is False
+        print("[B-C6] test_signature_is_boundary_aware — PASS")
+
+    def test_canonical_messages_differ_by_signing_version(self) -> None:
+        """B-C6 — canonical bytes differ when version byte in signing message differs."""
+        a, b = "x", b"y"
+        m1 = canonical_signing_message(a, b, version=0x01)
+        m2 = canonical_signing_message(a, b, version=0x02)
+        assert m1 != m2
+        print("[B-C6] test_canonical_messages_differ_by_signing_version — PASS")
+
+    def test_wrong_version_signature_does_not_verify(self) -> None:
+        """B-C6 — signature over version=0x02 canonical must not verify under default v1 verify."""
+        from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+
+        private_key, public_key = generate_keypair()
+        layer_a = _sample_layer_a()
+        layer_b = _sample_layer_b()
+        key = Ed25519PrivateKey.from_private_bytes(private_key)
+        alt_msg = canonical_signing_message(layer_a, layer_b, version=0x02)
+        sig_alt = key.sign(alt_msg)
+        assert verify_signature(public_key, layer_a, layer_b, sig_alt) is False
+        print("[B-C6] test_wrong_version_signature_does_not_verify — PASS")

@@ -17,7 +17,8 @@ export interface TrustEntry {
 export interface ResolveResult {
   layer_a: string;
   layer_b: string | null;
-  layer_c: string | null;
+  /** Hex Ed25519 signature when verified; diagnostic only */
+  signature: string | null;
   verified: boolean;
   issuer_id: string | null;
   routed_public_key: string | null;

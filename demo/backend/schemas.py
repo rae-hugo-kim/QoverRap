@@ -88,7 +88,10 @@ class ResolveRequest(BaseModel):
 class ResolveResponse(BaseModel):
     layer_a: str
     layer_b: Optional[str] = None
-    layer_c: Optional[str] = None
+    signature: Optional[str] = Field(
+        None,
+        description="Hex-encoded Ed25519 signature when verified=True; diagnostic only, not user data.",
+    )
     verified: bool
     issuer_id: Optional[str] = Field(
         None,

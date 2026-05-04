@@ -8,7 +8,7 @@ start
 :**S101** — 입력 검증\nlayer_a 에 구획자(12) 미포함\nlen(layer_b), len(layer_c) ≤ 65535;
 
 if (**S102** — Layer B(15) 또는 Layer C(16)\n중 적어도 하나가 비어있지 않은가?) then (yes : 복합 모드)
-  :**S103** — 이진 헤더 (14) 생성\nheader = pack(">BHH", 0x01,\n  len(layer_b), len(layer_c));
+  :**S103** — 이진 헤더 (14) 생성\nheader = pack(">BHH", 0x01,\n  len(layer_b), len(layer_c))\n버전 필드 (14a), b_len 필드 (14b),\nc_len 필드 (14c);
   :**S104** — 프레임 결합 + 텍스트 안전 인코딩\nframe = header || layer_b || layer_c\ntrailer (13) = base64(frame);
   :**S105** — 복합 모드 출력\npayload (10) = layer_a\n  || DELIMITER (12)\n  || trailer (13);
 else (no : 단순 모드)
