@@ -43,6 +43,12 @@ PYTHONPATH=src .venv/bin/pytest -q
 
 See [demo/README.md](demo/README.md) to run the web demo.
 
-## License
+## License / Notice
 
-Follow `LICENSE` at the repository root or `pyproject.toml` metadata.
+Copyright © 2026 Sangrae Kim (김상래). All rights reserved.
+
+This repository is published **for research, demonstration, and patent-pending disclosure purposes only**. **No license is granted** to use, copy, modify, distribute, sublicense, or commercialize the code, documentation, figures, or related materials except with prior written permission from the copyright holder.
+
+Patent application pending.
+
+See the [`LICENSE`](LICENSE) file at the repository root for the full notice. Public availability on GitHub is for *viewing and research* only and does not imply an open-source license.

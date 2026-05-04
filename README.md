@@ -43,6 +43,12 @@ PYTHONPATH=src .venv/bin/pytest -q
 
 데모 앱 실행은 [demo/README.md](demo/README.md) 를 참고하세요.
 
-## 라이선스
+## 라이선스 / 권리 고지
 
-저장소 루트의 `LICENSE` 또는 `pyproject.toml` 메타데이터를 따릅니다.
+저작권 © 2026 Sangrae Kim (김상래). 모든 권리 보유 (All rights reserved).
+
+본 저장소는 **연구, 시연, 및 특허 출원 진행 중인 기술 공개 목적**으로만 게시되었습니다. 저작권자의 사전 서면 허가 없이 본 저장소의 코드, 문서, 도면, 자료를 **사용·복제·수정·배포·재라이선스하거나 상업적으로 이용할 수 없습니다**.
+
+특허 출원 진행 중 (patent pending).
+
+전체 고지문은 저장소 루트의 [`LICENSE`](LICENSE) 파일을 참조하십시오. GitHub 공개는 *열람·연구 목적*이며 오픈소스 라이선스 부여를 의미하지 않습니다.
