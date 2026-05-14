@@ -1,0 +1,30 @@
+@startuml fig9_mobile_terminal_flow
+!include _kipo_style.iuml
+
+title Fig. 9 — 휴대용 단말 응용 및 출력 수준별 반환 데이터 흐름 (청구항 14·15)
+
+start
+
+:**S401** — 휴대용 단말 (스마트폰 / 태블릿 / 웨어러블)\n이미지 센서로 표준 QR 심벌 촬영;
+
+:**S402** — 표준 QR 디코더 (ISO/IEC 18004 호환)\n→ 단일 페이로드 문자열 payload (10) 출력;
+
+:**S403** — 본 발명의 디코더 (220) 에\npayload (10) 및 access_level 전달\n(단말 내장 또는 시스템서버 분산 실시);
+
+:**S404** — 리졸버 (250) 가\nFig. 3 의 [S204] ~ [S207] 출력 수준 분기 수행\n검증부 (240) 는 청구항 12 의 정규화 바이트열 재구성;
+
+if (access_level 및 검증 결과) then (제1\npublic)
+  :**S405a** — 표시부 / 음성 출력부\nLayer A (11) 평문만 출력;
+elseif (제2\nauthenticated) then
+  :**S405b** — 표시부 / 음성 출력부\nLayer A (11) +\nLayer B (15) [미검증 표시];
+elseif (제3 verified\n— 검증 성공) then
+  :**S405c** — 표시부 / 음성 출력부\nLayer A (11) +\n검증된 Layer B (15)\n(청구항 13: len(B)=0 인 경우 b"" 보존)\n+ 검증 결과 (VALID);
+else (강등\n청구항 8)
+  :**S405d** — 표시부 / 음성 출력부\nLayer A (11) +\n실패 상태 정보 (INVALID / 강등 사유);
+endif
+
+:**S406** — 반환 출력 인터페이스 (260)\n→ 단말 사용자;
+
+stop
+
+@enduml
