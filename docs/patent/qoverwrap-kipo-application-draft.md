@@ -1,6 +1,6 @@
 # QoverwRap 특허출원문서 초안
 
-> 상태: 변리사 검토 전 초안.  
+> 상태: 출원 준비 완료 — AI 작성 본인 출원 (KEAPS) 워크플로우. 14-round adversarial review 완료. KEAPS 형식 변환 후 출원.  
 > 기준 문서: `docs/research/DP250567_특허출원서.pdf`의 KIPO 출원서 형식, `docs/patent/spec-draft.md`, `docs/research/prior-art-survey.md`, `src/qoverwrap/` 구현.
 
 ---
