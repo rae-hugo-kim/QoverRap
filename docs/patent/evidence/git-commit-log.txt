@@ -39,3 +39,4 @@ c9272c7 | 2026-05-15 14:09:46 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(pate
 f525a90 | 2026-05-15 15:31:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add filing-handbook.html for KEAPS direct filing
 1389a13 | 2026-05-15 15:38:32 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add §30 grace-period exception package
 d423459 | 2026-05-15 15:39:27 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): handbook — surface §30 grace-period exception as own section
+c9ef517 | 2026-05-15 15:51:33 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 19th-round handbook + §30 evidence consistency (AJ1-AJ8)

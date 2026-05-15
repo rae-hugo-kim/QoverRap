@@ -82,10 +82,11 @@
 601eb6c | 2026-04-14 14:21:29 +0900 | rae.kim <rae.kim@aipq.kr> | Initial commit
 ```
 
-**3차 증명 (출원 직전 추가 권장)**: Web Archive 캡처
-- 출원 직전 https://web.archive.org/ 에서 저장소 페이지를 명시적으로 크롤링 요청하여 출원 시점의 공개 상태와 commit 이력을 영구 보존.
-- 캡처 URL: `https://web.archive.org/web/<timestamp>/https://github.com/rae-hugo-kim/QoverRap`
-- 저장 후 본 §3 에 URL 추가.
+**3차 증명**: Web Archive 영구 캡처 (2026-05-15 push 직후 수행됨)
+- 캡처 시각: **2026-05-15 06:56:21 UTC = 2026-05-15 15:56:21 KST**
+- 영구 URL: **`https://web.archive.org/web/20260515065621/https://github.com/rae-hugo-kim/QoverRap`**
+- 본 URL 은 push 완료 (`pushedAt = 2026-05-15T06:55:24Z`) 약 1분 후 캡처되어, 16~19차 라운드의 모든 commits (청12~15, Fig. 5/6 재번호화, oa-response-defense-memo, filing-handbook, §30 자료 자체) 가 공개된 상태가 영구 보존됨.
+- 출원 시 본 URL 을 §30 증명서류로 KEAPS 에 첨부.
 
 ---
 

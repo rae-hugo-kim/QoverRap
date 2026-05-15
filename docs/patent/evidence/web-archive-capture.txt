@@ -1,0 +1,29 @@
+Web Archive (archive.org) Permanent Capture — QoverwRap GitHub Repository
+===========================================================================
+
+Captured: 2026-05-15 06:56:21 UTC = 2026-05-15 15:56:21 KST
+Permanent URL:
+  https://web.archive.org/web/20260515065621/https://github.com/rae-hugo-kim/QoverRap
+
+Captured after the final pre-filing git push completed at
+2026-05-15T06:55:24Z (pushedAt per gh CLI), so the capture preserves
+the state of the public repository immediately after all local commits
+(through 19th adversarial-review round) became public.
+
+Capture trigger:
+  curl -sI https://web.archive.org/save/https://github.com/rae-hugo-kim/QoverRap
+
+Response:
+  HTTP/2 302
+  location: https://web.archive.org/web/20260515065621/https://github.com/rae-hugo-kim/QoverRap
+
+Purpose for §30 patent application evidence:
+- This capture is permanent and third-party-hosted (Internet Archive)
+- Provides date-stamped proof of public disclosure independent of
+  GitHub's own retention policy
+- Submitted to KEAPS as part of §30 grace-period exception evidence
+  package (특허법 §30(1)1호)
+
+To re-verify or capture again at filing time:
+  curl -sI "https://web.archive.org/save/https://github.com/rae-hugo-kim/QoverRap" \
+    | grep -i "^location:"
