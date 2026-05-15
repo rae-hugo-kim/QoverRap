@@ -1,0 +1,39 @@
+601eb6c | 2026-04-14 14:21:29 +0900 | rae.kim <rae.kim@aipq.kr> | Initial commit
+7704e0e | 2026-04-14 14:22:03 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | chore: initialize QoverRap from claude template
+4c703f2 | 2026-04-14 17:11:27 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | test: pass A-ASM1~3 feasibility spike — QR stack viability confirmed
+70c0318 | 2026-04-14 18:31:25 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | test: pass A-HYP1~4 feasibility spike — overlapping QR encoding validated
+50a4c22 | 2026-04-15 15:41:39 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | test: pass A-ENV2~4 environment durability spike + physical test tooling
+f2315ce | 2026-04-15 15:53:52 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | test: pass A-MET1~4 measurement protocol codification — Phase A code complete
+7363f7f | 2026-04-15 16:40:30 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | feat: add Maestro QR scan automation + physical test tooling
+48001a0 | 2026-04-15 17:19:30 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | feat: add QR version density limit test tooling
+18de81e | 2026-04-15 17:58:07 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | fix: sync display server with scan recorder + physical test results
+0d24e27 | 2026-04-15 18:05:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs: add density test quick reference commands to checklist
+b61e04e | 2026-04-21 13:15:55 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | chore: add harness drift check tooling + OMC session state
+3523b54 | 2026-04-21 13:16:06 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs: add KIPRIS/EPO prior-art survey + search tooling
+1b3918a | 2026-04-21 13:16:13 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | feat: scaffold Phase B qoverwrap source + test suites
+0714b50 | 2026-04-22 19:46:02 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs: complete EPO OPS prior-art survey for CN/JP/EP
+d66795f | 2026-04-24 13:18:58 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs: add Apple Invisible Optical Label (IOL) to prior-art survey
+4b5d63b | 2026-04-28 17:15:24 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | feat: add QoverwRap demo webapp + integration tests
+eefaddc | 2026-04-29 16:59:32 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | feat: patent spec draft + figure capture + UX polish
+bee8aae | 2026-04-30 14:05:04 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): reposition spec to plaintext-prefix + signed-trailer wire format
+c027c8a | 2026-04-30 14:05:52 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | chore(harness): sync harness 2026.5 → 2026.14
+0079bdb | 2026-04-30 14:13:42 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add (마)군 prior-art original citations (P1)
+90d8552 | 2026-04-30 15:31:09 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add §8.6 system block diagram for claim 11 mapping
+b424cbc | 2026-04-30 15:49:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): apply GPT round-2 P0+ consistency patches
+b3e18c1 | 2026-04-30 18:08:11 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): apply GPT round-3 P0++ tightening
+6e5a4cf | 2026-04-30 18:20:46 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): attach KIPO reference numbers throughout spec (direct-filing step 1/3)
+d49a08e | 2026-04-30 18:28:44 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): KIPO BW figure sources + render pipeline (direct-filing step 2/3)
+4cfd07b | 2026-04-30 18:33:04 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): KEAPS submission guide + bibliographic form (direct-filing step 3/3)
+a9905d9 | 2026-04-30 18:51:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): pre-filing 12-month prior-art re-check (2026-04-30)
+e276d02 | 2026-05-04 15:24:16 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): adversarial-review round + spec/code alignment hardening
+beebc52 | 2026-05-04 18:26:47 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | fix(demo): preserve verified-empty Layer B through API + UI (claim 7(iii))
+e82ad20 | 2026-05-04 18:42:35 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | fix(crypto): canonical signing message byte order matches spec §8.1.1
+2a8ad99 | 2026-05-04 19:14:57 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs: add restrictive license / patent-pending notice
+a7e6a94 | 2026-05-04 19:58:11 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | chore(metadata): pyproject.toml license + authors fields
+a223ea2 | 2026-05-14 17:58:20 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 14-round clarity/support hardening + KIPO application draft
+856f57d | 2026-05-14 19:11:09 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): drop attorney-review references — direct KEAPS filing workflow
+4570f6c | 2026-05-15 11:50:38 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 15th-round pre-filing precision review (AF1-AF4)
+5d6c1e6 | 2026-05-15 12:59:18 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 16th-round pre-filing precision review (AG1-AG7)
+c9272c7 | 2026-05-15 14:09:46 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 17th-round pre-filing final corrections (AH1-AH5)
+1d2a36c | 2026-05-15 14:46:01 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 18th-round PlantUML deprecation cleanup (AI1, AI2)
+f525a90 | 2026-05-15 15:31:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add filing-handbook.html for KEAPS direct filing
