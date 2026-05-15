@@ -1,7 +1,7 @@
-@startuml fig8_system_block
+@startuml fig5_system_block
 !include _kipo_style.iuml
 
-title Fig. 8 — 단일 QR 페이로드 계층형 데이터 처리 시스템 (1) 의 구성 블록도
+title Fig. 5 — 단일 QR 페이로드 계층형 데이터 처리 시스템 (1) 의 구성 블록도
 
 package "단일 QR 페이로드 계층형 데이터 처리 시스템 (1)\n— 청구항 11" as SYS {
 

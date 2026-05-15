@@ -1,6 +1,6 @@
 # Patent Figure Sources (KIPO 출원용)
 
-본 디렉토리는 명세서 도면 (Fig. 1, 2, 3, 4, 8) 의 PlantUML 소스 파일을 보관한다. 출원용 흑백 도면은 `../rendered/` 에 자동 생성된다. 데모 화면 캡처 (Fig. 5, 6, 7) 는 PNG 원본이 `../` 에 별도로 보관된다.
+본 디렉토리는 명세서 도면 (Fig. 1 ~ Fig. 6) 의 PlantUML 소스 파일을 보관한다. 출원용 흑백 도면은 `../rendered/` 에 자동 생성된다. 종전 명명 Fig. 8 / Fig. 9 는 16차 라운드 (2026-05-15) 에서 Fig. 5 / Fig. 6 으로 재번호화되었다. 종전 데모 화면 캡처 (`fig{5,6a,6b,6c,7a,7b}_clean.png`) 는 PNG 원본이 `../rendered/` 에 마케팅/내부 검토용으로 보관되며 본 출원에는 미첨부.
 
 ## 도면 목록
 
@@ -10,7 +10,8 @@
 | `fig2_encoder.puml` | Fig. 2 | 인코더 (130) 의 동작 흐름 — S100 ~ S106 |
 | `fig3_decoder_resolver.puml` | Fig. 3 | 디코더 (220) 및 리졸버 (250) 의 동작 흐름 — S200 ~ S208 + safe-fallback |
 | `fig4_issuer_routing.puml` | Fig. 4 | 발급자 식별자 기반 공개키 선택 라우팅 (선택적 실시예) — S300 ~ S305 |
-| `fig8_system_block.puml` | Fig. 8 | 시스템 (1) 의 모듈 구성 블록도 — 발급 측 (100) + 검증 측 (200), 청구항 11 시스템항 매핑 |
+| `fig5_system_block.puml` | Fig. 5 | 시스템 (1) 의 모듈 구성 블록도 — 발급 측 (100) + 검증 측 (200), 청구항 11 시스템항 매핑 |
+| `fig6_mobile_terminal_flow.puml` | Fig. 6 | 휴대용 단말 응용 및 출력 수준별 반환 데이터 흐름 — S401~S406, 청구항 14·15 매핑 |
 
 `_kipo_style.iuml` 은 모든 도면에 공통 적용되는 KIPO 스타일 (흑백, 300dpi, sans-serif) 정의 파일이다.
 
@@ -32,7 +33,7 @@ bash scripts/render_patent_figures.sh
 
 # 특정 도면만 렌더링
 bash scripts/render_patent_figures.sh fig1
-bash scripts/render_patent_figures.sh fig8
+bash scripts/render_patent_figures.sh fig5
 ```
 
 ## 출력 형식
@@ -58,4 +59,4 @@ bash scripts/render_patent_figures.sh fig8
 - [ ] 렌더링된 PNG 가 300dpi 인지 확인 (`identify -format "%x x %y dpi" rendered/fig1_payload.png`)
 - [ ] 모든 텍스트가 ASCII / 한글로 정상 표시되는지 확인 (한글 폰트 fallback 이슈 시 시스템에 Noto Sans KR 등 설치)
 - [ ] 명세서 §7 도면 설명 및 §7.1 참조부호 일람표와 도면 내용이 일치하는지 교차 확인
-- [ ] Fig. 5 ~ 7 (데모 PNG) 은 본 도면군과 별도로, KEAPS 첨부 전 흑백 변환 + 참조부호 부착 필요 (별도 작업)
+- [ ] 종전 데모 PNG (`fig{5,6a,6b,6c,7a,7b}_clean.png`) 는 본 출원에 미첨부 (마케팅/내부 검토용); KEAPS 첨부 도면은 Fig. 1 ~ Fig. 6 의 PlantUML 산출물에 한정

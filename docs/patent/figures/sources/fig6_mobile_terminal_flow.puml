@@ -1,7 +1,7 @@
-@startuml fig9_mobile_terminal_flow
+@startuml fig6_mobile_terminal_flow
 !include _kipo_style.iuml
 
-title Fig. 9 — 휴대용 단말 응용 및 출력 수준별 반환 데이터 흐름 (청구항 14·15)
+title Fig. 6 — 휴대용 단말 응용 및 출력 수준별 반환 데이터 흐름 (청구항 14·15)
 
 start
 
