@@ -42,3 +42,5 @@ d423459 | 2026-05-15 15:39:27 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(pate
 c9ef517 | 2026-05-15 15:51:33 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 19th-round handbook + §30 evidence consistency (AJ1-AJ8)
 7f89031 | 2026-05-15 15:57:45 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): refresh §30 evidence post-push + Web Archive capture
 cd52b73 | 2026-05-15 18:04:09 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 20th-round KEAPS multi-dep error fix (AK1-AK3)
+770be75 | 2026-05-15 18:04:40 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): refresh §30 evidence after 20th-round claim 8/14 fix push
+9dfed38 | 2026-05-15 18:08:40 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 21st-round KEAPS claim 10/11 compatibility (AL1-AL3)
