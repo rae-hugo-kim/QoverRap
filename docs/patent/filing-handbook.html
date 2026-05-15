@@ -233,6 +233,7 @@
     <li><a href="#sec2">작성 완료 문서 (docs/patent/)</a></li>
     <li><a href="#sec3">출원 도면 6장</a></li>
     <li><a href="#sec4">청구항 구조 (15항)</a></li>
+    <li><a href="#sec4b">⚠ §30 공지예외 적용 (필수)</a></li>
     <li><a href="#sec5">KEAPS 입력 순서</a></li>
     <li><a href="#sec6">청구항 형식 변환 (sed)</a></li>
     <li><a href="#sec7">수수료 납부</a></li>
@@ -297,6 +298,21 @@
       <td><span class="file-ref">oa-response-defense-memo.md</span></td>
       <td>청1 단독 진보성 거절 대비 fallback 청구항 1'·1'' 후보</td>
       <td>OA 발부 시 의견서 작성 출발점</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">grace-period-exception-section-30.md</span></td>
+      <td><strong>§30 공지예외 적용 자료</strong> (GitHub 공개 저장소 공지 → §29(1) 신규성 보전)</td>
+      <td><strong>출원과 동시</strong> — KEAPS "공지예외 적용 주장" 체크 + 증명서류 첨부</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">evidence/git-commit-log.txt</span></td>
+      <td>전체 commit log (공지 시점 증명, 39 commits)</td>
+      <td>§30 증명서류 (PDF 변환 후 첨부)</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">evidence/github-repo-metadata.json</span></td>
+      <td>저장소 메타데이터 (PUBLIC 상태, 생성일자, 소유자)</td>
+      <td>§30 증명서류 (PDF 변환 후 첨부)</td>
     </tr>
     <tr>
       <td><span class="file-ref">figures/rendered/fig{1~6}_*.{png,pdf,svg}</span></td>
@@ -378,6 +394,54 @@
 </div>
 </section>
 
+<section id="sec4b">
+<h2>4-B. ⚠ §30 공지예외 적용 (필수)</h2>
+
+<div class="callout">
+  <strong>왜 필요한가</strong>: 본 발명의 코드·문서·도면이 GitHub <em>PUBLIC</em> 저장소 (<code>github.com/rae-hugo-kim/QoverRap</code>) 에 <strong>2026-04-14</strong> 부터 공개되어 있다. 출원 시 §30 적용 주장 없으면 본 저장소 자체가 §29(1) 신규성 부인 근거가 되어 거절 사유가 됨.
+</div>
+
+<p><strong>적용 조항</strong>: 특허법 §30(1)1호 (출원인 자신의 공지) · 공지일로부터 12개월 이내 출원 시 신규성·진보성 부인 안 됨</p>
+
+<table>
+  <thead><tr><th>항목</th><th>내용</th></tr></thead>
+  <tbody>
+    <tr><td>공지 매체</td><td>GitHub PUBLIC 저장소</td></tr>
+    <tr><td>URL</td><td><code>https://github.com/rae-hugo-kim/QoverRap</code></td></tr>
+    <tr><td>공지 시각</td><td><strong>2026-04-14 14:21 KST</strong> (저장소 생성·첫 commit)</td></tr>
+    <tr><td>공지자 = 출원인</td><td>Sangrae Kim (김상래), 이메일 <code>rae.kim@aipq.kr</code></td></tr>
+    <tr><td>동일성 증명</td><td>LICENSE 저작권 표시 + pyproject.toml authors + 모든 commit author email 일관성</td></tr>
+    <tr><td>12개월 기한</td><td>2027-04-14 이전 출원 필수 (현재 약 11개월 여유)</td></tr>
+  </tbody>
+</table>
+
+<h3>출원 시 KEAPS 입력 ✓ 체크</h3>
+<ol>
+  <li>출원서 "공지예외 적용 주장" 섹션 → <strong>✓ 신청함</strong></li>
+  <li>적용 조항: 특허법 §30(1)1호</li>
+  <li>공지일: 2026-04-14</li>
+  <li>공지 매체: 인터넷 (GitHub 공개 저장소)</li>
+  <li>공지자: Sangrae Kim (김상래) — 출원인 본인</li>
+</ol>
+
+<h3>증명서류 첨부 (출원과 동시 또는 30일 이내)</h3>
+<ul class="checklist">
+  <li>공지예외 적용 신청서 (KEAPS 자동 생성 가능)</li>
+  <li>저장소 공개 사실: <span class="file-ref">evidence/github-repo-metadata.json</span> + GitHub 저장소 페이지 브라우저 캡처 PDF</li>
+  <li>공지 시점: <span class="file-ref">evidence/git-commit-log.txt</span> PDF 변환</li>
+  <li>공지자-출원인 동일성: <span class="file-ref">LICENSE</span> + <span class="file-ref">pyproject.toml</span></li>
+  <li>(선택) Web Archive 캡처 — 출원 직전 <code>web.archive.org/save/https://github.com/rae-hugo-kim/QoverRap</code> 요청</li>
+</ul>
+
+<div class="callout info">
+  <strong>상세 절차 + 위험 분석 + 출원 직전 체크리스트</strong>: <span class="file-ref">grace-period-exception-section-30.md</span> 참조 (8개 섹션, 전체 진행 가이드)
+</div>
+
+<div class="callout">
+  <strong>출원 시점 결정</strong>: 본 출원이 늦어질수록 §30 12개월 한도 (2027-04-14) 가 줄어들고, 그 사이 제3자가 동일 발명을 출원할 위험이 증가. <strong>가능한 빨리 출원 권장.</strong>
+</div>
+</section>
+
 <section id="sec5">
 <h2>5. KEAPS 입력 순서</h2>
 
@@ -389,6 +453,7 @@
   <li>발명의 명칭: <em>단일 QR 페이로드 계층형 데이터 처리 시스템 및 방법</em></li>
   <li>출원인 / 발명자 정보 입력</li>
   <li>심사청구 여부 선택 (즉시 청구 권장 — 약 14만원 추가, 심사 기간 단축)</li>
+  <li><strong>⚠ 공지예외 적용 주장 (§30) ✓ 체크</strong> — §4-B 참조</li>
 </ul>
 
 <p><span class="step-num">3</span><strong>명세서 입력</strong></p>
@@ -507,6 +572,9 @@ sed -i \
   <li>발급자 / 발명자 / 대리인 (없음) 정보 입력 완료</li>
   <li>심사청구 여부 결정 (즉시 청구 권장)</li>
   <li>출원료 + 청구항 추가료 + (선택) 심사청구료 결제 수단 준비</li>
+  <li><strong>⚠ §30 공지예외 적용</strong> — KEAPS "공지예외 적용 주장" ✓ 체크 + 증명서류 5종 (저장소 메타데이터, commit log, LICENSE, pyproject.toml, 브라우저 캡처) 첨부 준비</li>
+  <li>출원 직전 Web Archive 캡처 (<code>web.archive.org/save/...</code>) 요청 → URL 기록</li>
+  <li><span class="file-ref">grace-period-exception-section-30.md</span> §7 출원 직전 체크리스트 완료</li>
   <li><span class="file-ref">oa-response-defense-memo.md</span> 위치 확인 (OA 대비)</li>
 </ul>
 
