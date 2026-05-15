@@ -40,3 +40,5 @@ f525a90 | 2026-05-15 15:31:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(pate
 1389a13 | 2026-05-15 15:38:32 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add §30 grace-period exception package
 d423459 | 2026-05-15 15:39:27 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): handbook — surface §30 grace-period exception as own section
 c9ef517 | 2026-05-15 15:51:33 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 19th-round handbook + §30 evidence consistency (AJ1-AJ8)
+7f89031 | 2026-05-15 15:57:45 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): refresh §30 evidence post-push + Web Archive capture
+cd52b73 | 2026-05-15 18:04:09 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 20th-round KEAPS multi-dep error fix (AK1-AK3)
