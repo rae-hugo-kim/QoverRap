@@ -29,7 +29,7 @@ partition "리졸버 (250)" {
   :**S204** — 출력 수준 정규화\n(미지의 access_level → 제1 출력 수준);
 
   if (**S205** — decode 성공?) then (no)
-    #white:**S207** — safe-fallback\nLayer A 만 반환;
+    :**S207** — safe-fallback\nLayer A 만 반환;
     detach
   else (yes)
   endif
@@ -43,14 +43,14 @@ partition "리졸버 (250)" {
     stop
   case (제3\n(verified))
     if (public_key 존재?) then (no)
-      #white:**S207** — safe-fallback;
+      :**S207** — safe-fallback;
       detach
     else (yes)
       :**검증부 (240)** —\nsigning_message 재구성\n(A, B 로부터, §8.1.1)\nverify_signature(pk,\n  signing_message, Layer C);
       if (서명 valid?) then (yes)
         :return (Layer A, Layer B,\n  vr=valid,\n  signature=optional\n   (diagnostic));
       else (no)
-        #white:**S207** — safe-fallback;
+        :**S207** — safe-fallback;
         detach
       endif
     endif
