@@ -24,3 +24,8 @@ test-results/
 # Secrets
 .env
 .env.local
+
+# Confidential research PDFs (other parties' patent docs - never commit)
+docs/research/*.pdf
+docs/research/*.pdf:Zone.Identifier
+plantuml.jar

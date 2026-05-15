@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# render_patent_figures.sh - Render KIPO patent figures (Fig. 1-4, 8) from PlantUML sources.
+# render_patent_figures.sh - Render KIPO patent figures (Fig. 1-6) from PlantUML sources.
 #
 # KIPO 도면 작성 기준:
 #   - 흑백 (BW) — color disabled via _kipo_style.iuml

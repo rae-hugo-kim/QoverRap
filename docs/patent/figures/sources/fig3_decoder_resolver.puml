@@ -8,10 +8,16 @@ start
 
 partition "디코더 (220)" {
   if (**S201** — 구획자 (12) 가\npayload 내에 존재하는가?) then (no)
-    :return\n(payload as Layer A, empty Layer B/C);
+    :return\n(payload as Layer A, absent Layer B/C);
     note right
       단순 모드 처리
-      (청구항 5)
+      (청구항 5) — Layer B/C 는
+      페이로드에 미포함된
+      absent/unset 상태.
+      복합 모드의 영 바이트
+      Layer B (verified-empty)
+      와 출력 데이터 구조에서
+      구별됨 (청구항 13).
     end note
   else (yes)
     :**S202** — split(DELIMITER, max=1)\n→ Layer A (11), 트레일러 (13);
