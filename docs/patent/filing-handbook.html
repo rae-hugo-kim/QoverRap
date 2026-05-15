@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>QoverwRap 특허 KIPO 본인 출원 가이드</title>
+<style>
+  :root {
+    --fg: #1a1a1a;
+    --muted: #555;
+    --bg: #fafafa;
+    --accent: #0066cc;
+    --warn: #b35900;
+    --ok: #006633;
+    --border: #ddd;
+    --mono: 'SF Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+    --sans: -apple-system, BlinkMacSystemFont, 'Noto Sans CJK KR', 'Malgun Gothic', sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: var(--sans);
+    color: var(--fg);
+    background: var(--bg);
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+    line-height: 1.6;
+  }
+  header {
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+  }
+  h1 {
+    margin: 0 0 0.4rem;
+    font-size: 1.7rem;
+    color: var(--accent);
+  }
+  header .meta {
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+  header .status {
+    display: inline-block;
+    background: var(--ok);
+    color: white;
+    padding: 0.15rem 0.6rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+  }
+  nav {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    padding: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  nav h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  nav ol {
+    margin: 0;
+    padding-left: 1.4rem;
+    columns: 2;
+    column-gap: 2rem;
+  }
+  nav a {
+    color: var(--fg);
+    text-decoration: none;
+  }
+  nav a:hover { color: var(--accent); }
+  section {
+    margin-bottom: 3rem;
+    scroll-margin-top: 1rem;
+  }
+  h2 {
+    font-size: 1.3rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-size: 1.05rem;
+    margin: 1.6rem 0 0.5rem;
+    color: var(--muted);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.8rem 0;
+    background: white;
+    font-size: 0.92rem;
+  }
+  th, td {
+    border: 1px solid var(--border);
+    padding: 0.45rem 0.7rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: #eef2f7;
+    font-weight: 600;
+  }
+  td code, p code, li code {
+    font-family: var(--mono);
+    background: #eef;
+    padding: 0.05rem 0.3rem;
+    border-radius: 0.2rem;
+    font-size: 0.88rem;
+  }
+  pre {
+    background: #1e1e1e;
+    color: #e0e0e0;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    overflow-x: auto;
+    font-family: var(--mono);
+    font-size: 0.86rem;
+    line-height: 1.5;
+  }
+  pre code { background: transparent; padding: 0; color: inherit; }
+  .figures {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+    margin: 1rem 0;
+  }
+  figure {
+    margin: 0;
+    border: 1px solid var(--border);
+    border-radius: 0.4rem;
+    background: white;
+    padding: 1rem;
+    text-align: center;
+  }
+  figure img, figure object {
+    max-width: 100%;
+    height: auto;
+    max-height: 480px;
+    background: white;
+  }
+  figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  figcaption strong { color: var(--fg); }
+  .callout {
+    background: #fff8e6;
+    border-left: 4px solid var(--warn);
+    padding: 0.8rem 1rem;
+    margin: 1rem 0;
+    border-radius: 0.2rem;
+  }
+  .callout.ok {
+    background: #ecf7ed;
+    border-left-color: var(--ok);
+  }
+  .callout.info {
+    background: #eaf4ff;
+    border-left-color: var(--accent);
+  }
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+  }
+  .checklist li {
+    padding-left: 1.6rem;
+    position: relative;
+    margin-bottom: 0.4rem;
+  }
+  .checklist li::before {
+    content: "☐";
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+  .step-num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    width: 1.8rem;
+    height: 1.8rem;
+    line-height: 1.8rem;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    font-size: 0.95rem;
+  }
+  .file-ref {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+  }
+  footer {
+    margin-top: 4rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  @media print {
+    body { max-width: none; padding: 1rem; background: white; }
+    nav, header .status { display: none; }
+    section { page-break-inside: avoid; }
+    figure { page-break-inside: avoid; }
+    pre { font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>QoverwRap 특허 KIPO 본인 출원 가이드<span class="status">GO</span></h1>
+  <div class="meta">
+    AI 작성 → KEAPS 본인 출원 워크플로우 · 18-round adversarial review 완료
+    <br>최종 보정: 2026-05-15 · 변리사 검토 단계 없음 · 출원자 직접 KEAPS 입력
+  </div>
+</header>
+
+<nav>
+  <h2>목차</h2>
+  <ol>
+    <li><a href="#sec1">출원 전 준비물</a></li>
+    <li><a href="#sec2">작성 완료 문서 (docs/patent/)</a></li>
+    <li><a href="#sec3">출원 도면 6장</a></li>
+    <li><a href="#sec4">청구항 구조 (15항)</a></li>
+    <li><a href="#sec5">KEAPS 입력 순서</a></li>
+    <li><a href="#sec6">청구항 형식 변환 (sed)</a></li>
+    <li><a href="#sec7">수수료 납부</a></li>
+    <li><a href="#sec8">출원 후 OA 대응</a></li>
+    <li><a href="#sec9">최종 체크리스트</a></li>
+  </ol>
+</nav>
+
+<section id="sec1">
+<h2>1. 출원 전 준비물</h2>
+<ul class="checklist">
+  <li>특허고객번호 (KIPO 가입 시 부여, 미가입 시 <a href="https://www.patent.go.kr/">patent.go.kr</a> 에서 신규 가입)</li>
+  <li>공인인증서 또는 간편인증 (KEAPS 로그인용)</li>
+  <li>출원료 결제 수단 (계좌이체 / 신용카드 / 가상계좌)</li>
+  <li>본 가이드 + <code class="file-ref">docs/patent/</code> 전체 (브라우저 + 텍스트 에디터로 동시 열기)</li>
+  <li>KEAPS 소프트웨어 (KIPO 사이트에서 다운로드 + 설치)</li>
+</ul>
+</section>
+
+<section id="sec2">
+<h2>2. 작성 완료 문서 (docs/patent/)</h2>
+<table>
+  <thead>
+    <tr>
+      <th>파일</th>
+      <th>역할</th>
+      <th>KEAPS 입력 시 사용</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><span class="file-ref">qoverwrap-kipo-application-draft.md</span></td>
+      <td>KIPO §42 출원서 본문 (서지·명세서·청구범위·요약서·도면 목록 완전판)</td>
+      <td><strong>주 입력 소스</strong> — 섹션별 KEAPS 필드에 1:1 복사</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">spec-draft.md</span></td>
+      <td>upstream 마스터 (작업 이력 §12 포함, 18차 라운드 전체 기록)</td>
+      <td>참조용 — 청구항 뒷받침 근거 §9.0 매핑 표 확인</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">keaps-submission-guide.md</span></td>
+      <td>KEAPS 입력 절차 + 청구항 인용 형식 변환표</td>
+      <td>§3.1 sed 일괄 변환 명령 (본 가이드 §6 도 참조)</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">bibliographic-form.md</span></td>
+      <td>서지사항 양식 (출원인·발명자·대리인·심사청구 항목)</td>
+      <td>KEAPS §서지사항 필드 입력 시 참조</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">prior-art-survey.md</span></td>
+      <td>선행기술 조사 결과 (12개월 재조사 포함)</td>
+      <td>OA 단계 의견서 작성 시 인용 자료</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">remediation-plan-2026-05-13.md</span></td>
+      <td>거절이유 자체 비평 + 보완계획</td>
+      <td>참조용 — 청구항 좁힘 근거</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">oa-response-defense-memo.md</span></td>
+      <td>청1 단독 진보성 거절 대비 fallback 청구항 1'·1'' 후보</td>
+      <td>OA 발부 시 의견서 작성 출발점</td>
+    </tr>
+    <tr>
+      <td><span class="file-ref">figures/rendered/fig{1~6}_*.{png,pdf,svg}</span></td>
+      <td>출원 도면 6장 (BW, 300dpi, PlantUML 자동 생성)</td>
+      <td>KEAPS §도면 첨부 (PNG 또는 PDF)</td>
+    </tr>
+  </tbody>
+</table>
+</section>
+
+<section id="sec3">
+<h2>3. 출원 도면 6장</h2>
+<p>Fig. 1 ~ Fig. 6, KIPO 흑백/300dpi, PlantUML 자동 생성. 18차 라운드 deprecation warning 제거 완료.</p>
+
+<div class="figures">
+
+<figure>
+  <img src="figures/rendered/fig1_payload.svg" alt="Fig. 1 — 단일 페이로드 wire format">
+  <figcaption><strong>Fig. 1</strong> — 단일 페이로드 문자열 (10) 의 비트 레이아웃 · Layer A(11) / 구획자(12) / 트레일러(13) [헤더(14) + Layer B(15) + Layer C(16)] · <em>청1, 청3, 청4 매핑</em></figcaption>
+</figure>
+
+<figure>
+  <img src="figures/rendered/fig2_encoder.svg" alt="Fig. 2 — 인코더 동작 흐름">
+  <figcaption><strong>Fig. 2</strong> — 인코더 (130) 의 동작 흐름 · S100 ~ S106 · <em>청1 (생성 방법) 매핑</em></figcaption>
+</figure>
+
+<figure>
+  <img src="figures/rendered/fig3_decoder_resolver.svg" alt="Fig. 3 — 디코더·리졸버 동작 흐름">
+  <figcaption><strong>Fig. 3</strong> — 디코더 (220) 및 리졸버 (250) 의 동작 흐름 · S200 ~ S208 + safe-fallback · <em>청2 (검증 방법), 청5, 청7, 청8 매핑</em></figcaption>
+</figure>
+
+<figure>
+  <img src="figures/rendered/fig4_issuer_routing.svg" alt="Fig. 4 — 발급자 식별자 기반 키 라우팅">
+  <figcaption><strong>Fig. 4</strong> — 발급자 식별자 기반 공개키 선택 라우팅 (선택적 실시예) · S300 ~ S305 · <em>청6, 청9 매핑</em></figcaption>
+</figure>
+
+<figure>
+  <img src="figures/rendered/fig5_system_block.svg" alt="Fig. 5 — 시스템 구성 블록도">
+  <figcaption><strong>Fig. 5</strong> — 단일 QR 페이로드 계층형 데이터 처리 시스템 (1) 의 구성 블록도 · 발급 측 (100) + 검증 측 (200) · <em>청11 (시스템 독립항) 매핑</em></figcaption>
+</figure>
+
+<figure>
+  <img src="figures/rendered/fig6_mobile_terminal_flow.svg" alt="Fig. 6 — 휴대용 단말 응용 흐름">
+  <figcaption><strong>Fig. 6</strong> — 휴대용 단말 응용 및 출력 수준별 반환 데이터 흐름 · S401 ~ S406 · <em>청14 (휴대용 단말 응용), 청15 (시스템 종속) 매핑</em></figcaption>
+</figure>
+
+</div>
+
+<div class="callout">
+  <strong>참고</strong>: 종전 데모 캡처 (<code>fig{5,6a,6b,6c,7a,7b}_clean.png</code>) 는 16차 라운드 도면 재번호화 이전 명명으로, 본 출원에 미첨부 (마케팅·내부 검토용).
+</div>
+</section>
+
+<section id="sec4">
+<h2>4. 청구항 구조 (15항)</h2>
+<table>
+  <thead><tr><th>청구항</th><th>유형</th><th>인용</th><th>핵심 내용</th></tr></thead>
+  <tbody>
+    <tr><td><strong>청1</strong></td><td>방법 독립</td><td>-</td><td>단일 QR 페이로드 <strong>생성 방법</strong> · Layer A 선두 평문 + 구획자 + base64 trailer + 5바이트 헤더 + Ed25519 서명</td></tr>
+    <tr><td><strong>청2</strong></td><td>방법 독립</td><td>-</td><td>단일 QR 페이로드 <strong>검증 방법</strong> · 단순/복합 모드 자동 판별 + 외부 시스템 호출 없는 오프라인 검증</td></tr>
+    <tr><td>청3</td><td>방법 종속</td><td>청1</td><td>이진 헤더 5바이트 (1+2+2) + base64 인코딩 구체화</td></tr>
+    <tr><td>청4</td><td>방법 종속</td><td>청1</td><td>구획자 = 줄바꿈 문자로 둘러싸인 고유 문자열</td></tr>
+    <tr><td>청5</td><td>방법 종속</td><td>청2</td><td>단순 모드 처리는 트레일러 디코딩·서명 검증 미호출</td></tr>
+    <tr><td>청6</td><td>방법 종속</td><td>청2</td><td>Ed25519 알고리즘 + 신뢰 레지스트리 + Layer C 길이 64바이트 검증</td></tr>
+    <tr><td>청7</td><td>방법 종속</td><td>청2</td><td>리졸버 3단 출력 수준 (제1/제2/제3)</td></tr>
+    <tr><td>청8</td><td>방법 종속</td><td>청7</td><td>안전 강등 정책 (구조 파싱 실패 그룹 / 검증 실패 그룹 2그룹 분리)</td></tr>
+    <tr><td>청9</td><td>방법 종속</td><td>청2</td><td>발급자 식별자 → 공개키 라우팅</td></tr>
+    <tr><td>청10</td><td>CRM</td><td>청1~9, 12~14</td><td>컴퓨터 판독 가능 저장 매체</td></tr>
+    <tr><td><strong>청11</strong></td><td>시스템 독립</td><td>-</td><td>1 이상의 프로세서 + 메모리 + 인코더/디코더/검증부/리졸버 구성</td></tr>
+    <tr><td>청12</td><td>방법 종속</td><td>청2</td><td>Canonical signing message 정규화 바이트열</td></tr>
+    <tr><td>청13</td><td>방법 종속</td><td>청7</td><td>Verified-empty Layer B 보존 (영 바이트 검증 vs 부재 구별)</td></tr>
+    <tr><td>청14</td><td>방법 종속</td><td>청2</td><td>휴대용 단말 응용 + 시각·청각·촉각 출력</td></tr>
+    <tr><td>청15</td><td>시스템 종속</td><td>청11</td><td>Canonical + verified-empty 시스템 결합</td></tr>
+  </tbody>
+</table>
+
+<div class="callout info">
+  <strong>방어 portfolio</strong>: 청1 (broad 생성항) + 청2 (broad 검증항) 두 독립항을 핵심으로 두되, 거절 시 청7·8·12·13 결합으로 방어. 청1 단독 진보성이 약하다는 평가는 <code class="file-ref">oa-response-defense-memo.md</code> 의 fallback 청구항 1'/1'' 후보로 대비.
+</div>
+</section>
+
+<section id="sec5">
+<h2>5. KEAPS 입력 순서</h2>
+
+<p><span class="step-num">1</span><strong>특허고객번호 로그인 → "특허 출원" 메뉴 선택</strong></p>
+
+<p><span class="step-num">2</span><strong>서지사항 입력</strong></p>
+<ul>
+  <li>참조: <span class="file-ref">bibliographic-form.md</span> §1~§7</li>
+  <li>발명의 명칭: <em>단일 QR 페이로드 계층형 데이터 처리 시스템 및 방법</em></li>
+  <li>출원인 / 발명자 정보 입력</li>
+  <li>심사청구 여부 선택 (즉시 청구 권장 — 약 14만원 추가, 심사 기간 단축)</li>
+</ul>
+
+<p><span class="step-num">3</span><strong>명세서 입력</strong></p>
+<ul>
+  <li>참조: <span class="file-ref">qoverwrap-kipo-application-draft.md</span></li>
+  <li>KEAPS 필드별 매핑:
+    <table>
+      <thead><tr><th>KEAPS 필드</th><th>application-draft.md 섹션</th></tr></thead>
+      <tbody>
+        <tr><td>발명의 명칭</td><td>【발명의 명칭】 §0001</td></tr>
+        <tr><td>기술분야</td><td>【기술분야】 §0002~§0003</td></tr>
+        <tr><td>배경기술</td><td>【발명의 배경이 되는 기술】 §0004~§0005</td></tr>
+        <tr><td>선행기술문헌</td><td>【선행기술문헌】 §0006~§0017 (특허 5건 + 비특허 5건)</td></tr>
+        <tr><td>해결하려는 과제</td><td>【해결하고자 하는 과제】 §0018~§0023</td></tr>
+        <tr><td>과제의 해결수단</td><td>【과제의 해결 수단】 §0024~§0029</td></tr>
+        <tr><td>발명의 효과</td><td>【발명의 효과】 §0030~§0035</td></tr>
+        <tr><td>도면의 간단한 설명</td><td>【도면의 간단한 설명】 §0036~§0041 + §부호의 설명 §0074~§0102</td></tr>
+        <tr><td>발명을 실시하기 위한 구체적인 내용</td><td>【발명을 실시하기 위한 구체적인 내용】 §0042~§0073</td></tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<p><span class="step-num">4</span><strong>청구범위 입력</strong></p>
+<ul>
+  <li>참조: <span class="file-ref">qoverwrap-kipo-application-draft.md</span> §청구범위 (청1 ~ 청15)</li>
+  <li><strong>인용 형식 변환 필수</strong>: "청구항 N" → "제 N 항" (§6 참조)</li>
+  <li>각 청구항을 KEAPS 청구항 번호별 분리 필드에 1:1 복사</li>
+</ul>
+
+<p><span class="step-num">5</span><strong>요약서 입력</strong></p>
+<ul>
+  <li>참조: <span class="file-ref">qoverwrap-kipo-application-draft.md</span> §0/【요약서】 (약 500자)</li>
+  <li>대표도: <strong>도 5</strong> (시스템 구성 블록도)</li>
+</ul>
+
+<p><span class="step-num">6</span><strong>도면 첨부</strong></p>
+<ul>
+  <li>경로: <span class="file-ref">docs/patent/figures/rendered/fig{1~6}_*.png</span> (6장)</li>
+  <li>도면 번호 부여: Fig. 1 = "도 1", Fig. 2 = "도 2", ..., Fig. 6 = "도 6"</li>
+  <li>형식: PNG (300dpi, 흑백), 또는 PDF</li>
+</ul>
+
+<p><span class="step-num">7</span><strong>출원료 결제 → 출원번호 수령</strong></p>
+</section>
+
+<section id="sec6">
+<h2>6. 청구항 형식 변환 (sed 일괄)</h2>
+<p>KEAPS 표준 인용 형식 "<code>제 N 항</code>" 으로 변환. application-draft.md 의 본문 사본에 적용 후 KEAPS 에 복사.</p>
+
+<pre><code># sed 일괄 변환 (역순 — 두 자리 → 한 자리 순)
+sed -i \
+  -e 's/청구항 15/제 15 항/g' \
+  -e 's/청구항 14/제 14 항/g' \
+  -e 's/청구항 13/제 13 항/g' \
+  -e 's/청구항 12/제 12 항/g' \
+  -e 's/청구항 11/제 11 항/g' \
+  -e 's/청구항 10/제 10 항/g' \
+  -e 's/청구항 9/제 9 항/g' \
+  -e 's/청구항 8/제 8 항/g' \
+  -e 's/청구항 7/제 7 항/g' \
+  -e 's/청구항 6/제 6 항/g' \
+  -e 's/청구항 5/제 5 항/g' \
+  -e 's/청구항 4/제 4 항/g' \
+  -e 's/청구항 3/제 3 항/g' \
+  -e 's/청구항 2/제 2 항/g' \
+  -e 's/청구항 1/제 1 항/g' \
+  /tmp/qoverwrap-claims.md</code></pre>
+
+<div class="callout">
+  <strong>주의</strong>: 청구범위 본문에만 적용. 본문 §발명을 실시하기 위한 구체적 내용 등의 "청구항 N" 인용은 KEAPS 의 명세서 필드에 그대로 들어가도 무방하나 일관성을 위해 변환 권장.
+</div>
+</section>
+
+<section id="sec7">
+<h2>7. 수수료 납부 (2026 개인 출원 기준)</h2>
+<table>
+  <thead><tr><th>항목</th><th>금액 (예상)</th><th>비고</th></tr></thead>
+  <tbody>
+    <tr><td>출원료 본료</td><td>약 46,000원</td><td>개인 출원</td></tr>
+    <tr><td>청구항 추가료 (15개)</td><td>약 30,000~50,000원</td><td>청구항당 약 4,000~10,000원, 정확한 금액은 KIPO 수수료표 확인</td></tr>
+    <tr><td><strong>출원 합계</strong></td><td><strong>약 80,000~100,000원</strong></td><td>심사청구 미포함</td></tr>
+    <tr><td>심사청구료 (선택)</td><td>약 143,000원</td><td>출원과 동시 청구 권장</td></tr>
+    <tr><td>우선심사 신청 (선택)</td><td>약 200,000원</td><td>등록 단축 (1년 → 6개월)</td></tr>
+  </tbody>
+</table>
+
+<p>공식 수수료 (변동 가능): <a href="https://www.kipo.go.kr/">https://www.kipo.go.kr/</a> → "수수료 안내"</p>
+</section>
+
+<section id="sec8">
+<h2>8. 출원 후 OA (거절이유통지) 대응</h2>
+<p>출원 후 평균 1~2년 내 심사관 OA 발부 가능. 60일 이내 의견서 + 보정서 제출 필수.</p>
+
+<ol>
+  <li><strong>OA 수령 시 즉시 확인 사항</strong>: 거절이유 (§29(2) 진보성 / §42(4) 명확성·뒷받침 / §47(2) 신규사항 / §29(1) 신규성) 및 인용 선행기술 식별</li>
+  <li><strong>의견서 답변 논거</strong>: <span class="file-ref">oa-response-defense-memo.md</span> §2 (broad 청1 유지 논거) 참조</li>
+  <li><strong>거절이유 청1 단독에 집중 시 fallback 보정</strong>: <span class="file-ref">oa-response-defense-memo.md</span> §3.1 (청1') 또는 §3.2 (청1'') 적용 검토</li>
+  <li><strong>인용 본문 위치</strong>: <span class="file-ref">oa-response-defense-memo.md</span> §4 의 application-draft 본문 위치 표 활용</li>
+</ol>
+
+<div class="callout info">
+  <strong>전략 메모</strong>: 청1 broad 거절 시 청2 (검증 방법) + 청7·8·12·13 종속항으로 등록 가능. 청1 fallback 보정은 거절이유 회피 최후 수단. 본 명세서가 fallback 보정안을 본문 §8.1 · §8.1.1 로 모두 뒷받침하므로 §47(2) 신규사항 위반 위험 없음.
+</div>
+</section>
+
+<section id="sec9">
+<h2>9. 최종 출원 직전 체크리스트</h2>
+<ul class="checklist">
+  <li>특허고객번호 로그인 가능 확인</li>
+  <li><span class="file-ref">qoverwrap-kipo-application-draft.md</span> 최신 상태 확인 (git log <code>5d6c1e6</code> 이후 변경 없음)</li>
+  <li><span class="file-ref">figures/rendered/fig{1~6}_*.png</span> 6장 모두 존재 + Fig. N title 정합 (PlantUML deprecation warning 0건)</li>
+  <li>청구항 1 ~ 15 KEAPS 인용 형식 (제 N 항) 으로 변환 (§6 sed)</li>
+  <li>대표도 = 도 5</li>
+  <li>요약서 ~500자 (KEAPS 권장)</li>
+  <li>발급자 / 발명자 / 대리인 (없음) 정보 입력 완료</li>
+  <li>심사청구 여부 결정 (즉시 청구 권장)</li>
+  <li>출원료 + 청구항 추가료 + (선택) 심사청구료 결제 수단 준비</li>
+  <li><span class="file-ref">oa-response-defense-memo.md</span> 위치 확인 (OA 대비)</li>
+</ul>
+
+<div class="callout ok">
+  <strong>출원 완료 후</strong>: 출원번호 (예: 10-2026-XXXXXXX) 를 <span class="file-ref">spec-draft.md</span> 또는 별도 파일에 기록. 이후 통지서 · 의견서 제출 시 출원번호로 추적.
+</div>
+</section>
+
+<footer>
+  <p>본 가이드는 QoverwRap 특허 출원 워크플로우의 일부입니다. 작업 이력 전체는 <span class="file-ref">docs/patent/spec-draft.md</span> §12 (1차 ~ 18차 라운드) 에 기록됨.</p>
+  <p>법률 자문 아님. KIPO 공식 절차 및 수수료는 <a href="https://www.kipo.go.kr/">kipo.go.kr</a> 에서 최종 확인.</p>
+</footer>
+
+</body>
+</html>
