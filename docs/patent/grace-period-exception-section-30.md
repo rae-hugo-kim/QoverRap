@@ -14,13 +14,36 @@
 | 저장소 URL | https://github.com/rae-hugo-kim/QoverRap |
 | 저장소 명 | `rae-hugo-kim/QoverRap` (calling 명 "QoverwRap" 의 GitHub 명) |
 | 저장소 공개 상태 | **PUBLIC** (gh CLI 메타데이터 확인, `isPrivate: false`) |
-| 저장소 생성 시각 | 2026-04-14 05:21:23 UTC = **2026-04-14 14:21 KST** |
+| 최초 공지일 (저장소 PUBLIC 생성·첫 push) | 2026-04-14 05:21:23 UTC = **2026-04-14 14:21 KST** |
 | 첫 commit 시각 | 2026-04-14 14:21:29 KST (`601eb6c Initial commit`) |
-| 최종 commit 시각 (현재 기준) | 2026-05-15 15:31:21 KST (`f525a90`) |
+| 최종 push 시각 (GitHub 기준, gh CLI `pushedAt`) | **2026-05-04 10:58:11 UTC = 2026-05-04 19:58 KST** |
+| 로컬 최신 commit (출원 직전 push 예정) | 2026-05-15 이후 (출원 직전 push 시점) |
 | 공지자 (GitHub 계정) | `rae-hugo-kim` (이메일 `rae.kim@aipq.kr`) |
-| 공지 내용 | 본 발명 (단일 QR 페이로드 계층형 데이터 처리 시스템 및 방법) 의 명세서·청구항·도면·구현 코드 전체 |
+| 공지 내용 | 본 발명의 명세서·청구항·도면·구현 코드. 단, **공개 범위는 GitHub 에 push 된 commit 까지** — 로컬 commit 만 있는 부분은 공지 대상 아님 |
 
-**공지 기간**: 2026-04-14 ~ 출원일까지 (약 1개월, 12개월 이내 출원 → §30 적용 가능)
+**공지 기간 (현재 시점)**:
+- **1차 공개**: 2026-04-14 (저장소 PUBLIC 생성 + 첫 push, 원본 11항 청구항 + 명세서 골격 + 구현 + Fig. 1~4)
+- **연속 보완 공개**: 2026-04-14 ~ 2026-05-04 (마지막 push 시점, 청12~15 의 기초 구현 + 원 Fig. 8/9 도면 + 다수 보정 라운드)
+- **로컬 보완 (push 미완료)**: 2026-05-04 이후의 commits (16~19차 라운드 청구항·본문 보정, 도면 재번호화 Fig. 5/6 재렌더) 는 현 시점 GitHub 에 미반영. 출원 직전 push 시 공지 범위 확장됨.
+
+**§30 12개월 기한**: 최초 공지일 2026-04-14 기준 → **2027-04-14 이전 출원 필수**.
+
+---
+
+## 1.A 공지 일자별 commit / 청구항 매핑
+
+| 일자 | 주요 commit (대표) | GitHub 반영 (push 시점 ≤ 2026-05-04 = ✓) | 공지된 청구항·도면 |
+|---|---|---|---|
+| 2026-04-14 | `601eb6c` Initial commit, `7704e0e` initialize | ✓ | 저장소 골격, 초기 README·LICENSE |
+| 2026-04-14 ~ 04-29 | 다수 feasibility/spec/figure commits | ✓ | 본 발명의 wire format 본문 + 청구항 1·2·3·4·5·6·7·8·9·10·11 의 기술적 기재 (원본 11항) + Fig. 1~4 (PlantUML 첫 산출) |
+| 2026-04-30 | `90d8552 docs(patent): add §8.6 system block diagram for claim 11 mapping` | ✓ | 청11 (시스템 독립항) 본문 + 원 Fig. 8 (현 Fig. 5) 시스템 블록도 |
+| 2026-05-04 (마지막 push) | `c027c8a chore(harness): sync harness 2026.5 → 2026.14`, `bee8aae docs(patent): reposition spec to plaintext-prefix + signed-trailer wire format` | ✓ | 명세서 본문 재포지셔닝 (선두 평문 prefix + signed trailer wire format), 5차~7차 라운드 보정. 이 시점까지의 청1~11 본문이 GitHub 에 공개됨 |
+| 2026-05-05 ~ 05-15 (로컬 only) | `eefaddc feat: patent spec draft + figure capture`, `a223ea2 docs(patent): 14-round clarity/support hardening` 등 16~19차 보정 commits | ✗ (push 미완료) | 청12 (canonical signing), 청13 (verified-empty 보존), 청14 (휴대용 단말), 청15 (시스템 종속) 의 청구항 본문, Fig. 6 (mobile flow) 신설, 응용 명세서 보정, Fig. 5/6 재번호화 — **현 시점 미공개**. 출원 직전 push 시 공지 범위 확장 |
+
+**해석**:
+- 2026-05-04 까지 push 된 부분에 대해서만 §30 적용이 필요. 그 이후 (로컬) 변경은 공지된 적이 없으므로 §29(1) 우려 자체가 없음.
+- 출원 직전에 final push 를 수행하면, 그 시점이 청12~15 의 최초 공지일이 되며, 모두 §30 12개월 윈도우 내에 위치.
+- **권장**: 출원 직전 (a) 모든 로컬 commits push → (b) Web Archive 캡처 → (c) KEAPS 출원. 이 순서로 진행하면 §30 적용 범위가 명확히 출원 전체 청구항을 포섭.
 
 ---
 
@@ -68,22 +91,30 @@
 
 ## 4. 공지 내용 (본 출원과의 대응)
 
-본 출원 (`docs/patent/qoverwrap-kipo-application-draft.md`) 의 청구범위 청1 ~ 청15 에 대응하는 공지 내용:
+본 출원 (`docs/patent/qoverwrap-kipo-application-draft.md`) 의 청구범위 청1 ~ 청15 에 대응하는 공지 내용 및 GitHub 공개 여부:
 
-| 본 출원 청구항 | 공지 위치 (GitHub 저장소 내 경로) |
-|---|---|
-| 청1 (생성 방법), 청2 (검증 방법) | `src/qoverwrap/encoder.py`, `src/qoverwrap/decoder.py` |
-| 청3 (5바이트 헤더), 청4 (구획자), 청12 (canonical signing) | `src/qoverwrap/encoder.py`, `src/qoverwrap/crypto.py` |
-| 청5 (단순 모드), 청7 (3단 출력 수준), 청8 (안전 강등), 청13 (verified-empty) | `src/qoverwrap/decoder.py`, `src/qoverwrap/resolver.py` |
-| 청6 (Ed25519 + 64바이트 길이) | `src/qoverwrap/crypto.py` |
-| 청9 (발급자 라우팅) | `src/qoverwrap/registry.py` |
-| 청10 (CRM) | 저장소 전체 (Python source) |
-| 청11 (시스템 독립항), 청15 (시스템 종속) | `src/qoverwrap/` + `demo/` 통합 구성 |
-| 청14 (휴대용 단말 응용) | `demo/frontend/`, `demo/backend/` |
-| 명세서 §발명을 실시하기 위한 구체적인 내용 | `docs/patent/spec-draft.md`, `docs/patent/qoverwrap-kipo-application-draft.md` |
-| 도면 Fig. 1 ~ Fig. 6 | `docs/patent/figures/rendered/fig{1..6}_*.{png,pdf,svg}` |
+| 본 출원 청구항 | 공지 위치 (GitHub 저장소 내 경로) | 현 시점 GitHub 공개? |
+|---|---|---|
+| 청1 (생성 방법), 청2 (검증 방법) | `src/qoverwrap/encoder.py`, `src/qoverwrap/decoder.py` | ✓ (≤2026-05-04 push) |
+| 청3 (5바이트 헤더), 청4 (구획자) | `src/qoverwrap/encoder.py` | ✓ |
+| 청5 (단순 모드), 청7 (3단 출력 수준), 청8 (안전 강등) | `src/qoverwrap/decoder.py`, `src/qoverwrap/resolver.py` | ✓ |
+| 청6 (Ed25519) | `src/qoverwrap/crypto.py` | ✓ (구현 코드) / Layer C 길이 64바이트 명시 한정의 청구항 본문은 로컬 only |
+| 청9 (발급자 라우팅) | `src/qoverwrap/registry.py` | ✓ |
+| 청10 (CRM) | 저장소 전체 (Python source) | ✓ |
+| 청11 (시스템 독립항) | `src/qoverwrap/` + `demo/` 통합 구성 + 명세서 §8.6 (원 Fig. 8 → 현 Fig. 5) | ✓ (~2026-04-30 시스템 블록도 추가 이후) |
+| 청12 (canonical signing message 정규화) | `src/qoverwrap/crypto.py` (canonical signing 함수 구현) | ✓ (구현 코드) / 청구항 본문 명시화는 로컬 only |
+| 청13 (verified-empty Layer B 보존) | `src/qoverwrap/resolver.py` (verified-empty 처리 로직) | ✓ (구현) / positive limitation 청구항 본문은 로컬 only |
+| 청14 (휴대용 단말 응용) | `demo/frontend/`, `demo/backend/` | ✓ (데모 앱) / 휴대용 단말 청구항 본문은 로컬 only |
+| 청15 (시스템 종속, canonical+verified-empty 결합) | 결합 실시예 (`demo/` + spec §8.7.3) | ✗ (로컬 only) |
+| 명세서 §발명을 실시하기 위한 구체적인 내용 | `docs/patent/spec-draft.md`, `docs/patent/qoverwrap-kipo-application-draft.md` | 부분 ✓ (2026-04-14 ~ 05-04 push 분), 이후 보정은 로컬 only |
+| 도면 Fig. 1 ~ Fig. 4 | `docs/patent/figures/rendered/fig{1..4}_*.png` | ✓ |
+| 도면 Fig. 5 (system block, 원 Fig. 8) | `docs/patent/figures/rendered/fig5_system_block.png` (원본은 `fig8_system_block.png` 로 push 됨) | ✓ (원 명명으로 공개) / 재번호화·재렌더는 로컬 only |
+| 도면 Fig. 6 (mobile flow, 원 Fig. 9) | `docs/patent/figures/rendered/fig6_mobile_terminal_flow.png` (원본은 `fig9_mobile_terminal_flow.png` 로 push 됨) | ✓ (원 명명으로 공개) / 재번호화·재렌더는 로컬 only |
 
-**공지 범위**: 본 출원의 모든 청구항이 공지된 저장소 콘텐츠로부터 직접 또는 자명한 도출로 식별 가능. 따라서 본 §30 적용은 본 출원의 모든 청구항·도면·명세서에 대하여 일괄 주장됨.
+**공지 범위 해석**:
+- **2026-05-04 이전 push 분**: 청1~11 본문 (원본 11항) + Fig. 1~4 + 원 Fig. 8/9 + 구현 코드 전체. 본 부분에 대해 §30 적용 주장.
+- **2026-05-04 이후 로컬 commits**: 청12~15 본문, 청1·6·14 의 정밀화 표현, Fig. 5/6 재번호화 및 재렌더. **공지된 적 없음 → §29(1) 우려 없음 → §30 적용 대상도 아님**. 단, 출원 직전 push 시점에서 공지 범위 확장됨.
+- 본 §30 신청은 **2026-04-14 의 1차 공개**를 기점으로 일괄 주장하되, 청구항별 최초 공지 시점은 위 표의 commit 매핑으로 추적 가능. 모든 공지가 12개월 윈도우 내에 위치하므로 §30 적용 영향 균질.
 
 ---
 
@@ -151,11 +182,13 @@ KEAPS "공지예외 증명서류" 첨부 항목에 다음 자료 제출:
 
 ## 7. 출원 직전 체크리스트
 
-- [ ] Web Archive 에 https://github.com/rae-hugo-kim/QoverRap 캡처 요청 → URL 기록
-- [ ] GitHub 저장소 페이지 (Code 탭, Issues 탭, History 탭) 브라우저 캡처 → PDF 저장
-- [ ] `docs/patent/evidence/git-commit-log.txt` 출원 직전 시점으로 재생성 (출원 직전 최종 commit 까지 포함)
-- [ ] `docs/patent/evidence/github-repo-metadata.json` 출원 직전 재추출
+- [ ] **모든 로컬 commits 를 GitHub 에 push** (`git push origin main`) — 청12~15·재번호화 등 로컬-only 항목을 공지 범위에 편입할지 결정. push 후 본 §1.A 표의 "GitHub 반영" 컬럼 일괄 ✓ 처리 가능
+- [ ] **Web Archive 캡처**: `https://web.archive.org/save/https://github.com/rae-hugo-kim/QoverRap` 요청 → 캡처 URL 기록 (예: `https://web.archive.org/web/2026MMDDhhmmss/...`)
+- [ ] GitHub 저장소 페이지 브라우저 캡처 (Code 탭 + History 탭) → PDF 저장
+- [ ] `docs/patent/evidence/git-commit-log.txt` 출원 직전 시점으로 재생성 — `git log --reverse --format="%h | %ai | %an <%ae> | %s" > docs/patent/evidence/git-commit-log.txt`
+- [ ] `docs/patent/evidence/github-repo-metadata.json` 출원 직전 재추출 — `gh repo view rae-hugo-kim/QoverRap --json visibility,createdAt,pushedAt,isPrivate,nameWithOwner,url,licenseInfo,updatedAt > docs/patent/evidence/github-repo-metadata.json`. push 직후 pushedAt 갱신 확인
 - [ ] LICENSE 파일 PDF 변환 (출원인 명의 명시)
+- [ ] pyproject.toml authors 필드 캡처 (출원인 = `Sangrae Kim (김상래)`)
 - [ ] (필요 시) GitHub 계정 설정 페이지 캡처 (이메일 일치 확인용)
 - [ ] KEAPS 출원서에서 "공지예외 적용 주장" ✓ 체크
 - [ ] 위 증명서류 모두 KEAPS 첨부 (PDF / 이미지)

@@ -37,3 +37,5 @@ a223ea2 | 2026-05-14 17:58:20 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(pate
 c9272c7 | 2026-05-15 14:09:46 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 17th-round pre-filing final corrections (AH1-AH5)
 1d2a36c | 2026-05-15 14:46:01 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): 18th-round PlantUML deprecation cleanup (AI1, AI2)
 f525a90 | 2026-05-15 15:31:21 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add filing-handbook.html for KEAPS direct filing
+1389a13 | 2026-05-15 15:38:32 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): add §30 grace-period exception package
+d423459 | 2026-05-15 15:39:27 +0900 | rae-hugo-kim <rae.kim@aipq.kr> | docs(patent): handbook — surface §30 grace-period exception as own section
