@@ -28,15 +28,20 @@ OUT_DIR="docs/patent/figures/rendered"
 mkdir -p "$OUT_DIR"
 
 # Determine renderer
+# PlantUML default PNG dimension cap is 4096px. Set to 8192 to avoid
+# bottom-clipping on tall flowcharts (fig3 was 4368px, clipped to 4096).
+export PLANTUML_LIMIT_SIZE=8192
+JAVA_OPTS="-DPLANTUML_LIMIT_SIZE=8192"
+
 PLANTUML_CMD=""
 if command -v plantuml >/dev/null 2>&1; then
   PLANTUML_CMD="plantuml"
 elif [[ -n "${PLANTUML_JAR:-}" && -f "$PLANTUML_JAR" ]]; then
-  PLANTUML_CMD="java -jar $PLANTUML_JAR"
+  PLANTUML_CMD="java $JAVA_OPTS -jar $PLANTUML_JAR"
 elif [[ -f "plantuml.jar" ]]; then
-  PLANTUML_CMD="java -jar plantuml.jar"
+  PLANTUML_CMD="java $JAVA_OPTS -jar plantuml.jar"
 elif command -v docker >/dev/null 2>&1; then
-  PLANTUML_CMD="docker run --rm -v $(pwd):/work -w /work plantuml/plantuml"
+  PLANTUML_CMD="docker run --rm -e PLANTUML_LIMIT_SIZE=8192 -v $(pwd):/work -w /work plantuml/plantuml"
 else
   echo "ERROR: PlantUML not found. Install one of:"
   echo "  - sudo apt install plantuml"
