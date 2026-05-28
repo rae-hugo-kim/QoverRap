@@ -50,6 +50,26 @@ class EncodeResponse(BaseModel):
     encoded: str = Field(..., description="Full QR payload string")
 
 
+class EncodeLayerBRequest(BaseModel):
+    """Build a Layer B hex string from structured ticket data via the demo codec.
+
+    The chosen format determines the byte layout (and downstream QR size).
+    """
+
+    ticket: dict = Field(
+        ..., description="TicketLayerB fields as a JSON object (validated server-side)"
+    )
+    format: Literal["json", "cbor", "cbor_aggr"] = Field(
+        "json", description="Layer B serialization format — see layer_b_codec"
+    )
+
+
+class EncodeLayerBResponse(BaseModel):
+    layer_b_hex: str = Field(..., description="Encoded Layer B bytes as hex string")
+    byte_size: int = Field(..., description="Encoded Layer B size in bytes")
+    format: Literal["json", "cbor", "cbor_aggr"]
+
+
 class QrImageRequest(BaseModel):
     encoded: str
     box_size: int = Field(10, ge=2, le=40)

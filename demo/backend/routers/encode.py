@@ -8,9 +8,24 @@ import qrcode
 from fastapi import APIRouter, HTTPException
 from qrcode.constants import ERROR_CORRECT_H, ERROR_CORRECT_L, ERROR_CORRECT_M, ERROR_CORRECT_Q
 
+from pydantic import ValidationError
+
 from qoverwrap.encoder import encode_layers
 
-from ..schemas import EncodeRequest, EncodeResponse, QrImageRequest, QrImageResponse
+from ..layer_b_codec import (
+    TicketLayerB,
+    encode_cbor,
+    encode_cbor_aggressive,
+    encode_json,
+)
+from ..schemas import (
+    EncodeLayerBRequest,
+    EncodeLayerBResponse,
+    EncodeRequest,
+    EncodeResponse,
+    QrImageRequest,
+    QrImageResponse,
+)
 
 router = APIRouter(prefix="/api", tags=["encode"])
 
@@ -38,6 +53,33 @@ def encode(req: EncodeRequest) -> EncodeResponse:
     except (TypeError, ValueError) as exc:
         raise HTTPException(status_code=422, detail=str(exc)) from exc
     return EncodeResponse(encoded=encoded)
+
+
+_LAYER_B_ENCODERS = {
+    "json": encode_json,
+    "cbor": encode_cbor,
+    "cbor_aggr": encode_cbor_aggressive,
+}
+
+
+@router.post("/encode-layer-b", response_model=EncodeLayerBResponse)
+def encode_layer_b(req: EncodeLayerBRequest) -> EncodeLayerBResponse:
+    """Build a Layer B hex string from a TicketLayerB model + format choice.
+
+    Caller flow: encode-layer-b → sign (via trust router) → encode (assembly).
+    """
+    try:
+        ticket = TicketLayerB.model_validate(req.ticket)
+    except ValidationError as exc:
+        raise HTTPException(status_code=422, detail=exc.errors()) from exc
+
+    encoder = _LAYER_B_ENCODERS[req.format]
+    raw = encoder(ticket)
+    return EncodeLayerBResponse(
+        layer_b_hex=raw.hex(),
+        byte_size=len(raw),
+        format=req.format,
+    )
 
 
 @router.post("/qr-image", response_model=QrImageResponse)
