@@ -103,6 +103,18 @@ class ResolveResponse(BaseModel):
     )
 
 
+# ---- redeem -----------------------------------------------------------------
+
+class RedeemRequest(BaseModel):
+    payload: str
+    max_uses: int = Field(1, ge=1, description="Maximum number of times this ticket may be redeemed")
+
+
+class RedeemResponse(BaseModel):
+    status: Literal["ok", "already_used", "invalid"]
+    use_count: int = Field(..., description="Current use count after this attempt (0 when invalid)")
+
+
 # ---- trust registry ---------------------------------------------------------
 
 class TrustEntry(BaseModel):
