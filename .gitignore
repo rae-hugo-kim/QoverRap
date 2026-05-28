@@ -15,6 +15,7 @@ __pycache__/
 
 # OMC internal state
 .omc/state/
+.omc/harness-state/
 
 # Generated test artifacts
 test-qr-images/
