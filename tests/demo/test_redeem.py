@@ -123,16 +123,19 @@ def test_tampered_signature_returns_invalid(redeem_client: TestClient) -> None:
 
 
 def test_tampered_does_not_increment_counter(redeem_client: TestClient) -> None:
-    """A tampered redeem attempt leaves a later valid redeem unaffected."""
-    # First, a tampered attempt
-    tampered = _make_tampered_payload(redeem_client, "tigers-2026", "seat-D4")
-    redeem_client.post("/api/redeem", json={"payload": tampered, "max_uses": 1})
+    """A tampered redeem must not enter the counter — repeated attempts stay invalid.
 
-    # A valid payload for the same issuer (different signature → different counter key)
-    valid = _make_signed_payload(redeem_client, "tigers-2026", "seat-D4-valid")
-    r = redeem_client.post("/api/redeem", json={"payload": valid, "max_uses": 1})
-    assert r.json()["status"] == "ok"
-    assert r.json()["use_count"] == 1
+    If verify_signature failure ever stopped short-circuiting the store call,
+    the second attempt would observe a non-zero counter (or already_used). Asserting
+    invalid+use_count=0 on retry directly probes that the store is untouched.
+    """
+    tampered = _make_tampered_payload(redeem_client, "tigers-2026", "seat-D4")
+
+    for attempt in range(3):
+        r = redeem_client.post("/api/redeem", json={"payload": tampered, "max_uses": 1})
+        data = r.json()
+        assert data["status"] == "invalid", f"attempt {attempt}: expected invalid, got {data}"
+        assert data["use_count"] == 0, f"attempt {attempt}: counter must stay 0, got {data}"
 
 
 def test_different_seat_different_counter(redeem_client: TestClient) -> None:
