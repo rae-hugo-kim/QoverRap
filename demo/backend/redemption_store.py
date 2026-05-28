@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import os
 import sqlite3
+import threading
 from pathlib import Path
 from typing import Optional
 
@@ -39,8 +40,13 @@ class RedemptionStore:
         else:
             db_path = os.environ.get("QWR_REDEMPTION_DB", str(_DEFAULT_DB))
             self._conn = sqlite3.connect(db_path, check_same_thread=False)
+        # Autocommit mode: we manage transactions explicitly via BEGIN IMMEDIATE.
+        self._conn.isolation_level = None
         self._conn.execute(_DDL)
-        self._conn.commit()
+        # Serializes redeem() across threads that share this connection — SQLite
+        # forbids nested transactions on a single connection, so we cannot rely
+        # on BEGIN IMMEDIATE alone when check_same_thread=False is in effect.
+        self._lock = threading.Lock()
 
     def redeem(self, signature_hex: str, max_uses: int) -> tuple[str, int]:
         """Attempt to redeem one use slot for the given signature.
@@ -49,40 +55,47 @@ class RedemptionStore:
           "ok"           – slot consumed; use_count is the *new* value.
           "already_used" – max_uses already reached; use_count is unchanged.
         """
-        cur = self._conn.execute(
-            "SELECT use_count, max_uses FROM redemptions WHERE signature = ?",
-            (signature_hex,),
-        )
-        row = cur.fetchone()
+        with self._lock:
+            self._conn.execute("BEGIN IMMEDIATE")
+            try:
+                cur = self._conn.execute(
+                    "SELECT use_count, max_uses FROM redemptions WHERE signature = ?",
+                    (signature_hex,),
+                )
+                row = cur.fetchone()
 
-        if row is None:
-            # First encounter — insert with use_count=1
-            if max_uses < 1:
-                return ("already_used", 0)
-            self._conn.execute(
-                """
-                INSERT INTO redemptions (signature, use_count, max_uses)
-                VALUES (?, 1, ?)
-                """,
-                (signature_hex, max_uses),
-            )
-            self._conn.commit()
-            return ("ok", 1)
+                if row is None:
+                    if max_uses < 1:
+                        self._conn.execute("ROLLBACK")
+                        return ("already_used", 0)
+                    self._conn.execute(
+                        """
+                        INSERT INTO redemptions (signature, use_count, max_uses)
+                        VALUES (?, 1, ?)
+                        """,
+                        (signature_hex, max_uses),
+                    )
+                    self._conn.execute("COMMIT")
+                    return ("ok", 1)
 
-        current_count, stored_max = row
-        effective_max = stored_max  # honour original max_uses on first insert
+                current_count, stored_max = row
+                effective_max = stored_max
 
-        if current_count >= effective_max:
-            return ("already_used", current_count)
+                if current_count >= effective_max:
+                    self._conn.execute("ROLLBACK")
+                    return ("already_used", current_count)
 
-        new_count = current_count + 1
-        self._conn.execute(
-            """
-            UPDATE redemptions
-            SET use_count = ?, last_seen = datetime('now')
-            WHERE signature = ?
-            """,
-            (new_count, signature_hex),
-        )
-        self._conn.commit()
-        return ("ok", new_count)
+                new_count = current_count + 1
+                self._conn.execute(
+                    """
+                    UPDATE redemptions
+                    SET use_count = ?, last_seen = datetime('now')
+                    WHERE signature = ?
+                    """,
+                    (new_count, signature_hex),
+                )
+                self._conn.execute("COMMIT")
+                return ("ok", new_count)
+            except Exception:
+                self._conn.execute("ROLLBACK")
+                raise

@@ -157,3 +157,44 @@ def test_different_seat_different_counter(redeem_client: TestClient) -> None:
     # Second attempt on E5 → already used
     r_e5_dup = redeem_client.post("/api/redeem", json={"payload": payload_e5, "max_uses": 1})
     assert r_e5_dup.json()["status"] == "already_used"
+
+
+def test_concurrent_redeem_only_one_succeeds() -> None:
+    """Hammer the store directly from N threads — exactly one ok, rest already_used.
+
+    We exercise RedemptionStore.redeem directly (not via TestClient) because
+    TestClient is not guaranteed thread-safe. The race lives in the store,
+    which is what we need to verify is atomic.
+    """
+    import sqlite3
+    import threading
+
+    from demo.backend.redemption_store import RedemptionStore
+
+    conn = sqlite3.connect(":memory:", check_same_thread=False)
+    store = RedemptionStore(conn=conn)
+
+    sig = "deadbeef" * 16  # fake 64-byte signature (hex)
+    n_threads = 16
+    results: list[tuple[str, int]] = []
+    results_lock = threading.Lock()
+    barrier = threading.Barrier(n_threads)
+
+    def hammer() -> None:
+        barrier.wait()
+        status, count = store.redeem(sig, max_uses=1)
+        with results_lock:
+            results.append((status, count))
+
+    threads = [threading.Thread(target=hammer) for _ in range(n_threads)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+
+    ok_count = sum(1 for s, _ in results if s == "ok")
+    already = sum(1 for s, _ in results if s == "already_used")
+    assert ok_count == 1, f"expected exactly 1 ok, got {ok_count}: {results}"
+    assert already == n_threads - 1, f"expected {n_threads - 1} already_used: {results}"
+    # No thread should observe use_count > 1 — that would mean overshoot.
+    assert all(c == 1 for _, c in results), results
