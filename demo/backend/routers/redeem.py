@@ -8,7 +8,7 @@ Flow:
 """
 from __future__ import annotations
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 
 from qoverwrap.decoder import decode_layers
 from qoverwrap.crypto import verify_signature
@@ -19,12 +19,22 @@ from ..schemas import RedeemRequest, RedeemResponse
 
 router = APIRouter(prefix="/api", tags=["redeem"])
 
-# Module-level store instance — tests override this attribute directly.
-_store: RedemptionStore = RedemptionStore()
+_store: RedemptionStore | None = None
+
+
+def get_store() -> RedemptionStore:
+    """Lazy-init redemption store. Tests override via `app.dependency_overrides`."""
+    global _store
+    if _store is None:
+        _store = RedemptionStore()
+    return _store
 
 
 @router.post("/redeem", response_model=RedeemResponse)
-def redeem(req: RedeemRequest) -> RedeemResponse:
+def redeem(
+    req: RedeemRequest,
+    store: RedemptionStore = Depends(get_store),
+) -> RedeemResponse:
     # 1. Decode
     try:
         layer_a, layer_b_bytes, layer_c_bytes = decode_layers(req.payload)
@@ -44,5 +54,5 @@ def redeem(req: RedeemRequest) -> RedeemResponse:
 
     # 4. Consult counter
     signature_hex = layer_c_bytes.hex()
-    status, use_count = _store.redeem(signature_hex, req.max_uses)
+    status, use_count = store.redeem(signature_hex, req.max_uses)
     return RedeemResponse(status=status, use_count=use_count)

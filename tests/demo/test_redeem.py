@@ -54,21 +54,21 @@ def _make_tampered_payload(client: TestClient, issuer_id: str, message: str) -> 
 # ---------------------------------------------------------------------------
 
 @pytest.fixture()
-def redeem_client(tmp_path) -> TestClient:
+def redeem_client(tmp_path):
     """TestClient with a fresh in-memory SQLite redemption store per test."""
     import sqlite3
     from demo.backend.redemption_store import RedemptionStore
     from demo.backend.main import app
-    from demo.backend.routers import redeem as redeem_router
+    from demo.backend.routers.redeem import get_store
 
-    db_path = ":memory:"
-    conn = sqlite3.connect(db_path, check_same_thread=False)
+    conn = sqlite3.connect(":memory:", check_same_thread=False)
     store = RedemptionStore(conn=conn)
 
-    # Override the store on the router so tests use isolated DB
-    redeem_router._store = store  # noqa: SLF001
-
-    return TestClient(app)
+    app.dependency_overrides[get_store] = lambda: store
+    try:
+        yield TestClient(app)
+    finally:
+        app.dependency_overrides.pop(get_store, None)
 
 
 # ---------------------------------------------------------------------------
