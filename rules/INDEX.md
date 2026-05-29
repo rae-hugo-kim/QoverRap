@@ -22,6 +22,7 @@ If both global and local guidance exist for the same tool choice, apply global-h
 - Agent security (adversarial threats, prompt injection defense): [`agent_security.md`](agent_security.md)
 - Anti-hallucination & evidence ladder: [`anti_hallucination.md`](anti_hallucination.md)
 - Repo command discovery (never guess commands): [`repo_command_discovery.md`](repo_command_discovery.md)
+- Information discovery (breadth-first search before concluding absence): [`information_discovery.md`](information_discovery.md)
 
 ## Quality rails
 

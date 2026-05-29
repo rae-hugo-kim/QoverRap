@@ -31,6 +31,51 @@ No coding. Only information gathering + state file saving to `docs/harness/`.
 
 ## Workflow
 
+### Phase -1: Brainstorm Discovery (조건부)
+
+이전에 `/brainstorm` 모드로 작성된 캡처가 있으면 발판 삼아 시작한다. 없으면 즉시 Phase 0으로 건너뛴다.
+
+**Agent가 수행**:
+
+1. `docs/brainstorming/*.md` Glob (가장 최근 파일이 먼저 오도록 mtime 또는 파일명 timestamp로 정렬)
+2. 비어있으면 → 이 phase 건너뛰고 Phase 0으로
+3. 있으면 → `AskUserQuestion`으로 옵션 제시:
+   - **최신 파일 사용** (파일명 + 첫 줄 topic 미리보기)
+   - **다른 파일 사용** — 추가 파일이 있을 경우 (3개 이상이면 최근 3개만 표시)
+   - **백지로 시작** (브레인스토밍 무시)
+
+**사용자가 파일을 선택한 경우**:
+
+4. 선택된 파일을 `Read`로 전체 읽기
+5. 캡처에서 다음 **signal**을 메모리에 정리 (파일 수정 X):
+   - **반복 갈래**: 여러 turn에서 다시 언급된 주제
+   - **명시 발언**: 사용자가 "X가 중요/필요/불필요/보류"라고 직접 표명한 항목
+   - **암묵 가정**: 자연스럽게 전제한 기술 스택/사용자/제약
+   - **열린 질문**: 끝까지 답이 나오지 않은 보류 항목
+6. 채택된 파일 경로를 메모리에 보존 → Step 3 seed.yaml `references`에 포함, Step 7 audit.jsonl에 `brainstorm_referenced` 이벤트로 기록.
+
+**Gate**: 사용자가 fresh를 선택했거나 파일 선택을 완료할 때까지.
+
+**후속 phase에서의 사용**:
+
+후속 Phase 0–4 질문에 signal을 **soft hook**으로 녹인다. **결정은 사용자**가 한다 — 캡처 내용을 산출물 필드에 자동 복사하지 않는다.
+
+| Phase | Signal 활용 예 |
+|---|---|
+| 0 JTBD | "브레인스토밍에서 'X 상황에서 답을 못 찾는다' 갈래가 반복됐는데, 그게 user/problem과 어떻게 연결되나요?" |
+| 1 Context | 캡처에서 언급된 기술/패턴/제약을 Repo 탐색의 hypothesis로 활용 후 증거로 검증 |
+| 2 Scope | "브레인스토밍에서 'Y는 지금 하지 말자' 보류 항목이 있었는데, OUT OF SCOPE 또는 MUST NOT으로 넣을까요?" |
+| 3 Acceptance | "브레인스토밍에서 'Z가 작동하면 성공'이라는 신호가 있었는데, 그걸 AC로 정의할 수 있을까요?" |
+| 4 Backpressure | (덜 관련됨, signal 있으면만) |
+
+**금지 사항** (brainstorm 스킬의 보존 정책과 정합):
+
+- 캡처 파일을 후처리/재구조화하지 않음
+- 사용자가 결정해야 할 항목을 캡처에서 추출해 단정하지 않음 ("브레인스토밍에서 X라고 하셨으니 MUST는 X" 같은 단정 금지)
+- 사용자가 fresh를 선택하면 signal 일절 인용하지 않음 (실수로 누설 금지)
+
+---
+
 ### Phase 0: JTBD (Job To Be Done)
 
 **질문** (AskUserQuestion 도구 사용):
@@ -160,7 +205,7 @@ Write 도구로 `docs/harness/kickoff-summary.md`에 아래 Output Format 전체
 - `out_of_scope`: Phase 2 OUT OF SCOPE
 - `assumptions`: Phase 1 Context 중 증거 없이 전제한 항목
 - `risks`: Phase 1 Risks + Phase 3 Edge Cases
-- `references`: kickoff-summary.md + 관련 파일 경로
+- `references`: kickoff-summary.md + 관련 파일 경로 + (Phase -1에서 채택한 brainstorm 캡처 경로, 있을 때만)
 
 **생성 후 자체 검증:**
 - YAML 파싱 가능한가 (Read로 다시 읽어서 확인)
@@ -260,6 +305,11 @@ Write 도구로 `docs/harness/current-scope.md`에 Scope 섹션만 추출하여 
 override가 있었다면 추가:
 ```
 {"ts":"<ISO>","event":"seed_override_approved","actor":"user","meta":{"reason":"<사유>"}}
+```
+
+Phase -1에서 brainstorm 캡처를 채택했다면 추가:
+```
+{"ts":"<ISO>","event":"brainstorm_referenced","actor":"user","meta":{"path":"docs/brainstorming/<file>.md"}}
 ```
 
 > **주의**: 기존 audit.jsonl 내용을 덮어쓰지 말고 반드시 append. Bash `echo '...' >> docs/harness/audit.jsonl` 또는 기존 내용을 Read한 후 합쳐서 Write.

@@ -58,11 +58,15 @@ PATHS=(
   "checklists"
   "templates"
   "CLAUDE.md"
+  "INDEX.md"
+  "EXAMPLES.md"
   ".claude/hooks/harness"
   ".claude/settings.json"
   ".githooks/post-commit"
   "scripts/harness-version-bump.sh"
   "scripts/harness-sync.sh"
+  "scripts/harness-audit.sh"
+  "scripts/test-harness-audit.sh"
   ".claude/skills/bootstrap"
   ".claude/skills/init"
   ".claude/skills/kickoff"
@@ -74,6 +78,9 @@ PATHS=(
   ".claude/skills/harness-check"
   ".claude/skills/code-review"
   ".claude/skills/receiving-code-review"
+  ".claude/skills/brainstorm"
+  ".claude/skills/design-mockup"
+  ".claude/skills/grepai-search"
 )
 
 if [[ $DRY_RUN -eq 1 ]]; then
