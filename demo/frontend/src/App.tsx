@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { api, strToHex } from "./api/client";
-import type { AccessLevel, ResolveResult, TrustEntry } from "./types";
+import type {
+  AccessLevel,
+  LayerBFormat,
+  ResolveResult,
+  TicketLayerB,
+  TrustEntry,
+} from "./types";
 import StepNav from "./components/StepNav";
 import IssuerPicker from "./components/IssuerPicker";
 import QRPanel from "./components/QRPanel";
@@ -23,53 +29,82 @@ const LAYER_A_PRESETS: Record<string, string> = {
   "comic-con-2026": "Comic Con 2026 출입증",
 };
 
-const LAYER_B_PRESETS: Record<string, object> = {
+// Structured Layer B presets — must conform to the backend TicketLayerB schema
+// (layer_b_codec.py): event_id / serial / issued_at required; single `datetime`
+// (not the old date/time split); section/seat/gate/opponent/holder optional.
+const LAYER_B_PRESETS: Record<string, TicketLayerB> = {
   "tigers-2026": {
+    event_id: "tigers-2026-042",
+    serial: "T-000042",
+    issued_at: "2026-04-20T09:00:00+09:00",
     section: "1루 응원석",
     seat: "12B",
     gate: "Gate 3",
-    date: "2026-05-10",
-    time: "18:30",
+    datetime: "2026-05-10T18:30:00+09:00",
     opponent: "Lions",
     holder: "FAN-2456",
   },
   "violet-fandom": {
-    tier: "Diamond Fan",
-    member_id: "VIO-008812",
-    since: "2024-09",
-    exclusive: "Behind The Scenes #07",
+    event_id: "violet-diamond-pass",
+    serial: "VIO-008812",
+    issued_at: "2024-09-01T12:00:00+09:00",
+    section: "Diamond Fan",
+    seat: "BTS#07",
+    gate: "Members Hall",
+    datetime: "2026-06-01T20:00:00+09:00",
+    opponent: "",
+    holder: "VIO-008812",
   },
   "comic-con-2026": {
-    badge: "VIP Pass",
-    name: "코드네임 인비저블",
-    track: "Hall H",
-    panel: "Marvel Studios Reveal",
-    day: "Day 1 / Sat",
+    event_id: "comic-con-2026",
+    serial: "CC-VIP-1138",
+    issued_at: "2026-03-15T10:00:00+09:00",
+    section: "Hall H",
+    seat: "VIP",
+    gate: "Day 1 / Sat",
+    datetime: "2026-07-18T11:00:00+09:00",
+    opponent: "Marvel Studios Reveal",
+    holder: "코드네임 인비저블",
   },
 };
 
+// Tamper presets feed the raw/empty path (strToHex → encode with original
+// signature), so they are intentionally NOT codec-tagged: verification fails
+// and Layer B collapses to null. Shapes mirror TicketLayerB for a coherent
+// "forged" display in the bare view.
 const TAMPER_PRESETS: Record<string, object> = {
   "tigers-2026": {
+    event_id: "tigers-2026-042",
+    serial: "T-000042",
+    issued_at: "2026-04-20T09:00:00+09:00",
     section: "VVIP 스카이박스",
     seat: "FORGED",
     gate: "Gate 1",
-    date: "2026-05-10",
-    time: "18:30",
+    datetime: "2026-05-10T18:30:00+09:00",
     opponent: "Lions",
     holder: "STOLEN-0001",
   },
   "violet-fandom": {
-    tier: "★★★ Platinum ★★★",
-    member_id: "VIO-FORGED",
-    since: "2020-01",
-    exclusive: "ALL CONTENT",
+    event_id: "violet-diamond-pass",
+    serial: "VIO-FORGED",
+    issued_at: "2024-09-01T12:00:00+09:00",
+    section: "★★★ Platinum ★★★",
+    seat: "ALL",
+    gate: "Members Hall",
+    datetime: "2026-06-01T20:00:00+09:00",
+    opponent: "",
+    holder: "VIO-FORGED",
   },
   "comic-con-2026": {
-    badge: "STAFF ALL-ACCESS",
-    name: "FORGED ATTENDEE",
-    track: "Hall H",
-    panel: "Marvel Studios Reveal",
-    day: "All Days",
+    event_id: "comic-con-2026",
+    serial: "CC-FORGED",
+    issued_at: "2026-03-15T10:00:00+09:00",
+    section: "Hall H",
+    seat: "STAFF ALL-ACCESS",
+    gate: "All Days",
+    datetime: "2026-07-18T11:00:00+09:00",
+    opponent: "Marvel Studios Reveal",
+    holder: "FORGED ATTENDEE",
   },
 };
 
@@ -93,10 +128,17 @@ export default function App() {
   const [layerBJson, setLayerBJson] = useState("{}");
   const [tamperedJson, setTamperedJson] = useState("{}");
 
+  const [layerBFormat, setLayerBFormat] = useState<LayerBFormat>("json");
+  // raw/empty mode preserves the strToHex path used for verified-empty, tamper,
+  // and arbitrary-Layer-B demos. When on, the format selector is ignored.
+  const [rawMode, setRawMode] = useState(false);
+
   const [encoded, setEncoded] = useState<string | null>(null);
   const [pngBase64, setPngBase64] = useState<string | null>(null);
   const [lastSig, setLastSig] = useState<string | null>(null);
   const [lastLayerBHex, setLastLayerBHex] = useState<string | null>(null);
+  const [layerBBytes, setLayerBBytes] = useState<number | null>(null);
+  const [payloadBytes, setPayloadBytes] = useState<number | null>(null);
   const [tampered, setTampered] = useState(false);
 
   const [themed, setThemed] = useState(true);
@@ -154,6 +196,8 @@ export default function App() {
     setResolves({ public: null, authenticated: null, verified: null });
     setLastSig(null);
     setLastLayerBHex(null);
+    setLayerBBytes(null);
+    setPayloadBytes(null);
     setTampered(false);
     setErr(null);
     setActive("issuer");
@@ -178,12 +222,28 @@ export default function App() {
     setResolves({ public: null, authenticated: null, verified: null });
     setTampered(false);
     try {
-      const layerBHex = strToHex(layerBJson);
+      let layerBHex: string;
+      let layerBByteCount: number;
+      if (rawMode) {
+        // raw/empty path: preserves verified-empty (empty Layer B) and
+        // arbitrary-Layer-B demos. Format selector is ignored here.
+        layerBHex = strToHex(layerBJson);
+        layerBByteCount = layerBHex.length / 2;
+      } else {
+        // structured path: validate as TicketLayerB and encode via the codec
+        // in the selected format. byte_size is the demo's headline metric.
+        const ticketObj = JSON.parse(layerBJson) as object;
+        const lb = await api.encodeLayerB(ticketObj, layerBFormat);
+        layerBHex = lb.layer_b_hex;
+        layerBByteCount = lb.byte_size;
+      }
       const sig = await api.trustSign(issuerId, layerA, layerBHex);
       const enc = await api.encode(layerA, layerBHex, sig.signature);
       const img = await api.qrImage(enc.encoded, { box_size: 14, border: 4 });
       setLastSig(sig.signature);
       setLastLayerBHex(layerBHex);
+      setLayerBBytes(layerBByteCount);
+      setPayloadBytes(new TextEncoder().encode(enc.encoded).length);
       setEncoded(enc.encoded);
       setPngBase64(img.image_png_base64);
       setActive("qr");
@@ -394,7 +454,7 @@ export default function App() {
               </label>
               <label className="block text-sm">
                 <span className="block text-xs text-slate-500 mb-1">
-                  Layer B (앱 전용 콘텐츠 JSON)
+                  Layer B ({rawMode ? "임의 바이트 (raw)" : "TicketLayerB JSON"})
                 </span>
                 <textarea
                   value={layerBJson}
@@ -403,6 +463,52 @@ export default function App() {
                   className="w-full px-2 py-1.5 border border-slate-300 rounded text-xs font-mono"
                 />
               </label>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <label className="flex items-center gap-1.5 text-xs text-slate-600">
+                <input
+                  data-testid="raw-mode-toggle"
+                  type="checkbox"
+                  checked={rawMode}
+                  onChange={(e) => setRawMode(e.target.checked)}
+                  className="rounded border-slate-300"
+                />
+                raw / empty Layer B 모드 (verified-empty · 변조 데모용)
+              </label>
+              <div
+                className={`flex items-center gap-1 ${
+                  rawMode ? "opacity-40 pointer-events-none" : ""
+                }`}
+              >
+                <span className="text-xs text-slate-500 mr-1">Layer B 포맷:</span>
+                {(
+                  [
+                    ["json", "JSON"],
+                    ["cbor", "CBOR"],
+                    ["cbor_aggr", "CBOR aggr."],
+                  ] as [LayerBFormat, string][]
+                ).map(([fmt, label]) => (
+                  <label
+                    key={fmt}
+                    className={`px-2 py-1 rounded text-xs border cursor-pointer ${
+                      layerBFormat === fmt
+                        ? "bg-slate-900 text-white border-slate-900"
+                        : "bg-white text-slate-600 border-slate-300 hover:border-slate-500"
+                    }`}
+                  >
+                    <input
+                      data-testid={`format-${fmt}`}
+                      type="radio"
+                      name="layer-b-format"
+                      value={fmt}
+                      checked={layerBFormat === fmt}
+                      onChange={() => setLayerBFormat(fmt)}
+                      className="sr-only"
+                    />
+                    {label}
+                  </label>
+                ))}
+              </div>
             </div>
             <details className="text-sm">
               <summary className="cursor-pointer text-slate-600">
@@ -439,13 +545,41 @@ export default function App() {
           >
             <div>
               <QRPanel pngBase64={pngBase64} themed={themed} issuer={issuer} />
+              {pngBase64 && layerBBytes != null && (
+                <div
+                  data-testid="byte-size"
+                  className="mt-2 inline-flex items-center gap-2 rounded-lg bg-slate-900 text-white px-3 py-1.5 text-xs"
+                >
+                  <span className="font-semibold">
+                    Layer B {layerBBytes} B
+                  </span>
+                  <span className="text-slate-400">·</span>
+                  <span className="uppercase tracking-wide text-emerald-300 font-mono">
+                    {rawMode ? "raw" : layerBFormat}
+                  </span>
+                  {payloadBytes != null && (
+                    <>
+                      <span className="text-slate-400">·</span>
+                      <span className="text-slate-300">
+                        전체 페이로드 {payloadBytes} B
+                      </span>
+                    </>
+                  )}
+                </div>
+              )}
               {pngBase64 && !screenshot && (
                 <button
                   onClick={downloadQR}
-                  className="mt-2 px-3 py-1 bg-slate-200 rounded text-xs"
+                  className="mt-2 px-3 py-1 bg-slate-200 rounded text-xs block"
                 >
                   PNG 다운로드
                 </button>
+              )}
+              {pngBase64 && !screenshot && !rawMode && (
+                <p className="mt-1 text-[10px] text-slate-400">
+                  포맷을 바꿔 다시 생성하면 Layer B 바이트 수가 달라집니다 (JSON →
+                  CBOR → CBOR aggr.).
+                </p>
               )}
             </div>
             {!screenshot && (

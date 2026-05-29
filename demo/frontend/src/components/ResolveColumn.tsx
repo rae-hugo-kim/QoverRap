@@ -1,6 +1,6 @@
 import type { ResolveResult, TrustEntry, AccessLevel } from "../types";
 import { hexToStr } from "../api/client";
-import ThemedCard, { parseLayerBJson } from "./ThemedCard";
+import ThemedCard from "./ThemedCard";
 
 interface Props {
   level: AccessLevel;
@@ -67,12 +67,19 @@ export default function ResolveColumn({
 }: Props) {
   const themeBg = themed && issuer ? issuer.theme_color : "#0f172a";
   const themeAccent = themed && issuer ? issuer.accent_color : "#64748b";
-  // Use `!= null` (not truthiness): an empty Layer B hex (`""`) is a legal
-  // "verified-but-empty" outcome and must be distinguishable from "Layer B
-  // absent" (null) per claim 7(iii). Truthy check would collapse both.
+  // Consume the backend's already-decoded ticket (result.layer_b_ticket) rather
+  // than re-decoding the hex client-side — this works for every Layer B format
+  // (json / cbor / cbor_aggr) because the backend normalizes to one dict.
+  //
+  // Use `!= null` (not truthiness) on `layer_b`: an empty Layer B hex (`""`) is
+  // a legal "verified-but-empty" outcome and must be distinguishable from
+  // "Layer B absent" (null) per claim 7(iii). For verified-empty the backend
+  // returns layer_b="" with layer_b_ticket=null, so we surface an empty `{}`
+  // card (exposed, no fields) rather than a locked card. Tamper/public yield
+  // layer_b=null → locked.
   const layerBData =
     result && result.layer_b != null
-      ? parseLayerBJson(hexToStr(result.layer_b))
+      ? (result.layer_b_ticket ?? {})
       : null;
 
   // Themed mode — render each level as an in-app screen

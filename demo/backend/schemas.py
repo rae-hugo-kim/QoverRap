@@ -108,6 +108,14 @@ class ResolveRequest(BaseModel):
 class ResolveResponse(BaseModel):
     layer_a: str
     layer_b: Optional[str] = None
+    layer_b_ticket: Optional[dict] = Field(
+        None,
+        description="Layer B bytes decoded via the demo codec (TicketLayerB.model_dump()). Present only when Layer B is exposed and decodable; None otherwise.",
+    )
+    layer_b_format: Optional[Literal["json", "cbor", "cbor_aggr"]] = Field(
+        None,
+        description="Layer B serialization format derived from the leading tag byte (0x01->json, 0x02->cbor, 0x03->cbor_aggr). None when Layer B is absent/empty/undecodable.",
+    )
     signature: Optional[str] = Field(
         None,
         description="Hex-encoded Ed25519 signature when verified=True; diagnostic only, not user data.",

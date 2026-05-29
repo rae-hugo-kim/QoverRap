@@ -1,5 +1,25 @@
 export type AccessLevel = "public" | "authenticated" | "verified";
 
+export type LayerBFormat = "json" | "cbor" | "cbor_aggr";
+
+/** Mirrors the backend TicketLayerB schema (layer_b_codec.py). */
+export interface TicketLayerB {
+  kind?: "ticket";
+  /** required */
+  event_id: string;
+  /** required */
+  serial: string;
+  /** required — ISO 8601 */
+  issued_at: string;
+  /** optional (default "") */
+  section?: string;
+  seat?: string;
+  gate?: string;
+  datetime?: string;
+  opponent?: string;
+  holder?: string;
+}
+
 export interface KeyPair {
   private_key: string;
   public_key: string;
@@ -17,6 +37,10 @@ export interface TrustEntry {
 export interface ResolveResult {
   layer_a: string;
   layer_b: string | null;
+  /** Layer B decoded via the demo codec; null when Layer B is absent/empty/undecodable */
+  layer_b_ticket?: TicketLayerB | null;
+  /** Layer B serialization format derived from the leading tag byte */
+  layer_b_format?: LayerBFormat | null;
   /** Hex Ed25519 signature when verified; diagnostic only */
   signature: string | null;
   verified: boolean;

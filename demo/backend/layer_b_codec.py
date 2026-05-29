@@ -74,10 +74,18 @@ _TICKET_AGGRESSIVE_TS_FIELDS = {"issued_at", "datetime"}
 
 
 def _iso_to_epoch(iso: str) -> int:
-    """Parse ISO 8601 to unix epoch seconds. Empty string → 0."""
+    """Parse ISO 8601 to unix epoch seconds. Empty string → 0.
+
+    Naive (offset-less) inputs are interpreted as UTC rather than the server's
+    local timezone, so the aggressive-CBOR epoch is deterministic regardless of
+    where encoding runs. Inputs that carry an offset are unchanged.
+    """
     if not iso:
         return 0
-    return int(dt_module.fromisoformat(iso).timestamp())
+    d = dt_module.fromisoformat(iso)
+    if d.tzinfo is None:
+        d = d.replace(tzinfo=tz_module.utc)
+    return int(d.timestamp())
 
 
 def _epoch_to_iso(epoch: int) -> str:

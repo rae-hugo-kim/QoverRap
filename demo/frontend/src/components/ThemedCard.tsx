@@ -1,26 +1,42 @@
-import type { TrustEntry } from "../types";
+import { useEffect, useState } from "react";
+import type { TicketLayerB, TrustEntry } from "../types";
 
-type CardData = Record<string, unknown>;
+// All issuer cards now read from the backend-decoded TicketLayerB dict, so the
+// card is format-agnostic (json / cbor / cbor_aggr all decode to this shape).
+type CardData = Partial<TicketLayerB>;
+
+// ISO timestamps are displayed at a fixed timezone so the same ticket reads
+// identically across formats: aggressive-CBOR normalizes to a UTC ISO string
+// while json/cbor keep the original offset, but both denote the same instant.
+// Pinning to Asia/Seoul makes that instant render the same wall-clock time.
+const _SEOUL_DATETIME = new Intl.DateTimeFormat("ko-KR", {
+  timeZone: "Asia/Seoul",
+  dateStyle: "medium",
+  timeStyle: "short",
+});
+const _SEOUL_MONTH = new Intl.DateTimeFormat("ko-KR", {
+  timeZone: "Asia/Seoul",
+  year: "numeric",
+  month: "2-digit",
+});
+
+function fmtDateTime(iso?: string): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? "—" : _SEOUL_DATETIME.format(d);
+}
+
+function fmtMonth(iso?: string): string {
+  if (!iso) return "—";
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? "—" : _SEOUL_MONTH.format(d);
+}
 
 interface Props {
   issuer: TrustEntry;
   data: CardData;
   verified: boolean;
   locked?: boolean;
-}
-
-function safeParse(s: string | null | undefined): CardData {
-  if (!s) return {};
-  try {
-    const v = JSON.parse(s);
-    return typeof v === "object" && v !== null ? (v as CardData) : {};
-  } catch {
-    return { _raw: s };
-  }
-}
-
-export function parseLayerBJson(s: string | null | undefined): CardData {
-  return safeParse(s);
 }
 
 function VerifiedStamp({ verified }: { verified: boolean }) {
@@ -33,6 +49,43 @@ function VerifiedStamp({ verified }: { verified: boolean }) {
       }`}
     >
       {verified ? "✓ ISSUER VERIFIED" : "UNVERIFIED"}
+    </div>
+  );
+}
+
+/**
+ * Liveness strip — a per-second clock plus a flowing shimmer band. Its only
+ * job is to make a still screenshot visibly stale on the spot: the printed
+ * timestamp freezes while a live screen keeps ticking (PRD §7.5). Rendered in
+ * every mode (including screenshot mode) so the captured frame carries a clock.
+ */
+function LivenessStrip({ accent }: { accent: string }) {
+  const [now, setNow] = useState(() => new Date());
+  useEffect(() => {
+    const id = window.setInterval(() => setNow(new Date()), 1000);
+    return () => window.clearInterval(id);
+  }, []);
+  const hhmmss = now.toLocaleTimeString("ko-KR", { hour12: false });
+  return (
+    <div className="relative z-[1] overflow-hidden border-t border-white/15 px-4 py-1.5 flex items-center justify-between text-[10px]">
+      <span
+        className="absolute inset-0 opacity-30 animate-card-shimmer"
+        style={{
+          background: `linear-gradient(110deg, transparent 35%, ${accent}, transparent 65%)`,
+          backgroundSize: "200% 100%",
+        }}
+        aria-hidden
+      />
+      <span className="relative font-mono tracking-wider opacity-80">
+        LIVE · 실시간 검증 화면
+      </span>
+      <span
+        data-testid="liveness-clock"
+        className="relative font-mono font-bold tabular-nums"
+        style={{ color: accent }}
+      >
+        {hhmmss}
+      </span>
     </div>
   );
 }
@@ -105,7 +158,7 @@ function StarBurstIcon({ color }: { color: string }) {
   );
 }
 
-/* --- Per-issuer cards ---------------------------------------------------- */
+/* --- Per-issuer cards ----------------------------------------------------- */
 
 function TigersTicket({ issuer, data, verified }: Props) {
   return (
@@ -142,17 +195,13 @@ function TigersTicket({ issuer, data, verified }: Props) {
         </div>
       </div>
       <div className="px-4 py-3 grid grid-cols-2 gap-y-2 gap-x-3 text-sm relative z-[1]">
-        <div>
-          <div className="text-[9px] uppercase opacity-60">DATE</div>
-          <div className="font-semibold">{String(data.date ?? "—")}</div>
-        </div>
-        <div>
-          <div className="text-[9px] uppercase opacity-60">TIME</div>
-          <div className="font-semibold">{String(data.time ?? "—")}</div>
+        <div className="col-span-2">
+          <div className="text-[9px] uppercase opacity-60">DATETIME</div>
+          <div className="font-semibold">{fmtDateTime(data.datetime)}</div>
         </div>
         <div>
           <div className="text-[9px] uppercase opacity-60">SECTION</div>
-          <div className="font-semibold">{String(data.section ?? "—")}</div>
+          <div className="font-semibold">{data.section || "—"}</div>
         </div>
         <div>
           <div className="text-[9px] uppercase opacity-60">SEAT</div>
@@ -160,25 +209,26 @@ function TigersTicket({ issuer, data, verified }: Props) {
             className="font-extrabold text-3xl leading-none"
             style={{ color: issuer.accent_color }}
           >
-            {String(data.seat ?? "—")}
+            {data.seat || "—"}
           </div>
         </div>
         <div>
           <div className="text-[9px] uppercase opacity-60">GATE</div>
-          <div className="font-semibold">{String(data.gate ?? "—")}</div>
+          <div className="font-semibold">{data.gate || "—"}</div>
         </div>
         <div>
           <div className="text-[9px] uppercase opacity-60">OPPONENT</div>
-          <div className="font-semibold">vs {String(data.opponent ?? "—")}</div>
+          <div className="font-semibold">vs {data.opponent || "—"}</div>
         </div>
       </div>
       <div
         className="px-4 py-2 text-[10px] opacity-70 font-mono border-t border-dashed flex justify-between relative z-[1]"
         style={{ borderColor: issuer.accent_color }}
       >
-        <span>HOLDER · {String(data.holder ?? "—")}</span>
-        <span>NON-TRANSFERABLE</span>
+        <span>HOLDER · {data.holder || "—"}</span>
+        <span>{data.serial || "NON-TRANSFERABLE"}</span>
       </div>
+      <LivenessStrip accent={issuer.accent_color} />
     </div>
   );
 }
@@ -186,57 +236,63 @@ function TigersTicket({ issuer, data, verified }: Props) {
 function VioletMembership({ issuer, data, verified }: Props) {
   return (
     <div
-      className="relative rounded-2xl overflow-hidden text-white p-4 shadow-xl"
+      className="relative rounded-2xl overflow-hidden text-white shadow-xl"
       style={{
         background: `radial-gradient(circle at 80% 0%, ${issuer.accent_color}30, transparent 60%), linear-gradient(135deg, ${issuer.theme_color} 0%, #1f0033 100%)`,
       }}
     >
-      <SparkleIcon color={issuer.accent_color} />
-      <VerifiedStamp verified={verified} />
-      <div className="flex items-center gap-3 mb-3 relative z-[1]">
-        <div
-          className="w-12 h-12 rounded-full grid place-items-center font-extrabold text-lg ring-2 ring-white/40"
-          style={{ background: issuer.accent_color, color: issuer.theme_color }}
-        >
-          {issuer.logo_text}
-        </div>
-        <div>
+      <div className="p-4 relative">
+        <SparkleIcon color={issuer.accent_color} />
+        <VerifiedStamp verified={verified} />
+        <div className="flex items-center gap-3 mb-3 relative z-[1]">
           <div
-            className="text-[9px] uppercase tracking-[0.25em]"
-            style={{ color: issuer.accent_color }}
+            className="w-12 h-12 rounded-full grid place-items-center font-extrabold text-lg ring-2 ring-white/40"
+            style={{
+              background: issuer.accent_color,
+              color: issuer.theme_color,
+            }}
           >
-            FAN MEMBERSHIP
+            {issuer.logo_text}
           </div>
-          <div className="text-base font-semibold">{issuer.display_name}</div>
+          <div>
+            <div
+              className="text-[9px] uppercase tracking-[0.25em]"
+              style={{ color: issuer.accent_color }}
+            >
+              FAN MEMBERSHIP
+            </div>
+            <div className="text-base font-semibold">{issuer.display_name}</div>
+          </div>
+        </div>
+        <div className="space-y-2 text-sm relative z-[1]">
+          <div className="flex items-baseline justify-between">
+            <span className="text-[10px] uppercase opacity-60">TIER</span>
+            <span
+              className="text-lg font-extrabold tracking-wide"
+              style={{ color: issuer.accent_color }}
+            >
+              ✦ {data.section || "—"} ✦
+            </span>
+          </div>
+          <div className="flex items-baseline justify-between">
+            <span className="text-[10px] uppercase opacity-60">MEMBER ID</span>
+            <span className="font-mono text-xs">
+              {data.holder || "—"}
+            </span>
+          </div>
+          <div className="flex items-baseline justify-between">
+            <span className="text-[10px] uppercase opacity-60">SINCE</span>
+            <span className="text-xs">{fmtMonth(data.issued_at)}</span>
+          </div>
+        </div>
+        <div className="mt-3 rounded-lg bg-white/10 backdrop-blur p-2.5 text-xs relative z-[1]">
+          <div className="text-[10px] uppercase opacity-60 mb-0.5">
+            🎬 EXCLUSIVE · {fmtDateTime(data.datetime)}
+          </div>
+          <div className="font-medium">{data.seat || "—"}</div>
         </div>
       </div>
-      <div className="space-y-2 text-sm relative z-[1]">
-        <div className="flex items-baseline justify-between">
-          <span className="text-[10px] uppercase opacity-60">TIER</span>
-          <span
-            className="text-lg font-extrabold tracking-wide"
-            style={{ color: issuer.accent_color }}
-          >
-            ✦ {String(data.tier ?? "—")} ✦
-          </span>
-        </div>
-        <div className="flex items-baseline justify-between">
-          <span className="text-[10px] uppercase opacity-60">MEMBER ID</span>
-          <span className="font-mono text-xs">
-            {String(data.member_id ?? "—")}
-          </span>
-        </div>
-        <div className="flex items-baseline justify-between">
-          <span className="text-[10px] uppercase opacity-60">SINCE</span>
-          <span className="text-xs">{String(data.since ?? "—")}</span>
-        </div>
-      </div>
-      <div className="mt-3 rounded-lg bg-white/10 backdrop-blur p-2.5 text-xs relative z-[1]">
-        <div className="text-[10px] uppercase opacity-60 mb-0.5">
-          🎬 EXCLUSIVE NOW
-        </div>
-        <div className="font-medium">{String(data.exclusive ?? "—")}</div>
-      </div>
+      <LivenessStrip accent={issuer.accent_color} />
     </div>
   );
 }
@@ -246,48 +302,48 @@ function ComicConBadge({ issuer, data, verified }: Props) {
   const halftone = `radial-gradient(${issuer.accent_color}40 1px, transparent 1.5px)`;
   return (
     <div
-      className="relative rounded-xl overflow-hidden p-4 shadow-xl"
+      className="relative rounded-xl overflow-hidden shadow-xl"
       style={{
         background: `${halftone}, linear-gradient(160deg, ${issuer.theme_color} 0%, #001a33 100%)`,
         backgroundSize: "8px 8px, 100% 100%",
         color: "#fff",
       }}
     >
-      <StarBurstIcon color={issuer.accent_color} />
-      <VerifiedStamp verified={verified} />
-      <div
-        className="rounded-md px-2 py-0.5 inline-block text-[10px] font-extrabold tracking-widest mb-3 relative z-[1]"
-        style={{ background: issuer.accent_color, color: issuer.theme_color }}
-      >
-        ★ {String(data.badge ?? "ATTENDEE").toUpperCase()} ★
-      </div>
-      <div className="text-2xl font-extrabold leading-tight mb-0.5 relative z-[1]">
-        {String(data.name ?? "ATTENDEE")}
-      </div>
-      <div className="text-xs opacity-70 mb-3 relative z-[1]">
-        {issuer.display_name}
-      </div>
-      <div className="space-y-1 text-sm relative z-[1]">
-        <div className="flex justify-between">
-          <span className="text-[10px] uppercase opacity-60">DAY</span>
-          <span className="font-semibold">{String(data.day ?? "—")}</span>
+      <div className="p-4 relative">
+        <StarBurstIcon color={issuer.accent_color} />
+        <VerifiedStamp verified={verified} />
+        <div
+          className="rounded-md px-2 py-0.5 inline-block text-[10px] font-extrabold tracking-widest mb-3 relative z-[1]"
+          style={{ background: issuer.accent_color, color: issuer.theme_color }}
+        >
+          ★ {(data.seat || "ATTENDEE").toUpperCase()} ★
         </div>
-        <div className="flex justify-between">
-          <span className="text-[10px] uppercase opacity-60">TRACK</span>
-          <span
-            className="font-bold"
-            style={{ color: issuer.accent_color }}
-          >
-            {String(data.track ?? "—")}
-          </span>
+        <div className="text-2xl font-extrabold leading-tight mb-0.5 relative z-[1]">
+          {data.holder || "ATTENDEE"}
         </div>
-        <div className="rounded-md bg-white/10 backdrop-blur px-2 py-1 mt-2">
-          <div className="text-[10px] uppercase opacity-60 mb-0.5">PANEL</div>
-          <div className="text-xs font-medium">
-            {String(data.panel ?? "—")}
+        <div className="text-xs opacity-70 mb-3 relative z-[1]">
+          {issuer.display_name}
+        </div>
+        <div className="space-y-1 text-sm relative z-[1]">
+          <div className="flex justify-between">
+            <span className="text-[10px] uppercase opacity-60">DAY</span>
+            <span className="font-semibold">{data.gate || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-[10px] uppercase opacity-60">TRACK</span>
+            <span className="font-bold" style={{ color: issuer.accent_color }}>
+              {data.section || "—"}
+            </span>
+          </div>
+          <div className="rounded-md bg-white/10 backdrop-blur px-2 py-1 mt-2">
+            <div className="text-[10px] uppercase opacity-60 mb-0.5">PANEL</div>
+            <div className="text-xs font-medium">
+              {data.opponent || "—"}
+            </div>
           </div>
         </div>
       </div>
+      <LivenessStrip accent={issuer.accent_color} />
     </div>
   );
 }
