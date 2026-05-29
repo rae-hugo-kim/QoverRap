@@ -1,8 +1,8 @@
 {
-  "version": "2026.14",
-  "updated": "2026-04-29",
+  "version": "2026.16",
+  "updated": "2026-05-26",
   "description": "Personal harness for OMC - scope/context/acceptance/backpressure gates",
   "source_remote": "git@github.com:rae-hugo-kim/claude.git",
-  "commit_sha": "499017aec6ea77106dcbe2ff5e9f1178b2632de7",
-  "bootstrapped_at": "2026-04-29T08:00:41Z"
+  "commit_sha": "0ae47778d833702cf7475751763e51149134fd72",
+  "bootstrapped_at": "2026-05-26T07:40:54Z"
 }

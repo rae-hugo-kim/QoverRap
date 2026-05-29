@@ -65,7 +65,37 @@ cd <project-name>
 2. docs/glossary.yaml → 템플릿에서 복사하여 terms: [] 로 초기화
 
 3. docs/sum/ → 비움 (이전 세션 기록 제거)
+
+4. README 교체 (템플릿 README가 derived repo에 새지 않도록):
+   - README.md, README.en.md를 아래 placeholder로 덮어쓴다.
+   - `<!-- claude-template-placeholder -->` 마커는 `/kickoff`이 "아직 사용자가 손대지 않음"을 판별하는 데 사용된다.
 ```
+
+**README.md placeholder**:
+
+```markdown
+**[English](README.en.md)**
+
+# <project-name>
+
+> TODO — 프로젝트 설명. `/kickoff` 실행 시 kickoff 결과로 자동 채워집니다.
+
+<!-- claude-template-placeholder -->
+```
+
+**README.en.md placeholder**:
+
+```markdown
+**[한국어](README.md)**
+
+# <project-name>
+
+> TODO — Project description. Will be auto-filled when you run `/kickoff`.
+
+<!-- claude-template-placeholder -->
+```
+
+`<project-name>`은 Phase 0에서 추출한 이름으로 치환한다.
 
 ### Phase 3: 하네스 메타 주입
 

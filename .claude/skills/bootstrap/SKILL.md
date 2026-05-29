@@ -10,7 +10,8 @@ description: Bootstrap development environment with OMC, RTK, and MCP servers
 ## Goal
 
 이 하네스 템플릿을 사용하기 위한 개발 환경을 구축한다.
-OMC + RTK 설치, 범용 MCP 서버 자동 등록, 선택적 MCP 서버 안내까지 한 번에 처리.
+OMC + RTK 설치, 범용 MCP 서버 자동 등록, 선택적 MCP 서버 안내, docs viewer
+빌드 도구(mdBook + Mermaid)까지 한 번에 처리.
 
 ## Non-Negotiables
 
@@ -66,7 +67,30 @@ OMC + RTK 설치, 범용 MCP 서버 자동 등록, 선택적 MCP 서버 안내�
 
 RTK는 선택적 — 설치 실패해도 중단하지 않고 계속 진행.
 
-### Phase 3: 범용 MCP 서버 등록 (자동)
+### Phase 3: Docs Build Tools (자동)
+
+`scripts/docs-build.sh`와 `mdbook serve`가 의존하는 도구. 템플릿 fresh-clone
+에서 docs viewer 즉시 동작을 위해 설치.
+
+```
+1. mdbook 체크:
+   - command -v mdbook → 있으면 "✓ mdbook already installed" 스킵
+   - 미설치 시: cargo install mdbook
+   - cargo 없으면 → "Rust/Cargo를 설치하세요: https://rustup.rs" 안내, 스킵
+
+2. mdbook-mermaid 체크:
+   - command -v mdbook-mermaid → 있으면 스킵
+   - 미설치 시: cargo install mdbook-mermaid
+
+3. mmdc (mermaid-cli) 체크:
+   - command -v mmdc → 있으면 스킵
+   - 미설치 시: npm install -g @mermaid-js/mermaid-cli
+```
+
+셋 모두 선택적 — 설치 실패해도 중단하지 않고 계속 진행. docs viewer를
+나중에 사용하지 않을 프로젝트는 그대로 두고 넘어가도 됨.
+
+### Phase 4: 범용 MCP 서버 등록 (자동)
 
 이미 등록된 서버는 스킵. 미등록 서버만 추가:
 
@@ -86,7 +110,7 @@ claude mcp add --scope user browser-tools-mcp -- npx -y @agentdeskai/browser-too
 
 각 서버 등록 후 성공/실패 표시.
 
-### Phase 4: 선택적 MCP 서버 (인터랙티브)
+### Phase 5: 선택적 MCP 서버 (인터랙티브)
 
 `--skip-optional` 이면 이 단계 스킵.
 
@@ -117,7 +141,7 @@ claude mcp add --transport sse --scope user react-design-systems <url>
 # → 설치 경로 안내만 제공
 ```
 
-### Phase 5: 결과 리포트
+### Phase 6: 결과 리포트
 
 ```markdown
 ## Bootstrap Complete
@@ -148,7 +172,7 @@ claude mcp add --transport sse --scope user react-design-systems <url>
 |-----------|--------|
 | Claude Code 미설치 | 안내 후 중단 |
 | Node.js 미설치 | 안내 후 중단 |
-| Cargo 미설치 | RTK 스킵, 경고 출력 후 계속 |
+| Cargo 미설치 | RTK + docs 빌드 도구(mdbook, mdbook-mermaid) 스킵, 경고 출력 후 계속 |
 | MCP 서버 등록 실패 | 해당 서버만 실패 표시, 계속 진행 |
 | 네트워크 오류 | 재시도 안내, 수동 명령어 제시 |
 | 이미 설치된 항목 | 스킵, 현재 버전 표시 |

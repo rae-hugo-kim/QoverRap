@@ -264,7 +264,84 @@ override가 있었다면 추가:
 
 > **주의**: 기존 audit.jsonl 내용을 덮어쓰지 말고 반드시 append. Bash `echo '...' >> docs/harness/audit.jsonl` 또는 기존 내용을 Read한 후 합쳐서 Write.
 
-#### Step 8: 다음 단계 안내
+#### Step 8: README placeholder 채우기 (조건부)
+
+`/init`이 만든 placeholder를 kickoff 결과로 채운다. **사용자가 이미 손댔으면 건드리지 않는다**.
+
+**판별**:
+- `README.md`에 `<!-- claude-template-placeholder -->` 마커가 있으면 placeholder 상태 → 채움
+- 마커가 없으면 사용자가 수정한 것 → 건드리지 않고 Step 9로
+
+**채움 (placeholder인 경우)**:
+
+`README.md`을 아래 형식으로 덮어쓴다 (project name은 git remote 또는 디렉토리명에서 추출):
+
+```markdown
+**[English](README.en.md)**
+
+# <project-name>
+
+<JTBD.Success를 1-2문장으로 풀어쓴 한 줄 설명>
+
+## 목표
+
+<seed.yaml의 goal 필드>
+
+## 수락 기준
+
+- [ ] <AC 1>
+- [ ] <AC 2>
+- [ ] <AC 3>
+
+## 제약
+
+<seed.yaml의 constraints 항목들 — 없으면 섹션 생략>
+
+## 상태
+
+🚧 개발 중 — 자세한 컨텍스트는 `docs/harness/kickoff-summary.md` 참고.
+```
+
+`README.en.md`도 동일 구조로, 영문으로 덮어쓴다 (마커가 있는 경우에 한해):
+
+```markdown
+**[한국어](README.md)**
+
+# <project-name>
+
+<English one-liner from JTBD.Success>
+
+## Goal
+
+<goal>
+
+## Acceptance Criteria
+
+- [ ] <AC 1>
+...
+
+## Constraints
+
+<list — omit section if empty>
+
+## Status
+
+🚧 In development — see `docs/harness/kickoff-summary.md` for full context.
+```
+
+> 영문 번역은 한국어 원문을 자연스러운 영어로 옮긴다. 기계 번역체 금지.
+
+**audit 기록**:
+```
+{"ts":"<ISO>","event":"readme_initialized","actor":"assistant","meta":{"source":"kickoff"}}
+```
+
+마커가 없어 건너뛴 경우:
+```
+{"ts":"<ISO>","event":"readme_initialized","actor":"assistant","meta":{"skipped":"user_modified"}}
+```
+
+#### Step 9: 다음 단계 안내
 저장 완료 후 출력:
 > "Kickoff 완료. seed.yaml 생성됨 (status: draft). 구현을 시작하려면 `/startdev`를 사용하세요."
 
