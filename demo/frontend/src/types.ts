@@ -53,3 +53,35 @@ export interface DecodeResult {
   layer_b: string;
   layer_c: string;
 }
+
+// ---- visit collection (stamp rally) ----------------------------------------
+
+export interface BoothInfo {
+  booth_id: string;
+  issuer_id: string;
+  booth_name: string;
+  collection: string;
+  emoji: string;
+}
+
+export interface VisitCollectResponse {
+  status: "collected" | "already_collected" | "ticket_invalid" | "wrong_issuer";
+  booth_id: string;
+  booth_name?: string | null;
+  /** sha256(ticket Layer C)[:32] — pseudonymous, no PII */
+  visitor_token?: string | null;
+  visited_at?: string | null;
+  collection?: string | null;
+  emoji?: string | null;
+  /** full wire-format marker for offline re-verification (collected only) */
+  marker_payload?: string | null;
+}
+
+export interface VisitVerifyResponse {
+  verified: boolean;
+  booth_id?: string | null;
+  booth_name?: string | null;
+  visitor_token?: string | null;
+  visited_at?: string | null;
+  collection?: string | null;
+}

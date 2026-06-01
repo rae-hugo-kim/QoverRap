@@ -12,6 +12,7 @@ import IssuerPicker from "./components/IssuerPicker";
 import QRPanel from "./components/QRPanel";
 import QRScanner from "./components/QRScanner";
 import ResolveColumn from "./components/ResolveColumn";
+import CollectionPanel from "./components/CollectionPanel";
 
 const STEPS = [
   { id: "issuer", label: "발급자 선택" },
@@ -19,6 +20,7 @@ const STEPS = [
   { id: "qr", label: "QR 생성" },
   { id: "scan", label: "스캔" },
   { id: "resolve", label: "접근레벨 비교" },
+  { id: "collect", label: "방문 컬렉션" },
 ];
 
 const LEVELS: AccessLevel[] = ["public", "authenticated", "verified"];
@@ -708,6 +710,26 @@ export default function App() {
               <span className="font-mono">{resolves.verified.layer_a}</span>)
             </p>
           )}
+        </section>
+
+        {/* 6. Collection */}
+        <section id="collect" className="space-y-3">
+          {!screenshot && (
+            <>
+              <h2 className="font-semibold">6. 방문 성취 컬렉션 (스탬프러시)</h2>
+              <p className="text-sm text-slate-600">
+                현장 부스에서 <em>내 티켓을 제시</em>하면 — 진짜 회원이 진짜
+                거기 갔을 때만 — 부스가 방문 마커를 서명 발급합니다. 뱃지는 신원
+                노출 없이 내 것으로 누적되고, 같은 컨텐츠라도 부스(서울/부산
+                등)가 다르면 별도 뱃지입니다.
+              </p>
+            </>
+          )}
+          <CollectionPanel
+            ticketPayload={encoded}
+            trust={trust}
+            screenshot={screenshot}
+          />
         </section>
 
         {!screenshot && (

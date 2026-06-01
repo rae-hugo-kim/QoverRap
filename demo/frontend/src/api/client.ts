@@ -1,10 +1,13 @@
 import type {
   AccessLevel,
+  BoothInfo,
   DecodeResult,
   KeyPair,
   LayerBFormat,
   ResolveResult,
   TrustEntry,
+  VisitCollectResponse,
+  VisitVerifyResponse,
 } from "../types";
 
 export interface EncodeLayerBResponse {
@@ -80,6 +83,11 @@ export const api = {
       `/trust/${encodeURIComponent(issuer_id)}/sign`,
       { layer_a, layer_b },
     ),
+  booths: () => get<{ booths: BoothInfo[] }>("/booths"),
+  visitCollect: (ticket_payload: string, booth_id: string) =>
+    post<VisitCollectResponse>("/visit/collect", { ticket_payload, booth_id }),
+  visitVerify: (marker_payload: string) =>
+    post<VisitVerifyResponse>("/visit/verify", { marker_payload }),
 };
 
 // utf-8 string -> hex helper (browser-safe)

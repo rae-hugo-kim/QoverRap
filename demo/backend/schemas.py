@@ -156,3 +156,52 @@ class TrustEntry(BaseModel):
 
 class TrustListResponse(BaseModel):
     entries: list[TrustEntry]
+
+
+# ---- visit collection (stamp rally) -----------------------------------------
+
+class VisitCollectRequest(BaseModel):
+    ticket_payload: str = Field(..., description="The attendee's full ticket QR payload string")
+    booth_id: str
+
+
+class VisitCollectResponse(BaseModel):
+    status: Literal["collected", "already_collected", "ticket_invalid", "wrong_issuer"]
+    booth_id: str
+    booth_name: Optional[str] = None
+    visitor_token: Optional[str] = Field(
+        None,
+        description="sha256(ticket Layer C)[:32] — pseudonymous binding token, carries no PII.",
+    )
+    visited_at: Optional[str] = None
+    collection: Optional[str] = None
+    emoji: Optional[str] = None
+    marker_payload: Optional[str] = Field(
+        None,
+        description="Full wire-format marker string for offline re-verification (present only when collected).",
+    )
+
+
+class VisitVerifyRequest(BaseModel):
+    marker_payload: str
+
+
+class VisitVerifyResponse(BaseModel):
+    verified: bool
+    booth_id: Optional[str] = None
+    booth_name: Optional[str] = None
+    visitor_token: Optional[str] = None
+    visited_at: Optional[str] = None
+    collection: Optional[str] = None
+
+
+class BoothInfo(BaseModel):
+    booth_id: str
+    issuer_id: str
+    booth_name: str
+    collection: str
+    emoji: str
+
+
+class BoothListResponse(BaseModel):
+    booths: list[BoothInfo]

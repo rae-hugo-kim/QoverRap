@@ -4,7 +4,7 @@ from __future__ import annotations
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import crypto, decode, encode, redeem, resolve, trust
+from .routers import crypto, decode, encode, redeem, resolve, trust, visit
 
 app = FastAPI(
     title="QoverwRap Demo API",
@@ -29,6 +29,7 @@ app.include_router(decode.router)
 app.include_router(resolve.router)
 app.include_router(trust.router)
 app.include_router(redeem.router)
+app.include_router(visit.router)
 
 
 @app.get("/api/health")
