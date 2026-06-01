@@ -110,6 +110,13 @@ export interface DecodeResult {
   layer_c: string;
 }
 
+// ---- redeem (gate-checker one-time-use counter) ----------------------------
+
+export interface RedeemResponse {
+  status: "ok" | "already_used" | "invalid";
+  use_count: number;
+}
+
 // ---- visit collection (stamp rally) ----------------------------------------
 
 export interface BoothInfo {

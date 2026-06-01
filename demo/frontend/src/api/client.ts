@@ -4,6 +4,7 @@ import type {
   DecodeResult,
   KeyPair,
   LayerBFormat,
+  RedeemResponse,
   ResolveResult,
   SchemaInfo,
   TrustEntry,
@@ -94,6 +95,8 @@ export const api = {
     post<VisitCollectResponse>("/visit/collect", { ticket_payload, booth_id }),
   visitVerify: (marker_payload: string) =>
     post<VisitVerifyResponse>("/visit/verify", { marker_payload }),
+  redeem: (payload: string, max_uses = 1) =>
+    post<RedeemResponse>("/redeem", { payload, max_uses }),
 };
 
 // utf-8 string -> hex helper (browser-safe)

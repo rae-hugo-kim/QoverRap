@@ -15,6 +15,7 @@ import QRPanel from "./components/QRPanel";
 import QRScanner from "./components/QRScanner";
 import ResolveColumn from "./components/ResolveColumn";
 import CollectionPanel from "./components/CollectionPanel";
+import CheckerView from "./components/CheckerView";
 
 const STEPS = [
   { id: "issuer", label: "발급자 선택" },
@@ -162,6 +163,7 @@ const presetTamper = (id: string | null, kind: string | null) =>
   JSON.stringify(TAMPER_PRESETS[presetKey(id, kind)] ?? {}, null, 2);
 
 export default function App() {
+  const [appMode, setAppMode] = useState<"builder" | "checker">("builder");
   const [active, setActive] = useState("issuer");
   const [trust, setTrust] = useState<TrustEntry[]>([]);
   const [schemas, setSchemas] = useState<SchemaInfo[]>([]);
@@ -426,53 +428,76 @@ export default function App() {
             </div>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="bg-slate-100 rounded p-0.5 flex">
+            {appMode === "checker" ? (
               <button
-                data-testid="mode-bare"
-                onClick={() => setThemed(false)}
-                className={`px-2.5 py-1 rounded text-xs ${
-                  !themed
-                    ? "bg-white shadow font-semibold"
-                    : "text-slate-500"
-                }`}
+                data-testid="mode-builder"
+                onClick={() => setAppMode("builder")}
+                className="px-3 py-1.5 rounded text-xs bg-slate-900 text-white hover:bg-slate-700"
               >
-                Bare
+                ← 발급자 데모
               </button>
-              <button
-                data-testid="mode-themed"
-                onClick={() => setThemed(true)}
-                className={`px-2.5 py-1 rounded text-xs ${
-                  themed
-                    ? "bg-white shadow font-semibold"
-                    : "text-slate-500"
-                }`}
-              >
-                Themed
-              </button>
-            </span>
-            <button
-              data-testid="mode-screenshot"
-              onClick={() => setScreenshot((v) => !v)}
-              className={`px-2 py-1.5 rounded text-xs border ${
-                screenshot
-                  ? "bg-amber-100 border-amber-300 text-amber-900"
-                  : "bg-white border-slate-300 text-slate-600 hover:border-slate-500"
-              }`}
-              title="스크린샷 모드: 설명/디버그 UI를 숨겨 카드만 깔끔히 보입니다"
-            >
-              📸 {screenshot ? "샷 ON" : "샷"}
-            </button>
-            <button
-              data-testid="reset"
-              onClick={reset}
-              className="px-3 py-1.5 rounded text-xs bg-slate-900 text-white hover:bg-slate-700"
-            >
-              ↻ 처음부터
-            </button>
+            ) : (
+              <>
+                <button
+                  data-testid="mode-checker"
+                  onClick={() => setAppMode("checker")}
+                  className="px-2.5 py-1.5 rounded text-xs border border-emerald-300 bg-emerald-50 text-emerald-800 hover:border-emerald-500"
+                >
+                  🛂 검표원 모드
+                </button>
+                <span className="bg-slate-100 rounded p-0.5 flex">
+                  <button
+                    data-testid="mode-bare"
+                    onClick={() => setThemed(false)}
+                    className={`px-2.5 py-1 rounded text-xs ${
+                      !themed
+                        ? "bg-white shadow font-semibold"
+                        : "text-slate-500"
+                    }`}
+                  >
+                    Bare
+                  </button>
+                  <button
+                    data-testid="mode-themed"
+                    onClick={() => setThemed(true)}
+                    className={`px-2.5 py-1 rounded text-xs ${
+                      themed
+                        ? "bg-white shadow font-semibold"
+                        : "text-slate-500"
+                    }`}
+                  >
+                    Themed
+                  </button>
+                </span>
+                <button
+                  data-testid="mode-screenshot"
+                  onClick={() => setScreenshot((v) => !v)}
+                  className={`px-2 py-1.5 rounded text-xs border ${
+                    screenshot
+                      ? "bg-amber-100 border-amber-300 text-amber-900"
+                      : "bg-white border-slate-300 text-slate-600 hover:border-slate-500"
+                  }`}
+                  title="스크린샷 모드: 설명/디버그 UI를 숨겨 카드만 깔끔히 보입니다"
+                >
+                  📸 {screenshot ? "샷 ON" : "샷"}
+                </button>
+                <button
+                  data-testid="reset"
+                  onClick={reset}
+                  className="px-3 py-1.5 rounded text-xs bg-slate-900 text-white hover:bg-slate-700"
+                >
+                  ↻ 처음부터
+                </button>
+              </>
+            )}
           </div>
         </div>
       </header>
 
+      {appMode === "checker" ? (
+        <CheckerView trust={trust} />
+      ) : (
+        <>
       {toast && (
         <div className="fixed top-16 left-1/2 -translate-x-1/2 z-50 bg-slate-900 text-white text-sm px-4 py-2 rounded-full shadow-lg pointer-events-none">
           {toast}
@@ -845,6 +870,8 @@ export default function App() {
           </footer>
         )}
       </main>
+        </>
+      )}
     </div>
   );
 }

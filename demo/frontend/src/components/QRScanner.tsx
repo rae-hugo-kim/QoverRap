@@ -121,12 +121,16 @@ export default function QRScanner({ onResult }: Props) {
         <summary className="cursor-pointer text-slate-600">
           카메라 없이 직접 입력
         </summary>
-        <div className="mt-2 flex gap-2">
-          <input
+        {/* textarea (not input): the wire payload contains `\n---QWR---\n`
+            delimiters, and a single-line <input> strips newlines on value
+            sanitization — which corrupts the payload. */}
+        <div className="mt-2 space-y-2">
+          <textarea
             value={manual}
             onChange={(e) => setManual(e.target.value)}
-            placeholder="QR payload 문자열 붙여넣기"
-            className="flex-1 px-2 py-1.5 border border-slate-300 rounded text-sm font-mono"
+            rows={3}
+            placeholder="QR payload 문자열 붙여넣기 (여러 줄 포함)"
+            className="w-full px-2 py-1.5 border border-slate-300 rounded text-xs font-mono"
           />
           <button
             onClick={() => manual && onResult(manual)}
