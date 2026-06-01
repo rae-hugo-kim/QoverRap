@@ -91,17 +91,27 @@ export default function ResolveColumn({
           style={{ background: themeBg }}
         >
           <span>{LEVEL_LABEL[level]}</span>
-          {level === "verified" && (
-            <span
-              className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                result.verified
-                  ? "bg-emerald-300 text-emerald-950"
-                  : "bg-red-300 text-red-950"
-              }`}
-            >
-              {result.verified ? "✓ VALID" : "✗ INVALID"}
-            </span>
-          )}
+          <span className="flex items-center gap-1.5">
+            {level === "verified" && result.layer_b_schema && (
+              <span
+                data-testid="schema-badge"
+                className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-white/20 text-white"
+              >
+                {result.layer_b_schema}
+              </span>
+            )}
+            {level === "verified" && (
+              <span
+                className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
+                  result.verified
+                    ? "bg-emerald-300 text-emerald-950"
+                    : "bg-red-300 text-red-950"
+                }`}
+              >
+                {result.verified ? "✓ VALID" : "✗ INVALID"}
+              </span>
+            )}
+          </span>
         </div>
         <div className="p-3 space-y-2 flex-1 bg-slate-50">
           <p className="text-[11px] text-slate-500">{LEVEL_DESC[level]}</p>

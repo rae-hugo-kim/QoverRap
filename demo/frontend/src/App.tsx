@@ -4,11 +4,13 @@ import type {
   AccessLevel,
   LayerBFormat,
   ResolveResult,
-  TicketLayerB,
+  SchemaInfo,
   TrustEntry,
 } from "./types";
 import StepNav from "./components/StepNav";
 import IssuerPicker from "./components/IssuerPicker";
+import MediaPicker from "./components/MediaPicker";
+import SchemaForm from "./components/SchemaForm";
 import QRPanel from "./components/QRPanel";
 import QRScanner from "./components/QRScanner";
 import ResolveColumn from "./components/ResolveColumn";
@@ -25,57 +27,81 @@ const STEPS = [
 
 const LEVELS: AccessLevel[] = ["public", "authenticated", "verified"];
 
+// Layer A labels are keyed by issuer, with an optional per-(issuer:kind)
+// refinement so small media read distinctly (e.g. a wristband vs. a pass).
 const LAYER_A_PRESETS: Record<string, string> = {
   "tigers-2026": "Tigers 정규시즌 입장권",
-  "violet-fandom": "VF Diamond Pass",
+  "violet-fandom": "Violet 팬이벤트 패스",
   "comic-con-2026": "Comic Con 2026 출입증",
+  "comic-con-2026:wristband": "Comic Con 팔찌",
 };
 
-// Structured Layer B presets — must conform to the backend TicketLayerB schema
-// (layer_b_codec.py): event_id / serial / issued_at required; single `datetime`
-// (not the old date/time split); section/seat/gate/opponent/holder optional.
-const LAYER_B_PRESETS: Record<string, TicketLayerB> = {
-  "tigers-2026": {
+// Structured Layer B field presets, keyed by `${issuer}:${kind}` with a
+// `${kind}` fallback. Values are per-field strings (Record<string,string>) so
+// they feed SchemaForm directly; field names match the backend schema models
+// (layer_b_codec.py) exactly. `kind` is omitted — the schema selection fixes it.
+type FieldValues = Record<string, string>;
+
+const LAYER_B_PRESETS: Record<string, FieldValues> = {
+  // baseball_ticket — existing Tigers data
+  "tigers-2026:baseball_ticket": {
     event_id: "tigers-2026-042",
     serial: "T-000042",
-    issued_at: "2026-04-20T09:00:00+09:00",
+    issued_at: "2026-04-20",
     section: "1루 응원석",
     seat: "12B",
     gate: "Gate 3",
-    datetime: "2026-05-10T18:30:00+09:00",
+    datetime: "2026-05-10",
     opponent: "Lions",
     holder: "FAN-2456",
   },
-  "violet-fandom": {
-    event_id: "violet-diamond-pass",
+  // festival_pass — Violet fan-event pass
+  "violet-fandom:festival_pass": {
+    festival_id: "violet-fanmeet-2026",
     serial: "VIO-008812",
-    issued_at: "2024-09-01T12:00:00+09:00",
-    section: "Diamond Fan",
-    seat: "BTS#07",
+    issued_at: "2026-05-01",
+    day: "Day 1 / Sat",
+    zone: "Diamond Floor",
+    tier: "Diamond Fan",
     gate: "Members Hall",
-    datetime: "2026-06-01T20:00:00+09:00",
-    opponent: "",
     holder: "VIO-008812",
   },
-  "comic-con-2026": {
-    event_id: "comic-con-2026",
+  // festival_pass — Comic Con day pass
+  "comic-con-2026:festival_pass": {
+    festival_id: "comic-con-2026",
     serial: "CC-VIP-1138",
-    issued_at: "2026-03-15T10:00:00+09:00",
-    section: "Hall H",
-    seat: "VIP",
-    gate: "Day 1 / Sat",
-    datetime: "2026-07-18T11:00:00+09:00",
-    opponent: "Marvel Studios Reveal",
+    issued_at: "2026-03-15",
+    day: "Day 1 / Sat",
+    zone: "Hall H",
+    tier: "VIP",
+    gate: "West Entrance",
+    holder: "코드네임 인비저블",
+  },
+  // wristband — Comic Con small-media band
+  "comic-con-2026:wristband": {
+    band_id: "CC-BAND-7741",
+    serial: "WB-7741",
+    issued_at: "2026-07-17",
+    tier: "Weekend",
+    valid_until: "2026-07-20",
     holder: "코드네임 인비저블",
   },
 };
 
+// Generic per-kind fallback so any (issuer, kind) without a bespoke preset
+// still pre-fills sensible required fields.
+const KIND_FALLBACK_PRESETS: Record<string, FieldValues> = {
+  baseball_ticket: { event_id: "event-001", serial: "T-0001", issued_at: "2026-01-01" },
+  festival_pass: { festival_id: "festival-001", serial: "F-0001", issued_at: "2026-01-01" },
+  wristband: { band_id: "BAND-0001", serial: "WB-0001", issued_at: "2026-01-01" },
+};
+
 // Tamper presets feed the raw/empty path (strToHex → encode with original
 // signature), so they are intentionally NOT codec-tagged: verification fails
-// and Layer B collapses to null. Shapes mirror TicketLayerB for a coherent
-// "forged" display in the bare view.
+// and Layer B collapses to null. Shapes mirror each schema for a coherent
+// "forged" display in the bare view. One or two fields are visibly altered.
 const TAMPER_PRESETS: Record<string, object> = {
-  "tigers-2026": {
+  "tigers-2026:baseball_ticket": {
     event_id: "tigers-2026-042",
     serial: "T-000042",
     issued_at: "2026-04-20T09:00:00+09:00",
@@ -86,47 +112,76 @@ const TAMPER_PRESETS: Record<string, object> = {
     opponent: "Lions",
     holder: "STOLEN-0001",
   },
-  "violet-fandom": {
-    event_id: "violet-diamond-pass",
+  "violet-fandom:festival_pass": {
+    festival_id: "violet-fanmeet-2026",
     serial: "VIO-FORGED",
-    issued_at: "2024-09-01T12:00:00+09:00",
-    section: "★★★ Platinum ★★★",
-    seat: "ALL",
+    issued_at: "2026-05-01T12:00:00+09:00",
+    day: "Day 1 / Sat",
+    zone: "Backstage ALL",
+    tier: "★★★ Platinum ★★★",
     gate: "Members Hall",
-    datetime: "2026-06-01T20:00:00+09:00",
-    opponent: "",
     holder: "VIO-FORGED",
   },
-  "comic-con-2026": {
-    event_id: "comic-con-2026",
+  "comic-con-2026:festival_pass": {
+    festival_id: "comic-con-2026",
     serial: "CC-FORGED",
     issued_at: "2026-03-15T10:00:00+09:00",
-    section: "Hall H",
-    seat: "STAFF ALL-ACCESS",
-    gate: "All Days",
-    datetime: "2026-07-18T11:00:00+09:00",
-    opponent: "Marvel Studios Reveal",
+    day: "All Days",
+    zone: "Hall H",
+    tier: "STAFF ALL-ACCESS",
+    gate: "West Entrance",
     holder: "FORGED ATTENDEE",
+  },
+  "comic-con-2026:wristband": {
+    band_id: "CC-BAND-7741",
+    serial: "WB-FORGED",
+    issued_at: "2026-07-17T09:00:00+09:00",
+    tier: "ALL-ACCESS",
+    valid_until: "2026-12-31T23:59:59+09:00",
+    holder: "FORGED",
   },
 };
 
-const presetLayerB = (id: string | null) =>
-  id ? JSON.stringify(LAYER_B_PRESETS[id] ?? {}, null, 2) : "{}";
-const presetLayerA = (id: string | null) =>
-  id ? LAYER_A_PRESETS[id] ?? "" : "";
-const presetTamper = (id: string | null) =>
-  id ? JSON.stringify(TAMPER_PRESETS[id] ?? {}, null, 2) : "{}";
+const presetKey = (id: string | null, kind: string | null) =>
+  id && kind ? `${id}:${kind}` : "";
+
+const presetFields = (id: string | null, kind: string | null): FieldValues =>
+  kind
+    ? {
+        ...(KIND_FALLBACK_PRESETS[kind] ?? {}),
+        ...(LAYER_B_PRESETS[presetKey(id, kind)] ?? {}),
+      }
+    : {};
+
+const presetLayerA = (id: string | null, kind: string | null) => {
+  if (!id) return "";
+  return LAYER_A_PRESETS[presetKey(id, kind)] ?? LAYER_A_PRESETS[id] ?? "";
+};
+
+const presetTamper = (id: string | null, kind: string | null) =>
+  JSON.stringify(TAMPER_PRESETS[presetKey(id, kind)] ?? {}, null, 2);
 
 export default function App() {
   const [active, setActive] = useState("issuer");
   const [trust, setTrust] = useState<TrustEntry[]>([]);
+  const [schemas, setSchemas] = useState<SchemaInfo[]>([]);
   const [issuerId, setIssuerId] = useState<string | null>(null);
   const issuer = useMemo(
     () => trust.find((t) => t.issuer_id === issuerId) ?? null,
     [trust, issuerId],
   );
+  // The schema kind (media) currently being issued. Defaults to the issuer's
+  // first allowed schema; Comic Con (2 schemas) can switch via MediaPicker.
+  const [schemaKind, setSchemaKind] = useState<string | null>(null);
+  const schemaInfo = useMemo(
+    () => schemas.find((s) => s.kind === schemaKind) ?? null,
+    [schemas, schemaKind],
+  );
 
   const [layerAMessage, setLayerAMessage] = useState("");
+  // Structured issue input as per-field values, rendered by SchemaForm.
+  const [layerBFields, setLayerBFields] = useState<Record<string, string>>({});
+  // Raw JSON textarea — used ONLY in rawMode (verified-empty + tamper demos).
   const [layerBJson, setLayerBJson] = useState("{}");
   const [tamperedJson, setTamperedJson] = useState("{}");
 
@@ -160,18 +215,20 @@ export default function App() {
     verified: null,
   });
 
-  // bootstrap trust list
+  // bootstrap trust list + schema catalog
   useEffect(() => {
-    api
-      .trustList()
-      .then((r) => {
-        setTrust(r.entries);
-        if (r.entries.length && !issuerId) {
-          const first = r.entries[0].issuer_id;
-          setIssuerId(first);
-          setLayerAMessage(presetLayerA(first));
-          setLayerBJson(presetLayerB(first));
-          setTamperedJson(presetTamper(first));
+    Promise.all([api.trustList(), api.schemas()])
+      .then(([t, s]) => {
+        setTrust(t.entries);
+        setSchemas(s.schemas);
+        if (t.entries.length && !issuerId) {
+          const first = t.entries[0];
+          const kind = first.allowed_schemas[0] ?? null;
+          setIssuerId(first.issuer_id);
+          setSchemaKind(kind);
+          setLayerAMessage(presetLayerA(first.issuer_id, kind));
+          setLayerBFields(presetFields(first.issuer_id, kind));
+          setTamperedJson(presetTamper(first.issuer_id, kind));
         }
       })
       .catch((e) => setErr(String(e)));
@@ -184,11 +241,23 @@ export default function App() {
   );
 
   function pickIssuer(id: string) {
+    const entry = trust.find((t) => t.issuer_id === id);
+    const kind = entry?.allowed_schemas[0] ?? null;
     setIssuerId(id);
-    setLayerAMessage(presetLayerA(id));
-    setLayerBJson(presetLayerB(id));
-    setTamperedJson(presetTamper(id));
+    setSchemaKind(kind);
+    setLayerAMessage(presetLayerA(id, kind));
+    setLayerBFields(presetFields(id, kind));
+    setTamperedJson(presetTamper(id, kind));
     setActive("compose");
+  }
+
+  // Switch media (schema) for the current issuer — reset the form to that
+  // schema's preset so fields match the new kind.
+  function pickMedia(kind: string) {
+    setSchemaKind(kind);
+    setLayerAMessage(presetLayerA(issuerId, kind));
+    setLayerBFields(presetFields(issuerId, kind));
+    setTamperedJson(presetTamper(issuerId, kind));
   }
 
   function reset() {
@@ -204,9 +273,9 @@ export default function App() {
     setErr(null);
     setActive("issuer");
     if (issuerId) {
-      setLayerAMessage(presetLayerA(issuerId));
-      setLayerBJson(presetLayerB(issuerId));
-      setTamperedJson(presetTamper(issuerId));
+      setLayerAMessage(presetLayerA(issuerId, schemaKind));
+      setLayerBFields(presetFields(issuerId, schemaKind));
+      setTamperedJson(presetTamper(issuerId, schemaKind));
     }
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -232,10 +301,15 @@ export default function App() {
         layerBHex = strToHex(layerBJson);
         layerBByteCount = layerBHex.length / 2;
       } else {
-        // structured path: validate as TicketLayerB and encode via the codec
-        // in the selected format. byte_size is the demo's headline metric.
-        const ticketObj = JSON.parse(layerBJson) as object;
-        const lb = await api.encodeLayerB(ticketObj, layerBFormat);
+        // structured path: build the ticket object from the per-field form
+        // values + the selected schema kind, then encode via the codec in the
+        // selected format. byte_size is the demo's headline metric.
+        if (!schemaKind) {
+          setErr("매체(스키마)를 먼저 선택하세요.");
+          return;
+        }
+        const ticketObj = { kind: schemaKind, ...layerBFields };
+        const lb = await api.encodeLayerB(ticketObj, layerBFormat, schemaKind);
         layerBHex = lb.layer_b_hex;
         layerBByteCount = lb.byte_size;
       }
@@ -440,31 +514,55 @@ export default function App() {
         {!screenshot && (
           <section id="compose" className="space-y-3">
             <h2 className="font-semibold">2. 레이어 입력</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-              <label className="block text-sm">
-                <span className="block text-xs text-slate-500 mb-1">
-                  Layer A (공개 텍스트, 표지)
-                </span>
-                <input
-                  value={layerAMessage}
-                  onChange={(e) => setLayerAMessage(e.target.value)}
-                  className="w-full px-2 py-1.5 border border-slate-300 rounded text-sm"
-                />
-                <span className="block text-[10px] text-slate-400 mt-1 font-mono">
-                  실제 Layer A: {layerA}
-                </span>
-              </label>
-              <label className="block text-sm">
-                <span className="block text-xs text-slate-500 mb-1">
-                  Layer B ({rawMode ? "임의 바이트 (raw)" : "TicketLayerB JSON"})
-                </span>
+            <label className="block text-sm">
+              <span className="block text-xs text-slate-500 mb-1">
+                Layer A (공개 텍스트, 표지)
+              </span>
+              <input
+                value={layerAMessage}
+                onChange={(e) => setLayerAMessage(e.target.value)}
+                className="w-full px-2 py-1.5 border border-slate-300 rounded text-sm"
+              />
+              <span className="block text-[10px] text-slate-400 mt-1 font-mono">
+                실제 Layer A: {layerA}
+              </span>
+            </label>
+            {/* Media (schema) picker — shown only when the issuer may emit
+                more than one schema (e.g. Comic Con: festival_pass + wristband).
+                Single-schema issuers auto-select and skip the picker. */}
+            {issuer && issuer.allowed_schemas.length > 1 && (
+              <MediaPicker
+                schemas={schemas}
+                allowed={issuer.allowed_schemas}
+                selected={schemaKind}
+                onSelect={pickMedia}
+              />
+            )}
+            <div className="block text-sm">
+              <span className="block text-xs text-slate-500 mb-1">
+                Layer B (
+                {rawMode
+                  ? "임의 바이트 (raw)"
+                  : `${schemaKind ?? "schema"} 필드`}
+                )
+              </span>
+              {rawMode ? (
                 <textarea
+                  data-testid="layer-b-raw"
                   value={layerBJson}
                   onChange={(e) => setLayerBJson(e.target.value)}
                   rows={6}
                   className="w-full px-2 py-1.5 border border-slate-300 rounded text-xs font-mono"
                 />
-              </label>
+              ) : schemaInfo ? (
+                <SchemaForm
+                  schema={schemaInfo}
+                  value={layerBFields}
+                  onChange={setLayerBFields}
+                />
+              ) : (
+                <p className="text-xs text-slate-400 italic">스키마 로딩 중…</p>
+              )}
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <label className="flex items-center gap-1.5 text-xs text-slate-600">

@@ -5,6 +5,7 @@ import type {
   KeyPair,
   LayerBFormat,
   ResolveResult,
+  SchemaInfo,
   TrustEntry,
   VisitCollectResponse,
   VisitVerifyResponse,
@@ -14,6 +15,10 @@ export interface EncodeLayerBResponse {
   layer_b_hex: string;
   byte_size: number;
   format: LayerBFormat;
+  /** Layer B schema kind used to encode (echoed by the backend) */
+  schema: string;
+  /** Numeric schema id from the codec catalog */
+  schema_id: number;
 }
 
 const BASE = "/api";
@@ -56,8 +61,8 @@ export const api = {
     }),
   encode: (layer_a: string, layer_b: string, layer_c: string) =>
     post<{ encoded: string }>("/encode", { layer_a, layer_b, layer_c }),
-  encodeLayerB: (ticket: object, format: LayerBFormat) =>
-    post<EncodeLayerBResponse>("/encode-layer-b", { ticket, format }),
+  encodeLayerB: (ticket: object, format: LayerBFormat, schema: string) =>
+    post<EncodeLayerBResponse>("/encode-layer-b", { ticket, format, schema }),
   qrImage: (encoded: string, opts?: { box_size?: number; border?: number }) =>
     post<{ image_png_base64: string }>("/qr-image", {
       encoded,
@@ -78,6 +83,7 @@ export const api = {
       ...(public_key ? { public_key } : {}),
     }),
   trustList: () => get<{ entries: TrustEntry[] }>("/trust"),
+  schemas: () => get<{ schemas: SchemaInfo[] }>("/schemas"),
   trustSign: (issuer_id: string, layer_a: string, layer_b: string) =>
     post<{ issuer_id: string; signature: string; public_key: string }>(
       `/trust/${encodeURIComponent(issuer_id)}/sign`,

@@ -1,9 +1,33 @@
 import { useEffect, useState } from "react";
-import type { TicketLayerB, TrustEntry } from "../types";
+import type { TrustEntry } from "../types";
 
-// All issuer cards now read from the backend-decoded TicketLayerB dict, so the
-// card is format-agnostic (json / cbor / cbor_aggr all decode to this shape).
-type CardData = Partial<TicketLayerB>;
+// Cards read from the backend-decoded Layer B dict, so they are
+// format-agnostic (json / cbor / cbor_aggr all decode to this shape) and
+// schema-agnostic at the field level. The union of every schema's fields is
+// flattened into one optional-string accessor; the active card reads only the
+// fields its `kind` defines. `kind` is the discriminator that selects the card.
+type CardData = {
+  kind?: string;
+  // baseball_ticket
+  event_id?: string;
+  section?: string;
+  seat?: string;
+  datetime?: string;
+  opponent?: string;
+  // festival_pass
+  festival_id?: string;
+  day?: string;
+  zone?: string;
+  // wristband
+  band_id?: string;
+  valid_until?: string;
+  // shared
+  serial?: string;
+  issued_at?: string;
+  gate?: string;
+  tier?: string;
+  holder?: string;
+};
 
 // ISO timestamps are displayed at a fixed timezone so the same ticket reads
 // identically across formats: aggressive-CBOR normalizes to a UTC ISO string
@@ -14,22 +38,11 @@ const _SEOUL_DATETIME = new Intl.DateTimeFormat("ko-KR", {
   dateStyle: "medium",
   timeStyle: "short",
 });
-const _SEOUL_MONTH = new Intl.DateTimeFormat("ko-KR", {
-  timeZone: "Asia/Seoul",
-  year: "numeric",
-  month: "2-digit",
-});
 
 function fmtDateTime(iso?: string): string {
   if (!iso) return "—";
   const d = new Date(iso);
   return Number.isNaN(d.getTime()) ? "—" : _SEOUL_DATETIME.format(d);
-}
-
-function fmtMonth(iso?: string): string {
-  if (!iso) return "—";
-  const d = new Date(iso);
-  return Number.isNaN(d.getTime()) ? "—" : _SEOUL_MONTH.format(d);
 }
 
 interface Props {
@@ -160,7 +173,7 @@ function StarBurstIcon({ color }: { color: string }) {
 
 /* --- Per-issuer cards ----------------------------------------------------- */
 
-function TigersTicket({ issuer, data, verified }: Props) {
+function BaseballTicketCard({ issuer, data, verified }: Props) {
   return (
     <div
       className="relative rounded-lg overflow-hidden text-white shadow-xl"
@@ -233,72 +246,11 @@ function TigersTicket({ issuer, data, verified }: Props) {
   );
 }
 
-function VioletMembership({ issuer, data, verified }: Props) {
-  return (
-    <div
-      className="relative rounded-2xl overflow-hidden text-white shadow-xl"
-      style={{
-        background: `radial-gradient(circle at 80% 0%, ${issuer.accent_color}30, transparent 60%), linear-gradient(135deg, ${issuer.theme_color} 0%, #1f0033 100%)`,
-      }}
-    >
-      <div className="p-4 relative">
-        <SparkleIcon color={issuer.accent_color} />
-        <VerifiedStamp verified={verified} />
-        <div className="flex items-center gap-3 mb-3 relative z-[1]">
-          <div
-            className="w-12 h-12 rounded-full grid place-items-center font-extrabold text-lg ring-2 ring-white/40"
-            style={{
-              background: issuer.accent_color,
-              color: issuer.theme_color,
-            }}
-          >
-            {issuer.logo_text}
-          </div>
-          <div>
-            <div
-              className="text-[9px] uppercase tracking-[0.25em]"
-              style={{ color: issuer.accent_color }}
-            >
-              FAN MEMBERSHIP
-            </div>
-            <div className="text-base font-semibold">{issuer.display_name}</div>
-          </div>
-        </div>
-        <div className="space-y-2 text-sm relative z-[1]">
-          <div className="flex items-baseline justify-between">
-            <span className="text-[10px] uppercase opacity-60">TIER</span>
-            <span
-              className="text-lg font-extrabold tracking-wide"
-              style={{ color: issuer.accent_color }}
-            >
-              ✦ {data.section || "—"} ✦
-            </span>
-          </div>
-          <div className="flex items-baseline justify-between">
-            <span className="text-[10px] uppercase opacity-60">MEMBER ID</span>
-            <span className="font-mono text-xs">
-              {data.holder || "—"}
-            </span>
-          </div>
-          <div className="flex items-baseline justify-between">
-            <span className="text-[10px] uppercase opacity-60">SINCE</span>
-            <span className="text-xs">{fmtMonth(data.issued_at)}</span>
-          </div>
-        </div>
-        <div className="mt-3 rounded-lg bg-white/10 backdrop-blur p-2.5 text-xs relative z-[1]">
-          <div className="text-[10px] uppercase opacity-60 mb-0.5">
-            🎬 EXCLUSIVE · {fmtDateTime(data.datetime)}
-          </div>
-          <div className="font-medium">{data.seat || "—"}</div>
-        </div>
-      </div>
-      <LivenessStrip accent={issuer.accent_color} />
-    </div>
-  );
-}
-
-function ComicConBadge({ issuer, data, verified }: Props) {
-  // Halftone dots via radial gradient pattern
+function FestivalPassCard({ issuer, data, verified }: Props) {
+  // Halftone dots via radial gradient pattern (ported from the Comic Con badge
+  // visual). Shared by every festival_pass issuer (Violet, Comic Con); the
+  // issuer theme color + logo carries the brand. Reads the real FestivalPass
+  // fields: day / zone / tier / gate / holder.
   const halftone = `radial-gradient(${issuer.accent_color}40 1px, transparent 1.5px)`;
   return (
     <div
@@ -313,10 +265,16 @@ function ComicConBadge({ issuer, data, verified }: Props) {
         <StarBurstIcon color={issuer.accent_color} />
         <VerifiedStamp verified={verified} />
         <div
-          className="rounded-md px-2 py-0.5 inline-block text-[10px] font-extrabold tracking-widest mb-3 relative z-[1]"
+          className="rounded-md px-2 py-0.5 inline-flex items-center gap-1.5 text-[10px] font-extrabold tracking-widest mb-3 relative z-[1]"
           style={{ background: issuer.accent_color, color: issuer.theme_color }}
         >
-          ★ {(data.seat || "ATTENDEE").toUpperCase()} ★
+          <span
+            className="grid place-items-center w-4 h-4 rounded-full text-[8px]"
+            style={{ background: issuer.theme_color, color: issuer.accent_color }}
+          >
+            {issuer.logo_text.slice(0, 2)}
+          </span>
+          ★ FESTIVAL PASS ★
         </div>
         <div className="text-2xl font-extrabold leading-tight mb-0.5 relative z-[1]">
           {data.holder || "ATTENDEE"}
@@ -327,19 +285,105 @@ function ComicConBadge({ issuer, data, verified }: Props) {
         <div className="space-y-1 text-sm relative z-[1]">
           <div className="flex justify-between">
             <span className="text-[10px] uppercase opacity-60">DAY</span>
-            <span className="font-semibold">{data.gate || "—"}</span>
+            <span className="font-semibold">{data.day || "—"}</span>
           </div>
           <div className="flex justify-between">
-            <span className="text-[10px] uppercase opacity-60">TRACK</span>
+            <span className="text-[10px] uppercase opacity-60">ZONE</span>
             <span className="font-bold" style={{ color: issuer.accent_color }}>
-              {data.section || "—"}
+              {data.zone || "—"}
             </span>
           </div>
-          <div className="rounded-md bg-white/10 backdrop-blur px-2 py-1 mt-2">
-            <div className="text-[10px] uppercase opacity-60 mb-0.5">PANEL</div>
-            <div className="text-xs font-medium">
-              {data.opponent || "—"}
+          <div className="flex justify-between">
+            <span className="text-[10px] uppercase opacity-60">TIER</span>
+            <span className="font-semibold">{data.tier || "—"}</span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-[10px] uppercase opacity-60">GATE</span>
+            <span className="font-semibold">{data.gate || "—"}</span>
+          </div>
+        </div>
+      </div>
+      <LivenessStrip accent={issuer.accent_color} />
+    </div>
+  );
+}
+
+function WristbandCard({ issuer, data, verified }: Props) {
+  // Small-media wristband: minimal, compact, sized like a printed band.
+  // Reads the real Wristband fields: band_id / tier / valid_until / holder.
+  return (
+    <div
+      className="relative rounded-full overflow-hidden text-white shadow-xl"
+      style={{
+        background: `linear-gradient(90deg, ${issuer.theme_color} 0%, ${issuer.accent_color}55 50%, ${issuer.theme_color} 100%)`,
+      }}
+    >
+      <SparkleIcon color={issuer.accent_color} />
+      <VerifiedStamp verified={verified} />
+      <div className="px-5 py-3 relative z-[1]">
+        <div className="flex items-center gap-2 mb-1.5">
+          <div
+            className="w-7 h-7 rounded-full grid place-items-center font-extrabold text-[9px] ring-2 ring-white/40"
+            style={{ background: issuer.accent_color, color: issuer.theme_color }}
+          >
+            {issuer.logo_text}
+          </div>
+          <div
+            className="text-[9px] uppercase tracking-[0.3em]"
+            style={{ color: issuer.accent_color }}
+          >
+            WRISTBAND
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-3 text-sm">
+          <div>
+            <div className="text-[9px] uppercase opacity-60">BAND</div>
+            <div className="font-mono font-bold">{data.band_id || "—"}</div>
+          </div>
+          <div className="text-right">
+            <div className="text-[9px] uppercase opacity-60">TIER</div>
+            <div
+              className="font-extrabold tracking-wide"
+              style={{ color: issuer.accent_color }}
+            >
+              {data.tier || "—"}
             </div>
+          </div>
+        </div>
+        <div className="mt-1.5 flex items-center justify-between gap-3 text-[10px] opacity-80 font-mono border-t border-white/15 pt-1.5">
+          <span>VALID UNTIL · {fmtDateTime(data.valid_until)}</span>
+          <span>{data.holder || "—"}</span>
+        </div>
+      </div>
+      <LivenessStrip accent={issuer.accent_color} />
+    </div>
+  );
+}
+
+function EmptyPayloadCard({ issuer, verified }: Props) {
+  // No structured Layer B (verified-empty / raw / undecodable). Preserves the
+  // claim 7(iii) verified-empty path: render a calm themed card stating the
+  // payload carries no structured fields rather than crashing or blanking.
+  return (
+    <div
+      className="relative rounded-lg overflow-hidden text-white shadow-xl"
+      style={{
+        background: `linear-gradient(135deg, ${issuer.theme_color} 0%, #0f172a 100%)`,
+      }}
+    >
+      <VerifiedStamp verified={verified} />
+      <div className="px-4 py-5 relative z-[1] flex items-center gap-3">
+        <div
+          className="w-10 h-10 rounded-full grid place-items-center font-extrabold text-xs ring-2 ring-white/30"
+          style={{ background: issuer.accent_color, color: issuer.theme_color }}
+        >
+          {issuer.logo_text}
+        </div>
+        <div>
+          <div className="text-sm font-semibold">{issuer.display_name}</div>
+          <div className="text-[11px] opacity-70 mt-0.5">구조화 페이로드 없음</div>
+          <div className="text-[10px] opacity-50 mt-1 leading-relaxed">
+            Layer B에 스키마 필드가 없습니다 (verified-empty · raw 바이트).
           </div>
         </div>
       </div>
@@ -350,21 +394,18 @@ function ComicConBadge({ issuer, data, verified }: Props) {
 
 export default function ThemedCard(props: Props) {
   if (props.locked) return <LockedCover issuer={props.issuer} />;
-  switch (props.issuer.issuer_id) {
-    case "tigers-2026":
-      return <TigersTicket {...props} />;
-    case "violet-fandom":
-      return <VioletMembership {...props} />;
-    case "comic-con-2026":
-      return <ComicConBadge {...props} />;
+  // Switch on the decoded Layer B `kind` (the schema discriminator), NOT the
+  // issuer — one issuer (Comic Con) may emit multiple media, and each renders
+  // its own card. Issuer theme color/logo still skins every card.
+  switch (props.data.kind) {
+    case "baseball_ticket":
+      return <BaseballTicketCard {...props} />;
+    case "festival_pass":
+      return <FestivalPassCard {...props} />;
+    case "wristband":
+      return <WristbandCard {...props} />;
     default:
-      return (
-        <div
-          className="rounded p-3 text-xs text-white"
-          style={{ background: props.issuer.theme_color }}
-        >
-          {JSON.stringify(props.data)}
-        </div>
-      );
+      // No structured Layer B (verified-empty / raw / undecodable).
+      return <EmptyPayloadCard {...props} />;
   }
 }
