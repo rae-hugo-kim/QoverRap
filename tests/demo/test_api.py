@@ -209,6 +209,39 @@ def test_trust_list_returns_seeded_issuers(client: TestClient) -> None:
         assert e["theme_color"].startswith("#")
 
 
+def test_trust_list_exposes_allowed_schemas(client: TestClient) -> None:
+    """allowed_schemas must surface per issuer: comic-con runs two media under
+    one key (festival_pass + wristband)."""
+    entries = {e["issuer_id"]: e for e in client.get("/api/trust").json()["entries"]}
+    assert entries["tigers-2026"]["allowed_schemas"] == ["baseball_ticket"]
+    assert entries["violet-fandom"]["allowed_schemas"] == ["festival_pass"]
+    assert entries["comic-con-2026"]["allowed_schemas"] == ["festival_pass", "wristband"]
+
+
+def test_schema_catalog_lists_three_schemas_with_fields(client: TestClient) -> None:
+    r = client.get("/api/schemas")
+    assert r.status_code == 200
+    schemas = {s["kind"]: s for s in r.json()["schemas"]}
+    assert set(schemas) == {"baseball_ticket", "festival_pass", "wristband"}
+    assert schemas["baseball_ticket"]["schema_id"] == 1
+    assert schemas["festival_pass"]["schema_id"] == 2
+    assert schemas["wristband"]["schema_id"] == 3
+
+    # `kind` is the discriminator — it is NOT listed as a settable field.
+    band_fields = {f["name"]: f for f in schemas["wristband"]["fields"]}
+    assert "kind" not in band_fields
+    # required vs optional reflects the model
+    assert band_fields["band_id"]["required"] is True
+    assert band_fields["tier"]["required"] is False
+    # is_timestamp reflects the schema's ts_fields (per-schema, not global)
+    assert band_fields["valid_until"]["is_timestamp"] is True
+    assert band_fields["tier"]["is_timestamp"] is False
+    # festival `day` is a string label, NOT a timestamp
+    fest_fields = {f["name"]: f for f in schemas["festival_pass"]["fields"]}
+    assert fest_fields["day"]["is_timestamp"] is False
+    assert fest_fields["issued_at"]["is_timestamp"] is True
+
+
 def test_unknown_issuer_no_routing(client: TestClient) -> None:
     layer_a = "qwr:never-registered|x"
     layer_b_hex = b"x".hex()

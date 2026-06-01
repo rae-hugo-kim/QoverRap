@@ -57,10 +57,17 @@ class EncodeLayerBRequest(BaseModel):
     """
 
     ticket: dict = Field(
-        ..., description="TicketLayerB fields as a JSON object (validated server-side)"
+        ..., description="Layer B schema fields as a JSON object (validated server-side)"
     )
     format: Literal["json", "cbor", "cbor_aggr"] = Field(
         "json", description="Layer B serialization format — see layer_b_codec"
+    )
+    # `schema` intentionally shadows BaseModel's deprecated v1 `.schema()` (now
+    # `.model_json_schema()`); the UserWarning is harmless and verified. Keep
+    # this exact wire name — it is the frontend contract. Do NOT rename.
+    schema: str = Field(
+        "baseball_ticket",
+        description="Layer B schema kind to validate against (baseball_ticket/festival_pass/wristband)",
     )
 
 
@@ -68,6 +75,8 @@ class EncodeLayerBResponse(BaseModel):
     layer_b_hex: str = Field(..., description="Encoded Layer B bytes as hex string")
     byte_size: int = Field(..., description="Encoded Layer B size in bytes")
     format: Literal["json", "cbor", "cbor_aggr"]
+    schema: str = Field(..., description="Layer B schema kind used to encode")
+    schema_id: int = Field(..., description="Numeric schema id from the codec catalog")
 
 
 class QrImageRequest(BaseModel):
@@ -110,11 +119,15 @@ class ResolveResponse(BaseModel):
     layer_b: Optional[str] = None
     layer_b_ticket: Optional[dict] = Field(
         None,
-        description="Layer B bytes decoded via the demo codec (TicketLayerB.model_dump()). Present only when Layer B is exposed and decodable; None otherwise.",
+        description="Layer B bytes decoded via the demo codec (catalog model.model_dump(); see layer_b_schema for the kind). Present only when Layer B is exposed and decodable; None otherwise.",
     )
     layer_b_format: Optional[Literal["json", "cbor", "cbor_aggr"]] = Field(
         None,
         description="Layer B serialization format derived from the leading tag byte (0x01->json, 0x02->cbor, 0x03->cbor_aggr). None when Layer B is absent/empty/undecodable.",
+    )
+    layer_b_schema: Optional[str] = Field(
+        None,
+        description="Decoded Layer B schema kind (baseball_ticket/festival_pass/wristband). Present only when Layer B is exposed and decodable; None otherwise.",
     )
     signature: Optional[str] = Field(
         None,
@@ -152,10 +165,32 @@ class TrustEntry(BaseModel):
     accent_color: str = Field(..., description="Secondary CSS color")
     logo_text: str = Field(..., description="Short label rendered as logo placeholder")
     public_key: str = Field(..., description="Hex-encoded Ed25519 public key")
+    allowed_schemas: list[str] = Field(
+        default_factory=list,
+        description="Layer B schema kinds this issuer may emit (not enforced at encode time yet)",
+    )
 
 
 class TrustListResponse(BaseModel):
     entries: list[TrustEntry]
+
+
+# ---- schema catalog ---------------------------------------------------------
+
+class SchemaFieldInfo(BaseModel):
+    name: str
+    required: bool
+    is_timestamp: bool
+
+
+class SchemaInfo(BaseModel):
+    kind: str
+    schema_id: int
+    fields: list[SchemaFieldInfo]
+
+
+class SchemaListResponse(BaseModel):
+    schemas: list[SchemaInfo]
 
 
 # ---- visit collection (stamp rally) -----------------------------------------

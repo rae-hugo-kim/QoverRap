@@ -31,6 +31,7 @@ class TrustEntry:
     logo_text: str
     private_key: bytes  # demo-only; real deployments would NEVER ship private keys
     public_key: bytes
+    allowed_schemas: tuple[str, ...]  # Layer B schema kinds this issuer may emit
 
 
 def _build_demo_registry() -> dict[str, TrustEntry]:
@@ -40,12 +41,15 @@ def _build_demo_registry() -> dict[str, TrustEntry]:
     one session are not verifiable across restarts. Acceptable for the demo.
     """
     issuers = [
-        ("tigers-2026", "Tigers Baseball Club", "#000000", "#FFCC00", "TIGERS"),
-        ("violet-fandom", "Violet Fandom", "#6E00B3", "#F2C7FF", "V"),
-        ("comic-con-2026", "Comic Con 2026", "#0A2540", "#FF4D6D", "CC26"),
+        ("tigers-2026", "Tigers Baseball Club", "#000000", "#FFCC00", "TIGERS",
+         ("baseball_ticket",)),
+        ("violet-fandom", "Violet Fandom", "#6E00B3", "#F2C7FF", "V",
+         ("festival_pass",)),
+        ("comic-con-2026", "Comic Con 2026", "#0A2540", "#FF4D6D", "CC26",
+         ("festival_pass", "wristband")),
     ]
     out: dict[str, TrustEntry] = {}
-    for issuer_id, display_name, color, accent, logo in issuers:
+    for issuer_id, display_name, color, accent, logo, allowed_schemas in issuers:
         priv, pub = generate_keypair()
         out[issuer_id] = TrustEntry(
             issuer_id=issuer_id,
@@ -55,6 +59,7 @@ def _build_demo_registry() -> dict[str, TrustEntry]:
             logo_text=logo,
             private_key=priv,
             public_key=pub,
+            allowed_schemas=allowed_schemas,
         )
     return out
 

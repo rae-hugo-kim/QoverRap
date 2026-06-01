@@ -85,6 +85,7 @@ def test_verified_decodes_layer_b_ticket(client: TestClient, fmt: str) -> None:
     r = _verified_resolve_for_format(client, fmt)
     assert r["verified"] is True
     assert r["layer_b_format"] == fmt
+    assert r["layer_b_schema"] == "baseball_ticket"
 
     # model_dump of the original ticket is the canonical comparison target:
     # aggressive CBOR drops empty optionals and roundtrips UTC timestamps, but
@@ -146,6 +147,7 @@ def test_verified_empty_layer_b_has_no_ticket(client: TestClient) -> None:
     assert r["layer_b"] == ""  # empty hex preserved, NOT None (claim 7(iii))
     assert r["layer_b_ticket"] is None
     assert r["layer_b_format"] is None
+    assert r["layer_b_schema"] is None
 
 
 def test_tampered_layer_b_falls_back_no_crash(client: TestClient) -> None:
@@ -179,6 +181,7 @@ def test_tampered_layer_b_falls_back_no_crash(client: TestClient) -> None:
     assert body["layer_b"] is None  # safe-fallback hides Layer B
     assert body["layer_b_ticket"] is None
     assert body["layer_b_format"] is None
+    assert body["layer_b_schema"] is None
 
 
 def test_authenticated_undecodable_layer_b_no_crash(client: TestClient) -> None:
@@ -201,6 +204,7 @@ def test_authenticated_undecodable_layer_b_no_crash(client: TestClient) -> None:
     assert body["layer_b"] == garbage_b  # raw hex preserved
     assert body["layer_b_ticket"] is None
     assert body["layer_b_format"] is None
+    assert body["layer_b_schema"] is None
 
 
 def test_authenticated_decodes_layer_b_ticket(client: TestClient) -> None:
@@ -222,6 +226,7 @@ def test_authenticated_decodes_layer_b_ticket(client: TestClient) -> None:
     ).json()
     assert r["verified"] is False
     assert r["layer_b_format"] == "cbor"
+    assert r["layer_b_schema"] == "baseball_ticket"
     assert r["layer_b_ticket"] == TicketLayerB.model_validate(_ticket_dict()).model_dump()
 
 
@@ -244,6 +249,7 @@ def test_public_level_no_layer_b_fields(client: TestClient) -> None:
     assert r["layer_b"] is None
     assert r["layer_b_ticket"] is None
     assert r["layer_b_format"] is None
+    assert r["layer_b_schema"] is None
 
 
 def test_iso_to_epoch_naive_is_utc_not_host_tz(monkeypatch: pytest.MonkeyPatch) -> None:

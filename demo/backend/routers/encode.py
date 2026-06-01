@@ -13,7 +13,7 @@ from pydantic import ValidationError
 from qoverwrap.encoder import encode_layers
 
 from ..layer_b_codec import (
-    TicketLayerB,
+    SCHEMA_BY_KIND,
     encode_cbor,
     encode_cbor_aggressive,
     encode_json,
@@ -64,21 +64,29 @@ _LAYER_B_ENCODERS = {
 
 @router.post("/encode-layer-b", response_model=EncodeLayerBResponse)
 def encode_layer_b(req: EncodeLayerBRequest) -> EncodeLayerBResponse:
-    """Build a Layer B hex string from a TicketLayerB model + format choice.
+    """Build a Layer B hex string from a catalog schema + format choice.
 
     Caller flow: encode-layer-b → sign (via trust router) → encode (assembly).
     """
+    schema = SCHEMA_BY_KIND.get(req.schema)
+    if schema is None:
+        raise HTTPException(
+            status_code=422, detail=f"unknown layer_b schema: {req.schema!r}"
+        )
+
     try:
-        ticket = TicketLayerB.model_validate(req.ticket)
+        model = schema.model.model_validate(req.ticket)
     except ValidationError as exc:
         raise HTTPException(status_code=422, detail=exc.errors()) from exc
 
     encoder = _LAYER_B_ENCODERS[req.format]
-    raw = encoder(ticket)
+    raw = encoder(model)
     return EncodeLayerBResponse(
         layer_b_hex=raw.hex(),
         byte_size=len(raw),
         format=req.format,
+        schema=schema.kind,
+        schema_id=schema.schema_id,
     )
 
 

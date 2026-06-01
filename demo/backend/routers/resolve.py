@@ -75,6 +75,9 @@ def resolve(req: ResolveRequest) -> ResolveResponse:
     # (None -> no decode), verified-empty keeps b"" (claim 7(iii) -> no decode),
     # and a tampered/failed verification collapses Layer B to None (no decode).
     layer_b_ticket, layer_b_format = _decode_layer_b(resolved.layer_b)
+    # Every catalog model carries `kind`; derive the schema name from the
+    # decoded dict so _decode_layer_b's signature stays unchanged.
+    layer_b_schema = layer_b_ticket["kind"] if layer_b_ticket else None
 
     # Use `is not None` (not truthiness): an empty bytes Layer B with verified=True
     # is a legal outcome and must be distinguishable from "Layer B absent". See
@@ -85,6 +88,7 @@ def resolve(req: ResolveRequest) -> ResolveResponse:
         layer_b=resolved.layer_b.hex() if resolved.layer_b is not None else None,
         layer_b_ticket=layer_b_ticket,
         layer_b_format=layer_b_format,
+        layer_b_schema=layer_b_schema,
         signature=resolved.signature.hex() if resolved.signature is not None else None,
         verified=resolved.verified,
         issuer_id=issuer_id,

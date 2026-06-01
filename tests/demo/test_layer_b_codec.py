@@ -1,14 +1,17 @@
-"""Tests for demo Layer B codec — schema + JSON/CBOR/CBOR-aggressive + size budget."""
+"""Tests for demo Layer B codec — catalog + JSON/CBOR/CBOR-aggressive + size budget."""
 from __future__ import annotations
 
 import cbor2
 import pytest
+from pydantic import ValidationError
 
 from demo.backend.layer_b_codec import (
     LAYER_B_TAG_CBOR,
     LAYER_B_TAG_CBOR_AGGR,
     LAYER_B_TAG_JSON,
+    FestivalPass,
     TicketLayerB,
+    Wristband,
     decode,
     encode_cbor,
     encode_cbor_aggressive,
@@ -29,6 +32,30 @@ def _sample_ticket() -> TicketLayerB:
         datetime="2026-05-10T09:30:00+00:00",
         opponent="Lions",
         holder="FAN-2456",
+    )
+
+
+def _sample_festival() -> FestivalPass:
+    return FestivalPass(
+        festival_id="comic-con-2026",
+        serial="F-2026-000777",
+        issued_at="2026-07-01T00:00:00+00:00",
+        day="Day 1 / Sat",
+        zone="Hall A",
+        tier="VIP",
+        gate="Gate 7",
+        holder="FAN-9981",
+    )
+
+
+def _sample_wristband() -> Wristband:
+    return Wristband(
+        band_id="comic-con-2026-band",
+        serial="W-2026-000333",
+        issued_at="2026-07-01T00:00:00+00:00",
+        tier="3-day",
+        valid_until="2026-07-03T23:59:59+00:00",
+        holder="FAN-9981",
     )
 
 
@@ -57,24 +84,25 @@ def test_cbor_aggressive_roundtrip() -> None:
     assert decode(raw) == t
 
 
-def test_kind_default_is_ticket() -> None:
-    """Schema fixes kind="ticket" — future polymorphism keys off this field."""
+def test_kind_default_is_baseball_ticket() -> None:
+    """Schema fixes kind="baseball_ticket" — JSON/CBOR routing keys off this field."""
     t = _sample_ticket()
-    assert t.kind == "ticket"
+    assert t.kind == "baseball_ticket"
     raw = encode_json(t)
-    assert b'"kind":"ticket"' in raw
+    assert b'"kind":"baseball_ticket"' in raw
 
 
-def test_aggressive_omits_kind_from_body() -> None:
-    """kind is implicit in tag 0x03 — no need to spend bytes on it."""
+def test_aggressive_encodes_schema_id_not_kind_string() -> None:
+    """kind never spends string bytes in 0x03 — the schema_id rides in int key 0."""
     t = _sample_ticket()
     raw = encode_cbor_aggressive(t)
     body = cbor2.loads(raw[1:])
     assert isinstance(body, dict)
-    # No string key "kind", no int key reserved for it either
+    # No string key "kind"; all keys are ints
     assert "kind" not in body
-    # All keys are ints
     assert all(isinstance(k, int) for k in body.keys())
+    # Int key 0 carries the schema_id discriminator (baseball_ticket == 1)
+    assert body[0] == 1
 
 
 # ---------------------------------------------------------------------------
@@ -165,13 +193,16 @@ def test_optional_fields_default_to_empty_string() -> None:
 # alone — final QR version depends on the combined payload size.
 
 def test_size_budget_json() -> None:
+    # Budget bumped +10B over the pre-catalog 250B: the kind discriminator grew
+    # from "ticket" (6) to "baseball_ticket" (15) for self-describing routing.
     raw = encode_json(_sample_ticket())
-    assert len(raw) <= 250, f"JSON layer_b is {len(raw)}B, expected ≤250B (target QR v10)"
+    assert len(raw) <= 260, f"JSON layer_b is {len(raw)}B, expected ≤260B (target QR v10)"
 
 
 def test_size_budget_cbor() -> None:
+    # Budget bumped +10B over the pre-catalog 215B (longer kind string, see above).
     raw = encode_cbor(_sample_ticket())
-    assert len(raw) <= 215, f"CBOR layer_b is {len(raw)}B, expected ≤215B (target QR v9)"
+    assert len(raw) <= 225, f"CBOR layer_b is {len(raw)}B, expected ≤225B (target QR v9)"
 
 
 def test_size_budget_cbor_aggressive() -> None:
@@ -202,3 +233,125 @@ def test_format_ordering_by_size() -> None:
         "aggr": len(encode_cbor_aggressive(t)),
     }
     assert sizes["json"] > sizes["cbor"] > sizes["aggr"], sizes
+
+
+# ---------------------------------------------------------------------------
+# Self-describing catalog — multi-schema roundtrips
+# ---------------------------------------------------------------------------
+
+@pytest.mark.parametrize(
+    "factory,kind",
+    [
+        (_sample_festival, "festival_pass"),
+        (_sample_wristband, "wristband"),
+    ],
+)
+def test_non_baseball_schema_roundtrips_all_formats(factory, kind: str) -> None:
+    """festival_pass / wristband must roundtrip through every format and decode
+    back into their own model (not baseball)."""
+    m = factory()
+    assert m.kind == kind
+    for enc in (encode_json, encode_cbor, encode_cbor_aggressive):
+        decoded = decode(enc(m))
+        assert decoded.kind == kind
+        assert decoded == m
+
+
+def test_aggressive_festival_carries_its_schema_id() -> None:
+    """Int key 0 in a festival aggressive body is schema_id 2 (not baseball's 1)."""
+    body = cbor2.loads(encode_cbor_aggressive(_sample_festival())[1:])
+    assert body[0] == 2
+
+
+def test_aggressive_wristband_carries_its_schema_id() -> None:
+    body = cbor2.loads(encode_cbor_aggressive(_sample_wristband())[1:])
+    assert body[0] == 3
+
+
+# ---------------------------------------------------------------------------
+# Cross-schema decode SAFETY — the core authenticity boundary
+# ---------------------------------------------------------------------------
+
+def test_festival_aggressive_bytes_do_not_decode_as_baseball() -> None:
+    """A festival_pass aggressive token must decode as festival_pass, never as
+    a baseball ticket whose field 1 happens to be the festival_id. The schema_id
+    in key 0 is the only thing the decoder trusts."""
+    raw = encode_cbor_aggressive(_sample_festival())
+    decoded = decode(raw)
+    assert decoded.kind == "festival_pass"
+    assert not isinstance(decoded, TicketLayerB)
+
+
+def test_festival_json_bytes_do_not_decode_as_baseball() -> None:
+    """JSON/CBOR route on the `kind` string — a festival body must not silently
+    validate against TicketLayerB."""
+    raw = encode_json(_sample_festival())
+    assert decode(raw).kind == "festival_pass"
+
+
+def test_kind_field_mismatch_is_rejected() -> None:
+    """A body claiming kind="baseball_ticket" but carrying festival-only fields
+    (no required event_id) must fail schema validation, not coerce."""
+    forged = bytes([LAYER_B_TAG_JSON]) + (
+        b'{"kind":"baseball_ticket","festival_id":"x","serial":"s",'
+        b'"issued_at":"2026-07-01T00:00:00+00:00"}'
+    )
+    with pytest.raises((ValueError, ValidationError)):
+        decode(forged)
+
+
+def test_unknown_kind_string_rejected() -> None:
+    forged = bytes([LAYER_B_TAG_JSON]) + b'{"kind":"spaceship","serial":"s"}'
+    with pytest.raises(ValueError, match="unknown layer_b kind"):
+        decode(forged)
+
+
+# ---------------------------------------------------------------------------
+# Aggressive schema_id discriminator — boundary cases
+# ---------------------------------------------------------------------------
+
+def test_aggressive_unknown_schema_id_rejected() -> None:
+    """An aggressive body whose key 0 names an unregistered schema_id must
+    raise (no silent fallback to baseball)."""
+    forged = bytes([LAYER_B_TAG_CBOR_AGGR]) + cbor2.dumps({0: 99, 2: "s"})
+    with pytest.raises(ValueError, match="unknown schema_id"):
+        decode(forged)
+
+
+def test_aggressive_key0_absent_falls_back_to_baseball() -> None:
+    """Pre-catalog ticket bytes never wrote key 0. A key-0-absent aggressive
+    body must still decode as baseball_ticket so old tokens stay readable."""
+    # Hand-build a baseball aggressive body WITHOUT key 0 (legacy shape).
+    legacy = cbor2.dumps({1: "tigers-2026-042", 2: "T-1", 3: 1777_000_000})
+    forged = bytes([LAYER_B_TAG_CBOR_AGGR]) + legacy
+    decoded = decode(forged)
+    assert decoded.kind == "baseball_ticket"
+    assert isinstance(decoded, TicketLayerB)
+    assert decoded.event_id == "tigers-2026-042"
+
+
+# ---------------------------------------------------------------------------
+# Timestamp epoch roundtrip — per-schema ts fields
+# ---------------------------------------------------------------------------
+
+def test_festival_issued_at_epoch_roundtrip() -> None:
+    """festival_pass ts_fields = {issued_at}; `day` is a STRING, not epoch."""
+    f = _sample_festival()
+    raw = encode_cbor_aggressive(f)
+    body = cbor2.loads(raw[1:])
+    # issued_at (int key 3) is an int epoch; day (int key 4) stays a string
+    assert isinstance(body[3], int)
+    assert isinstance(body[4], str)
+    assert decode(raw).issued_at == f.issued_at
+
+
+def test_wristband_valid_until_epoch_roundtrip() -> None:
+    """wristband ts_fields = {issued_at, valid_until} — both epoch-encoded."""
+    w = _sample_wristband()
+    raw = encode_cbor_aggressive(w)
+    body = cbor2.loads(raw[1:])
+    assert isinstance(body[3], int)  # issued_at
+    assert isinstance(body[5], int)  # valid_until
+    decoded = decode(raw)
+    assert decoded.issued_at == w.issued_at
+    assert decoded.valid_until == w.valid_until

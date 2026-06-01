@@ -42,6 +42,54 @@ def test_default_format_is_json(client: TestClient) -> None:
     assert len(raw) == data["byte_size"]
 
 
+def test_default_schema_is_baseball_ticket(client: TestClient) -> None:
+    """Omitting `schema` defaults to baseball_ticket (id 1) — frontend stays
+    runtime-compatible without sending the new field."""
+    r = client.post("/api/encode-layer-b", json={"ticket": _ticket_dict()})
+    assert r.status_code == 200
+    data = r.json()
+    assert data["schema"] == "baseball_ticket"
+    assert data["schema_id"] == 1
+
+
+def test_festival_schema_selection(client: TestClient) -> None:
+    festival = {
+        "festival_id": "comic-con-2026",
+        "serial": "F-2026-000777",
+        "issued_at": "2026-07-01T00:00:00+00:00",
+        "day": "Day 1 / Sat",
+        "zone": "Hall A",
+        "tier": "VIP",
+    }
+    r = client.post(
+        "/api/encode-layer-b",
+        json={"ticket": festival, "format": "cbor_aggr", "schema": "festival_pass"},
+    )
+    assert r.status_code == 200
+    data = r.json()
+    assert data["schema"] == "festival_pass"
+    assert data["schema_id"] == 2
+    assert bytes.fromhex(data["layer_b_hex"])[0] == LAYER_B_TAG_CBOR_AGGR
+
+
+def test_unknown_schema_rejected_422(client: TestClient) -> None:
+    r = client.post(
+        "/api/encode-layer-b",
+        json={"ticket": _ticket_dict(), "schema": "spaceship"},
+    )
+    assert r.status_code == 422
+
+
+def test_ticket_fields_against_wrong_schema_rejected_422(client: TestClient) -> None:
+    """Baseball fields validated against festival_pass must 422 (festival_id
+    required, event_id unknown) — schema selection is enforced at encode time."""
+    r = client.post(
+        "/api/encode-layer-b",
+        json={"ticket": _ticket_dict(), "schema": "festival_pass"},
+    )
+    assert r.status_code == 422
+
+
 def test_cbor_format(client: TestClient) -> None:
     r = client.post(
         "/api/encode-layer-b",

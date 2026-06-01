@@ -166,6 +166,8 @@ canonical 서명 메시지 = "QWR1" + version(1B) + len(A)(2B) + A + len(B)(2B) 
 
 **권장**: 발급자가 매체 선택과 함께 포맷 선택(`format: "json" | "cbor" | "cbor_aggr"` API 파라미터, M2에서 노출 예정). 검증기는 첫 바이트 태그로 자동 디스패치.
 
+**스키마 discriminator (M2.5)**: `[tag:1B][body]` 프레이밍은 불변. 스키마 식별자는 body 내부에 둔다 — JSON/CBOR(str-key)는 기존 `kind` 필드로, aggressive(0x03)는 **정수키 `0 = schema_id`** 를 전 스키마 공통으로 신규 예약(필드 맵은 1부터 시작). **key 0 부재 시 schema_id=1(baseball_ticket) 폴백** → 카탈로그 도입 전 발급된 aggressive ticket 바이트와 backward-compatible. `kind`가 `"ticket"`→`"baseball_ticket"`로 길어져 string-keyed 포맷은 +10B(예산 JSON ≤260B / CBOR ≤225B로 상향), aggressive·프레이밍 바이트는 불변.
+
 ### 7.3 검증 (Resolver — `src/qoverwrap/resolver.py`)
 - 출력 레벨: `public`(Layer A만) / `authenticated`(파싱된 메타, 미검증) / `verified`(서명 검증)
 - 실패 시 Layer A만 노출하는 강등(safe-fallback) 정책
@@ -216,7 +218,7 @@ canonical 서명 메시지 = "QWR1" + version(1B) + len(A)(2B) + A + len(B)(2B) 
 - **✅ M2 — 완료 (2026-06-01)**: 3개 항목 전부 완료.
   - **✅ format 파라미터 노출 + 검증 경로 Layer B decode + 모바일 동적 liveness** (커밋 `9aff7e5`, 2026-05-29).
   - **✅ 방문 성취 컬렉션 + 뱃지 (양자적 감정 UX)** (2026-06-01): **신뢰모델 B** — 관객이 부스에서 티켓 제시 → 발급자 일치 검증(`verify_signature` + issuer 매칭) → 운영자 키로 "방문 마커" 서명 발급 → 신원 비노출 뱃지 누적. **양자적 감정** = `visitor_token = sha256(티켓 Layer C)[:32]`(PII 없음, 같은 티켓 결정적 묶기). **부스당 1뱃지**(`RedemptionStore` 키 `visit:{booth_id}:{visitor_token}` 재사용), `booth_id`를 마커 Layer B에 내장·서명 → **서울≠부산 별도 뱃지**. **발급자 일치 강제**(아이유 티켓→아이유 부스만, 타행사=`wrong_issuer`; 위조=`ticket_invalid`). 마커 자체가 wire format이라 **오프라인 재검증**(`POST /api/visit/verify`). 파일: `demo/backend/{booth_registry.py, routers/visit.py, schemas.py, main.py}`, `demo/frontend/src/{components/CollectionPanel.tsx, App.tsx, types.ts, api/client.ts}`, 테스트 11종(`tests/demo/test_visit.py`). **코어 무수정**, layer_b_codec 신규 태그 없음.
-- **M2.5**: trust registry에 발급자별 `layer_b_schema` 필드 추가 — 같은 시스템에서 콘서트/페스티벌/팔찌 등 다른 사양 공존 가능
+- **✅ M2.5 — 완료 (2026-06-01, 백엔드+테스트+문서)**: **self-describing Layer B 스키마 카탈로그**(B안). 발급자→스키마 1:1 라우팅 대신 schema_id를 body에 임베드(JSON/CBOR는 `kind`, aggressive는 정수키 0). 스키마 3종 `baseball_ticket`/`festival_pass`/`wristband` + `LayerBSchema` 디스크립터·`SCHEMA_CATALOG`. **멀티매체**: Comic Con이 한 키로 festival_pass+wristband 둘 다 발매·검증. **스키마 공유**: festival_pass를 Violet+Comic Con 공유. trust registry에 `allowed_schemas` 노출(발급 시 강제는 후속). 신규 `GET /api/schemas`, `/api/encode-layer-b`에 `schema` 파라미터·응답 `schema`/`schema_id`, `/api/resolve`에 `layer_b_schema`. 파일: `demo/backend/{layer_b_codec.py, trust_registry.py, schemas.py, routers/{encode,resolve,trust,catalog}.py, main.py}`, 테스트(`tests/demo/test_schema_catalog.py` 신규 + 4종 개정). **코어 무수정**, 프레이밍 바이트·aggressive 1~9 맵 불변(key 0 폴백으로 구 ticket 바이트 backward-compatible). 프론트 2단계 선택·동적 폼은 후속.
 - **M3**: 모바일 최적화 (PWA 강화 / 검표원 스캔 흐름)
 
 > 접근 방식 = 기존 기반 리팩터링이므로, M1 시작 전 기존 `demo/` 구조를 "티켓 진위확인 제품" 관점으로 재정리하는 작업이 선행된다 (범위·명명 정리).
@@ -250,7 +252,7 @@ canonical 서명 메시지 = "QWR1" + version(1B) + len(A)(2B) + A + len(B)(2B) 
 - **모바일 구현 방식** (M3) — PWA 강화 vs 네이티브 (메모리: `agent-browser`가 UI 검증 기본 경로)
 - **검표 속도 KPI** — 영업 데모 목표 수치
 - **포맷 선택 API 노출** (M2) — `/api/encode` 또는 신규 엔드포인트가 `format: "json"|"cbor"|"cbor_aggr"` 파라미터 받아 발급 시 선택 가능하도록 노출
-- **발급자별 Layer B 스키마** (M2.5) — trust registry에 `layer_b_schema` 필드 추가, 발급자가 자기 매핑표 들고 등록. 같은 시스템에서 콘서트/페스티벌/팔찌 등 다른 사양 공존 가능
+- ~~**발급자별 Layer B 스키마** (M2.5)~~ → **해소 (2026-06-01)**: 발급자→스키마 1:1 라우팅(A안) 대신 **self-describing schema_id를 Layer B body에 임베드한 공유 카탈로그**(B안) 채택. 스키마 3종 `baseball_ticket`/`festival_pass`/`wristband`. **멀티매체**=한 운영자 키로 여러 스키마 발매(Comic Con이 festival_pass+wristband 둘 다), **스키마 공유**=한 스키마를 여러 발급자가(festival_pass를 Violet+Comic Con). trust registry `allowed_schemas`는 노출만, 발급 시 강제는 후속.
 
 ## 12. 범위 외 (Out of Scope)
 - 암표/부정 양도 차단 (본인확인)

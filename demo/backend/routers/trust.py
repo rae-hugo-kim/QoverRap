@@ -28,6 +28,7 @@ def list_trust() -> TrustListResponse:
             accent_color=e.accent_color,
             logo_text=e.logo_text,
             public_key=e.public_key.hex(),
+            allowed_schemas=list(e.allowed_schemas),
         )
         for e in trust_registry.list_entries()
     ]
