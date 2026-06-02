@@ -287,6 +287,18 @@ export default function App() {
     window.setTimeout(() => setToast(null), 2400);
   }
 
+  // StepNav click: mark active AND scroll the section into view. The nav lives
+  // in a long single-page layout, so without this the tab highlights but the
+  // viewport never moves. scroll-margin-top (index.css) clears the sticky header.
+  function goToStep(id: string) {
+    setActive(id);
+    requestAnimationFrame(() =>
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" }),
+    );
+  }
+
   async function buildQR() {
     if (!issuerId) return;
     setBusy(true);
@@ -413,8 +425,8 @@ export default function App() {
   return (
     <div className="min-h-full">
       <header className="border-b border-slate-200 bg-white sticky top-0 z-20">
-        <div className="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
+        <div className="max-w-5xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+          <div className="flex items-center gap-2 shrink-0">
             <img src="/favicon.svg" alt="" className="w-7 h-7" />
             <div>
               <h1 className="text-base sm:text-xl font-semibold leading-none">
@@ -506,7 +518,7 @@ export default function App() {
 
       <main className="max-w-5xl mx-auto px-4 py-6 space-y-8">
         {!screenshot && (
-          <StepNav steps={STEPS} activeId={active} onSelect={setActive} />
+          <StepNav steps={STEPS} activeId={active} onSelect={goToStep} />
         )}
 
         {err && (
