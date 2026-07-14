@@ -8,7 +8,7 @@ A false negative is as wrong as a fabrication. Do **not** assert "there's no rec
 
 ## Decide: known path vs. class of artifact
 
-- **Known single path** (the user named it, or you have a verified path) → just `Read` it. No sweep needed.
+- **Known single path** (the user named it, or you have a verified path) → just `read` it. No sweep needed.
 - **A class/set, or path uncertain** ("all session summaries", "anything about X", "where did we decide Y") → you do **not** know the location. Run a breadth-first sweep *before* concluding.
 
 The failure mode is treating the second case like the first: forming a hypothesis ("probably in `<dir>`"), checking only there, and stopping.

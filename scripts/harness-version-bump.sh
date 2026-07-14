@@ -25,27 +25,27 @@ for arg in "$@"; do
 done
 
 REPO_ROOT="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
-META_FILE="$REPO_ROOT/.claude/hooks/harness/harness-meta.json"
+META_FILE="$REPO_ROOT/.omp/extensions/harness/harness-meta.json"
 
 # Harness asset paths that warrant a version bump. Keep ALIGNED with the synced
 # set in scripts/harness-sync.sh (PATHS): a change to anything consumers receive
 # should produce a new version. Entries ending in "/" are directory prefixes;
-# others are exact file paths. (Excludes docs-build/docs-drift — not synced.)
+# others are exact file paths. (Excludes docs-drift — not synced.)
 HARNESS_PATHS=(
   "rules/"
   "checklists/"
   "templates/"
-  "CLAUDE.md"
+  "AGENTS.md"
   "INDEX.md"
   "EXAMPLES.md"
-  ".claude/hooks/harness/"
-  ".claude/settings.json"
+  ".omp/extensions/harness/"
   ".githooks/"
   "scripts/harness-version-bump.sh"
   "scripts/harness-sync.sh"
   "scripts/harness-audit.sh"
   "scripts/test-harness-audit.sh"
-  ".claude/skills/"
+  ".omp/skills/"
+  ".omp/agents/"
 )
 
 # Literal path match (no regex): exact for file entries, prefix for "dir/" entries.
@@ -139,7 +139,7 @@ echo "Now push:  git push --follow-tags"
 # --- 7. Append audit-score row (best-effort; failure must not block) ---
 # Issue #11: track audit results over time, one row per harness/* version.
 {
-  scores_file="$REPO_ROOT/.omc/state/harness-scores.jsonl"
+  scores_file="$REPO_ROOT/.omp/state/harness-scores.jsonl"
   mkdir -p "$(dirname "$scores_file")"
   audit_out="$(bash "$REPO_ROOT/scripts/harness-audit.sh" --root "$REPO_ROOT" --terse 2>/dev/null)"
   rubric_version="$(bash "$REPO_ROOT/scripts/harness-audit.sh" --rubric-version 2>/dev/null)"

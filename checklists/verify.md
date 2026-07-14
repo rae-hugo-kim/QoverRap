@@ -21,7 +21,7 @@ Use this mode when changes are limited to markdown/policy navigation/template ed
 - [ ] Deterministic artifacts captured:
   - [ ] Link integrity check (edited links/anchors resolve)
   - [ ] Cross-reference check (references point to canonical docs)
-  - [ ] Rule conflict checklist (no contradictions with `CLAUDE.md` and linked rules)
+  - [ ] Rule conflict checklist (no contradictions with `AGENTS.md` and linked rules)
 - [ ] Evidence block prepared for docs-only PR:
   - [ ] Changed files listed
   - [ ] Before/after intent documented

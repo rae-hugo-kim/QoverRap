@@ -150,7 +150,7 @@ If low-confidence observations exist, append them after the summary under a **No
 
 ## SHOULD: project-specific conventions
 
-When project conventions exist in `CLAUDE.md` or linked rules, SHOULD check for adherence. Examples:
+When project conventions exist in `AGENTS.md` or linked rules, SHOULD check for adherence. Examples:
 
 - Immutability requirements (spread over mutation)
 - Database migration patterns

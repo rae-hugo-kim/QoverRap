@@ -1,9 +1,5 @@
 
 # Local files
-.claude/*
-!.claude/skills/
-!.claude/hooks/
-!.claude/settings.json
 docs/sum/
 docs/brainstorming/
 
@@ -13,9 +9,6 @@ __pycache__/
 *.pyc
 *.egg-info/
 
-# OMC internal state
-.omc/state/
-.omc/harness-state/
 
 # Generated test artifacts
 test-qr-images/
@@ -30,3 +23,15 @@ test-results/
 docs/research/*.pdf
 docs/research/*.pdf:Zone.Identifier
 plantuml.jar
+
+# --- OMP harness (added by /skill:migrate) ---
+.omp/harness-state/
+.omp/state/
+docs/reviews/
+docs/harness/*-skip
+docs/harness/*-done
+.omc/
+
+# AI tool runtime state (untracked at OMP cutover)
+.serena/
+codex-hud/

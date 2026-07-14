@@ -1,0 +1,8 @@
+{
+  "version": "2026.64",
+  "updated": "2026-07-14",
+  "description": "Personal harness for OMP - context/acceptance/backpressure gates (ported from the Claude Code template at 2026.49)",
+  "source_remote": "git@github.com:rae-hugo-kim/omp.git",
+  "commit_sha": "696e5111d19218279c8a5c4224d3a4abbfb6509b",
+  "bootstrapped_at": "2026-07-14T11:58:13Z"
+}

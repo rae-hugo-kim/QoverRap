@@ -4,7 +4,7 @@
 # Runs harness-audit.sh against fixtures and asserts the total score falls
 # within an expected range. Three cases:
 #   1) empty fixture       → 0/70
-#   2) minimal CLAUDE.md   → small non-zero (1..5)
+#   2) minimal AGENTS.md   → small non-zero (1..5)
 #   3) the host repo       → substantial non-zero (40..70)
 #
 # Exits non-zero on any failure.
@@ -63,16 +63,16 @@ F1=$(mktemp -d)
 TMPDIRS+=("$F1")
 run_case "empty fixture" "$F1" 0 0
 
-# --- fixture 2: only CLAUDE.md with model_routing block ---
+# --- fixture 2: only AGENTS.md with model_routing block ---
 F2=$(mktemp -d)
 TMPDIRS+=("$F2")
-cat > "$F2/CLAUDE.md" <<'CLAUDE_EOF'
-# CLAUDE.md
+cat > "$F2/AGENTS.md" <<'AGENTS_EOF'
+# AGENTS.md
 <model_routing>
 haiku / sonnet / opus
 </model_routing>
-CLAUDE_EOF
-run_case "minimal CLAUDE.md only" "$F2" 1 5
+AGENTS_EOF
+run_case "minimal AGENTS.md only" "$F2" 1 5
 
 # --- fixture 3: actual host repo ---
 run_case "host repo" "$REPO_ROOT" 40 70

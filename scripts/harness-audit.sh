@@ -24,7 +24,7 @@ set -euo pipefail
 # Rubric version: bump whenever scoring rules change (new category, threshold
 # shift, weighting change). Consumers (e.g. harness-version-bump.sh) tag each
 # stored audit row with this so series can be split on rule evolution.
-RUBRIC_VERSION="2"
+RUBRIC_VERSION="3"
 
 ROOT="$(pwd)"
 TERSE=0
@@ -117,23 +117,23 @@ emit_category() {
 # --- 1. Tool Coverage ---
 score_tool_coverage() {
   local agents
-  agents=$(count_files ".claude/agents")
+  agents=$(count_files ".omp/agents")
   # Rubric v2: the >=5 threshold encoded the retired MCP delegation matrix
   # (researcher/db-worker/refactorer/full-context, removed 2026-06 after zero
   # measured delegations). Full credit now means the verification pair
   # (reviewer + verifier) is present.
   if (( agents >= 2 )); then
-    award tool_coverage 3 ".claude/agents/ has $agents agents (>=2; verification pair)"
+    award tool_coverage 3 ".omp/agents/ has $agents agents (>=2; verification pair)"
   elif (( agents > 0 )); then
-    award tool_coverage 1 ".claude/agents/ has $agents agents (<2)"
+    award tool_coverage 1 ".omp/agents/ has $agents agents (<2)"
   else
-    skip tool_coverage ".claude/agents/"
+    skip tool_coverage ".omp/agents/"
   fi
 
-  if exists ".claude/hooks/harness"; then
-    award tool_coverage 2 ".claude/hooks/harness/ present"
+  if exists ".omp/extensions/harness/gates"; then
+    award tool_coverage 2 ".omp/extensions/harness/gates/ present"
   else
-    skip tool_coverage ".claude/hooks/harness/"
+    skip tool_coverage ".omp/extensions/harness/gates/"
   fi
 
   if (( $(count_files "scripts") >= 3 )); then
@@ -150,10 +150,10 @@ score_tool_coverage() {
     skip tool_coverage "rules/agent_routing.md"
   fi
 
-  if has_pattern "CLAUDE.md" "model_routing" || has_pattern "CLAUDE.md" "model routing"; then
-    award tool_coverage 2 "CLAUDE.md model_routing block"
+  if has_pattern "AGENTS.md" "model_routing" || has_pattern "AGENTS.md" "model routing"; then
+    award tool_coverage 2 "AGENTS.md model_routing block"
   else
-    skip tool_coverage "CLAUDE.md model_routing block"
+    skip tool_coverage "AGENTS.md model_routing block"
   fi
 }
 
@@ -171,10 +171,10 @@ score_context_efficiency() {
     skip context_efficiency "rules/session_persistence.md"
   fi
 
-  if grep -rqF ".omc/state" "$ROOT/CLAUDE.md" "$ROOT/rules" 2>/dev/null; then
-    award context_efficiency 2 ".omc/state referenced in rules/CLAUDE.md"
+  if grep -rqF ".omp/state" "$ROOT/AGENTS.md" "$ROOT/rules" 2>/dev/null; then
+    award context_efficiency 2 ".omp/state referenced in rules/AGENTS.md"
   else
-    skip context_efficiency ".omc/state reference"
+    skip context_efficiency ".omp/state reference"
   fi
 }
 
@@ -192,16 +192,16 @@ score_quality_gates() {
     skip quality_gates "checklists/code_review.md"
   fi
 
-  if compgen -G "$ROOT/.claude/hooks/harness/acceptance-gate.*" >/dev/null 2>&1; then
-    award quality_gates 2 "acceptance-gate hook"
+  if compgen -G "$ROOT/.omp/extensions/harness/gates/acceptance-gate.*" >/dev/null 2>&1; then
+    award quality_gates 2 "acceptance-gate gate"
   else
-    skip quality_gates "acceptance-gate hook"
+    skip quality_gates "acceptance-gate gate"
   fi
 
-  if compgen -G "$ROOT/.claude/hooks/harness/backpressure-gate.*" >/dev/null 2>&1; then
-    award quality_gates 2 "backpressure-gate hook"
+  if compgen -G "$ROOT/.omp/extensions/harness/gates/backpressure-gate.*" >/dev/null 2>&1; then
+    award quality_gates 2 "backpressure-gate gate"
   else
-    skip quality_gates "backpressure-gate hook"
+    skip quality_gates "backpressure-gate gate"
   fi
 
   if exists "rules/quality_gates.md"; then
@@ -225,22 +225,22 @@ score_memory_persistence() {
     skip memory_persistence "rules/session_persistence.md"
   fi
 
-  if has_pattern "CLAUDE.md" "auto memory" \
-    || has_pattern "CLAUDE.md" "MEMORY.md" \
-    || has_pattern "CLAUDE.md" "memory system"; then
-    award memory_persistence 3 "CLAUDE.md auto-memory references"
+  if has_pattern "AGENTS.md" "auto memory" \
+    || has_pattern "AGENTS.md" "MEMORY.md" \
+    || has_pattern "AGENTS.md" "memory system"; then
+    award memory_persistence 3 "AGENTS.md auto-memory references"
   else
-    skip memory_persistence "CLAUDE.md auto-memory reference"
+    skip memory_persistence "AGENTS.md auto-memory reference"
   fi
 
-  if grep -rqF ".omc/state/sessions" "$ROOT/CLAUDE.md" "$ROOT/rules" 2>/dev/null; then
-    award memory_persistence 2 ".omc/state/sessions referenced"
+  if grep -rqF ".omp/state/sessions" "$ROOT/AGENTS.md" "$ROOT/rules" 2>/dev/null; then
+    award memory_persistence 2 ".omp/state/sessions referenced"
   else
-    skip memory_persistence ".omc/state/sessions reference"
+    skip memory_persistence ".omp/state/sessions reference"
   fi
 
-  # 'sum' skill mentioned in CLAUDE.md or rules
-  if grep -rqwF "sum" "$ROOT/CLAUDE.md" 2>/dev/null \
+  # 'sum' skill mentioned in AGENTS.md or rules
+  if grep -rqwF "sum" "$ROOT/AGENTS.md" 2>/dev/null \
     || grep -rqwF "sum" "$ROOT/rules" 2>/dev/null; then
     award memory_persistence 3 "sum skill referenced"
   else
@@ -296,16 +296,16 @@ score_security_guardrails() {
     skip security_guardrails "rules/agent_security.md"
   fi
 
-  if compgen -G "$ROOT/.claude/hooks/harness/destructive-guard.*" >/dev/null 2>&1; then
-    award security_guardrails 3 "destructive-guard hook"
+  if compgen -G "$ROOT/.omp/extensions/harness/gates/destructive-guard.*" >/dev/null 2>&1; then
+    award security_guardrails 3 "destructive-guard gate"
   else
-    skip security_guardrails "destructive-guard hook"
+    skip security_guardrails "destructive-guard gate"
   fi
 
-  if compgen -G "$ROOT/.claude/hooks/harness/mcp-gate.*" >/dev/null 2>&1; then
-    award security_guardrails 2 "mcp-gate hook"
+  if compgen -G "$ROOT/.omp/extensions/harness/gates/mcp-gate.*" >/dev/null 2>&1; then
+    award security_guardrails 2 "mcp-gate gate"
   else
-    skip security_guardrails "mcp-gate hook"
+    skip security_guardrails "mcp-gate gate"
   fi
 
   if grep -rqiF "secret" "$ROOT/rules" 2>/dev/null \
@@ -324,10 +324,10 @@ score_cost_efficiency() {
     skip cost_efficiency "rules/cost_awareness.md"
   fi
 
-  if has_pattern "CLAUDE.md" "model_routing" || has_pattern "CLAUDE.md" "model routing"; then
-    award cost_efficiency 3 "CLAUDE.md model routing"
+  if has_pattern "AGENTS.md" "model_routing" || has_pattern "AGENTS.md" "model routing"; then
+    award cost_efficiency 3 "AGENTS.md model routing"
   else
-    skip cost_efficiency "CLAUDE.md model routing"
+    skip cost_efficiency "AGENTS.md model routing"
   fi
 
   if exists "rules/context_management.md"; then
@@ -337,7 +337,7 @@ score_cost_efficiency() {
   fi
 
   if grep -rqiF "token budget" "$ROOT/rules" 2>/dev/null \
-    || grep -rqiF "token budget" "$ROOT/CLAUDE.md" 2>/dev/null \
+    || grep -rqiF "token budget" "$ROOT/AGENTS.md" 2>/dev/null \
     || grep -rqiF "token-budget" "$ROOT/rules" 2>/dev/null; then
     award cost_efficiency 2 "token budget guidance"
   else

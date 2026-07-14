@@ -44,11 +44,11 @@ DRY_RUN=0
 [[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
-META_FILE="$REPO_ROOT/.claude/hooks/harness/harness-meta.json"
-DEFAULT_SOURCE="git@github.com:rae-hugo-kim/claude.git"
-# Anchor to a host/path boundary so e.g. `notrae-hugo-kim/claude.git` does NOT
+META_FILE="$REPO_ROOT/.omp/extensions/harness/harness-meta.json"
+DEFAULT_SOURCE="git@github.com:rae-hugo-kim/omp.git"
+# Anchor to a host/path boundary so e.g. `notrae-hugo-kim/omp.git` does NOT
 # match and wrongly self-skip sync (codex review nit).
-SOURCE_MATCH_RE='(^|[:/])rae-hugo-kim/claude(\.git)?$'
+SOURCE_MATCH_RE='(^|[:/])rae-hugo-kim/omp(\.git)?$'
 
 # --- 1. Detect source repo (self-skip) ---
 origin_url=$(git -C "$REPO_ROOT" remote get-url origin 2>/dev/null || true)
@@ -93,28 +93,32 @@ PATHS=(
   "rules"
   "checklists"
   "templates"
-  "CLAUDE.md"
+  "AGENTS.md"
   "INDEX.md"
   "EXAMPLES.md"
-  ".claude/hooks/harness"
-  ".claude/settings.json"
+  ".omp/extensions/harness"
   ".githooks/post-commit"
+  ".githooks/pre-push"
   "scripts/harness-version-bump.sh"
   "scripts/harness-sync.sh"
   "scripts/harness-audit.sh"
   "scripts/test-harness-audit.sh"
-  ".claude/skills/bootstrap"
-  ".claude/skills/init"
-  ".claude/skills/kickoff"
-  ".claude/skills/startdev"
-  ".claude/skills/sum"
-  ".claude/skills/compr"
-  ".claude/skills/compush"
-  ".claude/skills/harness-check"
-  ".claude/skills/receiving-code-review"
-  ".claude/skills/brainstorm"
-  ".claude/skills/design-mockup"
-  ".claude/skills/grepai-search"
+  ".omp/skills/bootstrap"
+  ".omp/skills/init"
+  ".omp/skills/migrate"
+  ".omp/skills/kickoff"
+  ".omp/skills/startdev"
+  ".omp/skills/sum"
+  ".omp/skills/compr"
+  ".omp/skills/compush"
+  ".omp/skills/harness-check"
+  ".omp/skills/receiving-code-review"
+  ".omp/skills/brainstorm"
+  ".omp/skills/design-mockup"
+  ".omp/skills/grepai-search"
+  ".omp/skills/gh-loop"
+  ".omp/skills/gh-fanout"
+  ".omp/agents"
 )
 
 if [[ $DRY_RUN -eq 1 ]]; then
@@ -129,6 +133,18 @@ if [[ $DRY_RUN -eq 1 ]]; then
   exit 0
 fi
 
+# --- 5.6 Capture bootstrapped_at BEFORE the copy overwrites META_FILE ---
+# Step 6 replaces .omp/extensions/harness/ wholesale, and META_FILE lives
+# inside it. The source repo's meta has no bootstrapped_at (source self-skips
+# sync), so reading after the copy always hits the date fallback and resets
+# the first-registration timestamp on every sync.
+bootstrapped_at=""
+if [[ -f "$META_FILE" ]]; then
+  bootstrapped_at=$(grep -o '"bootstrapped_at"[[:space:]]*:[[:space:]]*"[^"]*"' "$META_FILE" \
+    | sed 's/.*"bootstrapped_at"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' || true)
+fi
+[[ -z "$bootstrapped_at" ]] && bootstrapped_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+
 # --- 6. Copy (remote wins) ---
 for p in "${PATHS[@]}"; do
   [[ -e "$tmp/$p" ]] || continue
@@ -141,15 +157,9 @@ for p in "${PATHS[@]}"; do
   fi
 done
 
-# --- 7. Rewrite harness-meta.json (preserve bootstrapped_at) ---
-bootstrapped_at=""
-if [[ -f "$META_FILE" ]]; then
-  bootstrapped_at=$(grep -o '"bootstrapped_at"[[:space:]]*:[[:space:]]*"[^"]*"' "$META_FILE" \
-    | sed 's/.*"bootstrapped_at"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' || true)
-fi
-[[ -z "$bootstrapped_at" ]] && bootstrapped_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+# --- 7. Rewrite harness-meta.json (bootstrapped_at captured in step 5.6) ---
 
-src_desc=$(grep -o '"description"[[:space:]]*:[[:space:]]*"[^"]*"' "$tmp/.claude/hooks/harness/harness-meta.json" \
+src_desc=$(grep -o '"description"[[:space:]]*:[[:space:]]*"[^"]*"' "$tmp/.omp/extensions/harness/harness-meta.json" \
   | sed 's/.*"description"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' || echo "")
 today=$(date +%Y-%m-%d)
 
@@ -165,7 +175,7 @@ cat > "$META_FILE" <<EOF
 EOF
 
 # --- 8. Clear stale check cache ---
-cache="$REPO_ROOT/.omc/state/harness-version-check.json"
+cache="$REPO_ROOT/.omp/state/harness-version-check.json"
 [[ -f "$cache" ]] && rm -f "$cache"
 
 echo "Synced to harness/$latest_tag (SHA: ${target_sha:0:7})"

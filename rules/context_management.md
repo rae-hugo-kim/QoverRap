@@ -71,7 +71,7 @@ Use `priority` variant for facts that must survive conversation compaction long-
 
 ### Notepad persistence
 
-**MAY** use `.omc/notepads/{plan-name}/` for cross-session persistence:
+**MAY** use `.omp/notepads/{plan-name}/` for cross-session persistence:
 
 | File | Use for |
 |------|---------|
@@ -85,7 +85,7 @@ Write to notepads before compacting when the information needs to survive beyond
 
 ## Startup Context Budget
 
-Every MCP server and skill registered in `~/.claude/` is listed in the system prompt at session start, consuming context before any work begins. Lazy-load pattern: keep rarely-used servers and skills dormant, activate on demand.
+Every MCP server registered in OMP's MCP config (see `omp://mcp-config.md`) and every discovered skill (`.omp/skills/`, plus OMC skills discovered from `~/.claude`) is listed in the system prompt at session start, consuming context before any work begins. Lazy-load pattern: keep rarely-used servers and skills dormant, activate on demand.
 
 ### Scripts: `~/.claude/scripts/`
 
@@ -97,7 +97,9 @@ mcp on/off <name>     # enable/disable in ~/.claude.json
 mcp reset             # keep only defaults (exa, supabase, context7)
 ```
 
-**`skill`** — Skill on/off (archive: `~/.claude/skills-archive/`)
+> Note: the `mcp` script toggles Claude Code's `~/.claude.json`, which OMP does **not** read. For OMP sessions, register/deregister servers in OMP's own MCP config (`omp://mcp-config.md`).
+
+**`skill`** — Skill on/off (archive: `~/.claude/skills-archive/`) — still effective under OMP, which discovers OMC skills from `~/.claude`
 
 ```
 skill ls              # show active/archived skills
@@ -113,7 +115,7 @@ Changes take effect next session. When user requests a dormant server or skill (
 
 Before compacting, ask: **"Am I about to lose context that I'll need in the next 5 minutes?"**
 
-- [ ] Is the current todo list saved (in TodoWrite or a file)?
+- [ ] Is the current todo list saved (in the `todo` tool or a file)?
 - [ ] Are key file paths recorded (notepad, `<remember>`, or todo description)?
 - [ ] Are in-session architecture decisions captured?
 - [ ] Are user preferences expressed this session written down?
