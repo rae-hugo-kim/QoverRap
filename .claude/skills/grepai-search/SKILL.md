@@ -5,7 +5,7 @@ argument-hint: <natural-language-query>
 description: Semantic code search via grepai CLI for cold-start orientation when symbol names are unknown. Use ONLY when ALL of (a) intent-based query with no specific symbol/literal, (b) codebase >500 files or unfamiliar, (c) CLAUDE.md/AGENTS.md did not yield a concrete target. Explicit user keywords like "grepai", "semantic search", "의미 기반 검색", "콜드스타트 탐색" also trigger it. Do NOT use when a symbol name, file path, or literal string is already specified — go straight to Grep/LSP.
 ---
 
-# grepai-search - Semantic Code Search (Trial, 2-week)
+# grepai-search - Semantic Code Search (Trial, event-based)
 
 ## Goal
 
@@ -13,8 +13,12 @@ Collapse the iteration cost of "I don't know the symbol name yet" cold-start ori
 
 ## Scope & Trial Status
 
-- **Status**: 2-week trial adoption (see `docs/sum/session_2026-04-21_grepai-adoption-decision.md`).
-- **Kill criteria**: daily-avg calls <1 OR misleads > assists → delete this skill directory; no other cleanup needed.
+- **Status**: EVENT-BASED trial (see `docs/sum/session_2026-04-21_grepai-adoption-decision.md`).
+  The original 2-week window expired with ZERO trigger events (no >500-file unfamiliar
+  cold-start task occurred), so time-based evaluation was vacuous; replaced 2026-06-10.
+- **Kill criteria**: evaluate after 3 accumulated trigger-qualified tasks (cold start on a
+  >500-file or unfamiliar codebase). If misleads >= assists, OR the skill goes unused even
+  when triggers qualify → delete this skill directory; no other cleanup needed.
 - **Cost model**: CLI path (no MCP context tax). Bash output is compressed transparently by RTK.
 
 ## When to Use
@@ -122,4 +126,4 @@ If grepai returns zero usable candidates twice in the same query:
 
 - grepai is installed at `~/.local/bin/grepai` (prebuilt binary, not `go install`).
 - All Bash invocations transit RTK for output compression — no extra flags needed.
-- MCP promotion (`grepai mcp-serve`) is deferred until the 2-week trial confirms stable call frequency + accuracy.
+- MCP promotion (`grepai mcp-serve`) is deferred until the event-based trial (3 trigger-qualified tasks) confirms stable call frequency + accuracy.

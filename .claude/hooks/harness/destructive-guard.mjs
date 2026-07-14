@@ -26,6 +26,7 @@ const stateDir = getStateDir(cwd);
 const logFile = join(stateDir, 'hook-debug.log');
 
 function log(msg) {
+  if (!process.env.HARNESS_DEBUG) return;
   const timestamp = new Date().toISOString();
   appendFileSync(logFile, `[${timestamp}] destructive-guard: ${msg}\n`);
 }
@@ -34,6 +35,28 @@ log('Hook started');
 
 const command = data?.tool_input?.command || '';
 log(`Command: ${command.slice(0, 120)}`);
+
+// Blank ONLY the value of a commit-message flag (-m / -am / --message) before the
+// keyword scan. A message that mentions a destructive command (e.g.
+// `git commit -m "remove the rm -rf call"`) is the common false positive. This is
+// deliberately narrow: real destructive commands — including quoted `sh -c`
+// payloads and overwrite targets — are left intact and still match, because they
+// are not commit-message values. (Heuristic, not a shell parser; an attached
+// `-m"msg"` form is not stripped — uncommon and only costs an extra warning.)
+function stripCommitMessageValue(cmd) {
+  return cmd.replace(
+    /(^|\s)(--message|-[a-z]*m)(\s+|=)("(?:\\.|[^"\\])*"|'[^']*'|[^\s'";|&]+)/g,
+    (match, pre, flag, sep, value) => {
+      // Keep a message value that contains a command substitution: the shell
+      // executes $(...) / `...` before git ever sees the message, so blanking it
+      // would hide a real destructive command. (Errs toward warning — the rare
+      // single-quoted literal `$(...)` just gets an extra advisory warning.)
+      if (/\$\(|`/.test(value)) return match;
+      return `${pre}${flag}${sep}""`;
+    },
+  );
+}
+const keywordScan = stripCommitMessageValue(command);
 
 // Code file extensions to detect overwrite-via-redirect
 const CODE_EXTS = /\.(ts|tsx|js|jsx|mjs|cjs|py|go|rs|java|rb|php|sh|sql)$/;
@@ -50,7 +73,9 @@ const DESTRUCTIVE_PATTERNS = [
 ];
 
 // Check for truncation via redirect on code files: "> some/file.ts"
-const redirectMatch = command.match(/>\s*(['"]?)([^\s'";&|]+\.[a-z]+)\1/);
+// (uses keywordScan so a "> file.ts" inside a commit message doesn't false-fire,
+// while a real quoted target like `> "file.ts"` is preserved and still detected.)
+const redirectMatch = keywordScan.match(/>\s*(['"]?)([^\s'";&|]+\.[a-z]+)\1/);
 if (redirectMatch) {
   const targetFile = redirectMatch[2];
   if (CODE_EXTS.test(targetFile)) {
@@ -58,8 +83,9 @@ if (redirectMatch) {
   }
 }
 
-// Check for mv/cp overwriting code files
-const mvCpMatch = command.match(/\b(?:mv|cp)\b[^|;&\n]*\s+(['"]?)([^\s'";&|]+\.[a-z]+)\1/);
+// Check for mv/cp overwriting code files (keywordScan: a "mv a.ts b.ts" inside a
+// commit message is blanked, but a real mv/cp with a quoted target still matches.)
+const mvCpMatch = keywordScan.match(/\b(?:mv|cp)\b[^|;&\n]*\s+(['"]?)([^\s'";&|]+\.[a-z]+)\1/);
 if (mvCpMatch) {
   const targetFile = mvCpMatch[2];
   if (CODE_EXTS.test(targetFile)) {
@@ -67,7 +93,7 @@ if (mvCpMatch) {
   }
 }
 
-const matched = DESTRUCTIVE_PATTERNS.find(({ pattern }) => pattern.test(command));
+const matched = DESTRUCTIVE_PATTERNS.find(({ pattern }) => pattern.test(keywordScan));
 
 if (!matched) {
   log('No destructive pattern matched, allowing');

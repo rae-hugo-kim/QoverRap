@@ -4,6 +4,7 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync, appendFileSync } from 'fs';
 import { join } from 'path';
+import { classifyVerification } from './backpressure-patterns.mjs';
 
 const input = readFileSync(0, 'utf-8');
 
@@ -23,6 +24,7 @@ const logFile = join(stateDir, 'hook-debug.log');
 const historyFile = join(stateDir, 'test-history.json');
 
 function log(msg) {
+  if (!process.env.HARNESS_DEBUG) return;
   const timestamp = new Date().toISOString();
   appendFileSync(logFile, `[${timestamp}] backpressure-tracker: ${msg}\n`);
 }
@@ -32,28 +34,21 @@ log('Hook started');
 const command = data?.tool_input?.command || '';
 log(`Command: ${command}`);
 
-// Patterns for build/test/lint commands
-const buildPatterns = /npm run build|pnpm build|yarn build|tsc(?:\s|$)|make(?:\s|$)|cargo build|go build|mvn compile|gradle build/;
-const testPatterns = /npm test|pnpm test|yarn test|pytest|jest|vitest|cargo test|go test|mvn test|gradle test/;
-const lintPatterns = /npm run lint|pnpm lint|eslint|prettier|tsc --noEmit|cargo clippy|golangci-lint/;
+// Classify via the shared leading-token matcher (backpressure-patterns.mjs),
+// which only matches a verification command at the start of a shell segment —
+// not `echo "npm test"` or `grep -r "npm test"`.
+const { isVerification, type: verificationType, passReliable } = classifyVerification(command);
 
-let isVerification = false;
-let verificationType = '';
+log(`Is verification: ${isVerification}, type: ${verificationType}, passReliable: ${passReliable}`);
 
-if (buildPatterns.test(command)) {
-  isVerification = true;
-  verificationType = 'build';
-} else if (testPatterns.test(command)) {
-  isVerification = true;
-  verificationType = 'test';
-} else if (lintPatterns.test(command)) {
-  isVerification = true;
-  verificationType = 'lint';
+// Only record PASS when the verification command controls the overall exit
+// (passReliable). A piped / `|| true` / `;`-chained success can mask a real
+// failure, so skip rather than record a false PASS that would clear protection.
+if (isVerification && !passReliable) {
+  log('Verification matched but exit unreliable (piped / || / ;), not recording PASS');
 }
 
-log(`Is verification: ${isVerification}, type: ${verificationType}`);
-
-if (isVerification) {
+if (isVerification && passReliable) {
   const statusFile = join(stateDir, 'backpressure-status');
   const now = new Date();
   const timeStr = now.toTimeString().substring(0, 5);
@@ -67,7 +62,9 @@ if (isVerification) {
     }
   }
 
-  // PostToolUse only fires on success, so this is always PASS
+  // PostToolUse fires only on success; a failing verification run routes to
+  // PostToolUseFailure (handled by backpressure-failure-tracker.mjs). So
+  // reaching here means the command's overall shell exit was 0 -> PASS.
   const run = {
     time: timeStr,
     type: verificationType,

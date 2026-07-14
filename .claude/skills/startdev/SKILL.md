@@ -49,8 +49,10 @@ seed.yaml을 확인하고 유효성을 검증한다.
      acceptance_criteria, out_of_scope, assumptions, risks, references)
    - task_id 형식 확인 (YYYYMMDD-HHMMSS-XXXX)
    - acceptance_criteria >= 1개 확인
-   - status가 draft 또는 approved 확인
-   - 실패 시: "seed.yaml이 유효하지 않습니다. /kickoff를 먼저 실행하세요." 출력 후 중단
+   - status 확인:
+     - `draft` 또는 `approved` → 진행
+     - `done` 또는 `superseded` (종료상태) → "이 seed는 완료/대체된 작업(`<status>`)입니다. 새 작업은 `/kickoff`로 새 seed를 생성하세요 (새 task_id)." 출력 후 중단
+   - 그 외(필드 누락·파싱 실패 등) 실패 시: "seed.yaml이 유효하지 않습니다. /kickoff를 먼저 실행하세요." 출력 후 중단
 3. 없으면:
    - $ARGUMENTS에 epic 패턴이 있으면 → Phase 1 fallback으로 진행
    - 아무 입력도 없으면 → "/kickoff를 먼저 실행하세요." 출력 후 중단

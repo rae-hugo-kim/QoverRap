@@ -64,6 +64,11 @@ git checkout -b <branch-name>
 - `refactor/<description>` — Refactoring
 - `chore/<description>` — Maintenance
 
+### 3.5 Closeout check (스테이징 직전)
+
+추적 중인 작업이 완료됐으면 마감한다 — `docs/rules/closeout_contract.md` 절차를 따른다:
+seed `status: approved` + `docs/harness/current-scope.md`의 AC가 전부 `[x]`이면 → seed를 `status: done` + `completed: <date>`로 갱신, `current-scope.md` 삭제, `docs/harness/audit.jsonl`에 `task_closed` append(이 변경들은 아래 커밋에 포함된다). AC 미충족/비추적(seed 부재 또는 `approved` 아님)이면 advisory 후 skip(no-op). `.claude/skills/`를 수정했다면 전역 미러도 동기화.
+
 ### 4. Stage and commit
 
 ```bash
@@ -86,7 +91,7 @@ git push -u --follow-tags origin <branch-name>
 gh pr create --base <target> --head <branch> --title "<title>" --body "<body>"
 ```
 
-`--follow-tags` ensures any annotated tags created by hooks (e.g., harness version bump) are pushed with the branch.
+`--follow-tags` ensures annotated tags (e.g., a deliberate harness version bump via `scripts/harness-version-bump.sh`) are pushed with the branch.
 
 **PR body format**:
 ```markdown

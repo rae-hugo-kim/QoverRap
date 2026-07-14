@@ -6,13 +6,49 @@
 
 set -euo pipefail
 
+# --- 0. Re-exec from a private temp copy (self-overwrite safety) ---
+# Step 6 below overwrites whitelist PATHS in-place, and PATHS includes this
+# script (scripts/harness-sync.sh). `cp` truncates the destination inode in
+# place, so a shell still reading this file mid-run would execute garbage and
+# the sync would fail or partially complete (recurring every harness-check
+# because meta is never updated). Running from a throwaway copy makes the
+# in-place overwrite of the on-disk script harmless to the live process, and
+# still lets the script self-update in consumer repos.
+if [[ -z "${_HARNESS_SYNC_REEXEC:-}" ]]; then
+  _self="$(mktemp)"
+  trap 'rm -f "$_self"' EXIT   # cover the pre-exec window before _cleanup is registered
+  cp "$0" "$_self"
+  _HARNESS_SYNC_REEXEC=1 _HARNESS_SYNC_SELF="$_self" exec bash "$_self" "$@"
+fi
+
+# Initialize tmp empty BEFORE registering the trap: otherwise _cleanup's
+# `rm -rf "${tmp:-}"` would expand an inherited lowercase `tmp` ENV var and
+# delete it on an early exit (e.g. the self-skip path, where tmp is never
+# assigned). The temp self-copy lives outside REPO_ROOT, so step 6's in-place
+# overwrite never touches the running process.
+tmp=""
+# Cleanup is deliberately conservative — it only removes paths THIS process
+# created. $tmp is removed only when non-empty; the temp self-copy is removed
+# only when _HARNESS_SYNC_SELF equals $0 (true after our own re-exec, where
+# $0 IS the temp copy). That stops a forged `_HARNESS_SYNC_REEXEC=1` plus a
+# hostile/stale `_HARNESS_SYNC_SELF` from turning cleanup into an arbitrary
+# `rm -rf` on self-skip / dry-run / any exit.
+_cleanup() {
+  [[ -n "${tmp:-}" ]] && rm -rf -- "$tmp"
+  [[ -n "${_HARNESS_SYNC_SELF:-}" && "$_HARNESS_SYNC_SELF" == "$0" ]] && rm -f -- "$_HARNESS_SYNC_SELF"
+  return 0
+}
+trap _cleanup EXIT
+
 DRY_RUN=0
 [[ "${1:-}" == "--dry-run" ]] && DRY_RUN=1
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 META_FILE="$REPO_ROOT/.claude/hooks/harness/harness-meta.json"
 DEFAULT_SOURCE="git@github.com:rae-hugo-kim/claude.git"
-SOURCE_MATCH_RE="rae-hugo-kim/claude(\.git)?$"
+# Anchor to a host/path boundary so e.g. `notrae-hugo-kim/claude.git` does NOT
+# match and wrongly self-skip sync (codex review nit).
+SOURCE_MATCH_RE='(^|[:/])rae-hugo-kim/claude(\.git)?$'
 
 # --- 1. Detect source repo (self-skip) ---
 origin_url=$(git -C "$REPO_ROOT" remote get-url origin 2>/dev/null || true)
@@ -48,7 +84,7 @@ echo "Target: harness/$latest_tag"
 
 # --- 4. Shallow clone the target tag into temp ---
 tmp=$(mktemp -d)
-trap "rm -rf $tmp" EXIT
+# (cleanup of $tmp handled by the _cleanup EXIT trap registered at the top)
 git clone --quiet --depth 1 --branch "harness/$latest_tag" "$source_remote" "$tmp"
 target_sha=$(git -C "$tmp" rev-parse HEAD)
 
@@ -74,9 +110,7 @@ PATHS=(
   ".claude/skills/sum"
   ".claude/skills/compr"
   ".claude/skills/compush"
-  ".claude/skills/tidy"
   ".claude/skills/harness-check"
-  ".claude/skills/code-review"
   ".claude/skills/receiving-code-review"
   ".claude/skills/brainstorm"
   ".claude/skills/design-mockup"

@@ -6,6 +6,7 @@
 
 import { readFileSync, existsSync, appendFileSync, mkdirSync } from 'fs';
 import { join } from 'path';
+import { isGitCommit, isWipCommit } from './git-commit-detect.mjs';
 
 // Use project-local state directory
 function getStateDir(cwd) {
@@ -29,6 +30,7 @@ const stateDir = getStateDir(cwd);
 const logFile = join(stateDir, 'hook-debug.log');
 
 function log(msg) {
+  if (!process.env.HARNESS_DEBUG) return;
   const timestamp = new Date().toISOString();
   appendFileSync(logFile, `[${timestamp}] acceptance-gate: ${msg}\n`);
 }
@@ -39,7 +41,7 @@ const command = data?.tool_input?.command || '';
 log(`Command: ${command}`);
 
 // Only check for git commit commands
-if (!command.match(/(?:^|&&|\|\||;)\s*git\b[^|;]*\bcommit\b/)) {
+if (!isGitCommit(command)) {
   log('Not a git commit, allowing');
   process.exit(0);
 }
@@ -68,6 +70,15 @@ if (existsSync(flagFilePath)) {
 // Check 2: seed.yaml AC existence check
 if (existsSync(seedPath)) {
   const seedContent = readFileSync(seedPath, 'utf-8');
+  // A CLOSED seed carries no ACTIVE acceptance criteria: `done` = the task completed
+  // (closeout), `superseded` = replaced by a newer seed. Either way its criteria belong
+  // to a finished/obsolete task and must not gate new, unrelated work. (cf. seed_contract.md)
+  const statusMatch = seedContent.match(/^status:\s*["']?(\w+)/m);  // tolerate quoted YAML
+  const status = statusMatch ? statusMatch[1].toLowerCase() : null;
+  if (status === 'done' || status === 'superseded') {
+    log(`seed.yaml status=${status} (closed), no active AC, allowing`);
+    process.exit(0);
+  }
   const hasAC = /^acceptance_criteria:\s*\n\s+-/m.test(seedContent);
   if (hasAC) {
     log('AC found in seed.yaml, checking completion via flag or scope file checkboxes');
@@ -117,6 +128,17 @@ if (checkboxes.length === 0) {
 
 if (unchecked.length === 0) {
   log('All acceptance criteria met, allowing');
+  process.exit(0);
+}
+
+// WIP commits are intentional in-progress checkpoints. Without this, every commit
+// during a tracked task is blocked until ALL AC are checked, pushing people to the
+// blunt `acceptance-done` flag (which disables the gate). A `wip:`/`[wip]` marker in
+// the message lets intermediate commits through while keeping the gate armed for the
+// real (non-WIP) commit. (cf. closeout_contract.md — closeout runs on completion.)
+if (isWipCommit(command)) {
+  log(`WIP commit, ${unchecked.length} unchecked criteria but allowing (wip marker)`);
+  console.error(`HARNESS WARNING: WIP commit with ${unchecked.length} unmet acceptance criteria (allowed by wip marker).`);
   process.exit(0);
 }
 

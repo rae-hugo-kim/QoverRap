@@ -1,0 +1,5 @@
+{"t":0,"agent":"ad94b70","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a03c973","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"ad198f0","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"a3ffcc6","agent_type":"executor","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a3ffcc6","agent_type":"executor","event":"agent_stop","success":true,"duration_ms":135121}

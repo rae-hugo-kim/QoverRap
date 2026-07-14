@@ -6,11 +6,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/hooks/harness/scope-gate.mjs",
-            "timeout": 3
-          },
-          {
-            "type": "command",
             "command": "node .claude/hooks/harness/context-gate.mjs",
             "timeout": 3
           }
@@ -26,18 +21,8 @@
           },
           {
             "type": "command",
-            "command": "node .claude/hooks/harness/acceptance-gate.mjs",
-            "timeout": 3
-          },
-          {
-            "type": "command",
-            "command": "node .claude/hooks/harness/backpressure-gate.mjs",
-            "timeout": 3
-          },
-          {
-            "type": "command",
-            "command": "node .claude/hooks/harness/review-gate.mjs",
-            "timeout": 3
+            "command": "node .claude/hooks/harness/commit-gates.mjs",
+            "timeout": 10
           }
         ]
       },
@@ -78,7 +63,24 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node .claude/hooks/harness/write-tracker.mjs",
+            "timeout": 3
+          },
+          {
+            "type": "command",
             "command": "node .claude/hooks/harness/backpressure-invalidator.mjs",
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/harness/backpressure-failure-tracker.mjs",
             "timeout": 3
           }
         ]

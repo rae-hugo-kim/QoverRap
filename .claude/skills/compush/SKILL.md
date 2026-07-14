@@ -50,6 +50,10 @@ If remote differs from provided URL → ask user for action.
 **HTTPS to SSH conversion**:
 `https://github.com/user/repo` → `git@github.com:user/repo.git`
 
+### 2.5 Closeout check (스테이징 직전)
+
+추적 중인 작업이 완료됐으면 마감한다 — `docs/rules/closeout_contract.md` 절차를 따른다(compr와 동일): seed `status: approved` + `docs/harness/current-scope.md`의 AC 전부 `[x]`이면 → seed `status: done` + `completed: <date>`, `current-scope.md` 삭제, `docs/harness/audit.jsonl`에 `task_closed` append(아래 커밋에 포함). AC 미충족/비추적이면 advisory 후 skip(no-op). `.claude/skills/` 수정 시 전역 미러 동기화. *(compush는 중간 푸시일 수 있으니 git 액션이 아니라 완료 상태에만 키잉됨에 유의.)*
+
 ### 3. Stage changes
 
 ```bash
@@ -85,7 +89,7 @@ git commit -m "<message>"
 git push --follow-tags
 ```
 
-`--follow-tags` ensures any annotated tags created by hooks (e.g., harness version bump) are pushed with the branch in one operation.
+`--follow-tags` ensures annotated tags (e.g., a deliberate harness version bump via `scripts/harness-version-bump.sh`) are pushed with the branch in one operation.
 
 ### 7. Output
 

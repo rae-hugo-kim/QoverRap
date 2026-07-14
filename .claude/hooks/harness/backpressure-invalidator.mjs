@@ -29,6 +29,7 @@ if (!existsSync(stateDir)) mkdirSync(stateDir, { recursive: true });
 const logFile = join(stateDir, 'hook-debug.log');
 
 function log(msg) {
+  if (!process.env.HARNESS_DEBUG) return;
   const timestamp = new Date().toISOString();
   appendFileSync(logFile, `[${timestamp}] backpressure-invalidator: ${msg}\n`);
 }

@@ -26,6 +26,7 @@ const stateDir = getStateDir(cwd);
 const logFile = join(stateDir, 'hook-debug.log');
 
 function log(msg) {
+  if (!process.env.HARNESS_DEBUG) return;
   const timestamp = new Date().toISOString();
   appendFileSync(logFile, `[${timestamp}] mcp-gate: ${msg}\n`);
 }
@@ -35,13 +36,18 @@ log('Hook started');
 const toolName = data?.tool_name || '';
 log(`Tool: ${toolName}`);
 
-// Patterns for destructive MCP tool names
+// Patterns for destructive MCP tool names. Scoped to operations that REMOVE,
+// REPLACE, or DEPLOY — `create_`/`update_` were dropped because they fire on
+// benign additive/edit tools (slack_create_canvas, create_draft, create_label,
+// update_label, create_branch, write/create_*_file, ...) and produced almost
+// all of this gate's false positives. DDL via execute_sql is still caught below.
 const DESTRUCTIVE_NAME_PATTERNS = [
   /apply_migration/,
-  /create_/,
-  /update_/,
   /delete_/,
+  /(^|_)drop_/, // `_` is a word char, so `\bdrop_` never matches `..__drop_table`
+  /truncate_/,
   /deploy_/,
+  /reset_branch/,
 ];
 
 const isDestructiveByName = DESTRUCTIVE_NAME_PATTERNS.some(p => p.test(toolName));
@@ -50,8 +56,8 @@ const isDestructiveByName = DESTRUCTIVE_NAME_PATTERNS.some(p => p.test(toolName)
 let isDestructiveSQL = false;
 if (/execute_sql/.test(toolName)) {
   const query = (data?.tool_input?.query || data?.tool_input?.sql || '').toUpperCase();
-  const DDL_KEYWORDS = ['ALTER', 'DROP', 'CREATE', 'TRUNCATE'];
-  isDestructiveSQL = DDL_KEYWORDS.some(kw => query.includes(kw));
+  // Word-bounded so identifiers like CREATED_AT, DROPDOWN, ALTERATION don't match.
+  isDestructiveSQL = /\b(ALTER|DROP|CREATE|TRUNCATE)\b/.test(query);
   if (isDestructiveSQL) {
     log(`DDL keyword detected in execute_sql query`);
   }

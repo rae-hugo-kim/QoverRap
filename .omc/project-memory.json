@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "lastScanned": 1776656133279,
+  "lastScanned": 1780895230857,
   "projectRoot": "/home/rae/projects/workspace/QoverwRap",
   "techStack": {
     "languages": [
@@ -53,7 +53,7 @@
       "path": "brainstorming",
       "purpose": null,
       "fileCount": 13,
-      "lastAccessed": 1776656133273,
+      "lastAccessed": 1780895230846,
       "keyFiles": [
         "00_problem-framing.md",
         "01_channel-strategy.md",
@@ -66,7 +66,7 @@
       "path": "checklists",
       "purpose": null,
       "fileCount": 10,
-      "lastAccessed": 1776656133274,
+      "lastAccessed": 1780895230849,
       "keyFiles": [
         "INDEX.md",
         "bugfix.md",
@@ -79,7 +79,7 @@
       "path": "claudedocs",
       "purpose": null,
       "fileCount": 6,
-      "lastAccessed": 1776656133274,
+      "lastAccessed": 1780895230849,
       "keyFiles": [
         "CLAUDEKR.md",
         "CLAUDE_original.md",
@@ -88,46 +88,65 @@
         "bootstrap_oh_my_claudecode.md"
       ]
     },
+    "codex-hud": {
+      "path": "codex-hud",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1780895230850,
+      "keyFiles": [
+        "README.md"
+      ]
+    },
+    "demo": {
+      "path": "demo",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1780895230850,
+      "keyFiles": [
+        "README.md"
+      ]
+    },
     "docs": {
       "path": "docs",
       "purpose": "Documentation",
-      "fileCount": 1,
-      "lastAccessed": 1776656133274,
+      "fileCount": 2,
+      "lastAccessed": 1780895230851,
       "keyFiles": [
-        "glossary.yaml"
+        "glossary.yaml",
+        "rules.md"
       ]
     },
     "rules": {
       "path": "rules",
       "purpose": null,
-      "fileCount": 23,
-      "lastAccessed": 1776656133275,
+      "fileCount": 26,
+      "lastAccessed": 1780895230851,
       "keyFiles": [
         "INDEX.md",
         "adversarial_review.md",
+        "agent_routing.md",
         "agent_security.md",
-        "anti_hallucination.md",
-        "assetization.md"
+        "anti_hallucination.md"
       ]
     },
     "scripts": {
       "path": "scripts",
       "purpose": "Build/utility scripts",
-      "fileCount": 10,
-      "lastAccessed": 1776656133275,
+      "fileCount": 16,
+      "lastAccessed": 1780895230852,
       "keyFiles": [
+        "capture_figures.sh",
+        "cleanup_demo_figures.sh",
         "collect-results.py",
         "density_scan_test.py",
-        "generate_density_qrs.py",
-        "generate_test_qrs.py",
-        "harness-sync.sh"
+        "epo_search.py"
       ]
     },
     "src": {
       "path": "src",
       "purpose": "Source code",
       "fileCount": 1,
-      "lastAccessed": 1776656133276,
+      "lastAccessed": 1780895230852,
       "keyFiles": [
         "__init__.py"
       ]
@@ -136,7 +155,7 @@
       "path": "templates",
       "purpose": null,
       "fileCount": 10,
-      "lastAccessed": 1776656133276,
+      "lastAccessed": 1780895230853,
       "keyFiles": [
         "INDEX.md",
         "assumptions.md",
@@ -149,7 +168,7 @@
       "path": "test-qr-density",
       "purpose": null,
       "fileCount": 49,
-      "lastAccessed": 1776656133276,
+      "lastAccessed": 1780895230853,
       "keyFiles": [
         "manifest.json",
         "v05_200px_H.png",
@@ -162,7 +181,7 @@
       "path": "test-qr-images",
       "purpose": null,
       "fileCount": 7,
-      "lastAccessed": 1776656133276,
+      "lastAccessed": 1780895230853,
       "keyFiles": [
         "manifest.json",
         "qr_001_small.png",
@@ -175,7 +194,7 @@
       "path": "test-results",
       "purpose": null,
       "fileCount": 3,
-      "lastAccessed": 1776656133277,
+      "lastAccessed": 1780895230855,
       "keyFiles": [
         "density-galaxy-tab.json",
         "density-scan-results.json",
@@ -185,50 +204,57 @@
     "tests": {
       "path": "tests",
       "purpose": "Test files",
-      "fileCount": 3,
-      "lastAccessed": 1776656133277,
+      "fileCount": 4,
+      "lastAccessed": 1780895230855,
       "keyFiles": [
         "README.md",
         "__init__.py",
+        "conftest.py",
         "test_test_plan_docs.py"
       ]
     }
   },
   "hotPaths": [
     {
-      "path": "docs/research/prior-art-survey.md",
-      "accessCount": 11,
-      "lastAccessed": 1776998661914,
-      "type": "file"
-    },
-    {
-      "path": "scripts/epo_search.py",
-      "accessCount": 7,
-      "lastAccessed": 1776748202854,
-      "type": "file"
-    },
-    {
-      "path": "docs/harness/acceptance-done",
+      "path": "demo/README.md",
       "accessCount": 1,
-      "lastAccessed": 1776744949886,
+      "lastAccessed": 1780895454644,
       "type": "file"
     },
     {
-      "path": "scripts/kipris_search.py",
+      "path": "demo/frontend/vite.config.ts",
       "accessCount": 1,
-      "lastAccessed": 1776745257709,
+      "lastAccessed": 1780895455587,
       "type": "file"
     },
     {
-      "path": "docs/research/epo-queries.md",
+      "path": "demo/frontend/index.html",
       "accessCount": 1,
-      "lastAccessed": 1776745261390,
+      "lastAccessed": 1780895456066,
       "type": "file"
     },
     {
-      "path": "docs/sum/session_2026-04-22_epo-prior-art-complete.md",
+      "path": "demo/frontend/package.json",
       "accessCount": 1,
-      "lastAccessed": 1776857298492,
+      "lastAccessed": 1780895456322,
+      "type": "file"
+    },
+    {
+      "path": "demo/backend/main.py",
+      "accessCount": 1,
+      "lastAccessed": 1780895653990,
+      "type": "file"
+    },
+    {
+      "path": "demo/backend/trust_registry.py",
+      "accessCount": 1,
+      "lastAccessed": 1780895654037,
+      "type": "file"
+    },
+    {
+      "path": "demo/backend/redemption_store.py",
+      "accessCount": 1,
+      "lastAccessed": 1780895654110,
       "type": "file"
     }
   ],

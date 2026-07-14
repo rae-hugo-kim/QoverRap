@@ -23,8 +23,7 @@ This repo assumes **oh-my-claudecode** is active globally. The following are enf
 | What | How | Hook Location |
 |------|-----|---------------|
 | Code changes | Delegated to executor agents | N/A (global rule) |
-| Scope enforcement | `scope-gate` hook | `.claude/hooks/harness/` |
-| Pre-edit file read | `context-gate` + `read-tracker` hooks | `.claude/hooks/harness/` |
+| Pre-edit file read | `context-gate` + `read-tracker` + `write-tracker` hooks | `.claude/hooks/harness/` |
 | Completion verification | Architect agent | N/A (global rule) |
 | Backpressure on failures | `backpressure-gate` + `backpressure-tracker` hooks | `.claude/hooks/harness/` |
 | Acceptance criteria | `acceptance-gate` hook | `.claude/hooks/harness/` |
@@ -108,17 +107,13 @@ If you cannot comply with any MUST:
 
 - See [`rules/mcp_policy.md`](rules/mcp_policy.md) for full policies on all MCP servers.
 - **Context7**: MUST use for new external APIs/SDKs, dependencies, version-sensitive syntax.
-- **Serena**: SHOULD use for symbol navigation, refactoring. MUST use `--context claude-code` flag.
 - **Supabase**: MUST use migrations for DDL; MAY use direct SQL for queries.
 - **Web Search**: SHOULD use for current events, errors, latest docs.
 
 ## Agent Routing Policy (Trigger-based)
 
-- See [`rules/agent_routing.md`](rules/agent_routing.md) for full routing rules.
-- **researcher** (Exa): SHOULD delegate for external docs, web search, error lookups.
-- **db-worker** (Supabase): MUST delegate for DDL changes and schema operations.
-- **refactorer** (Serena): SHOULD delegate for 3+ file symbol renames or impact analysis.
-- **full-context** (all MCP): SHOULD delegate when 2+ MCP domains intersect in one task.
+- See [`rules/agent_routing.md`](rules/agent_routing.md) for full routing rules
+  (incl. the 2026-06 retirement of the unused MCP delegation matrix).
 - **reviewer**: SHOULD delegate for code changes ≥10 lines or logic changes. 3-pass adversarial (self + Codex + OMC).
 - **verifier**: MUST delegate before claiming task completion when AC exists.
 

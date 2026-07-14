@@ -451,7 +451,7 @@ Next: `/startdev` or manual planning.
 ## Integration with Hooks
 
 - **kickoff-detector** (UserPromptSubmit): 새 작업 감지 시 "/kickoff 먼저 실행하세요" 리마인더
-- **scope-gate** (PreToolUse): seed.yaml의 out_of_scope 기반으로 경로 변경 블록 (current-scope.md fallback)
+- **out_of_scope** (seed.yaml): 자동 차단 게이트 아님 (scope-gate 폐기됨). 에이전트가 읽어 scope drift를 자체 방지하는 prose — 강제는 Surgical Changes 규칙 + PR 리뷰
 - **acceptance-gate** (PreToolUse): git commit 시 Acceptance criteria 미충족이면 블록
 
 ## Contracts

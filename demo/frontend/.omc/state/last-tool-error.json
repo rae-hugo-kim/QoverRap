@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"pkill -f \\\"uvicorn demo.backend.main\\\" 2>/dev/null; sleep 1; echo done\",\"description\":\"Stop backend smoke server\"}",
+  "error": "Exit code 144",
+  "timestamp": "2026-04-28T06:18:34.735Z",
+  "retry_count": 1
+}
