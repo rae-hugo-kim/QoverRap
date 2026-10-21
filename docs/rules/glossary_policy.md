@@ -16,7 +16,7 @@
 
 | 시점 | 행동 |
 |------|------|
-| `/kickoff` 완료 후 | 새 도메인 용어가 등장하면 추가 |
+| `/skill:kickoff` 완료 후 | 새 도메인 용어가 등장하면 추가 |
 | 코드 리뷰 중 | 같은 개념에 다른 이름이 쓰이면 canonical term 정의 |
 | 에이전트 간 혼동 발견 시 | aliases에 혼동된 이름 추가 |
 | 용어가 더 이상 쓰이지 않을 때 | deprecated 표시 또는 삭제 |
@@ -50,8 +50,7 @@
 |------|------|------|
 | 1 (현재) | 수동 관리, kickoff 때 리마인더 | 기본 |
 | 2 | seed.yaml `references`에 glossary.yaml 링크 | seed에서 참조 필요 시 |
-| 3 | scope-gate가 glossary alias를 정규화에 활용 | 용어 불일치 블록 필요 시 |
-| 4 | kickoff 스킬이 자동으로 glossary 갱신 제안 | 반복적 용어 추가 발생 시 |
+| 3 | kickoff 스킬이 자동으로 glossary 갱신 제안 | 반복적 용어 추가 발생 시 |
 
 ## YAML 스키마
 

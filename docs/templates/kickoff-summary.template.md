@@ -1,4 +1,4 @@
-# Kickoff Summary
+# Kickoff Summary Template
 
 ## Goal
 <무엇을 만들거나 바꾸는지>
